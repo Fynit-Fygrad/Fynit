@@ -1,0 +1,572 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Académico — Fynit</title>
+  <meta name="description"
+    content="Recursos, guías y artículos especializados sobre redacción científica, metodología de investigación, publicación en revistas indexadas e inteligencia artificial académica.">
+  <meta name="theme-color" content="#1B60DF">
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2' y='4' width='20' height='16' rx='6' fill='%231B60DF'/%3E%3Ccircle cx='9' cy='12' r='1.6' fill='white'/%3E%3Ccircle cx='15' cy='12' r='1.6' fill='white'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Sora:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <!-- Sprite de íconos -->
+  <svg class="sr-only" aria-hidden="true">
+    <symbol id="ic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5" />
+    </symbol>
+    <symbol id="ic-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 6l12 12M18 6 6 18" />
+    </symbol>
+    <symbol id="ic-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </symbol>
+    <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6 9 17l-5-5" />
+    </symbol>
+    <symbol id="ic-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="3" />
+      <path d="M8 10.5v6M8 7.8v.1M12.3 16.5v-3.6c0-1.3.9-2.2 2-2.2s1.8.8 1.8 2.1v3.7" />
+    </symbol>
+    <symbol id="ic-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+      <circle cx="12" cy="12" r="3.6" />
+      <circle cx="17.2" cy="6.8" r=".6" fill="currentColor" stroke="none" />
+    </symbol>
+    <symbol id="ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 4l16 16M20 4 4 20" />
+    </symbol>
+    <symbol id="ic-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="3" />
+      <path d="M16 2v4M8 2v4M3 10h18" />
+    </symbol>
+    <symbol id="ic-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 3" />
+    </symbol>
+    <symbol id="ic-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
+    </symbol>
+    <symbol id="ic-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" />
+      <path d="M19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14z" />
+    </symbol>
+  </svg>
+
+  <!-- ============ SIDEBAR OFF-CANVAS ============ -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <aside class="sidebar" id="sidebar" aria-hidden="true">
+    <div class="sidebar-top">
+      <div class="logo">
+        <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\logos svg\logo-fynit-white.svg" alt="Fynit" class="logo-img">
+      </div>
+      <button class="sidebar-close" id="sidebarClose" aria-label="Cerrar menú"><svg><use href="#ic-close" /></svg></button>
+    </div>
+    <nav class="sidebar-nav" aria-label="Navegación principal">
+      <a href="fynit_landing.html#inicio" data-nav-link>Inicio</a>
+      <a href="fynit_landing.html#como-funciona" data-nav-link>Cómo funciona</a>
+      <div class="sidebar-accordion">
+        <button class="accordion-btn" aria-expanded="false">
+          Recursos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="accordion-content">
+          <a href="blog.html" data-nav-link style="color: var(--white);">Blog</a>
+          <a href="faq.html" data-nav-link>Preguntas Frecuentes</a>
+        </div>
+      </div>
+      <div class="sidebar-accordion">
+        <button class="accordion-btn" aria-expanded="false">
+          Nosotros
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="accordion-content">
+          <a href="nosotros.html" data-nav-link>Sobre Fynit</a>
+          <a href="equipo.html" data-nav-link>Nuestro Equipo</a>
+          <a href="contacto.html" data-nav-link>Contacto</a>
+        </div>
+      </div>
+      <a href="precios.html">Precios</a>
+    </nav>
+  </aside>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-row">
+      <a href="fynit_landing.html#inicio" class="logo" aria-label="Fynit — inicio">
+        <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\logos svg\logo-fynit.svg" alt="Fynit" class="logo-img">
+      </a>
+      <nav class="nav-desktop" aria-label="Navegación principal">
+        <a href="fynit_landing.html#como-funciona">Cómo funciona</a>
+        <div class="nav-dropdown">
+          <button class="dropdown-trigger">Recursos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6" /></svg></button>
+          <div class="dropdown-content">
+            <a href="blog.html" class="active">Blog</a>
+            <a href="faq.html">Preguntas Frecuentes</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="dropdown-trigger">Nosotros <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6" /></svg></button>
+          <div class="dropdown-content">
+            <a href="nosotros.html">Sobre Fynit</a>
+            <a href="equipo.html">Nuestro Equipo</a>
+            <a href="contacto.html">Contacto</a>
+          </div>
+        </div>
+        <a href="precios.html">Precios</a>
+      </nav>
+      <div class="header-actions" style="white-space: nowrap;">
+        <button class="lang-switcher" id="langSwitcher" aria-label="Cambiar idioma">
+          <span>ES</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6" /></svg>
+        </button>
+        <a href="login.html" style="font-family:'Sora',sans-serif; font-weight:600; font-size:14.5px; color:var(--ink-70); text-decoration:none; padding:6px 0; margin-right:4px;">Iniciar Sesión</a>
+        <a href="contacto.html" class="btn btn-primary btn-sm" id="headerCta">Registrarse</a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">
+          <svg><use href="#ic-menu" /></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ BLOG HERO ============ -->
+    <section class="blog-hero">
+      <div class="container blog-hero-inner">
+        <span class="eyebrow-accent">Blog Académico</span>
+        <h1>Recursos para investigadores que publican</h1>
+        <p>Guías prácticas, análisis editoriales y estrategias con IA para que tu artículo llegue más lejos.</p>
+        <div class="blog-filter-tabs">
+          <button class="blog-filter-btn active" data-filter="all">Todo</button>
+          <button class="blog-filter-btn" data-filter="redaccion">Redacción</button>
+          <button class="blog-filter-btn" data-filter="metodologia">Metodología</button>
+          <button class="blog-filter-btn" data-filter="publicacion">Publicación</button>
+          <button class="blog-filter-btn" data-filter="ia">IA Académica</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ARTÍCULO DESTACADO ============ -->
+    <section class="featured-section" data-filter-item="ia">
+      <div class="container">
+        <div style="margin-bottom: 24px;">
+          <span class="eyebrow">Artículo Destacado</span>
+        </div>
+        <a href="#" class="featured-card" style="text-decoration: none; display: grid;">
+          <div class="featured-card-visual">
+            <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\imgs png\fynit_mascot_2.png" alt="Fynit IA Diagnóstico" loading="eager">
+          </div>
+          <div class="featured-card-body">
+            <div class="featured-tag">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"/></svg>
+              IA Académica
+            </div>
+            <h2>Cómo la IA está redefiniendo el proceso de revisión por pares en revistas Q1 y Q2</h2>
+            <div class="post-meta">
+              <span class="post-meta-item">
+                <svg aria-hidden="true"><use href="#ic-user" /></svg>
+                Equipo Fynit
+              </span>
+              <span class="post-meta-item">
+                <svg aria-hidden="true"><use href="#ic-calendar" /></svg>
+                3 agosto, 2026
+              </span>
+              <span class="post-meta-item">
+                <svg aria-hidden="true"><use href="#ic-clock" /></svg>
+                8 min de lectura
+              </span>
+            </div>
+            <p>La incorporación de modelos de lenguaje avanzados en el flujo editorial de las principales revistas indexadas está transformando radicalmente la eficiencia del proceso de desk review, la detección temprana de falencias metodológicas y la reducción de sesgos humanos en la evaluación inicial de manuscritos científicos.</p>
+            <span class="post-read-link">
+              Leer artículo completo
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5"/></svg>
+            </span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ BLOG GRID ============ -->
+    <section class="blog-grid-section">
+      <div class="container">
+        <div class="blog-grid" id="blogGrid">
+
+          <!-- Artículo 1 — Redacción -->
+          <article class="article-card" data-category="redaccion">
+            <div class="article-card-thumb">
+              <div class="article-thumb-placeholder">
+                <span>âœï¸</span>
+              </div>
+            </div>
+            <div class="article-card-body">
+              <span class="article-category-tag">Redacción</span>
+              <h3>La estructura IMRyD explicada paso a paso para investigadores de ciencias sociales</h3>
+              <p>Dominar la estructura Introducciónâ€“Metodologíaâ€“Resultadosâ€“Discusión es el primer requisito para que un artículo supere la revisión de escritorio de las revistas indexadas más exigentes.</p>
+              <div class="article-card-footer">
+                <div class="article-meta-mini">
+                  <svg aria-hidden="true"><use href="#ic-calendar" /></svg>
+                  28 julio, 2026
+                  &nbsp;·&nbsp;
+                  <svg aria-hidden="true"><use href="#ic-clock" /></svg>
+                  6 min
+                </div>
+                <a href="#" class="article-read-link">
+                  Leer
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artículo 2 — Metodología -->
+          <article class="article-card" data-category="metodologia">
+            <div class="article-card-thumb">
+              <div class="article-thumb-placeholder">
+                <span>ðŸ”¬</span>
+              </div>
+            </div>
+            <div class="article-card-body">
+              <span class="article-category-tag">Metodología</span>
+              <h3>Cuándo usar análisis cuantitativo y cuándo cualitativo: una guía para no equivocarse</h3>
+              <p>Elegir el enfoque metodológico incorrecto es una de las causas más frecuentes de rechazo editorial. Te explicamos cuándo es conveniente cada paradigma y cómo justificarlo correctamente en tu artículo.</p>
+              <div class="article-card-footer">
+                <div class="article-meta-mini">
+                  <svg aria-hidden="true"><use href="#ic-calendar" /></svg>
+                  22 julio, 2026
+                  &nbsp;·&nbsp;
+                  <svg aria-hidden="true"><use href="#ic-clock" /></svg>
+                  9 min
+                </div>
+                <a href="#" class="article-read-link">
+                  Leer
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artículo 3 — Publicación -->
+          <article class="article-card" data-category="publicacion">
+            <div class="article-card-thumb">
+              <div class="article-thumb-placeholder">
+                <span>ðŸ“°</span>
+              </div>
+            </div>
+            <div class="article-card-body">
+              <span class="article-category-tag">Publicación</span>
+              <h3>Scopus vs. Web of Science: diferencias clave para elegir en qué revista publicar</h3>
+              <p>Muchos investigadores desconocen las diferencias de cobertura, indexación y factor de impacto entre Scopus y WoS. Analizamos ambas bases para que tomes la decisión editorial correcta.</p>
+              <div class="article-card-footer">
+                <div class="article-meta-mini">
+                  <svg aria-hidden="true"><use href="#ic-calendar" /></svg>
+                  15 julio, 2026
+                  &nbsp;·&nbsp;
+                  <svg aria-hidden="true"><use href="#ic-clock" /></svg>
+                  7 min
+                </div>
+                <a href="#" class="article-read-link">
+                  Leer
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artículo 4 — IA -->
+          <article class="article-card" data-category="ia">
+            <div class="article-card-thumb">
+              <div class="article-thumb-placeholder">
+                <span>ðŸ¤–</span>
+              </div>
+            </div>
+            <div class="article-card-body">
+              <span class="article-category-tag">IA Académica</span>
+              <h3>¿Puede una IA detectar si tu artículo será rechazado antes de enviarlo?</h3>
+              <p>Los nuevos modelos de diagnóstico editorial predictivo ya logran estimar con alta precisión la probabilidad de desk rejection. Así es cómo funciona la evaluación automática de Fynit.</p>
+              <div class="article-card-footer">
+                <div class="article-meta-mini">
+                  <svg aria-hidden="true"><use href="#ic-calendar" /></svg>
+                  10 julio, 2026
+                  &nbsp;·&nbsp;
+                  <svg aria-hidden="true"><use href="#ic-clock" /></svg>
+                  5 min
+                </div>
+                <a href="#" class="article-read-link">
+                  Leer
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artículo 5 — Redacción -->
+          <article class="article-card" data-category="redaccion">
+            <div class="article-card-thumb">
+              <div class="article-thumb-placeholder">
+                <span>ðŸ“</span>
+              </div>
+            </div>
+            <div class="article-card-body">
+              <span class="article-category-tag">Redacción</span>
+              <h3>Los 10 errores de redacción científica que hacen que los editores rechacen de inmediato</h3>
+              <p>Desde el uso impreciso de terminología hasta la ausencia de limitaciones del estudio, conoce los fallos más frecuentes que detectamos tras analizar miles de manuscritos rechazados.</p>
+              <div class="article-card-footer">
+                <div class="article-meta-mini">
+                  <svg aria-hidden="true"><use href="#ic-calendar" /></svg>
+                  5 julio, 2026
+                  &nbsp;·&nbsp;
+                  <svg aria-hidden="true"><use href="#ic-clock" /></svg>
+                  10 min
+                </div>
+                <a href="#" class="article-read-link">
+                  Leer
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Artículo 6 — Metodología -->
+          <article class="article-card" data-category="metodologia">
+            <div class="article-card-thumb">
+              <div class="article-thumb-placeholder">
+                <span>ðŸ“Š</span>
+              </div>
+            </div>
+            <div class="article-card-body">
+              <span class="article-category-tag">Metodología</span>
+              <h3>Cómo calcular el tamaño muestral adecuado y por qué es crítico para la aceptación editorial</h3>
+              <p>Un tamaño muestral mal justificado es una señal inmediata de debilidad metodológica para cualquier revisor. Aprende a calcularlo y a explicarlo correctamente en tu artículo de investigación.</p>
+              <div class="article-card-footer">
+                <div class="article-meta-mini">
+                  <svg aria-hidden="true"><use href="#ic-calendar" /></svg>
+                  29 junio, 2026
+                  &nbsp;·&nbsp;
+                  <svg aria-hidden="true"><use href="#ic-clock" /></svg>
+                  8 min
+                </div>
+                <a href="#" class="article-read-link">
+                  Leer
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NEWSLETTER CTA ============ -->
+    <section class="blog-newsletter">
+      <div class="container blog-newsletter-inner">
+        <span class="eyebrow" style="color: var(--yellow); margin-bottom: 16px;">Newsletter Académico</span>
+        <h2>Recursos semanales directo a tu correo</h2>
+        <p>Recibe cada semana una selección de guías, estrategias de publicación y novedades sobre IA académica redactadas por el equipo de Fynit.</p>
+        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+          <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="correo@universidad.edu" required>
+          <button type="submit" class="btn btn-yellow">
+            Suscribirme
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><path d="M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5"/></svg>
+          </button>
+        </form>
+        <p id="newsletterSuccessMsg" style="display:none; margin-top: 16px; color: var(--yellow); font-weight:600; font-size:14px;">
+          âœ“ ¡Suscripción confirmada! Pronto recibirás el primer boletín.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-cta">
+      <div class="footer-cta-inner">
+        <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\imgs png\fynit_mascot.png" alt="Fynit 3D" class="footer-mascot" loading="lazy">
+        <div class="footer-cta-text">
+          <span class="eyebrow" style="color:var(--yellow)">Empieza hoy</span>
+          <h2>¿Listo para ver hacia dónde puede llegar tu investigación?</h2>
+          <a href="contacto.html" class="btn btn-yellow">Crear cuenta<svg><use href="#ic-arrow" /></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-main">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\logos svg\logo-fynit-white.svg" alt="Fynit" class="logo-img">
+        </div>
+        <p>IA académica que entiende tu investigación, diagnostica su potencial editorial y te conecta con expertos para que llegue más lejos.</p>
+        <div class="footer-social">
+          <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><svg><use href="#ic-linkedin" /></svg></a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg><use href="#ic-ig" /></svg></a>
+          <a href="https://x.com" target="_blank" rel="noopener" aria-label="X"><svg><use href="#ic-x" /></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Producto</h4>
+        <ul>
+          <li><a href="fynit_landing.html#como-funciona">Cómo funciona</a></li>
+          <li><a href="precios.html">Precios</a></li>
+          <li><a href="seguridad.html">Seguridad y datos</a></li>
+          <li><a href="disciplinas.html">Disciplinas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Recursos</h4>
+        <ul>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="guias.html">Guías</a></li>
+          <li><a href="faq.html">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Compañía</h4>
+        <ul>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="carreras.html">Trabaja con nosotros</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>Â© 2026 Fynit. Todos los derechos reservados.</span>
+      <div class="legal">
+        <a href="privacidad.html">Privacidad</a>
+        <a href="terminos.html">Términos</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ FLOATING WIDGETS ============ -->
+  <div class="float-stack">
+    <div class="chat-widget" id="chatWidget" aria-hidden="true">
+      <div class="chat-header">
+        <div class="chat-avatar">
+          <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\imgs png\fynit_mascot_bot.png" alt="Fynit Bot"
+            style="width:40px;height:40px;object-fit:contain;border-radius:50%;background:var(--blue);padding:2px;">
+        </div>
+        <div class="chat-header-info">
+          <strong>Fynit IA</strong>
+          <span>â— En línea ahora</span>
+        </div>
+        <button class="chat-close" id="chatClose" aria-label="Cerrar chat">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="chat-body" id="chatBody">
+        <div class="chat-msg bot">
+          <p>¡Hola! Soy el asistente de <strong>Fynit</strong>. ¿En qué te puedo ayudar hoy?</p>
+        </div>
+        <div class="chat-suggestions" id="chatSuggestions">
+          <button class="chat-chip" data-q="que-es">¿Qué es Fynit?</button>
+          <button class="chat-chip" data-q="como-funciona">¿Cómo funciona?</button>
+          <button class="chat-chip" data-q="que-es-articulo">¿Qué es un artículo científico?</button>
+          <button class="chat-chip" data-q="contacto">¿Cuál es el contacto?</button>
+          <button class="chat-chip" data-q="precio">¿Cuánto cuesta?</button>
+          <button class="chat-chip" data-q="cuartil">¿Qué es un cuartil Q1/Q2?</button>
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" class="chat-input" placeholder="Escribe tu pregunta..." autocomplete="off">
+        <button id="chatSend" class="chat-send" aria-label="Enviar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 2 11 13" /><path d="M22 2 15 22 11 13 2 9l20-7z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <button class="chat-trigger" id="chatTrigger" aria-label="Abrir asistente Fynit" aria-expanded="false">
+      <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\imgs png\fynit_mascot_bot.png" alt="Fynit Bot" class="chatbot-mascot-fab icon-bot">
+      <span class="chat-notif" id="chatNotif">1</span>
+    </button>
+    <a class="whatsapp-float" href="https://wa.me/51999999999" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+        <path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.522 3.657 1.432 5.168L2 22l4.975-1.396C8.388 21.49 10.148 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" />
+      </svg>
+    </a>
+  </div>
+
+  <script src="js/main.js" defer></script>
+
+  <!-- Blog filter script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var filterBtns = document.querySelectorAll('.blog-filter-btn');
+      var articles = document.querySelectorAll('.article-card');
+      var featuredSection = document.querySelector('.featured-section');
+
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          // Update active state
+          filterBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+
+          var filter = btn.getAttribute('data-filter');
+
+          // Featured post: only visible on 'all' or 'ia'
+          if (featuredSection) {
+            var featuredVisible = (filter === 'all' || filter === 'ia');
+            featuredSection.style.display = featuredVisible ? 'block' : 'none';
+          }
+
+          // Filter article cards with a fade transition
+          articles.forEach(function (card) {
+            var cat = card.getAttribute('data-category');
+            var matches = (filter === 'all' || cat === filter);
+
+            if (matches) {
+              card.style.display = 'flex';
+              // Trigger a small reflow to restart the transition
+              void card.offsetWidth;
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            } else {
+              card.style.opacity = '0';
+              card.style.transform = 'translateY(8px)';
+              setTimeout(function () {
+                if (!matches) card.style.display = 'none';
+              }, 200);
+            }
+          });
+        });
+      });
+
+      // Newsletter form mock
+      window.handleNewsletter = function (e) {
+        e.preventDefault();
+        var successMsg = document.getElementById('newsletterSuccessMsg');
+        if (successMsg) {
+          successMsg.style.display = 'block';
+          document.getElementById('newsletterEmail').value = '';
+        }
+      };
+
+      // Inline transition defaults for all cards
+      articles.forEach(function (card) {
+        card.style.transition = 'opacity 0.2s ease, transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease';
+      });
+    });
+  </script>
+</body>
+
+</html>
+

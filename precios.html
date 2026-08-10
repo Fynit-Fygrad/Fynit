@@ -1,0 +1,782 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planes y Precios — Fynit</title>
+  <meta name="description"
+    content="Conoce los planes de Fynit. Desde nuestro diagnóstico gratuito hasta soluciones avanzadas e institucionales para maximizar el impacto de tu investigación.">
+  <meta name="theme-color" content="#1B60DF">
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2' y='4' width='20' height='16' rx='6' fill='%231B60DF'/%3E%3Ccircle cx='9' cy='12' r='1.6' fill='white'/%3E%3Ccircle cx='15' cy='12' r='1.6' fill='white'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Sora:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <!-- Sprite de íconos (uso interno vía <use>) -->
+  <svg class="sr-only" aria-hidden="true">
+    <symbol id="ic-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M5 3v18M5 4h12l-2.2 4L17 12H5" />
+    </symbol>
+    <symbol id="ic-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 15V3M12 3l-4.5 4.5M12 3l4.5 4.5" />
+      <path d="M4 15v3.5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V15" />
+    </symbol>
+    <symbol id="ic-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" />
+      <path d="M19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14z" />
+    </symbol>
+    <symbol id="ic-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10.6 3.9 2.7 18a1.5 1.5 0 0 0 1.3 2.2h16a1.5 1.5 0 0 0 1.3-2.2L13.4 3.9a1.5 1.5 0 0 0-2.8 0Z" />
+      <path d="M12 9.5v4" />
+      <path d="M12 16.7v.1" />
+    </symbol>
+    <symbol id="ic-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+      stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="8.2" />
+      <circle cx="12" cy="12" r="4.3" />
+      <circle cx="12" cy="12" r=".6" fill="currentColor" stroke="none" />
+    </symbol>
+    <symbol id="ic-journal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+      stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4.5" y="3" width="15" height="18" rx="2.2" />
+      <path d="M8.2 8h7.6M8.2 12h7.6M8.2 16h5" />
+    </symbol>
+    <symbol id="ic-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M9.2 6.5h11M9.2 12h11M9.2 17.5h11" />
+      <path d="M3.7 6.5l1 1 2-2.1M3.7 12l1 1 2-2.1M3.7 17.5l1 1 2-2.1" />
+    </symbol>
+    <symbol id="ic-filecheck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13.5 3H7.2A1.7 1.7 0 0 0 5.5 4.7v14.6A1.7 1.7 0 0 0 7.2 21h9.6a1.7 1.7 0 0 0 1.7-1.7V8L13.5 3Z" />
+      <path d="M13.5 3v5h5" />
+      <path d="M9.3 14.2l1.9 1.9 3.5-3.9" />
+    </symbol>
+    <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M20 6 9 17l-5-5" />
+    </symbol>
+    <symbol id="ic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5" />
+    </symbol>
+    <symbol id="ic-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M6 6l12 12M18 6 6 18" />
+    </symbol>
+    <symbol id="ic-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </symbol>
+    <symbol id="ic-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M20.5 11.8a8.3 8.3 0 1 1-3.6-6.8" />
+      <path d="M12 2.2c3.6 1 6.4 3.9 7.2 7.6" />
+      <path d="M8 10.3c.4 2.4 2.3 4.2 4.6 4.6" />
+    </symbol>
+    <symbol id="ic-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M14 3H7.5A1.5 1.5 0 0 0 6 4.5v15A1.5 1.5 0 0 0 7.5 21h9a1.5 1.5 0 0 0 1.5-1.5V8l-4-5Z" />
+      <path d="M14 3v5h4" />
+    </symbol>
+    <symbol id="ic-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+      stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="3" />
+      <path d="M8 10.5v6M8 7.8v.1M12.3 16.5v-3.6c0-1.3.9-2.2 2-2.2s1.8.8 1.8 2.1v3.7" />
+    </symbol>
+    <symbol id="ic-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+      stroke-linejoin="round">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+      <circle cx="12" cy="12" r="3.6" />
+      <circle cx="17.2" cy="6.8" r=".6" fill="currentColor" stroke="none" />
+    </symbol>
+    <symbol id="ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M4 4l16 16M20 4 4 20" />
+    </symbol>
+  </svg>
+
+  <!-- ============ SIDEBAR OFF-CANVAS ============ -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <aside class="sidebar" id="sidebar" aria-hidden="true">
+    <div class="sidebar-top">
+      <div class="logo">
+        <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\logos svg\logo-fynit-white.svg" alt="Fynit" class="logo-img">
+      </div>
+      <button class="sidebar-close" id="sidebarClose" aria-label="Cerrar menú"><svg>
+          <use href="#ic-close" />
+        </svg></button>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Navegación principal">
+      <a href="fynit_landing.html#inicio" data-nav-link>Inicio</a>
+      <a href="fynit_landing.html#como-funciona" data-nav-link>Cómo funciona</a>
+
+      <!-- Accordion: Recursos -->
+      <div class="sidebar-accordion">
+        <button class="accordion-btn" aria-expanded="false">
+          Recursos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="accordion-content">
+          <a href="blog.html" data-nav-link>Blog</a>
+          <a href="faq.html" data-nav-link>Preguntas Frecuentes</a>
+        </div>
+      </div>
+
+      <!-- Accordion: Nosotros -->
+      <div class="sidebar-accordion">
+        <button class="accordion-btn" aria-expanded="false">
+          Nosotros
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="accordion-content">
+          <a href="nosotros.html" data-nav-link>Sobre Fynit</a>
+          <a href="equipo.html" data-nav-link>Nuestro Equipo</a>
+          <a href="contacto.html" data-nav-link>Contacto</a>
+        </div>
+      </div>
+
+      <a href="precios.html" style="color: var(--white);">Precios</a>
+    </nav>
+  </aside>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-row">
+      <a href="fynit_landing.html#inicio" class="logo" aria-label="Fynit — inicio">
+        <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\logos svg\logo-fynit.svg" alt="Fynit" class="logo-img">
+      </a>
+
+      <nav class="nav-desktop" aria-label="Navegación principal">
+        <a href="fynit_landing.html#como-funciona">Cómo funciona</a>
+
+        <div class="nav-dropdown">
+          <button class="dropdown-trigger">Recursos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5" stroke-linecap="round">
+              <path d="M6 9l6 6 6-6" />
+            </svg></button>
+          <div class="dropdown-content">
+            <a href="blog.html">Blog</a>
+            <a href="faq.html">Preguntas Frecuentes</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button class="dropdown-trigger">Nosotros <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5" stroke-linecap="round">
+              <path d="M6 9l6 6 6-6" />
+            </svg></button>
+          <div class="dropdown-content">
+            <a href="nosotros.html">Sobre Fynit</a>
+            <a href="equipo.html">Nuestro Equipo</a>
+            <a href="contacto.html">Contacto</a>
+          </div>
+        </div>
+
+        <a href="precios.html" class="active">Precios</a>
+      </nav>
+
+      <div class="header-actions" style="white-space: nowrap;">
+        <button class="lang-switcher" id="langSwitcher" aria-label="Cambiar idioma">
+          <span>ES</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <a href="login.html"
+          style="font-family:'Sora',sans-serif; font-weight:600; font-size:14.5px; color:var(--ink-70); text-decoration:none; padding:6px 0; margin-right:4px;">Iniciar
+          Sesión</a>
+        <a href="contacto.html" class="btn btn-primary btn-sm" id="headerCta">Registrarse</a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false"
+          aria-controls="sidebar">
+          <svg>
+            <use href="#ic-menu" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO DE PRECIOS ============ -->
+    <section class="prices-hero">
+      <div class="container prices-hero-inner">
+        <span class="eyebrow-accent">Planes y Tarifas</span>
+        <h1>Encuentra el plan ideal para tu investigación</h1>
+        <p>Potencia la rigurosidad y el alcance de tu artículo científico con el respaldo de nuestra inteligencia artificial.</p>
+
+        <!-- Toggle selector mensual/anual -->
+        <div class="pricing-toggle-container">
+          <span class="pricing-toggle-label active" id="toggleLabelMensual" onclick="setBilling(false)">Mensual</span>
+          <label class="pricing-switch" aria-label="Cambiar tipo de facturación">
+            <input type="checkbox" id="pricingToggle">
+            <span class="pricing-slider"></span>
+          </label>
+          <span class="pricing-toggle-label" id="toggleLabelAnual" onclick="setBilling(true)">
+            Anual <span class="pricing-save-badge">Ahorra 20%</span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECCIÓN TARJETAS DE PLANES ============ -->
+    <section class="prices-section">
+      <div class="container">
+        <div class="pricing-grid">
+
+          <!-- Plan Explorador (Gratis) -->
+          <article class="price-card">
+            <div class="price-card-header">
+              <h3 class="price-card-title">Explorador</h3>
+              <div class="price-card-price">
+                <span class="currency">$</span>
+                <span class="value">0</span>
+                <span class="period">/ mes</span>
+              </div>
+              <div class="price-card-billing-detail">Gratis para siempre</div>
+            </div>
+            <p class="price-card-desc">Para investigadores independientes y estudiantes que dan sus primeros pasos evaluando manuscritos.</p>
+            <ul class="price-card-features-list">
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Hasta <strong>2 manuscritos</strong> al mes</span>
+              </li>
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Análisis de similitud <span style="font-size:11px;font-weight:700;background:var(--tint-2);color:var(--blue);padding:2px 8px;border-radius:999px;margin-left:4px;letter-spacing:.03em;">Vista previa</span></span>
+              </li>
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Estimación básica de viabilidad de cuartil</span>
+              </li>
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Sugerencia básica de revistas (top 3)</span>
+              </li>
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Análisis metodológico <span style="font-size:11px;font-weight:700;background:var(--tint-2);color:var(--blue);padding:2px 8px;border-radius:999px;margin-left:4px;letter-spacing:.03em;">Resumen general</span></span>
+              </li>
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Reporte de riesgos <span style="font-size:11px;font-weight:700;background:var(--tint-2);color:var(--blue);padding:2px 8px;border-radius:999px;margin-left:4px;letter-spacing:.03em;">Top 2 hallazgos</span></span>
+              </li>
+            </ul>
+            <a href="contacto.html?plan=explorador" class="btn btn-ghost btn-block">Comenzar gratis</a>
+          </article>
+
+          <!-- Plan Investigador Pro (Destacado) -->
+          <article class="price-card featured">
+            <div class="price-card-badge">Más Popular</div>
+            <div class="price-card-header">
+              <h3 class="price-card-title">Investigador Pro</h3>
+              <div class="price-card-price">
+                <span class="currency">$</span>
+                <div class="price-val-wrapper" id="proPriceValWrapper">
+                  <span class="value" id="proPriceVal">19</span>
+                </div>
+                <span class="period">/ mes</span>
+              </div>
+              <div class="price-card-billing-detail" id="proBillingDetail">Facturado mensualmente</div>
+            </div>
+            <p class="price-card-desc">Para académicos, docentes y doctorandos activos que buscan optimizar su flujo y publicar regularmente.</p>
+            <ul class="price-card-features-list">
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Diagnósticos de manuscritos <strong>ilimitados</strong></span>
+              </li>
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Análisis metodológico completo con IA</span>
+              </li>
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Estimación avanzada de viabilidad (Q1 a Q4)</span>
+              </li>
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Reporte de riesgos editorial estructurado</span>
+              </li>
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Búsqueda avanzada e ilimitada de revistas</span>
+              </li>
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Comparación de versiones e historial</span>
+              </li>
+            </ul>
+            <a href="contacto.html?plan=pro" class="btn btn-primary btn-block">Prueba 7 días gratis</a>
+          </article>
+
+          <!-- Plan Institucional (Empresas/Universidad) -->
+          <article class="price-card">
+            <div class="price-card-header">
+              <h3 class="price-card-title">Institucional</h3>
+              <div class="price-card-price">
+                <span class="value">Cotizar</span>
+              </div>
+              <div class="price-card-billing-detail">Según volumen de usuarios</div>
+            </div>
+            <p class="price-card-desc">Para universidades, institutos, facultades o centros de investigación que desean potenciar su impacto.</p>
+            <ul class="price-card-features-list">
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Cuentas para todos los docentes e investigadores</span>
+              </li>
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Panel administrativo con analíticas de impacto</span>
+              </li>
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Servidor dedicado y máxima seguridad de datos</span>
+              </li>
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Integración API (repositorios DSpace, etc.)</span>
+              </li>
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Soporte 24/7 y Account Manager dedicado</span>
+              </li>
+              <li class="price-card-feature-item">
+                <svg aria-hidden="true"><use href="#ic-check" /></svg>
+                <span>Capacitación en talleres institucionales</span>
+              </li>
+            </ul>
+            <a href="contacto.html?plan=institucional" class="btn btn-ghost btn-block" style="border-color: var(--navy); background: rgba(7, 23, 66, 0.04);">Contactar Ventas</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TABLA COMPARATIVA DE CARACTERÍSTICAS ============ -->
+    <section class="comparison-section">
+      <div class="container">
+        <div class="comparison-title">
+          <h2>Compara todas las características</h2>
+          <p>Encuentra el nivel de detalle y soporte que necesitas para tu ruta de publicación.</p>
+        </div>
+
+        <div class="comparison-table-wrapper">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Funcionalidad</th>
+                <th>Explorador</th>
+                <th>Investigador Pro</th>
+                <th>Institucional</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- Diagnóstico -->
+              <tr class="category-row">
+                <td colspan="4">Diagnóstico Académico</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="feature-name">Límite de manuscritos</span>
+                  <span class="feature-desc">Cantidad de análisis independientes que puedes realizar.</span>
+                </td>
+                <td><span class="plan-spec">2 al mes</span></td>
+                <td><span class="plan-spec" style="color:var(--blue); font-weight:700;">Ilimitados</span></td>
+                <td><span class="plan-spec">Ilimitados</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="feature-name">Análisis de similitud</span>
+                  <span class="feature-desc">Detección de textos coincidentes con bases de datos.</span>
+                </td>
+                <td><span class="plan-spec">Básico</span></td>
+                <td><span class="plan-spec">Avanzado (Completo)</span></td>
+                <td><span class="plan-spec">Avanzado (Completo)</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="feature-name">Evaluación metodológica</span>
+                  <span class="feature-desc">Análisis de consistencia interna y rigor experimental.</span>
+                </td>
+                <td><span class="plan-spec" style="font-size:12.5px;color:var(--blue);background:var(--tint-2);padding:4px 10px;border-radius:999px;font-weight:700;letter-spacing:.03em;">ðŸ” Vista parcial</span></td>
+                <td><svg class="check-icon" aria-hidden="true"><use href="#ic-check" /></svg></td>
+                <td><svg class="check-icon" aria-hidden="true"><use href="#ic-check" /></svg></td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="feature-name">Detección de riesgos críticos</span>
+                  <span class="feature-desc">Alertas sobre posibles falencias en estructura, citas y formato.</span>
+                </td>
+                <td><span class="plan-spec" style="font-size:12.5px;color:var(--blue);background:var(--tint-2);padding:4px 10px;border-radius:999px;font-weight:700;letter-spacing:.03em;">âš ï¸ Top 2 hallazgos</span></td>
+                <td><svg class="check-icon" aria-hidden="true"><use href="#ic-check" /></svg></td>
+                <td><svg class="check-icon" aria-hidden="true"><use href="#ic-check" /></svg></td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="feature-name">Plan de mejora personalizado</span>
+                  <span class="feature-desc">Hoja de ruta priorizada con acciones concretas para elevar la calidad del manuscrito.</span>
+                </td>
+                <td><span class="plan-spec" style="font-size:12.5px;color:var(--blue);background:var(--tint-2);padding:4px 10px;border-radius:999px;font-weight:700;letter-spacing:.03em;">Básico (Acciones limitadas)</span></td>
+                <td><span class="plan-spec" style="color:var(--blue); font-weight:700;">Ilimitado y Priorizado</span></td>
+                <td><span class="plan-spec">Ilimitado y Priorizado</span></td>
+              </tr>
+
+              <!-- Revistas -->
+              <tr class="category-row">
+                <td colspan="4">Recomendación Editorial</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="feature-name">Sugerencia de revistas</span>
+                  <span class="feature-desc">Revistas sugeridas indexadas ordenadas por fit y compatibilidad.</span>
+                </td>
+                <td><span class="plan-spec">Top 3 básicas</span></td>
+                <td><span class="plan-spec" style="color:var(--blue); font-weight:700;">Ilimitadas</span></td>
+                <td><span class="plan-spec">Ilimitadas</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="feature-name">Precisión de viabilidad (Q1-Q4)</span>
+                  <span class="feature-desc">Modelo predictivo que estima la probabilidad de aceptación según cuartil.</span>
+                </td>
+                <td><span class="plan-spec">Básica (Estimada)</span></td>
+                <td><span class="plan-spec" style="color:var(--blue); font-weight:700;">Fórmula Avanzada</span></td>
+                <td><span class="plan-spec">Fórmula Avanzada</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="feature-name">Filtros por indexadoras</span>
+                  <span class="feature-desc">Filtra por Scopus, Web of Science (WoS), Scielo, Latindex, etc.</span>
+                </td>
+                <td><svg class="cross-icon" aria-hidden="true"><use href="#ic-close" /></svg></td>
+                <td><svg class="check-icon" aria-hidden="true"><use href="#ic-check" /></svg></td>
+                <td><svg class="check-icon" aria-hidden="true"><use href="#ic-check" /></svg></td>
+              </tr>
+
+              <!-- Gestión -->
+              <tr class="category-row">
+                <td colspan="4">Gestión y Herramientas</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="feature-name">Historial de reportes</span>
+                  <span class="feature-desc">Periodo de tiempo en el que tus reportes permanecen guardados.</span>
+                </td>
+                <td><span class="plan-spec">30 días</span></td>
+                <td><span class="plan-spec">Permanente</span></td>
+                <td><span class="plan-spec">Permanente</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="feature-name">Comparativa de versiones</span>
+                  <span class="feature-desc">Mide el progreso y evolución de tu artículo entre cada subida.</span>
+                </td>
+                <td><svg class="cross-icon" aria-hidden="true"><use href="#ic-close" /></svg></td>
+                <td><svg class="check-icon" aria-hidden="true"><use href="#ic-check" /></svg></td>
+                <td><svg class="check-icon" aria-hidden="true"><use href="#ic-check" /></svg></td>
+              </tr>
+
+              <!-- Integración e Institución -->
+              <tr class="category-row">
+                <td colspan="4">Soporte y Seguridad</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="feature-name">Canal de Soporte</span>
+                  <span class="feature-desc">Vía por la cual resolvemos tus inquietudes técnicas o metodológicas.</span>
+                </td>
+                <td><span class="plan-spec">Comunidad</span></td>
+                <td><span class="plan-spec" style="color:var(--blue); font-weight:700;">Prioritario por chat</span></td>
+                <td><span class="plan-spec">Dedicado 24/7 (SLA)</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="feature-name">Integración de sistemas</span>
+                  <span class="feature-desc">API personalizada para enlazar repositorios institucionales de tesis.</span>
+                </td>
+                <td><svg class="cross-icon" aria-hidden="true"><use href="#ic-close" /></svg></td>
+                <td><svg class="cross-icon" aria-hidden="true"><use href="#ic-close" /></svg></td>
+                <td><svg class="check-icon" aria-hidden="true"><use href="#ic-check" /></svg></td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="feature-name">Panel de métricas institucionales</span>
+                  <span class="feature-desc">Mide la productividad y el avance editorial global de tus investigadores.</span>
+                </td>
+                <td><svg class="cross-icon" aria-hidden="true"><use href="#ic-close" /></svg></td>
+                <td><svg class="cross-icon" aria-hidden="true"><use href="#ic-close" /></svg></td>
+                <td><svg class="check-icon" aria-hidden="true"><use href="#ic-check" /></svg></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECCIÓN PREGUNTAS FRECUENTES ============ -->
+    <section class="pricing-faq-section">
+      <div class="container">
+        <div class="pricing-faq-head">
+          <h2>Preguntas frecuentes sobre tarifas</h2>
+          <p>¿Tienes dudas sobre los planes de pago? Aquí respondemos las más comunes.</p>
+        </div>
+
+        <div class="pricing-faq-grid">
+          <div class="faq-card">
+            <h3>¿Puedo probar el Plan Pro antes de pagar?</h3>
+            <p>¡Sí! Ofrecemos una prueba gratuita de 7 días sin restricciones en el Plan Investigador Pro. Puedes registrarte, subir tus artículos y probar todas las funcionalidades premium de forma completamente libre.</p>
+          </div>
+
+          <div class="faq-card">
+            <h3>¿Cómo funciona el descuento de facturación anual?</h3>
+            <p>Al seleccionar la facturación anual, pagas todo el año por adelantado en un solo pago de $180 USD (lo que equivale a $15 USD al mes). Esto representa un ahorro directo del 20% en comparación con la tarifa de pago mensual de $19 USD.</p>
+          </div>
+
+          <div class="faq-card">
+            <h3>¿Puedo cancelar mi suscripción en cualquier momento?</h3>
+            <p>Sí, no tenemos cláusulas de permanencia. Puedes cancelar tu plan mensual o anual directamente desde tu panel de usuario con un solo clic. Seguirás teniendo acceso a tus beneficios hasta que finalice tu ciclo de facturación actual.</p>
+          </div>
+
+          <div class="faq-card">
+            <h3>¿Qué métodos de pago aceptan?</h3>
+            <p>Aceptamos todas las principales tarjetas de crédito y débito internacionales (Visa, Mastercard, American Express). Para suscripciones institucionales de universidades o grupos, también aceptamos transferencia bancaria u orden de compra directa.</p>
+          </div>
+
+          <div class="faq-card">
+            <h3>¿Qué sucede si supero el límite de 2 manuscritos gratuitos?</h3>
+            <p>Tu límite se reinicia automáticamente 30 días después de tu primer diagnóstico. Si necesitas analizar un tercer documento antes de que culmine el mes o desbloquear el detalle completo de tus riesgos, puedes pasar temporalmente al plan Investigador Pro.</p>
+          </div>
+
+          <div class="faq-card">
+            <h3>¿Mis manuscritos y PDFs están seguros?</h3>
+            <p>Completamente. La privacidad es un pilar fundamental en Fynit. Tus documentos se encriptan tanto en tránsito como en reposo, y nunca se utilizan para entrenar modelos públicos de IA ni se comparten con terceros. Tú mantienes el 100% de los derechos de autor.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-cta">
+      <div class="footer-cta-inner">
+        <!-- Mascota 3D — lado izquierdo -->
+        <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\imgs png\fynit_mascot.png" alt="Fynit 3D" class="footer-mascot" loading="lazy">
+        <!-- Texto + CTA — lado derecho -->
+        <div class="footer-cta-text">
+          <span class="eyebrow" style="color:var(--yellow)">Empieza hoy</span>
+          <h2>¿Listo para ver hacia dónde puede llegar tu investigación?</h2>
+          <a href="contacto.html" class="btn btn-yellow">Crear cuenta<svg>
+              <use href="#ic-arrow" />
+            </svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-main">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\logos svg\logo-fynit-white.svg" alt="Fynit" class="logo-img">
+        </div>
+        <p>IA académica que entiende tu investigación, diagnostica su potencial editorial y te conecta con expertos para
+          que llegue más lejos.</p>
+        <div class="footer-social">
+          <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><svg>
+              <use href="#ic-linkedin" />
+            </svg></a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg>
+              <use href="#ic-ig" />
+            </svg></a>
+          <a href="https://x.com" target="_blank" rel="noopener" aria-label="X"><svg>
+              <use href="#ic-x" />
+            </svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Producto</h4>
+        <ul>
+          <li><a href="fynit_landing.html#como-funciona">Cómo funciona</a></li>
+          <li><a href="precios.html">Precios</a></li>
+          <li><a href="seguridad.html">Seguridad y datos</a></li>
+          <li><a href="disciplinas.html">Disciplinas</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Recursos</h4>
+        <ul>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="guias.html">Guías</a></li>
+          <li><a href="faq.html">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Compañía</h4>
+        <ul>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="carreras.html">Trabaja con nosotros</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>Â© 2026 Fynit. Todos los derechos reservados.</span>
+      <div class="legal">
+        <a href="privacidad.html">Privacidad</a>
+        <a href="terminos.html">Términos</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ FLOATING WIDGETS ============ -->
+  <div class="float-stack">
+
+    <!-- Chatbot Widget Window -->
+    <div class="chat-widget" id="chatWidget" aria-hidden="true">
+      <div class="chat-header">
+        <div class="chat-avatar">
+          <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\imgs png\fynit_mascot_bot.png" alt="Fynit Bot"
+            style="width:40px;height:40px;object-fit:contain;border-radius:50%;background:var(--blue);padding:2px;">
+        </div>
+        <div class="chat-header-info">
+          <strong>Fynit IA</strong>
+          <span>â— En línea ahora</span>
+        </div>
+        <button class="chat-close" id="chatClose" aria-label="Cerrar chat">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="chat-body" id="chatBody">
+        <div class="chat-msg bot">
+          <p>¡Hola! Soy el asistente de <strong>Fynit</strong>. ¿En qué te puedo ayudar hoy?</p>
+        </div>
+        <div class="chat-suggestions" id="chatSuggestions">
+          <button class="chat-chip" data-q="que-es">¿Qué es Fynit?</button>
+          <button class="chat-chip" data-q="como-funciona">¿Cómo funciona?</button>
+          <button class="chat-chip" data-q="que-es-articulo">¿Qué es un artículo científico?</button>
+          <button class="chat-chip" data-q="contacto">¿Cuál es el contacto?</button>
+          <button class="chat-chip" data-q="precio">¿Cuánto cuesta?</button>
+          <button class="chat-chip" data-q="cuartil">¿Qué es un cuartil Q1/Q2?</button>
+        </div>
+      </div>
+
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" class="chat-input" placeholder="Escribe tu pregunta..." autocomplete="off">
+        <button id="chatSend" class="chat-send" aria-label="Enviar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 2 11 13" />
+            <path d="M22 2 15 22 11 13 2 9l20-7z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Chatbot Trigger Button — mascota always visible, is the toggle -->
+    <button class="chat-trigger" id="chatTrigger" aria-label="Abrir asistente Fynit" aria-expanded="false">
+      <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\imgs png\fynit_mascot_bot.png" alt="Fynit Bot" class="chatbot-mascot-fab icon-bot">
+      <span class="chat-notif" id="chatNotif">1</span>
+    </button>
+
+    <!-- WhatsApp Button -->
+    <a class="whatsapp-float" href="https://wa.me/51999999999" target="_blank" rel="noopener"
+      aria-label="Escríbenos por WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+        <path
+          d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.522 3.657 1.432 5.168L2 22l4.975-1.396C8.388 21.49 10.148 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" />
+      </svg>
+    </a>
+
+  </div>
+
+  <script src="js/main.js" defer></script>
+  
+  <!-- Script local para el toggle de precios -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var pricingToggle = document.getElementById('pricingToggle');
+      var proPriceVal = document.getElementById('proPriceVal');
+      var proPriceValWrapper = document.getElementById('proPriceValWrapper');
+      var proBillingDetail = document.getElementById('proBillingDetail');
+      var labelMensual = document.getElementById('toggleLabelMensual');
+      var labelAnual = document.getElementById('toggleLabelAnual');
+
+      function updatePricing(isAnnual) {
+        // Toggle input checked state if triggered programmatically
+        if (pricingToggle.checked !== isAnnual) {
+          pricingToggle.checked = isAnnual;
+        }
+
+        // Toggle active visual class on labels
+        if (isAnnual) {
+          labelAnual.classList.add('active');
+          labelMensual.classList.remove('active');
+        } else {
+          labelMensual.classList.add('active');
+          labelAnual.classList.remove('active');
+        }
+
+        // Animate price change
+        proPriceValWrapper.classList.add('is-animating');
+        proBillingDetail.classList.add('is-animating');
+
+        setTimeout(function() {
+          if (isAnnual) {
+            proPriceVal.textContent = '15';
+            proBillingDetail.textContent = 'Facturado anualmente ($180/año)';
+          } else {
+            proPriceVal.textContent = '19';
+            proBillingDetail.textContent = 'Facturado mensualmente';
+          }
+          proPriceValWrapper.classList.remove('is-animating');
+          proBillingDetail.classList.remove('is-animating');
+        }, 200);
+      }
+
+      // Listen to check input changes
+      if (pricingToggle) {
+        pricingToggle.addEventListener('change', function() {
+          updatePricing(this.checked);
+        });
+      }
+
+      // Make labels clickable
+      window.setBilling = function(isAnnual) {
+        updatePricing(isAnnual);
+      };
+    });
+  </script>
+</body>
+
+</html>
+

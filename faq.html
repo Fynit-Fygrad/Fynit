@@ -1,0 +1,744 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preguntas Frecuentes — Fynit</title>
+  <meta name="description"
+    content="¿Tienes dudas sobre Fynit? Encuentra respuestas detalladas sobre el diagnóstico de similitud con IA, recomendación de revistas, privacidad de datos y planes de suscripción.">
+  <meta name="theme-color" content="#1B60DF">
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2' y='4' width='20' height='16' rx='6' fill='%231B60DF'/%3E%3Ccircle cx='9' cy='12' r='1.6' fill='white'/%3E%3Ccircle cx='15' cy='12' r='1.6' fill='white'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Sora:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <!-- Sprite de íconos (uso interno vía <use>) -->
+  <svg class="sr-only" aria-hidden="true">
+    <symbol id="ic-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M5 3v18M5 4h12l-2.2 4L17 12H5" />
+    </symbol>
+    <symbol id="ic-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 15V3M12 3l-4.5 4.5M12 3l4.5 4.5" />
+      <path d="M4 15v3.5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V15" />
+    </symbol>
+    <symbol id="ic-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" />
+      <path d="M19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14z" />
+    </symbol>
+    <symbol id="ic-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10.6 3.9 2.7 18a1.5 1.5 0 0 0 1.3 2.2h16a1.5 1.5 0 0 0 1.3-2.2L13.4 3.9a1.5 1.5 0 0 0-2.8 0Z" />
+      <path d="M12 9.5v4" />
+      <path d="M12 16.7v.1" />
+    </symbol>
+    <symbol id="ic-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+      stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="8.2" />
+      <circle cx="12" cy="12" r="4.3" />
+      <circle cx="12" cy="12" r=".6" fill="currentColor" stroke="none" />
+    </symbol>
+    <symbol id="ic-journal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+      stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4.5" y="3" width="15" height="18" rx="2.2" />
+      <path d="M8.2 8h7.6M8.2 12h7.6M8.2 16h5" />
+    </symbol>
+    <symbol id="ic-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M9.2 6.5h11M9.2 12h11M9.2 17.5h11" />
+      <path d="M3.7 6.5l1 1 2-2.1M3.7 12l1 1 2-2.1M3.7 17.5l1 1 2-2.1" />
+    </symbol>
+    <symbol id="ic-filecheck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13.5 3H7.2A1.7 1.7 0 0 0 5.5 4.7v14.6A1.7 1.7 0 0 0 7.2 21h9.6a1.7 1.7 0 0 0 1.7-1.7V8L13.5 3Z" />
+      <path d="M13.5 3v5h5" />
+      <path d="M9.3 14.2l1.9 1.9 3.5-3.9" />
+    </symbol>
+    <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M20 6 9 17l-5-5" />
+    </symbol>
+    <symbol id="ic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5" />
+    </symbol>
+    <symbol id="ic-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M6 6l12 12M18 6 6 18" />
+    </symbol>
+    <symbol id="ic-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </symbol>
+    <symbol id="ic-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M20.5 11.8a8.3 8.3 0 1 1-3.6-6.8" />
+      <path d="M12 2.2c3.6 1 6.4 3.9 7.2 7.6" />
+      <path d="M8 10.3c.4 2.4 2.3 4.2 4.6 4.6" />
+    </symbol>
+    <symbol id="ic-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M14 3H7.5A1.5 1.5 0 0 0 6 4.5v15A1.5 1.5 0 0 0 7.5 21h9a1.5 1.5 0 0 0 1.5-1.5V8l-4-5Z" />
+      <path d="M14 3v5h4" />
+    </symbol>
+    <symbol id="ic-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+      stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="3" />
+      <path d="M8 10.5v6M8 7.8v.1M12.3 16.5v-3.6c0-1.3.9-2.2 2-2.2s1.8.8 1.8 2.1v3.7" />
+    </symbol>
+    <symbol id="ic-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+      stroke-linejoin="round">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+      <circle cx="12" cy="12" r="3.6" />
+      <circle cx="17.2" cy="6.8" r=".6" fill="currentColor" stroke="none" />
+    </symbol>
+    <symbol id="ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M4 4l16 16M20 4 4 20" />
+    </symbol>
+    <!-- Lupa (Search) -->
+    <symbol id="ic-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+    </symbol>
+  </svg>
+
+  <!-- ============ SIDEBAR OFF-CANVAS ============ -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <aside class="sidebar" id="sidebar" aria-hidden="true">
+    <div class="sidebar-top">
+      <div class="logo">
+        <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\logos svg\logo-fynit-white.svg" alt="Fynit" class="logo-img">
+      </div>
+      <button class="sidebar-close" id="sidebarClose" aria-label="Cerrar menú"><svg>
+          <use href="#ic-close" />
+        </svg></button>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Navegación principal">
+      <a href="fynit_landing.html#inicio" data-nav-link>Inicio</a>
+      <a href="fynit_landing.html#como-funciona" data-nav-link>Cómo funciona</a>
+
+      <!-- Accordion: Recursos -->
+      <div class="sidebar-accordion">
+        <button class="accordion-btn" aria-expanded="false">
+          Recursos
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="accordion-content">
+          <a href="blog.html" data-nav-link>Blog</a>
+          <a href="faq.html" data-nav-link style="color: var(--white);">Preguntas Frecuentes</a>
+        </div>
+      </div>
+
+      <!-- Accordion: Nosotros -->
+      <div class="sidebar-accordion">
+        <button class="accordion-btn" aria-expanded="false">
+          Nosotros
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <div class="accordion-content">
+          <a href="nosotros.html" data-nav-link>Sobre Fynit</a>
+          <a href="equipo.html" data-nav-link>Nuestro Equipo</a>
+          <a href="contacto.html" data-nav-link>Contacto</a>
+        </div>
+      </div>
+
+      <a href="precios.html">Precios</a>
+    </nav>
+  </aside>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-row">
+      <a href="fynit_landing.html#inicio" class="logo" aria-label="Fynit — inicio">
+        <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\logos svg\logo-fynit.svg" alt="Fynit" class="logo-img">
+      </a>
+
+      <nav class="nav-desktop" aria-label="Navegación principal">
+        <a href="fynit_landing.html#como-funciona">Cómo funciona</a>
+
+        <div class="nav-dropdown">
+          <button class="dropdown-trigger">Recursos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5" stroke-linecap="round">
+              <path d="M6 9l6 6 6-6" />
+            </svg></button>
+          <div class="dropdown-content">
+            <a href="blog.html">Blog</a>
+            <a href="faq.html" class="active">Preguntas Frecuentes</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button class="dropdown-trigger">Nosotros <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5" stroke-linecap="round">
+              <path d="M6 9l6 6 6-6" />
+            </svg></button>
+          <div class="dropdown-content">
+            <a href="nosotros.html">Sobre Fynit</a>
+            <a href="equipo.html">Nuestro Equipo</a>
+            <a href="contacto.html">Contacto</a>
+          </div>
+        </div>
+
+        <a href="precios.html">Precios</a>
+      </nav>
+
+      <div class="header-actions" style="white-space: nowrap;">
+        <button class="lang-switcher" id="langSwitcher" aria-label="Cambiar idioma">
+          <span>ES</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+        <a href="login.html"
+          style="font-family:'Sora',sans-serif; font-weight:600; font-size:14.5px; color:var(--ink-70); text-decoration:none; padding:6px 0; margin-right:4px;">Iniciar
+          Sesión</a>
+        <a href="contacto.html" class="btn btn-primary btn-sm" id="headerCta">Registrarse</a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false"
+          aria-controls="sidebar">
+          <svg>
+            <use href="#ic-menu" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO DE FAQ ============ -->
+    <section class="faq-hero">
+      <div class="container faq-hero-inner">
+        <span class="eyebrow-accent">Centro de Ayuda</span>
+        <h1>Preguntas Frecuentes</h1>
+        <p>Encuentra respuestas rápidas sobre cómo funciona Fynit, el diagnóstico con IA y la seguridad de tus manuscritos.</p>
+
+        <!-- Buscador interactivo -->
+        <div class="faq-search-container">
+          <svg class="faq-search-icon" aria-hidden="true"><use href="#ic-search" /></svg>
+          <input type="text" id="faqSearchInput" class="faq-search-input" placeholder="Busca tu pregunta (ej. similitud, Pro, privacidad...)" autocomplete="off">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECCIÓN TABS & FAQ LIST ============ -->
+    <section class="faq-tabs-section">
+      <div class="container">
+
+        <!-- Botones de pestaña / categorías -->
+        <div class="faq-tabs-container">
+          <button class="faq-tab-btn active" data-category="all">Mostrar Todo</button>
+          <button class="faq-tab-btn" data-category="general">General</button>
+          <button class="faq-tab-btn" data-category="diagnostico">Diagnóstico con IA</button>
+          <button class="faq-tab-btn" data-category="revistas">Revistas y Publicación</button>
+          <button class="faq-tab-btn" data-category="planes">Cuenta y Seguridad</button>
+        </div>
+
+        <!-- Lista de acordeones -->
+        <div class="faq-list" id="faqList">
+
+          <!-- Pregunta 1 (General) -->
+          <div class="faq-item" data-category="general">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>¿Qué es Fynit y cómo me ayuda en mi proceso de investigación?</span>
+              <span class="faq-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content">
+              <div class="faq-answer">
+                <p><strong>Fynit</strong> es un asistente académico impulsado por inteligencia artificial especialmente diseñado para investigadores, doctorandos y docentes universitarios. Fynit analiza tus borradores de artículos científicos y te entrega una <strong>evaluación honesta en segundos</strong>.</p>
+                <p>Te ayuda a detectar problemas de similitud, identificar falencias en tu metodología, estimar la viabilidad de aceptación en diferentes cuartiles de revistas indexadas (Q1, Q2, etc.) y estructurar un plan de acción paso a paso para optimizar tu manuscrito antes de enviarlo a revisión por pares.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pregunta 2 (General) -->
+          <div class="faq-item" data-category="general">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>¿Fynit reemplaza el trabajo de un editor humano o un asesor metodológico?</span>
+              <span class="faq-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content">
+              <div class="faq-answer">
+                <p><strong>No.</strong> Fynit actúa como un primer filtro y un copiloto interactivo de alta velocidad. Su IA te permite automatizar las tareas repetitivas y de diagnóstico inicial (como formateo de citas, detección de textos redundantes y preselección de revistas).</p>
+                <p>Esto te ahorra semanas de trabajo, pero la revisión final y el aporte intelectual profundo siguen correspondiendo al investigador. En planes avanzados, Fynit además te permite conectar tu reporte directamente con consultores humanos expertos para una mentoría especializada de alto nivel.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pregunta 3 (Diagnostico) -->
+          <div class="faq-item" data-category="diagnostico">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>¿Qué tipos de archivos puedo subir y cuál es el tamaño máximo?</span>
+              <span class="faq-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content">
+              <div class="faq-answer">
+                <p>Actualmente puedes subir manuscritos en formato <strong>PDF</strong> y documentos de Microsoft Word (<strong>.docx</strong>).</p>
+                <p>El límite de peso por archivo es de <strong>15 MB</strong> para el plan Explorador (gratuito) y hasta <strong>35 MB</strong> en el plan Investigador Pro, lo cual es más que suficiente para almacenar artículos con gráficos, tablas y fórmulas complejas de alta resolución.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pregunta 4 (Diagnostico) -->
+          <div class="faq-item" data-category="diagnostico">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>¿Cómo funciona el diagnóstico de similitud y qué tan confiable es?</span>
+              <span class="faq-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content">
+              <div class="faq-answer">
+                <p>Nuestra IA escanea el texto de tu manuscrito y lo contrasta en tiempo real con una base de datos global indexada que contiene millones de artículos científicos, tesis de posgrado, libros académicos y contenidos web públicos.</p>
+                <p>El reporte te indica el porcentaje global de similitud e identifica las frases específicas que requieren parafraseo o una cita formal para evitar malas interpretaciones o sospechas de plagio involuntario. Su precisión y rigurosidad son equivalentes a los estándares empleados por las principales revistas científicas.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pregunta 5 (Diagnostico) -->
+          <div class="faq-item" data-category="diagnostico">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>¿Qué es la puntuación de "Readiness" o nivel de preparación?</span>
+              <span class="faq-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content">
+              <div class="faq-answer">
+                <p>El <strong>Readiness Score</strong> es una métrica desarrollada por Fynit que va de 0 a 100 y evalúa el nivel de madurez técnica de tu artículo.</p>
+                <p>Analiza si el manuscrito cumple con la estructura estándar (como IMRyD: Introducción, Metodología, Resultados y Discusión), si las citas bibliográficas están completas y consistentes, y si el hilo argumental es coherente. Un puntaje superior a <strong>80/100</strong> indica que tu artículo tiene una probabilidad considerablemente menor de sufrir un rechazo de escritorio (*desk reject*) automático.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pregunta 6 (Revistas) -->
+          <div class="faq-item" data-category="revistas">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>¿Cómo determina la IA qué revistas y qué cuartil son viables?</span>
+              <span class="faq-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content">
+              <div class="faq-answer">
+                <p>Fynit analiza la temática, las palabras clave, el nivel de complejidad del marco metodológico y la bibliografía de tu artículo. Posteriormente, utiliza modelos semánticos avanzados para comparar tu manuscrito con artículos publicados recientemente en revistas indexadas en <strong>Scopus y Web of Science (WoS)</strong>.</p>
+                <p>De este modo, Fynit estima la compatibilidad temática (<em>Fit Rate</em>) y calcula de forma probabilística qué tan viable es postular a una revista Q1, Q2, Q3 o Q4, permitiéndote tomar decisiones informadas para evitar pérdidas de tiempo en rechazos reiterados.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pregunta 7 (Revistas) -->
+          <div class="faq-item" data-category="revistas">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>¿Qué indexadoras académicas cubre la base de datos de Fynit?</span>
+              <span class="faq-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content">
+              <div class="faq-answer">
+                <p>Nuestra base de datos se sincroniza periódicamente con las principales redes y directorios mundiales:</p>
+                <ul>
+                  <li><strong>Scopus</strong> (SJR - Cuartiles Q1 a Q4)</li>
+                  <li><strong>Web of Science</strong> (JCR - WoS Core Collection)</li>
+                  <li><strong>SciELO</strong> (Bases de datos regionales latinoamericanas e ibéricas)</li>
+                  <li><strong>Latindex Catálogo 2.0</strong> y <strong>Redalyc</strong> (Revistas de acceso abierto)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pregunta 8 (Planes) -->
+          <div class="faq-item" data-category="planes">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>¿Cómo garantizan la privacidad de mi manuscrito y mi propiedad intelectual?</span>
+              <span class="faq-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content">
+              <div class="faq-answer">
+                <p>La seguridad y la privacidad son prioridades absolutas para Fynit. Implementamos políticas estrictas:</p>
+                <p>1. <strong>Cifrado extremo:</strong> Tus archivos se encriptan mediante protocolos SSL/TLS en tránsito y AES-256 en reposo en nuestros servidores seguros.</p>
+                <p>2. <strong>Sin uso para entrenamiento:</strong> Tus manuscritos **nunca** se utilizan para entrenar o ajustar modelos de IA públicos comerciales. Tus artículos permanecen 100% privados y tú retienes la propiedad intelectual y los derechos de autor absolutos en todo momento.</p>
+                <p>3. <strong>Eliminación de datos:</strong> Puedes eliminar de forma definitiva tus documentos e historial de reportes del sistema cuando lo desees.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pregunta 9 (Planes) -->
+          <div class="faq-item" data-category="planes">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>¿Qué limitaciones tiene el plan gratuito "Explorador"?</span>
+              <span class="faq-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content">
+              <div class="faq-answer">
+                <p>El plan <strong>Explorador</strong> está diseñado para que pruebes la potencia de la herramienta de forma permanente.</p>
+                <p>Te permite realizar <strong>1 diagnóstico completo al mes</strong>, lo cual incluye el análisis de similitud básico, un resumen de viabilidad y sugerencia limitada de las 3 revistas con mejor índice de fit. No incluye el reporte avanzado de riesgos metodológicos, historial permanente de versiones, ni descarga de informes detallados en PDF.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pregunta 10 (Planes) -->
+          <div class="faq-item" data-category="planes">
+            <button class="faq-trigger" aria-expanded="false">
+              <span>¿Cuáles son los métodos de pago aceptados y cómo cancelo?</span>
+              <span class="faq-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </span>
+            </button>
+            <div class="faq-content">
+              <div class="faq-answer">
+                <p>Aceptamos tarjetas de crédito y débito internacionales (Visa, Mastercard, American Express) de forma segura a través de nuestra pasarela de pagos.</p>
+                <p>No existen contratos de permanencia obligatoria ni plazos ocultos. Puedes cancelar o pausar tu suscripción directamente en tu cuenta con un solo clic. Si cancelas, seguirás teniendo acceso completo a las funciones contratadas hasta la finalización de tu periodo actual de facturación.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Estado Sin Resultados -->
+        <div class="faq-no-results" id="faqNoResults">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+          </svg>
+          <h3>No encontramos resultados</h3>
+          <p>No hay preguntas que coincidan con tu búsqueda. Intenta con otros términos o limpia el buscador.</p>
+          <button class="btn btn-ghost btn-sm" onclick="clearSearch()">Limpiar búsqueda</button>
+        </div>
+
+        <!-- FAQ Teaser de Contacto -->
+        <div class="faq-contact-teaser">
+          <div class="faq-contact-teaser-inner">
+            <h2>¿Aún tienes alguna pregunta sin responder?</h2>
+            <p>Si no encontraste lo que buscabas, nuestro equipo de soporte académico está listo para ayudarte con tu caso específico.</p>
+            <a href="contacto.html" class="btn btn-primary">Escríbenos una duda</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-cta">
+      <div class="footer-cta-inner">
+        <!-- Mascota 3D — lado izquierdo -->
+        <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\imgs png\fynit_mascot.png" alt="Fynit 3D" class="footer-mascot" loading="lazy">
+        <!-- Texto + CTA — lado derecho -->
+        <div class="footer-cta-text">
+          <span class="eyebrow" style="color:var(--yellow)">Empieza hoy</span>
+          <h2>¿Listo para ver hacia dónde puede llegar tu investigación?</h2>
+          <a href="contacto.html" class="btn btn-yellow">Crear cuenta<svg>
+              <use href="#ic-arrow" />
+            </svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-main">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\logos svg\logo-fynit-white.svg" alt="Fynit" class="logo-img">
+        </div>
+        <p>IA académica que entiende tu investigación, diagnostica su potencial editorial y te conecta con expertos para
+          que llegue más lejos.</p>
+        <div class="footer-social">
+          <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><svg>
+              <use href="#ic-linkedin" />
+            </svg></a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg>
+              <use href="#ic-ig" />
+            </svg></a>
+          <a href="https://x.com" target="_blank" rel="noopener" aria-label="X"><svg>
+              <use href="#ic-x" />
+            </svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Producto</h4>
+        <ul>
+          <li><a href="fynit_landing.html#como-funciona">Cómo funciona</a></li>
+          <li><a href="precios.html">Precios</a></li>
+          <li><a href="seguridad.html">Seguridad y datos</a></li>
+          <li><a href="disciplinas.html">Disciplinas</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Recursos</h4>
+        <ul>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="guias.html">Guías</a></li>
+          <li><a href="faq.html">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Compañía</h4>
+        <ul>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="carreras.html">Trabaja con nosotros</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>Â© 2026 Fynit. Todos los derechos reservados.</span>
+      <div class="legal">
+        <a href="privacidad.html">Privacidad</a>
+        <a href="terminos.html">Términos</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ FLOATING WIDGETS ============ -->
+  <div class="float-stack">
+
+    <!-- Chatbot Widget Window -->
+    <div class="chat-widget" id="chatWidget" aria-hidden="true">
+      <div class="chat-header">
+        <div class="chat-avatar">
+          <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\imgs png\fynit_mascot_bot.png" alt="Fynit Bot"
+            style="width:40px;height:40px;object-fit:contain;border-radius:50%;background:var(--blue);padding:2px;">
+        </div>
+        <div class="chat-header-info">
+          <strong>Fynit IA</strong>
+          <span>â— En línea ahora</span>
+        </div>
+        <button class="chat-close" id="chatClose" aria-label="Cerrar chat">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="chat-body" id="chatBody">
+        <div class="chat-msg bot">
+          <p>¡Hola! Soy el asistente de <strong>Fynit</strong>. ¿En qué te puedo ayudar hoy?</p>
+        </div>
+        <div class="chat-suggestions" id="chatSuggestions">
+          <button class="chat-chip" data-q="que-es">¿Qué es Fynit?</button>
+          <button class="chat-chip" data-q="como-funciona">¿Cómo funciona?</button>
+          <button class="chat-chip" data-q="que-es-articulo">¿Qué es un artículo científico?</button>
+          <button class="chat-chip" data-q="contacto">¿Cuál es el contacto?</button>
+          <button class="chat-chip" data-q="precio">¿Cuánto cuesta?</button>
+          <button class="chat-chip" data-q="cuartil">¿Qué es un cuartil Q1/Q2?</button>
+        </div>
+      </div>
+
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" class="chat-input" placeholder="Escribe tu pregunta..." autocomplete="off">
+        <button id="chatSend" class="chat-send" aria-label="Enviar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 2 11 13" />
+            <path d="M22 2 15 22 11 13 2 9l20-7z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Chatbot Trigger Button — mascota always visible, is the toggle -->
+    <button class="chat-trigger" id="chatTrigger" aria-label="Abrir asistente Fynit" aria-expanded="false">
+      <img src="C:\Users\LABOYMED\Downloads\FYNIT DISEÑO FINAL\assets\imgs png\fynit_mascot_bot.png" alt="Fynit Bot" class="chatbot-mascot-fab icon-bot">
+      <span class="chat-notif" id="chatNotif">1</span>
+    </button>
+
+    <!-- WhatsApp Button -->
+    <a class="whatsapp-float" href="https://wa.me/51999999999" target="_blank" rel="noopener"
+      aria-label="Escríbenos por WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+        <path
+          d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.522 3.657 1.432 5.168L2 22l4.975-1.396C8.388 21.49 10.148 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" />
+      </svg>
+    </a>
+
+  </div>
+
+  <script src="js/main.js" defer></script>
+  
+  <!-- Script interactivo local para buscador y acordeones de FAQ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Elementos DOM
+      var searchInput = document.getElementById('faqSearchInput');
+      var tabButtons = document.querySelectorAll('.faq-tab-btn');
+      var faqItems = document.querySelectorAll('.faq-item');
+      var faqNoResults = document.getElementById('faqNoResults');
+      var faqList = document.getElementById('faqList');
+
+      var activeCategory = 'all';
+      var searchQuery = '';
+
+      // ---- 1. Control de Acordeón ----
+      faqItems.forEach(function(item) {
+        var trigger = item.querySelector('.faq-trigger');
+        var content = item.querySelector('.faq-content');
+
+        trigger.addEventListener('click', function() {
+          var isOpen = item.classList.contains('is-open');
+          
+          // Cerrar otros acordeones abiertos
+          faqItems.forEach(function(otherItem) {
+            if (otherItem !== item && otherItem.classList.contains('is-open')) {
+              otherItem.classList.remove('is-open');
+              otherItem.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+              otherItem.querySelector('.faq-content').style.maxHeight = null;
+            }
+          });
+
+          // Toggle del actual acordeón
+          if (isOpen) {
+            item.classList.remove('is-open');
+            trigger.setAttribute('aria-expanded', 'false');
+            content.style.maxHeight = null;
+          } else {
+            item.classList.add('is-open');
+            trigger.setAttribute('aria-expanded', 'true');
+            content.style.maxHeight = content.scrollHeight + 'px';
+          }
+        });
+      });
+
+      // ---- 2. Filtrado Combinado (Buscador + Categoría) ----
+      function filterFaqs() {
+        var matchCount = 0;
+
+        faqItems.forEach(function(item) {
+          var itemCategory = item.getAttribute('data-category');
+          var triggerText = item.querySelector('.faq-trigger').textContent.toLowerCase();
+          var answerText = item.querySelector('.faq-answer').textContent.toLowerCase();
+
+          // Comprobar categoría
+          var matchesCategory = (activeCategory === 'all' || itemCategory === activeCategory);
+          
+          // Comprobar búsqueda
+          var matchesSearch = true;
+          if (searchQuery) {
+            matchesSearch = (triggerText.indexOf(searchQuery) > -1 || answerText.indexOf(searchQuery) > -1);
+          }
+
+          if (matchesCategory && matchesSearch) {
+            item.style.display = 'block';
+            matchCount++;
+          } else {
+            item.style.display = 'none';
+            // Si está oculto, nos aseguramos de que esté cerrado
+            item.classList.remove('is-open');
+            var trigger = item.querySelector('.faq-trigger');
+            var content = item.querySelector('.faq-content');
+            trigger.setAttribute('aria-expanded', 'false');
+            content.style.maxHeight = null;
+          }
+        });
+
+        // Mostrar u ocultar mensaje de "Sin Resultados"
+        if (matchCount === 0) {
+          faqNoResults.style.display = 'block';
+          faqList.style.display = 'none';
+        } else {
+          faqNoResults.style.display = 'none';
+          faqList.style.display = 'flex';
+        }
+      }
+
+      // ---- 3. Evento: Input del Buscador ----
+      if (searchInput) {
+        searchInput.addEventListener('input', function() {
+          searchQuery = this.value.toLowerCase().trim();
+          filterFaqs();
+        });
+      }
+
+      // ---- 4. Evento: Clic en Pestañas (Categorías) ----
+      tabButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          // Remover clase activa de todos
+          tabButtons.forEach(function(b) { b.classList.remove('active'); });
+          // Agregar a la actual pestaña
+          btn.classList.add('active');
+
+          activeCategory = btn.getAttribute('data-category');
+          filterFaqs();
+        });
+      });
+
+      // ---- 5. Limpieza de Búsqueda ----
+      window.clearSearch = function() {
+        if (searchInput) {
+          searchInput.value = '';
+        }
+        searchQuery = '';
+        filterFaqs();
+      };
+    });
+  </script>
+</body>
+
+</html>
+
