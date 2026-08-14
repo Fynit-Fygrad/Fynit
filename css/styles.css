@@ -2452,7 +2452,6 @@ p {
 
 /* Clip inner content (overflow:hidden on inner wrapper instead) */
 .chat-widget .chat-header,
-.chat-widget .chat-body,
 .chat-widget .chat-input-row {
   overflow: hidden;
 }
@@ -2556,6 +2555,7 @@ p {
   min-height: 200px;
   max-height: 320px;
   overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .chat-msg {
@@ -2718,16 +2718,31 @@ p {
 
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 56px;
+    gap: 48px;
+    text-align: center;
+  }
+
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .hero-copy p.lead {
     max-width: none;
+    font-size: 1rem;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
   }
 
   .hero-visual {
-    order: -1;
-    min-height: 420px;
+    order: 1;  /* imagen debajo del texto */
+    min-height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .desktop-frame {
@@ -2753,7 +2768,7 @@ p {
     order: -1;
   }
 
-  /* Mobile: step cards behave as accordion — visual panel shows below */
+  /* Mobile: step cards text visibility */
   .step-card {
     flex-direction: column;
     gap: 10px;
@@ -2762,13 +2777,8 @@ p {
   .step-card .step-body p {
     max-height: none;
     opacity: 1;
-    display: none;
-  }
-
-  .step-card.is-active .step-body p {
     display: block;
-    max-height: none;
-    opacity: 1;
+    margin-top: 8px;
   }
 
   /* Hide right-side visual frame on mobile; panels are inline */
@@ -4748,3 +4758,629 @@ p {
       font-weight: 300;
     }
   
+
+
+/* ============================================================
+   MOBILE RESPONSIVE — FYNIT FULL-SITE FIX
+   Todos los ajustes están dentro de media queries y NO
+   afectan la vista de escritorio (>1024px).
+   ============================================================ */
+
+/* ─── 1. BREAKPOINT TABLET/LARGE-MOBILE (≤1024px) ─────────────── */
+@media (max-width: 1024px) {
+
+  /* --- HEADER: evitar solapamiento logo/acciones/hamburger --- */
+  .site-header {
+    width: calc(100% - 32px);
+  }
+
+  .header-row {
+    height: auto;
+    min-height: 62px;
+    padding: 0.6rem 1.1rem;
+    gap: 10px;
+  }
+
+  .logo-img {
+    height: 28px;
+  }
+
+  /* Reducir botón Registrarse */
+  .header-actions .btn-sm {
+    padding: 9px 14px;
+    font-size: 13px;
+  }
+
+  /* Hamburger siempre a la derecha, sin colapsar */
+  .hamburger {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  /* --- TESTI GRID: 2 columnas en tablet --- */
+  .testi-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  /* --- HERO VISUAL en landing: contener imagen grande sin desordenar --- */
+  .hero-visual {
+    /* texto primero, imagen debajo — no invertir el orden */
+    order: 1;
+  }
+
+  .hero-visual img {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* --- ABOUT HERO GRID: 1 columna --- */
+  .about-hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .about-hero-visual {
+    order: -1;
+  }
+
+  /* --- SECTION padding reducido --- */
+  .section {
+    padding: 80px 0;
+  }
+
+  /* --- PRICING: 1 col en tablet --- */
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ─── 2. BREAKPOINT MOBILE (≤768px) ────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* --- HEADER: pill compacto, todo en una línea --- */
+  .site-header {
+    top: 10px;
+    width: calc(100% - 20px);
+    border-radius: 999px;
+  }
+
+  .header-row {
+    height: auto;
+    min-height: 58px;
+    padding: 0.5rem 1rem;
+    gap: 8px;
+  }
+
+  .logo-img {
+    height: 26px;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .header-actions .btn-sm {
+    padding: 8px 13px;
+    font-size: 12.5px;
+    white-space: nowrap;
+  }
+
+  .hamburger {
+    width: 38px;
+    height: 38px;
+  }
+
+  /* --- CONTAINER padding mobile --- */
+  .container {
+    padding: 0 18px;
+  }
+
+  /* --- SECCIÓN padding mobile --- */
+  .section {
+    padding: 64px 0;
+  }
+
+  .section-head {
+    margin-bottom: 36px;
+    max-width: 100%;
+  }
+
+  /* --- HERO LANDING: 1 columna, texto arriba, imagen abajo (centrado) --- */
+  .hero {
+    padding-top: 100px;
+    padding-bottom: 40px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    text-align: center;
+  }
+
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    margin-bottom: 18px;
+    line-height: 1.15;
+  }
+
+  .hero-copy p.lead {
+    font-size: 1rem;
+    line-height: 1.55;
+    margin-bottom: 28px;
+  }
+
+  .hero-copy .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    margin-bottom: 14px;
+  }
+
+  .hero-visual {
+    /* Imagen debajo del texto */
+    order: 1;
+    min-height: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .hero-visual img {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 340px;
+    gap: 12px;
+  }
+
+  .hero-ctas .btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 14px 16px;
+    justify-content: center;
+  }
+
+  /* Ocultar nota pequeña para ganar espacio en mobile */
+  .hero-honest {
+    display: none;
+  }
+
+
+  .hero-ctas .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* --- ABOUT HERO (nosotros.html) --- */
+  .about-hero {
+    padding: 100px 0 60px;
+    text-align: center;
+  }
+
+  .about-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    text-align: center;
+  }
+
+  .about-hero-visual {
+    order: -1;
+  }
+
+  .about-hero-visual img {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+
+  /* --- HERO PAGES (contacto, faq, blog, equipo, precios) --- */
+  .contact-hero,
+  .faq-hero,
+  .blog-hero,
+  .team-hero,
+  .prices-hero {
+    padding: 100px 0 44px;
+  }
+
+  .contact-hero h1,
+  .team-hero-inner h1 {
+    font-size: clamp(1.9rem, 7vw, 2.6rem);
+    line-height: 1.15;
+  }
+
+  .faq-hero h1,
+  .prices-hero h1,
+  .blog-hero h1 {
+    font-size: clamp(1.9rem, 7vw, 2.6rem);
+  }
+
+  /* --- CONTACT GRID (contacto.html) --- */
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .contact-form-wrap {
+    padding: 28px 20px;
+  }
+
+  /* --- ABOUT GRID (problem cards en landing) --- */
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  /* --- PAIN GRID --- */
+  .pain-grid {
+    grid-template-columns: 1fr;
+    background: transparent;
+    gap: 14px;
+  }
+
+  .pain-card {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line);
+  }
+
+  /* --- TESTIMONIALS --- */
+  .testi-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 36px;
+  }
+
+  /* --- NUMBERS (stats section) --- */
+  .numbers {
+    padding: 72px 0;
+  }
+
+  .numbers-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  /* --- PRICING GRID --- */
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 48px;
+  }
+
+  .price-card.popular,
+  .price-card.featured {
+    transform: none;
+  }
+
+  /* --- BLOG GRID (landing preview) --- */
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* --- BLOG HEAD: stack en mobile --- */
+  .blog-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  /* --- FOOTER --- */
+  .footer-cta {
+    padding: 64px 0 48px;
+  }
+
+  .footer-cta-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 28px;
+  }
+
+  .footer-cta-text {
+    text-align: center;
+  }
+
+  .footer-cta-text h2 {
+    font-size: clamp(1.7rem, 6vw, 2.4rem);
+    margin-bottom: 20px;
+  }
+
+  .footer-mascot {
+    display: none;
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding: 48px 0 32px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .footer-bottom .legal {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  /* --- FLOAT CHIPS (hero animated) --- */
+  .float-chip {
+    display: none;
+  }
+
+  /* --- MASCOT HERO (active) --- */
+  .fynit-mascot-active {
+    display: none;
+  }
+
+  /* --- CHATBOT FLOTANTE: compacto en mobile para no tapar contenido --- */
+  .float-stack {
+    bottom: 12px;
+    right: 10px;
+    gap: 6px;
+  }
+
+  .chat-trigger {
+    width: 48px;
+    height: 48px;
+  }
+
+  .chatbot-mascot-fab {
+    width: 48px;
+    height: 48px;
+  }
+
+  .whatsapp-float {
+    width: 46px;
+    height: 46px;
+  }
+
+  .whatsapp-float svg {
+    width: 20px;
+    height: 20px;
+  }
+
+
+  /* --- FEATURED CARD (blog.html) --- */
+  .featured-card {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-card-visual {
+    min-height: 220px;
+  }
+
+  .featured-card-body {
+    padding: 28px 20px;
+  }
+
+  /* --- NOSOTROS: MISSION/VISION y PILARES --- */
+  .mv-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .mv-card {
+    padding: 28px 24px;
+  }
+
+  .pilares-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .pilar-card {
+    padding: 28px 24px;
+  }
+
+  /* --- EQUIPO GRID (equipo.html) --- */
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  /* --- MARQUEE padding reduce --- */
+  .marquee-section {
+    padding: 64px 0;
+  }
+
+  /* --- CHAT WIDGET: responsive en mobile --- */
+  .chat-widget {
+    width: calc(100vw - 40px);
+    right: 0;
+    left: auto;
+    transform: translateY(12px) scale(.97);
+  }
+
+  .chat-widget.is-open {
+    transform: translateY(0) scale(1);
+  }
+
+  .float-stack {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  /* --- FAQ CONTACT TEASER padding --- */
+  .faq-contact-teaser {
+    padding: 36px 24px;
+    margin-top: 56px;
+  }
+
+  /* --- PRICING FAQ GRID --- */
+  .pricing-faq-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* --- COMPARISON TABLE: scroll horizontal --- */
+  .comparison-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ─── 3. BREAKPOINT SMALL MOBILE (≤480px) ──────────────────────── */
+@media (max-width: 480px) {
+
+  /* --- CONTAINER --- */
+  .container {
+    padding: 0 16px;
+  }
+
+  /* --- HEADER: mínimo viable en phones pequeños --- */
+  .site-header {
+    width: calc(100% - 16px);
+    top: 8px;
+  }
+
+  .header-row {
+    padding: 0.45rem 0.9rem;
+    min-height: 54px;
+    gap: 6px;
+  }
+
+  .logo-img {
+    height: 24px;
+  }
+
+  .header-actions .btn-sm {
+    padding: 7px 11px;
+    font-size: 12px;
+  }
+
+  .hamburger {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* --- HERO copy más compacto --- */
+  .hero-copy h1 {
+    font-size: clamp(1.8rem, 9vw, 2.4rem);
+  }
+
+  /* --- NUMBERS: 1 columna --- */
+  .numbers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .number-item {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, .14);
+    padding-left: 0;
+    padding-top: 20px;
+  }
+
+  .number-item:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  /* --- FOOTER: 1 columna --- */
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  /* --- PRICING card padding reducido --- */
+  .price-card {
+    padding: 36px 24px;
+  }
+
+  /* --- TEAM GRID: 1 columna --- */
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* --- SECTION PADDING mínimo --- */
+  .section {
+    padding: 52px 0;
+  }
+
+  /* --- EYEBROW TEXT --- */
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: .10em;
+  }
+
+  /* --- SECTION HEAD H2 --- */
+  .section-head h2 {
+    font-size: clamp(1.6rem, 7.5vw, 2.2rem);
+  }
+
+  /* --- STEP CARDS (como funciona) --- */
+  .step-card {
+    padding: 16px;
+  }
+
+  /* --- FAQ TRIGGER: padding reducido --- */
+  .faq-trigger {
+    padding: 18px 20px;
+    font-size: 1rem;
+  }
+
+  .faq-answer {
+    padding: 0 20px 24px;
+    font-size: 13.5px;
+  }
+}
+
+/* ─── 4. BREAKPOINT EXTRA SMALL (≤380px) ───────────────────────── */
+@media (max-width: 380px) {
+
+  .header-row {
+    padding: 0.4rem 0.75rem;
+    min-height: 52px;
+  }
+
+  .logo-img {
+    height: 22px;
+  }
+
+  /* Ocultar botón "Registrarse" del header en teléfonos muy pequeños
+     (el sidebar siempre tiene el botón disponible) */
+  .header-actions .btn {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex !important;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(1.65rem, 10vw, 2rem);
+  }
+
+  .section {
+    padding: 44px 0;
+  }
+
+  .container {
+    padding: 0 14px;
+  }
+}
