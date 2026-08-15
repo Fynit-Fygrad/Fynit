@@ -18,3 +18,10 @@ yarn-debug.log*
 # Temporary files
 *.tmp
 *.temp
+
+# Node
+node_modules/
+package.json
+package-lock.json
+convert-webp.js
+update-img-refs.js
