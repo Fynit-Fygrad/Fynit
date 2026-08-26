@@ -373,7 +373,7 @@
                       <div style="background: #fff; border-radius: 12px; padding: 16px; border: 1px solid #e1ecfb; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 8px 16px rgba(27,96,223,0.06);">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                           <div style="display: flex; align-items: center; gap: 12px;">
-                            <div style="width: 28px; height: 28px; background: #2563eb; color: #fff; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px;">W</div>
+                            <div class="file-badge-icon" style="width: 28px; height: 28px; background: #2563eb; color: #fff; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px;">W</div>
                             <span id="fileName" style="font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#111827;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px;">mi_articulo_final.docx</span>
                           </div>
                           <div style="display: flex; align-items: center; gap: 12px;">
@@ -385,13 +385,13 @@
                         </div>
                         <!-- Progress bar -->
                         <div style="height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden; width: 100%; display: flex;">
-                          <div style="width: 78%; height: 100%; background: #1B60DF; border-radius: 3px;"></div>
+                          <div style="width: 100%; height: 100%; background: #22c55e; border-radius: 3px;"></div>
                         </div>
-                        <div style="text-align: center; font-size: 11px; color: #6b7280; font-weight: 600;">78%</div>
+                        <div style="text-align: center; font-size: 11px; color: #22c55e; font-weight: 700;">100% Completado</div>
                       </div>
                     </div>
 
-                    <input type="file" id="cf-archivo" name="documento" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;" onchange="showFileNameMock(this)">
+                    <input type="file" id="cf-archivo" name="documento" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;">
                   </div>
 
                 </div>
@@ -422,6 +422,93 @@
         </div>
       </div>
     </section>
+
+    <script>
+      const dropZone = document.getElementById('dropZone');
+      const fileInput = document.getElementById('cf-archivo');
+
+      ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, preventDefaults, false);
+      });
+
+      function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, () => {
+          dropZone.style.background = 'linear-gradient(180deg, #f0f6ff 0%, #e1ecfb 100%)';
+          dropZone.style.borderColor = '#1B60DF';
+        }, false);
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, () => {
+          dropZone.style.background = 'linear-gradient(180deg, #f8fbff 0%, #f0f6ff 100%)';
+          dropZone.style.borderColor = '#e1ecfb';
+        }, false);
+      });
+
+      dropZone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        if (files.length > 0) {
+          fileInput.files = files; // Assign files to the hidden input
+          handleFile(files[0]);
+        }
+      }, false);
+
+      fileInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+          handleFile(this.files[0]);
+        }
+      });
+
+      function handleFile(file) {
+        const dropContent = document.getElementById('dropContent');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileNameSpan = document.getElementById('fileName');
+        
+        dropContent.style.display = 'none';
+        fileInfo.style.display = 'block';
+        fileNameSpan.textContent = file.name;
+
+        // Calculate size
+        let size = file.size;
+        let sizeStr = '';
+        if (size > 1024 * 1024) {
+          sizeStr = (size / (1024 * 1024)).toFixed(1) + ' MB';
+        } else if (size > 1024) {
+          sizeStr = (size / 1024).toFixed(1) + ' KB';
+        } else {
+          sizeStr = size + ' B';
+        }
+
+        // Find the elements to update size and icon
+        const sizeSpan = fileInfo.querySelector('span:nth-of-type(2)');
+        if (sizeSpan) sizeSpan.textContent = sizeStr;
+
+        const iconDiv = fileInfo.querySelector('.file-badge-icon');
+        
+        if (iconDiv) {
+          if (file.name.toLowerCase().endsWith('.pdf') || file.type === 'application/pdf') {
+            iconDiv.style.background = '#ef4444';
+            iconDiv.textContent = 'PDF';
+            iconDiv.style.fontSize = '9px';
+          } else {
+            iconDiv.style.background = '#2563eb';
+            iconDiv.textContent = 'W';
+            iconDiv.style.fontSize = '12px';
+          }
+        }
+        
+        dropZone.style.background = '#ffffff';
+        dropZone.style.borderColor = '#1B60DF';
+      }
+
+      // We need to add a class to the W icon div so we can find it easily
+    </script>
 
   </main>
 
