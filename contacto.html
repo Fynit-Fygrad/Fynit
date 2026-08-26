@@ -377,7 +377,7 @@
                             <span id="fileName" style="font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#111827;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px;">mi_articulo_final.docx</span>
                           </div>
                           <div style="display: flex; align-items: center; gap: 12px;">
-                            <span style="font-size:12px;color:#6b7280;font-weight:500;">12.4 MB</span>
+                            <span id="fileSize" style="font-size:12px;color:#6b7280;font-weight:500;">12.4 MB</span>
                             <div style="background:#22c55e;color:#fff;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;">
                               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
                             </div>
@@ -486,7 +486,7 @@
         }
 
         // Find the elements to update size and icon
-        const sizeSpan = fileInfo.querySelector('span:nth-of-type(2)');
+        const sizeSpan = document.getElementById('fileSize');
         if (sizeSpan) sizeSpan.textContent = sizeStr;
 
         const iconDiv = fileInfo.querySelector('.file-badge-icon');
