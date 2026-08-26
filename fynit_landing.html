@@ -302,9 +302,15 @@
           <div class="dropdown-content">
             <a href="nosotros.html">Sobre Fynit</a>
             <a href="equipo.html">Nuestro Equipo</a>
-            <a href="contacto.html">Contacto</a>
           </div>
         </div>
+
+        <a href="contacto.html" class="nav-contact-btn" style="background: linear-gradient(135deg, #1B60DF, #1a9fbf); color: #fff; padding: 8px 16px; border-radius: 8px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(27,96,223,0.25); transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 6px 16px rgba(27,96,223,0.35)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 12px rgba(27,96,223,0.25)';">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+          Contacto
+        </a>
       </nav>
 
       <div class="header-actions" style="white-space: nowrap;">
@@ -831,160 +837,99 @@
       </div>
     </section>
 
-    <!-- ============ CONTACTO / CARGA DE DOCUMENTO ============ -->
-    <section class="section" id="contacto"
-      style="background: linear-gradient(160deg, #0d1628 0%, #0e1f45 50%, #0d1628 100%); padding: 100px 0; position: relative; overflow: hidden;">
-
-      <!-- Orbs decorativos -->
-      <div
-        style="position:absolute;top:-80px;right:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(27,96,223,0.18) 0%,transparent 70%);border-radius:50%;pointer-events:none;">
-      </div>
-      <div
-        style="position:absolute;bottom:-60px;left:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(0,156,166,0.14) 0%,transparent 70%);border-radius:50%;pointer-events:none;">
-      </div>
-
-      <div class="container" style="position:relative;z-index:2;">
-
-        <!-- Encabezado -->
-        <div class="section-head center" data-aos="fade-up" style="margin-bottom:56px;">
-          <span class="eyebrow" style="color:#7eb3ff;">Contáctanos</span>
-          <h2 style="color:#fff;">Comparte tu investigación con nosotros</h2>
-          <p style="color:rgba(255,255,255,0.65);max-width:520px;margin:0 auto;">Cuéntanos sobre tu artículo. Nuestro
-            equipo lo revisará y te responderá en menos de 24 horas.</p>
+    <!-- ============ PRECIOS ============ -->
+    <section class="section pricing" id="precios">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">Planes &amp; Precios</span>
+          <h2>Elige el plan que se ajusta a tu etapa</h2>
+          <p>Sin sorpresas. Empieza y escala cuando estés listo.</p>
         </div>
-
-        <!-- Tarjeta del formulario -->
-        <div data-aos="fade-up" data-aos-delay="100" style="max-width:640px;margin:0 auto;">
-          <div
-            style="background:rgba(255,255,255,0.04);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:48px 40px;box-shadow:0 32px 80px rgba(0,0,0,0.4);">
-
-            <form id="contactForm" action="mailto:hola@fynit.app" method="post" enctype="multipart/form-data"
-              novalidate>
-
-              <!-- Nombre (opcional) -->
-              <div class="cform-field" style="margin-bottom:24px;">
-                <label for="cf-nombre"
-                  style="display:block;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px;">Nombre
-                  <span style="font-size:10px;opacity:.6;font-weight:400;">(opcional)</span></label>
-                <input type="text" id="cf-nombre" name="nombre" placeholder="¿Cómo te llamamos?" autocomplete="name"
-                  style="width:100%;box-sizing:border-box;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:14px 18px;color:#fff;font-family:'Sora',sans-serif;font-size:15px;outline:none;transition:border-color .25s,background .25s;"
-                  onfocus="this.style.borderColor='rgba(27,96,223,0.7)';this.style.background='rgba(27,96,223,0.08)';"
-                  onblur="this.style.borderColor='rgba(255,255,255,0.12)';this.style.background='rgba(255,255,255,0.06)';">
-              </div>
-
-              <!-- Email (obligatorio) -->
-              <div class="cform-field" style="margin-bottom:24px;">
-                <label for="cf-email"
-                  style="display:block;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px;">Correo
-                  electrónico <span style="color:#ff6b6b;font-size:13px;">*</span></label>
-                <input type="email" id="cf-email" name="email" placeholder="tu@correo.com" required autocomplete="email"
-                  style="width:100%;box-sizing:border-box;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:14px 18px;color:#fff;font-family:'Sora',sans-serif;font-size:15px;outline:none;transition:border-color .25s,background .25s;"
-                  onfocus="this.style.borderColor='rgba(27,96,223,0.7)';this.style.background='rgba(27,96,223,0.08)';"
-                  onblur="this.style.borderColor='rgba(255,255,255,0.12)';this.style.background='rgba(255,255,255,0.06)';">
-              </div>
-
-              <!-- Área de carga del documento -->
-              <div class="cform-field" style="margin-bottom:36px;">
-                <label
-                  style="display:block;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px;">Artículo
-                  científico <span style="font-size:10px;opacity:.6;font-weight:400;">(PDF, DOCX · máx 20
-                    MB)</span></label>
-
-                <div id="dropZone"
-                  style="position:relative;border:2px dashed rgba(27,96,223,0.4);border-radius:16px;padding:36px 24px;text-align:center;cursor:pointer;transition:border-color .25s,background .25s;background:rgba(27,96,223,0.04);"
-                  ondragover="event.preventDefault();this.style.borderColor='rgba(27,96,223,0.9)';this.style.background='rgba(27,96,223,0.12)';"
-                  ondragleave="this.style.borderColor='rgba(27,96,223,0.4)';this.style.background='rgba(27,96,223,0.04)';"
-                  ondrop="handleDrop(event)" onclick="document.getElementById('cf-archivo').click()">
-                  <!-- Ícono -->
-                  <div id="dropIcon" style="margin-bottom:12px;">
-                    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="rgba(27,96,223,0.9)"
-                      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;">
-                      <path d="M14 3H7.5A1.5 1.5 0 0 0 6 4.5v15A1.5 1.5 0 0 0 7.5 21h9a1.5 1.5 0 0 0 1.5-1.5V8l-4-5Z" />
-                      <path d="M14 3v5h4" />
-                      <path d="M12 11v6M9.5 14.5l2.5-3 2.5 3" />
-                    </svg>
-                  </div>
-
-                  <div id="dropText" style="font-family:'Sora',sans-serif;">
-                    <p style="color:#fff;font-size:14px;font-weight:600;margin:0 0 4px;">Arrastra tu documento aquí</p>
-                    <p style="color:rgba(255,255,255,0.4);font-size:12px;margin:0;">o haz clic para seleccionar el
-                      archivo</p>
-                  </div>
-
-                  <!-- Nombre del archivo seleccionado (oculto al inicio) -->
-                  <div id="fileInfo" style="display:none;margin-top:4px;">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"
-                      stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;">
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                    <span id="fileName"
-                      style="font-family:'Sora',sans-serif;font-size:13px;color:#4ade80;font-weight:600;"></span>
-                  </div>
-
-                  <input type="file" id="cf-archivo" name="documento"
-                    accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                    style="position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;"
-                    onchange="showFileName(this)">
-                </div>
-              </div>
-
-              <!-- Botón de envío -->
-              <button type="submit" id="cf-submit"
-                style="width:100%;padding:16px 24px;background:linear-gradient(135deg,#1B60DF,#1a9fbf);border:none;border-radius:14px;color:#fff;font-family:'Sora',sans-serif;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .2s,box-shadow .2s;box-shadow:0 8px 32px rgba(27,96,223,0.35);"
-                onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 14px 40px rgba(27,96,223,0.5)';"
-                onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 8px 32px rgba(27,96,223,0.35)';">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M22 2 11 13" />
-                  <path d="M22 2 15 22 11 13 2 9l20-7z" />
-                </svg>
-                Enviar a Fynit
-              </button>
-
-              <p
-                style="text-align:center;font-family:'Sora',sans-serif;font-size:11px;color:rgba(255,255,255,0.3);margin-top:20px;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" style="vertical-align:middle;margin-right:4px;">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                </svg>
-                Tu investigación está protegida · Solo la lee el equipo Fynit
-              </p>
-
-            </form>
+        <div class="pricing-grid">
+          <!-- Plan Gratuito -->
+          <div class="price-card">
+            <div class="price-badge">Gratis</div>
+            <div class="price-title">Explorador</div>
+            <div class="price-amount"><span class="price-num">$0</span><span class="price-per">/mes</span></div>
+            <p class="price-desc">Ideal para evaluar el potencial de tus primeros manuscritos.</p>
+            <ul class="price-features">
+              <li><svg>
+                  <use href="#ic-check" />
+                </svg> Hasta 2 manuscritos al mes</li>
+              <li><svg>
+                  <use href="#ic-check" />
+                </svg> Similitud + Readiness básico</li>
+              <li><svg>
+                  <use href="#ic-check" />
+                </svg> Hasta 3 revistas recomendadas</li>
+              <li><svg>
+                  <use href="#ic-check" />
+                </svg> Plan de mejora (Vista parcial)</li>
+              <li class="off"><svg>
+                  <use href="#ic-close" />
+                </svg> Reporte completo descargable</li>
+            </ul>
+            <a href="contacto.html" class="btn btn-ghost btn-block">Empezar</a>
+          </div>
+          <!-- Plan Pro -->
+          <div class="price-card popular">
+            <div class="price-pop-label">Más popular</div>
+            <div class="price-badge pro">Pro</div>
+            <div class="price-title">Investigador</div>
+            <div class="price-amount"><span class="price-num">$19</span><span class="price-per">/mes</span></div>
+            <p class="price-desc">Para investigadores activos que quieren publicar este año.</p>
+            <ul class="price-features">
+              <li><svg>
+                  <use href="#ic-check" />
+                </svg> Análisis ilimitados</li>
+              <li><svg>
+                  <use href="#ic-check" />
+                </svg> 6 métricas completas con IA</li>
+              <li><svg>
+                  <use href="#ic-check" />
+                </svg> Top 10 revistas + conferencias</li>
+              <li><svg>
+                  <use href="#ic-check" />
+                </svg> Plan de mejora priorizado</li>
+              <li><svg>
+                  <use href="#ic-check" />
+                </svg> Seguimiento de versiones</li>
+            </ul>
+            <a href="contacto.html" class="btn btn-primary btn-block">Empezar 14 días gratis <svg>
+                <use href="#ic-arrow" />
+              </svg></a>
+          </div>
+          <!-- Plan Institucional -->
+          <div class="price-card">
+            <div class="price-badge inst">Institucional</div>
+            <div class="price-title">Facultad</div>
+            <div class="price-amount"><span class="price-num" style="font-size:2rem">A medida</span></div>
+            <p class="price-desc">Para universidades, facultades y grupos de investigación.</p>
+            <ul class="price-features">
+              <li><svg>
+                  <use href="#ic-check" />
+                </svg> Licencias múltiples</li>
+              <li><svg>
+                  <use href="#ic-check" />
+                </svg> Dashboard del coordinador</li>
+              <li><svg>
+                  <use href="#ic-check" />
+                </svg> Integración con plataformas LMS</li>
+              <li><svg>
+                  <use href="#ic-check" />
+                </svg> Soporte dedicado y onboarding</li>
+              <li><svg>
+                  <use href="#ic-check" />
+                </svg> SLA garantizado</li>
+            </ul>
+            <a href="contacto.html" class="btn btn-ghost btn-block">Contactar ventas</a>
           </div>
         </div>
-
-        <!-- Features rápidas debajo del form -->
-        <div data-aos="fade-up" data-aos-delay="200"
-          style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px;margin-top:52px;">
-          <div style="display:flex;align-items:center;gap:10px;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7eb3ff" stroke-width="1.8"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            </svg>
-            <span style="font-family:'Sora',sans-serif;font-size:13px;color:rgba(255,255,255,0.6);">Datos
-              cifrados</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7eb3ff" stroke-width="1.8"
-              stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <polyline points="12 6 12 12 16 14" />
-            </svg>
-            <span style="font-family:'Sora',sans-serif;font-size:13px;color:rgba(255,255,255,0.6);">Respuesta en &lt;24
-              h</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7eb3ff" stroke-width="1.8"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 6 9 17l-5-5" />
-            </svg>
-            <span style="font-family:'Sora',sans-serif;font-size:13px;color:rgba(255,255,255,0.6);">Sin
-              compromisos</span>
-          </div>
+        <div style="text-align: center; margin-top: 32px; margin-bottom: 24px;">
+          <a href="precios.html" class="btn btn-ghost">Ver más detalle</a>
         </div>
-
+        <p class="pricing-note">Todos los planes incluyen seguridad de datos y privacidad de tu investigación. <a
+            href="seguridad.html">Ver política de datos &rarr;</a></p>
       </div>
     </section>
 
@@ -1212,44 +1157,6 @@
         });
       });
     });
-  </script>
-
-  <!-- Scripts del formulario de contacto -->
-  <script>
-    function showFileName(input) {
-      if (input.files && input.files[0]) {
-        const file = input.files[0];
-        document.getElementById('dropText').style.display = 'none';
-        document.getElementById('dropIcon').style.display = 'none';
-        document.getElementById('fileInfo').style.display = 'block';
-        document.getElementById('fileName').textContent = file.name;
-        const zone = document.getElementById('dropZone');
-        zone.style.borderColor = 'rgba(74,222,128,0.6)';
-        zone.style.background = 'rgba(74,222,128,0.06)';
-      }
-    }
-
-    function handleDrop(e) {
-      e.preventDefault();
-      const zone = document.getElementById('dropZone');
-      zone.style.borderColor = 'rgba(27,96,223,0.4)';
-      zone.style.background = 'rgba(27,96,223,0.04)';
-      const dt = e.dataTransfer;
-      const file = dt.files[0];
-      if (!file) return;
-      const allowed = ['application/pdf', 'application/msword',
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-      if (!allowed.includes(file.type) && !/\.(pdf|docx?)$/i.test(file.name)) {
-        alert('Solo se aceptan archivos PDF o Word (.doc/.docx)');
-        return;
-      }
-      /* Asignar al input file real */
-      const input = document.getElementById('cf-archivo');
-      const dataTransfer = new DataTransfer();
-      dataTransfer.items.add(file);
-      input.files = dataTransfer.files;
-      showFileName(input);
-    }
   </script>
 
 </body>

@@ -184,11 +184,15 @@
           <div class="dropdown-content">
             <a href="nosotros.html">Sobre Fynit</a>
             <a href="equipo.html">Nuestro Equipo</a>
-            <a href="contacto.html">Contacto</a>
           </div>
         </div>
 
-        <a href="precios.html">Precios</a>
+        <a href="contacto.html" class="nav-contact-btn" style="background: linear-gradient(135deg, #1B60DF, #1a9fbf); color: #fff; padding: 8px 16px; border-radius: 8px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(27,96,223,0.25); transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 6px 16px rgba(27,96,223,0.35)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 12px rgba(27,96,223,0.25)';">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+          Contacto
+        </a>
       </nav>
 
       <div class="header-actions" style="white-space: nowrap;">
@@ -233,29 +237,91 @@
           
           <!-- Columna Formulario -->
           <div class="contact-form-wrap">
-            <form id="contactForm" action="#" method="POST" onsubmit="event.preventDefault(); alert('¡Gracias por tu mensaje! Nos comunicaremos contigo a la brevedad.');">
-              <div class="form-group">
-                <label for="fullName">Nombre completo</label>
-                <input type="text" id="fullName" class="form-control" placeholder="Ej. Dr. Carlos Varela" required>
+            <form id="contactForm" action="mailto:hola@fynit.app" method="post" enctype="multipart/form-data" novalidate style="background:rgba(255,255,255,0.04);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:32px 24px;box-shadow:0 32px 80px rgba(0,0,0,0.4);">
+              <!-- Nombre (opcional) -->
+              <div class="cform-field" style="margin-bottom:24px;">
+                <label for="cf-nombre" style="display:block;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(25,25,25,0.7);margin-bottom:8px;">Nombre <span style="font-size:10px;opacity:.6;font-weight:400;">(opcional)</span></label>
+                <input type="text" id="cf-nombre" name="nombre" placeholder="¿Cómo te llamamos?" autocomplete="name" style="width:100%;box-sizing:border-box;background:rgba(27,96,223,0.03);border:1px solid rgba(27,96,223,0.15);border-radius:12px;padding:14px 18px;color:#1B60DF;font-family:'Sora',sans-serif;font-size:15px;outline:none;transition:border-color .25s,background .25s;" onfocus="this.style.borderColor='rgba(27,96,223,0.7)';this.style.background='rgba(27,96,223,0.08)';" onblur="this.style.borderColor='rgba(27,96,223,0.15)';this.style.background='rgba(27,96,223,0.03)';">
               </div>
-              <div class="form-group">
-                <label for="email">Correo electrónico institucional</label>
-                <input type="email" id="email" class="form-control" placeholder="Ej. cvarela@universidad.edu" required>
+
+              <!-- Email (obligatorio) -->
+              <div class="cform-field" style="margin-bottom:24px;">
+                <label for="cf-email" style="display:block;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(25,25,25,0.7);margin-bottom:8px;">Correo electrónico <span style="color:#ff6b6b;font-size:13px;">*</span></label>
+                <input type="email" id="cf-email" name="email" placeholder="tu@correo.com" required autocomplete="email" style="width:100%;box-sizing:border-box;background:rgba(27,96,223,0.03);border:1px solid rgba(27,96,223,0.15);border-radius:12px;padding:14px 18px;color:#1B60DF;font-family:'Sora',sans-serif;font-size:15px;outline:none;transition:border-color .25s,background .25s;" onfocus="this.style.borderColor='rgba(27,96,223,0.7)';this.style.background='rgba(27,96,223,0.08)';" onblur="this.style.borderColor='rgba(27,96,223,0.15)';this.style.background='rgba(27,96,223,0.03)';">
               </div>
-              <div class="form-group">
-                <label for="institution">Universidad o Centro de Investigación</label>
-                <input type="text" id="institution" class="form-control" placeholder="Ej. Universidad Nacional Mayor" required>
+
+              <!-- Área de carga del documento -->
+              <div class="cform-field" style="margin-bottom:36px;">
+                <label style="display:block;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(25,25,25,0.7);margin-bottom:8px;">Artículo científico <span style="font-size:10px;opacity:.6;font-weight:400;">(PDF, DOCX · máx 20 MB)</span></label>
+
+                <div id="dropZone" style="position:relative;border:2px dashed rgba(27,96,223,0.4);border-radius:16px;padding:36px 24px;text-align:center;cursor:pointer;transition:border-color .25s,background .25s;background:rgba(27,96,223,0.04);" ondragover="event.preventDefault();this.style.borderColor='rgba(27,96,223,0.9)';this.style.background='rgba(27,96,223,0.12)';" ondragleave="this.style.borderColor='rgba(27,96,223,0.4)';this.style.background='rgba(27,96,223,0.04)';" ondrop="handleDrop(event)" onclick="document.getElementById('cf-archivo').click()">
+                  <div id="dropIcon" style="margin-bottom:12px;">
+                    <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="rgba(27,96,223,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;">
+                      <path d="M14 3H7.5A1.5 1.5 0 0 0 6 4.5v15A1.5 1.5 0 0 0 7.5 21h9a1.5 1.5 0 0 0 1.5-1.5V8l-4-5Z" />
+                      <path d="M14 3v5h4" />
+                      <path d="M12 11v6M9.5 14.5l2.5-3 2.5 3" />
+                    </svg>
+                  </div>
+
+                  <div id="dropText" style="font-family:'Sora',sans-serif;">
+                    <p style="color:#1B60DF;font-size:14px;font-weight:600;margin:0 0 4px;">Arrastra tu documento aquí</p>
+                    <p style="color:rgba(27,96,223,0.6);font-size:12px;margin:0;">o haz clic para seleccionar el archivo</p>
+                  </div>
+
+                  <div id="fileInfo" style="display:none;margin-top:4px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:6px;">
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                    <span id="fileName" style="font-family:'Sora',sans-serif;font-size:13px;color:#22c55e;font-weight:600;"></span>
+                  </div>
+
+                  <input type="file" id="cf-archivo" name="documento" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;" onchange="showFileName(this)">
+                </div>
               </div>
-              <div class="form-group">
-                <label for="researchArea">Área de investigación</label>
-                <input type="text" id="researchArea" class="form-control" placeholder="Ej. Ciencias de la Salud / Ingeniería" required>
-              </div>
-              <div class="form-group">
-                <label for="message">Mensaje</label>
-                <textarea id="message" class="form-control" placeholder="Escribe aquí tu consulta en detalle..." required></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary btn-block" style="padding: 16px;">Enviar mensaje <svg><use href="#ic-arrow" /></svg></button>
+
+              <!-- Botón de envío -->
+              <button type="submit" id="cf-submit" style="width:100%;padding:16px 24px;background:linear-gradient(135deg,#1B60DF,#1a9fbf);border:none;border-radius:14px;color:#fff;font-family:'Sora',sans-serif;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .2s,box-shadow .2s;box-shadow:0 8px 32px rgba(27,96,223,0.35);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 14px 40px rgba(27,96,223,0.5)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 8px 32px rgba(27,96,223,0.35)';">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 2 11 13" />
+                  <path d="M22 2 15 22 11 13 2 9l20-7z" />
+                </svg>
+                Enviar a Fynit
+              </button>
             </form>
+            
+            <script>
+              function showFileName(input) {
+                if (input.files && input.files[0]) {
+                  const file = input.files[0];
+                  document.getElementById('dropText').style.display = 'none';
+                  document.getElementById('dropIcon').style.display = 'none';
+                  document.getElementById('fileInfo').style.display = 'block';
+                  document.getElementById('fileName').textContent = file.name;
+                  const zone = document.getElementById('dropZone');
+                  zone.style.borderColor = 'rgba(34,197,94,0.6)';
+                  zone.style.background = 'rgba(34,197,94,0.06)';
+                }
+              }
+              function handleDrop(e) {
+                e.preventDefault();
+                const zone = document.getElementById('dropZone');
+                zone.style.borderColor = 'rgba(27,96,223,0.4)';
+                zone.style.background = 'rgba(27,96,223,0.04)';
+                const dt = e.dataTransfer;
+                const file = dt.files[0];
+                if (!file) return;
+                const allowed = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+                if (!allowed.includes(file.type) && !/\.(pdf|docx?)$/i.test(file.name)) {
+                  alert('Solo se aceptan archivos PDF o Word (.doc/.docx)');
+                  return;
+                }
+                const input = document.getElementById('cf-archivo');
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                input.files = dataTransfer.files;
+                showFileName(input);
+              }
+            </script>
           </div>
 
           <!-- Columna Canales Alternativos & FAQ -->
