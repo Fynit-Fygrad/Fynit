@@ -235,9 +235,37 @@
         <div style="position: relative; max-width: 960px; margin: 0 auto;">
           
           <!-- MASCOTA FLOTANTE -->
-          <img src="assets/imgs png/fynit-contacto.webp" class="mascota-flotante" alt="Mascota Fynit" style="position: absolute; left: -90px; top: -70px; width: 180px; z-index: 10; filter: drop-shadow(0 15px 25px rgba(27,96,223,0.2));">
-
-          <!-- CARD CONTAINER -->
+          <style>
+            @keyframes floatMascot {
+              0% { transform: translateY(0px) rotate(0deg); }
+              50% { transform: translateY(-15px) rotate(2deg); }
+              100% { transform: translateY(0px) rotate(0deg); }
+            }
+            .mascota-flotante {
+              position: absolute;
+              left: -120px;
+              top: -160px;
+              width: 320px;
+              z-index: 10;
+              filter: drop-shadow(0 15px 25px rgba(27,96,223,0.2));
+              animation: floatMascot 6s ease-in-out infinite;
+              transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s;
+            }
+            .mascota-flotante:hover {
+              animation-play-state: paused;
+              transform: translateY(-25px) scale(1.05) rotate(-2deg);
+              filter: drop-shadow(0 25px 40px rgba(27,96,223,0.3));
+              cursor: pointer;
+            }
+            @media (max-width: 768px) {
+              .mascota-flotante {
+                width: 180px;
+                left: -20px;
+                top: -90px;
+              }
+            }
+          </style>
+          <img src="assets/imgs png/fynit-contacto.webp" class="mascota-flotante" alt="Mascota Fynit">
           <div style="background: #ffffff; border-radius: 28px; box-shadow: 0 24px 60px rgba(14,31,69,0.06); padding: 48px; position: relative; z-index: 5; text-align: left; border: 1px solid rgba(225, 236, 251, 0.5);">
             
             <form action="mailto:hola@fynit.app" method="post" enctype="multipart/form-data">
