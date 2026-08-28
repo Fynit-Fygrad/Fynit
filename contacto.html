@@ -888,7 +888,7 @@
         submitIcon.style.transform = 'none';
 
         try {
-          const response = await fetch('http://localhost:3000/api/enviar-articulo', {
+          const response = await fetch('/api/enviar-articulo', {
             method: 'POST',
             body: formData
           });
