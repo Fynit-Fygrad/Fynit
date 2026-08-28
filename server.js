@@ -48,7 +48,8 @@ const transporter = nodemailer.createTransport({
 app.post('/api/enviar-articulo', upload.single('documento'), async (req, res) => {
     try {
         const file = req.file;
-        const nombre = req.body.nombre || 'No especificado';
+        const nombres = req.body.nombres || 'No especificado';
+        const apellidos = req.body.apellidos || 'No especificado';
         const email = req.body.email; // Asegúrate de que el frontend envíe el campo 'email'
         const destino = process.env.CORREO_DESTINO || 'delatorreandre03@gmail.com';
 
@@ -64,10 +65,11 @@ app.post('/api/enviar-articulo', upload.single('documento'), async (req, res) =>
         const mailOptions = {
             from: `"Fynit Plataforma" <${process.env.EMAIL_USER}>`,
             to: destino,
-            subject: `Nuevo Artículo Recibido - ${nombre}`,
+            subject: `Nuevo Artículo Recibido - ${apellidos}, ${nombres}`,
             html: `
                 <h2>Nuevo Artículo Subido</h2>
-                <p><strong>Nombre del autor:</strong> ${nombre}</p>
+                <p><strong>Nombres:</strong> ${nombres}</p>
+                <p><strong>Apellidos:</strong> ${apellidos}</p>
                 <p><strong>Correo de contacto:</strong> ${email}</p>
                 <p>El documento ha sido guardado en el servidor y se encuentra adjunto a este correo.</p>
                 <p><small>Este es un correo automático generado por Fynit.</small></p>
