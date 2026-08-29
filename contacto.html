@@ -147,7 +147,6 @@
         <div class="accordion-content">
           <a href="nosotros.html" data-nav-link>Sobre Fynit</a>
           <a href="equipo.html" data-nav-link>Nuestro Equipo</a>
-          <a href="contacto.html" data-nav-link>Contacto</a>
         </div>
       </div>
 
@@ -162,42 +161,16 @@
         <img src="assets/logos svg/logo-fynit.svg" alt="Fynit" class="logo-img">
       </a>
 
-      <nav class="nav-desktop" aria-label="Navegación principal">
-        <a href="fynit_landing.html#como-funciona">Cómo funciona</a>
 
-        <div class="nav-dropdown">
-          <button class="dropdown-trigger">Recursos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2.5" stroke-linecap="round">
-              <path d="M6 9l6 6 6-6" />
-            </svg></button>
-          <div class="dropdown-content">
-            <a href="blog.html">Blog</a>
-            <a href="faq.html">Preguntas Frecuentes</a>
-          </div>
-        </div>
-
-        <div class="nav-dropdown">
-          <button class="dropdown-trigger">Nosotros <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2.5" stroke-linecap="round">
-              <path d="M6 9l6 6 6-6" />
-            </svg></button>
-          <div class="dropdown-content">
-            <a href="nosotros.html">Sobre Fynit</a>
-            <a href="equipo.html">Nuestro Equipo</a>
-          </div>
-        </div>
-
-        <a href="contacto.html" class="active">Contacto</a>
-      </nav>
-
-      <div class="header-actions" style="white-space: nowrap;">
+      <div class="header-actions" style="white-space: nowrap; display: flex; align-items: center; gap: 8px;">
 
         <a href="login.html"
           style="font-family:'Sora',sans-serif; font-weight:600; font-size:14.5px; color:var(--ink-70); text-decoration:none; padding:6px 0; margin-right:4px;">Iniciar
           Sesión</a>
-        <a href="contacto.html" class="btn btn-primary btn-sm" id="headerCta">Registrarse</a>
+        <a href="registro.html" class="btn btn-ghost btn-sm">Registrarse</a>
+        <a href="contacto.html" class="btn btn-primary btn-sm" id="headerCta">Evaluar</a>
         <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false"
-          aria-controls="sidebar">
+          aria-controls="sidebar" style="display: flex;">
           <svg>
             <use href="#ic-menu" />
           </svg>
@@ -209,12 +182,10 @@
   <main>
 
     <!-- ============ CONTACTO NUEVO LAYOUT ============ -->
-    <section class="contact-hero-section"
-      style="position: relative; overflow: visible; padding: 120px 0 80px; background: #f8fbff; text-align: center; font-family: 'Inter', sans-serif;">
+    <section class="contact-hero-section">
 
       <!-- Network Background Decoration (Optional subtle nodes) -->
-      <div
-        style="position: absolute; inset: 0; pointer-events: none; opacity: 0.4; background-image: radial-gradient(circle at 100% 50%, rgba(27,96,223,0.05) 0%, transparent 40%), radial-gradient(circle at 0% 100%, rgba(27,96,223,0.05) 0%, transparent 40%);">
+      <div class="contact-hero-bg">
       </div>
 
       <div class="container" style="position: relative; z-index: 2;">
@@ -237,132 +208,14 @@
         <div style="position: relative; max-width: 960px; margin: 0 auto;">
 
           <!-- MASCOTA FLOTANTE -->
-          <style>
-            @keyframes floatMascot {
-              0% {
-                transform: translateY(0px) rotate(0deg);
-              }
-
-              50% {
-                transform: translateY(-15px) rotate(2deg);
-              }
-
-              100% {
-                transform: translateY(0px) rotate(0deg);
-              }
-            }
-
-            .mascota-flotante {
-              position: absolute;
-              left: -125px;
-              top: -175px;
-              width: 290px;
-              z-index: 10;
-              filter: drop-shadow(0 15px 25px rgba(27, 96, 223, 0.2));
-              animation: floatMascot 6s ease-in-out infinite;
-              transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s;
-            }
-
-            .mascota-flotante:hover {
-              animation-play-state: paused;
-              transform: translateY(-25px) scale(1.05) rotate(-2deg);
-              filter: drop-shadow(0 25px 40px rgba(27, 96, 223, 0.3));
-              cursor: pointer;
-            }
-
-            @media (max-width: 768px) {
-              .mascota-flotante {
-                width: 180px;
-                left: -20px;
-                top: -90px;
-              }
-            }
-          </style>
           <img src="assets/imgs png/fynit-contacto.webp" class="mascota-flotante" alt="Mascota Fynit">
-          <div
-            style="background: #ffffff; border-radius: 28px; box-shadow: 0 24px 60px rgba(14,31,69,0.06); padding: 32px 40px; position: relative; z-index: 5; text-align: left; border: 1px solid rgba(225, 236, 251, 0.5);">
+          <div class="contact-form-card">
 
-            <style>
-              .custom-radio-group { display: grid; gap: 6px; margin-bottom: 16px; }
-              .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
-              .grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
-              
-              .custom-radio-label {
-                display: flex; flex-direction: column; align-items: center; justify-content: center;
-                text-align: center; padding: 8px 4px; background: #ffffff; border: 1px solid #e5e7eb;
-                border-radius: 10px; cursor: pointer; transition: all 0.2s; height: 100%; box-sizing: border-box;
-              }
-              .custom-radio-label:hover { border-color: #1B60DF; background: #f8fbff; }
-              .custom-radio-input { display: none; }
-              .custom-radio-input:checked + .custom-radio-label {
-                border-color: #1B60DF; background: #f0f6ff; box-shadow: 0 0 0 1px #1B60DF;
-              }
-              .custom-radio-icon {
-                display: flex; align-items: center; justify-content: center; margin-bottom: 4px;
-                height: 20px; color: #1B60DF;
-              }
-              .custom-radio-icon svg { width: 16px; height: 16px; }
-              .custom-radio-text {
-                font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600; color: #374151; line-height: 1.2;
-              }
-              
-              .icon-scopus { color: #f59e0b; }
-              .icon-wos { color: #4338ca; }
-              .icon-scielo { color: #ef4444; }
-              .icon-notengo { color: #1B60DF; }
-              
-              /* Modal Styles */
-              .privacy-modal-overlay {
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                background: rgba(14, 31, 69, 0.5); backdrop-filter: blur(4px);
-                display: flex; align-items: center; justify-content: center;
-                z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s;
-              }
-              .privacy-modal-overlay.active { opacity: 1; pointer-events: auto; }
-              .privacy-modal-content {
-                background: #fff; border-radius: 16px; width: 90%; max-width: 800px; height: 85vh;
-                display: flex; flex-direction: column; box-shadow: 0 24px 60px rgba(14,31,69,0.15);
-                transform: translateY(20px); transition: transform 0.3s;
-              }
-              .privacy-modal-overlay.active .privacy-modal-content { transform: translateY(0); }
-              .privacy-modal-header {
-                padding: 16px 24px; border-bottom: 1px solid #f3f4f6; display: flex;
-                justify-content: space-between; align-items: center;
-              }
-              .privacy-modal-title { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700; color: #111827; margin: 0; }
-              .privacy-modal-actions { display: flex; gap: 12px; }
-              .btn-download-pdf {
-                display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px;
-                background: #1B60DF; color: #fff; border-radius: 8px; font-family: 'Inter', sans-serif;
-                font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.2s;
-              }
-              .btn-download-pdf:hover { background: #1652cf; }
-              .btn-close-modal {
-                background: #f3f4f6; border: none; width: 36px; height: 36px; border-radius: 8px;
-                display: flex; align-items: center; justify-content: center; cursor: pointer;
-                color: #4b5563; transition: background 0.2s;
-              }
-              .btn-close-modal:hover { background: #e5e7eb; color: #111827; }
-              .privacy-modal-body {
-                flex: 1; padding: 0; overflow: hidden; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;
-              }
-              .privacy-modal-body iframe {
-                width: 100%; height: 100%; border: none; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;
-              }
-              
-              /* Button disabled state */
-              #submitBtn:disabled {
-                background: #9ca3af !important;
-                box-shadow: none !important;
-                transform: translateY(0) !important;
-                cursor: not-allowed !important;
-              }
-            </style>
+
 
             <form id="contactForm" enctype="multipart/form-data">
 
-              <div
-                style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 32px; margin-top: 16px; margin-bottom: 24px;">
+              <div class="contact-form-grid">
 
                 <!-- LEFT COLUMN: TUS DATOS -->
                 <div style="display: flex; flex-direction: column;">
@@ -965,8 +818,112 @@
             </button>
           </div>
         </div>
-        <div class="privacy-modal-body" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
-          <iframe src="assets/Politica_de_Privacidad_Fynit.pdf#toolbar=0&navpanes=0&view=FitH" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;"></iframe>
+        <div class="privacy-modal-body" id="privacyModalBody">
+          <p>En Fynit respetamos la privacidad de nuestros usuarios y la confidencialidad de sus investigaciones. Esta Política explica de forma sencilla qué información recopilamos, para qué la utilizamos y cómo la protegemos.</p>
+          
+          <h2>1. ¿Quién es responsable de tus datos?</h2>
+          <p>Fynit es un producto operado por:</p>
+          <p><b>FYGRAD S.A.C.</b><br>RUC N.° 20615739678<br>Correo de contacto: <b>hola@fynit.app</b></p>
+          <p>FYGRAD S.A.C. es responsable del tratamiento de los datos personales recopilados mediante Fynit.<br>Banco de datos personales: <b>Usuarios Fynit</b>.</p>
+          
+          <h2>2. ¿Qué información recopilamos?</h2>
+          <p>Podemos recopilar:</p>
+          <ul>
+            <li>nombres y apellidos;</li>
+            <li>correo electrónico;</li>
+            <li>información proporcionada mediante nuestros formularios;</li>
+            <li>manuscritos, artículos científicos y archivos enviados voluntariamente;</li>
+            <li>información académica incluida en dichos documentos;</li>
+            <li>respuestas, preferencias y comentarios sobre el servicio;</li>
+            <li>información técnica básica necesaria para el funcionamiento y seguridad de la plataforma.</li>
+          </ul>
+          <p>Solicitamos únicamente la información razonablemente necesaria para prestar nuestros servicios.</p>
+
+          <h2>3. ¿Para qué utilizamos tu información?</h2>
+          <p>Utilizamos tus datos principalmente para:</p>
+          <ul>
+            <li>analizar el manuscrito que nos envías;</li>
+            <li>identificar revistas, conferencias u otras rutas de publicación compatibles;</li>
+            <li>elaborar y enviarte recomendaciones o reportes;</li>
+            <li>comunicarnos contigo respecto del análisis solicitado;</li>
+            <li>evaluar y mejorar el funcionamiento de Fynit;</li>
+            <li>prevenir fraude, usos indebidos o incidentes de seguridad; y</li>
+            <li>cumplir obligaciones legales o requerimientos de autoridades competentes.</li>
+          </ul>
+          <p>Las comunicaciones comerciales o promocionales se enviarán únicamente cuando corresponda y podrás dejar de recibirlas en cualquier momento.</p>
+
+          <h2>4. Confidencialidad y propiedad de tu investigación</h2>
+          <p><b>Tu investigación continúa siendo tuya.</b></p>
+          <p>Al cargar un manuscrito en Fynit <b>no transfieres ni cedes derechos de autor, propiedad intelectual, resultados, metodologías, datos ni derechos sobre tu investigación.</b></p>
+          <p>Fynit recibe únicamente una autorización limitada para procesar el documento con la finalidad de realizar el análisis solicitado.</p>
+          <p>No vendemos, publicamos ni comercializamos los manuscritos enviados por nuestros usuarios.</p>
+          <p>El usuario declara que cuenta con los derechos, permisos o autorizaciones necesarios para proporcionar el documento y la información que contiene, incluyendo, cuando corresponda, información perteneciente a coautores o terceros.</p>
+
+          <h2>5. Uso de inteligencia artificial y proveedores tecnológicos</h2>
+          <p>Fynit puede utilizar herramientas tecnológicas para apoyar el procesamiento y análisis de los documentos, incluyendo servicios de inteligencia artificial.</p>
+          <p>Durante la etapa actual de validación, Fynit aplica medidas orientadas a reducir la exposición de información:</p>
+          <ul>
+            <li>minimización o anonimización de información cuando sea posible; y</li>
+            <li>acceso limitado al personal autorizado.</li>
+          </ul>
+          <p>El procesamiento mediante proveedores tecnológicos puede implicar que determinada información sea procesada en servidores ubicados fuera del país del usuario, incluyendo Estados Unidos u otras jurisdicciones.</p>
+          <p>Fynit procurará que dichos tratamientos se realicen únicamente para las finalidades informadas y de acuerdo con la legislación aplicable.</p>
+
+          <h2>6. ¿Quién puede acceder a tu información?</h2>
+          <p>El acceso podrá limitarse a:</p>
+          <ul>
+            <li>personal autorizado de FYGRAD S.A.C./Fynit;</li>
+            <li>colaboradores sujetos a obligaciones de confidencialidad;</li>
+            <li>proveedores tecnológicos necesarios para prestar el servicio; y</li>
+            <li>autoridades públicas cuando exista una obligación legal válida.</li>
+          </ul>
+          <p>Fynit <b>no vende datos personales a terceros.</b></p>
+          <p>También podremos comunicar información cuando resulte razonablemente necesario para proteger nuestros derechos, prevenir fraude, atender incidentes de seguridad o cumplir una obligación legal.</p>
+
+          <h2>7. ¿Cuánto tiempo conservamos la información?</h2>
+          <p>Como política general:</p>
+          <ul>
+            <li><b>Manuscrito y análisis:</b> hasta 30 días después de la entrega del resultado, salvo que el usuario solicite su eliminación antes o exista una obligación legal que requiera conservarlos.</li>
+            <li><b>Datos de contacto y registro del consentimiento:</b> hasta 24 meses desde la última interacción, salvo obligación legal de conservación por un plazo diferente.</li>
+            <li><b>Datos para comunicaciones comerciales:</b> hasta que el usuario retire su consentimiento.</li>
+          </ul>
+          <p>Podremos conservar estadísticas agregadas o información debidamente anonimizada cuando ya no sea razonablemente posible identificar al usuario o reconstruir su manuscrito.</p>
+
+          <h2>8. Seguridad</h2>
+          <p>Aplicamos medidas técnicas, organizativas y de acceso razonables para proteger la información frente a pérdida, alteración, acceso no autorizado o divulgación indebida. Adoptando medidas razonables para prevenirlos, detectarlos y responder ante ellos.</p>
+
+          <h2>9. Tus derechos</h2>
+          <p>Dependiendo de la legislación aplicable, puedes solicitar:</p>
+          <ul>
+            <li>acceso a tus datos;</li>
+            <li>corrección o actualización;</li>
+            <li>eliminación o supresión;</li>
+            <li>oposición o limitación del tratamiento;</li>
+            <li>portabilidad, cuando corresponda;</li>
+            <li>información sobre el tratamiento realizado; o</li>
+            <li>revocación del consentimiento.</li>
+          </ul>
+          <p>Puedes realizar tu solicitud gratuitamente escribiendo a <b>hola@fynit.app</b>.</p>
+          <p>Fynit atenderá las solicitudes dentro de los plazos establecidos por la legislación aplicable.</p>
+          <p>También podrás acudir ante la autoridad de protección de datos competente de tu país cuando consideres que tus derechos no han sido atendidos adecuadamente.</p>
+
+          <h2>10. Usuarios de distintos países</h2>
+          <p>FYGRAD S.A.C. se encuentra constituida en Perú y esta Política se interpreta principalmente conforme a la <b>Ley N.° 29733, Ley de Protección de Datos Personales, y su normativa vigente.</b></p>
+          <p>Cuando Fynit preste servicios a usuarios de otros países, también respetará las disposiciones obligatorias de protección de datos que resulten aplicables en la jurisdicción correspondiente.</p>
+          <p>Si una disposición de esta Política entra en conflicto con una norma imperativa aplicable al usuario, prevalecerá dicha norma respecto de ese tratamiento.</p>
+
+          <h2>11. Cambios a esta Política</h2>
+          <p>Fynit podrá actualizar esta Política para reflejar cambios legales, tecnológicos, operativos o en nuestros servicios.</p>
+          <p>La versión vigente estará disponible permanentemente en nuestra plataforma indicando su fecha de última actualización.</p>
+          
+          <hr style="margin: 24px 0; border: none; border-top: 1px solid #e5e7eb;">
+          <p style="font-size: 12px; color: #6b7280; text-align: center;">
+            <b>FYNIT</b><br>
+            Producto operado por <b>FYGRAD S.A.C.</b><br>
+            RUC N.° 20615739678<br>
+            <b>hola@fynit.app</b><br><br>
+            © 2026 FYGRAD S.A.C. Todos los derechos reservados.
+          </p>
         </div>
         <div class="privacy-modal-footer" style="padding: 16px 24px; border-top: 1px solid #f3f4f6; display: flex; justify-content: flex-end; align-items: center; gap: 12px; background: #fff; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px;">
           <a href="assets/Politica_de_Privacidad_Fynit.pdf" target="_blank" rel="noopener" download="Politica_de_Privacidad_Fynit.pdf" class="btn-download-pdf" style="background: #f3f4f6; color: #4b5563; font-size: 14px;">
