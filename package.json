@@ -1,0 +1,30 @@
+{
+  "name": "fynit",
+  "version": "1.0.0",
+  "description": "**Ecosistema Digital y Soluciones Tecnológicas.**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fynit-Fygrad/Fynit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Fynit-Fygrad/Fynit/issues"
+  },
+  "homepage": "https://github.com/Fynit-Fygrad/Fynit#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "multer": "^2.2.0",
+    "nodemailer": "^9.0.5",
+    "resend": "^6.25.0"
+  }
+}

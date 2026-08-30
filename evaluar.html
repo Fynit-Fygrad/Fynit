@@ -14,7 +14,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Sora:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=20260829">
+  <link rel="stylesheet" href="css/styles.css?v=20260829b">
 </head>
 
 <body>
@@ -585,22 +585,21 @@
                       onmouseout="this.style.textDecoration='none'">Política de Privacidad</a> y autorizo el tratamiento de mis datos para realizar el análisis solicitado.
                   </span>
                 </label>
+
                 <button id="submitBtn" type="submit"
-                  style="width: 100%; padding: 14px; background: linear-gradient(90deg, #1652cf, #1B60DF, #2374ff); border: none; border-radius: 10px; color: #fff; font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 12px 24px rgba(27,96,223,0.3); transition: transform 0.2s, box-shadow 0.2s, background 0.3s; position: relative; overflow: hidden;"
-                  onmouseover="if(!this.disabled){this.style.transform='translateY(-2px)';this.style.boxShadow='0 16px 32px rgba(27,96,223,0.4)';}"
-                  onmouseout="if(!this.disabled){this.style.transform='translateY(0)';this.style.boxShadow='0 12px 24px rgba(27,96,223,0.3)';}">
+                  style="width: 100%; padding: 14px; background: linear-gradient(90deg, #1652cf, #1B60DF, #2374ff); border: none; border-radius: 10px; color: #fff; font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 12px 24px rgba(27,96,223,0.3); transition: transform 0.2s, box-shadow 0.2s, background 0.4s; position: relative; overflow: hidden;"
+                  onmouseover="if(!this.disabled){this.style.transform='translateY(-2px)';this.style.boxShadow='0 16px 32px rgba(27,96,223,0.4)';}" 
+                  onmouseout="if(!this.disabled){this.style.transform='translateY(0)';this.style.boxShadow='0 12px 24px rgba(27,96,223,0.3)';}"> 
+                  <!-- Spinner (oculto por defecto) -->
+                  <span id="submitSpinner" style="display:none; width:18px; height:18px; border:2.5px solid rgba(255,255,255,0.3); border-top-color:#fff; border-radius:50%; animation:spinBtn 0.7s linear infinite; flex-shrink:0;"></span>
+                  <!-- Icono enviar -->
                   <svg id="submitIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    style="transform: rotate(45deg); margin-top:-2px;">
+                    style="transform: rotate(45deg); margin-top:-2px; flex-shrink:0;">
                     <line x1="22" y1="2" x2="11" y2="13" />
                     <polygon points="22 2 15 22 11 13 2 9 22 2" />
                   </svg>
                   <span id="submitText">Enviar Artículo</span>
-
-                  <!-- Subtle gradient ring decoration on the right side of button -->
-                  <div
-                    style="position: absolute; right: 24px; width: 24px; height: 24px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.4);">
-                  </div>
                 </button>
               </div>
 
@@ -612,6 +611,25 @@
     </section>
 
     <script>
+      /* ── Animación spinner del botón ── */
+      const btnStyle = document.createElement('style');
+      btnStyle.textContent = `
+        @keyframes spinBtn { to { transform: rotate(360deg); } }
+        @keyframes successPulse {
+          0%   { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+          70%  { box-shadow: 0 0 0 12px rgba(34,197,94,0); }
+          100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+        }
+        @keyframes checkDraw {
+          from { stroke-dashoffset: 30; }
+          to   { stroke-dashoffset: 0; }
+        }
+        #submitBtn.state-loading { cursor: wait !important; background: linear-gradient(90deg,#1652cf,#1B60DF,#2374ff) !important; }
+        #submitBtn.state-success { background: #16a34a !important; box-shadow: 0 12px 24px rgba(22,163,74,0.35) !important; animation: successPulse 0.6s ease-out; }
+        #submitBtn.state-error   { background: #dc2626 !important; box-shadow: 0 12px 24px rgba(220,38,38,0.3) !important; }
+      `;
+      document.head.appendChild(btnStyle);
+
       const dropZone = document.getElementById('dropZone');
       const fileInput = document.getElementById('cf-archivo');
 
@@ -726,13 +744,13 @@
           return;
         }
 
-        // Cambiar estado del botón a "Cargando..."
+        // ── Estado: CARGANDO ──
         submitBtn.disabled = true;
-        submitBtn.style.cursor = 'wait';
-        submitBtn.style.opacity = '0.8';
+        submitBtn.className = 'state-loading';
+        submitBtn.style.transform = 'none';
+        submitSpinner.style.display = 'block';
+        submitIcon.style.display = 'none';
         submitText.textContent = 'Enviando...';
-        submitIcon.innerHTML = '<circle cx="12" cy="12" r="10" stroke-width="4" stroke-dasharray="32" stroke-dashoffset="32"><animate attributeName="stroke-dashoffset" values="32;0" dur="1s" repeatCount="indefinite"/></circle>'; // Simple loader
-        submitIcon.style.transform = 'none';
 
         try {
           const response = await fetch('/api/enviar-articulo', {
@@ -743,43 +761,54 @@
           const result = await response.json();
 
           if (response.ok) {
-            // Éxito
-            submitBtn.style.background = 'linear-gradient(90deg, #16a34a, #22c55e)';
-            submitText.textContent = '¡Artículo Enviado!';
-            submitIcon.innerHTML = '<path d="M20 6 9 17l-5-5"/>'; // Checkmark
+            // ── Estado: ÉXITO ──
+            submitBtn.className = 'state-success';
+            submitSpinner.style.display = 'none';
+            submitIcon.style.display = 'block';
+            submitIcon.style.transform = 'none';
+            submitIcon.innerHTML = `<polyline points="20 6 9 17 4 12" stroke-dasharray="30" stroke-dashoffset="30"
+              style="animation:checkDraw 0.4s ease-out 0.05s forwards;"/>`;
+            submitText.textContent = 'Artículo enviado';
 
-            // Opcional: resetear formulario después de unos segundos
             setTimeout(() => {
               contactForm.reset();
               document.getElementById('dropContent').style.display = 'block';
               document.getElementById('fileInfo').style.display = 'none';
-              submitBtn.disabled = false;
-              submitBtn.style.cursor = 'pointer';
-              submitBtn.style.opacity = '1';
-              submitBtn.style.background = 'linear-gradient(90deg, #1652cf, #1B60DF, #2374ff)';
-              submitText.textContent = 'Enviar Artículo';
-              submitIcon.innerHTML = '<line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>';
-              submitIcon.style.transform = 'rotate(45deg)';
-            }, 5000);
+              resetButton();
+            }, 4000);
           } else {
-            // Error del servidor
-            alert('Hubo un error: ' + (result.error || 'Inténtalo de nuevo.'));
-            resetButton();
+            // ── Estado: ERROR ──
+            submitBtn.className = 'state-error';
+            submitSpinner.style.display = 'none';
+            submitIcon.style.display = 'block';
+            submitIcon.style.transform = 'none';
+            submitIcon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>';
+            submitText.textContent = result.error || 'Error al enviar';
+            setTimeout(resetButton, 3500);
           }
         } catch (error) {
           console.error(error);
-          alert('Error de conexión. Asegúrate de que el servidor esté corriendo.');
-          resetButton();
+          submitBtn.className = 'state-error';
+          submitSpinner.style.display = 'none';
+          submitIcon.style.display = 'block';
+          submitIcon.style.transform = 'none';
+          submitIcon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>';
+          submitText.textContent = 'Sin conexión con el servidor';
+          setTimeout(resetButton, 3500);
         }
       });
 
+      const submitSpinner = document.getElementById('submitSpinner');
+
       function resetButton() {
         submitBtn.disabled = false;
-        submitBtn.style.cursor = 'pointer';
-        submitBtn.style.opacity = '1';
-        submitText.textContent = 'Enviar Artículo';
-        submitIcon.innerHTML = '<line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>';
+        submitBtn.className = '';
+        submitBtn.style.cssText = 'width:100%;padding:14px;background:linear-gradient(90deg,#1652cf,#1B60DF,#2374ff);border:none;border-radius:10px;color:#fff;font-family:Sora,sans-serif;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 12px 24px rgba(27,96,223,0.3);transition:transform 0.2s,box-shadow 0.2s,background 0.4s;position:relative;overflow:hidden;';
+        submitSpinner.style.display = 'none';
+        submitIcon.style.display = 'block';
         submitIcon.style.transform = 'rotate(45deg)';
+        submitIcon.innerHTML = '<line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>';
+        submitText.textContent = 'Enviar Artículo';
       }
       // Lógica del Modal de Privacidad
       function openPrivacyModal(e) {
