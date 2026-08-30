@@ -88,101 +88,77 @@ app.post('/api/enviar-articulo', upload.single('documento'), async (req, res) =>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
 </head>
-<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;color:#111827;">
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-    <tr>
-      <td align="center" style="padding:40px 16px;">
-        <table width="580" cellpadding="0" cellspacing="0" border="0" style="max-width:580px;width:100%;">
+<body style="margin:0;padding:0;background:#ffffff;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;color:#333333;">
+  <div style="padding:40px 40px; width: 100%; box-sizing: border-box;">
+    
+    <!-- Logo / Header -->
+    <div style="border-bottom:2px solid #1B60DF;padding-bottom:20px;margin-bottom:30px;">
+      <h1 style="margin:0;color:#1B60DF;font-size:28px;font-weight:800;letter-spacing:-1px;">Fynit</h1>
+      <p style="margin:5px 0 0;color:#666666;font-size:14px;text-transform:uppercase;letter-spacing:1px;">Nueva Solicitud de Evaluación</p>
+    </div>
 
-          <!-- Logo / marca -->
-          <tr>
-            <td style="padding-bottom:28px;border-bottom:2px solid #1B60DF;">
-              <span style="font-size:13px;font-weight:700;color:#1B60DF;letter-spacing:0.05em;text-transform:uppercase;">Fynit</span>
-            </td>
-          </tr>
+    <!-- Intro -->
+    <p style="margin:0 0 30px;font-size:16px;line-height:1.6;color:#444444;">
+      Se ha recibido una nueva solicitud de evaluación de artículo científico. A continuación se presentan los detalles del investigador y el documento adjunto.
+    </p>
 
-          <!-- Intro -->
-          <tr>
-            <td style="padding:28px 0 0;">
-              <p style="margin:0 0 6px;font-size:20px;font-weight:700;color:#111827;">Nueva solicitud de evaluacion</p>
-              <p style="margin:0;font-size:13px;color:#6b7280;">${fechaEnvio}</p>
-            </td>
-          </tr>
+    <!-- Content Table -->
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:40px;border-collapse:collapse; max-width: 1000px;">
+      <!-- Section 1 -->
+      <tr>
+        <td colspan="2" style="padding:15px 0 5px;border-bottom:1px solid #eeeeee;font-size:12px;font-weight:700;color:#999999;text-transform:uppercase;letter-spacing:1px;">
+          Datos del Investigador
+        </td>
+      </tr>
+      <tr>
+        <td width="30%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;">Nombre Completo</td>
+        <td style="padding:15px 0;font-size:15px;color:#111111;">${nombres} ${apellidos}</td>
+      </tr>
+      <tr>
+        <td width="30%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;border-bottom:1px solid #eeeeee;">Correo Electrónico</td>
+        <td style="padding:15px 0;font-size:15px;border-bottom:1px solid #eeeeee;">
+          <a href="mailto:${email}" style="color:#1B60DF;text-decoration:none;">${email}</a>
+        </td>
+      </tr>
+      
+      <!-- Section 2 -->
+      <tr>
+        <td colspan="2" style="padding:30px 0 5px;border-bottom:1px solid #eeeeee;font-size:12px;font-weight:700;color:#999999;text-transform:uppercase;letter-spacing:1px;">
+          Detalles del Documento
+        </td>
+      </tr>
+      <tr>
+        <td width="30%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;">Estado del Artículo</td>
+        <td style="padding:15px 0;font-size:15px;color:#111111;">${estadoArticulo}</td>
+      </tr>
+      <tr>
+        <td width="30%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;">Tipo de Publicación</td>
+        <td style="padding:15px 0;font-size:15px;color:#111111;">${queBuscas}</td>
+      </tr>
+      <tr>
+        <td width="30%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;">Indexación Deseada</td>
+        <td style="padding:15px 0;font-size:15px;color:#111111;">${indexacion}</td>
+      </tr>
+      <tr>
+        <td width="30%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;border-bottom:1px solid #eeeeee;">Archivo Adjunto</td>
+        <td style="padding:15px 0;font-size:15px;color:#111111;border-bottom:1px solid #eeeeee;">
+          <strong>${file.originalname}</strong> <span style="color:#999999;font-size:13px;">(${(file.size/1024/1024).toFixed(2)} MB)</span>
+        </td>
+      </tr>
+    </table>
 
-          <!-- Separador -->
-          <tr><td style="padding:24px 0;"><hr style="border:none;border-top:1px solid #e5e7eb;margin:0;"></td></tr>
+    <!-- Action -->
+    <div style="margin-bottom:40px;">
+      <a href="mailto:${email}?subject=Re: Evaluación de tu artículo — Fynit" style="display:inline-block;background:#1B60DF;color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;padding:12px 24px;border-radius:4px;">
+        Responder al investigador
+      </a>
+    </div>
 
-          <!-- Datos del investigador -->
-          <tr>
-            <td>
-              <p style="margin:0 0 16px;font-size:11px;font-weight:600;color:#9ca3af;text-transform:uppercase;letter-spacing:0.08em;">Investigador</p>
-              <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                  <td width="140" style="padding:6px 0;font-size:13px;color:#6b7280;vertical-align:top;">Nombre</td>
-                  <td style="padding:6px 0;font-size:14px;font-weight:600;color:#111827;">${nombres} ${apellidos}</td>
-                </tr>
-                <tr>
-                  <td width="140" style="padding:6px 0;font-size:13px;color:#6b7280;vertical-align:top;">Correo</td>
-                  <td style="padding:6px 0;">
-                    <a href="mailto:${email}" style="font-size:14px;font-weight:600;color:#1B60DF;text-decoration:none;">${email}</a>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- Separador -->
-          <tr><td style="padding:24px 0;"><hr style="border:none;border-top:1px solid #e5e7eb;margin:0;"></td></tr>
-
-          <!-- Datos del articulo -->
-          <tr>
-            <td>
-              <p style="margin:0 0 16px;font-size:11px;font-weight:600;color:#9ca3af;text-transform:uppercase;letter-spacing:0.08em;">Articulo cientifico</p>
-              <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                  <td width="140" style="padding:6px 0;font-size:13px;color:#6b7280;vertical-align:top;">Estado</td>
-                  <td style="padding:6px 0;font-size:14px;color:#111827;">${estadoArticulo}</td>
-                </tr>
-                <tr>
-                  <td width="140" style="padding:6px 0;font-size:13px;color:#6b7280;vertical-align:top;">Publicacion</td>
-                  <td style="padding:6px 0;font-size:14px;color:#111827;">${queBuscas}</td>
-                </tr>
-                <tr>
-                  <td width="140" style="padding:6px 0;font-size:13px;color:#6b7280;vertical-align:top;">Indexacion</td>
-                  <td style="padding:6px 0;font-size:14px;color:#111827;">${indexacion}</td>
-                </tr>
-                <tr>
-                  <td width="140" style="padding:6px 0;font-size:13px;color:#6b7280;vertical-align:top;">Archivo adjunto</td>
-                  <td style="padding:6px 0;font-size:14px;color:#111827;">${file.originalname} <span style="color:#9ca3af;font-size:12px;">(${(file.size/1024/1024).toFixed(2)} MB)</span></td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- Separador -->
-          <tr><td style="padding:24px 0;"><hr style="border:none;border-top:1px solid #e5e7eb;margin:0;"></td></tr>
-
-          <!-- Boton responder -->
-          <tr>
-            <td style="padding-bottom:40px;">
-              <a href="mailto:${email}?subject=Re: Evaluacion de tu articulo — Fynit"
-                style="display:inline-block;background:#1B60DF;color:#ffffff;font-size:13px;font-weight:600;text-decoration:none;padding:10px 22px;border-radius:5px;">
-                Responder al investigador
-              </a>
-            </td>
-          </tr>
-
-          <!-- Footer -->
-          <tr>
-            <td style="border-top:1px solid #e5e7eb;padding-top:20px;">
-              <p style="margin:0;font-size:12px;color:#9ca3af;">Fynit &middot; Mensaje generado automaticamente</p>
-            </td>
-          </tr>
-
-        </table>
-      </td>
-    </tr>
-  </table>
+    <!-- Footer -->
+    <div style="border-top:1px solid #eeeeee;padding-top:20px;font-size:12px;color:#999999;">
+      <p style="margin:0;">Enviado el ${fechaEnvio} — Fynit. Mensaje generado automáticamente.</p>
+    </div>
+  </div>
 </body>
 </html>`,
         };
@@ -199,77 +175,58 @@ app.post('/api/enviar-articulo', upload.single('documento'), async (req, res) =>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    @media only screen and (max-width: 600px) {
-      .wrapper { padding: 16px !important; }
-      .card { border-radius: 0 !important; }
-    }
-  </style>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
 </head>
-<body style="margin:0;padding:0;background:#f5f5f5;font-family:Arial,Helvetica,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f5f5f5;">
-    <tr>
-      <td align="center" style="padding:32px 16px;">
-        <table class="card" width="600" cellpadding="0" cellspacing="0" border="0"
-          style="max-width:600px;width:100%;background:#ffffff;border:1px solid #e4e4e4;border-radius:6px;">
+<body style="margin:0;padding:0;background:#ffffff;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;color:#333333;">
+  <div style="padding:40px 40px; width: 100%; box-sizing: border-box;">
+    
+    <!-- Logo / Header -->
+    <div style="border-bottom:2px solid #1B60DF;padding-bottom:20px;margin-bottom:30px;">
+      <h1 style="margin:0;color:#1B60DF;font-size:28px;font-weight:800;letter-spacing:-1px;">Fynit</h1>
+      <p style="margin:5px 0 0;color:#666666;font-size:14px;text-transform:uppercase;letter-spacing:1px;">Confirmación de Recepción</p>
+    </div>
 
-          <!-- HEADER -->
-          <tr>
-            <td style="background:#1B60DF;padding:24px 32px;border-radius:6px 6px 0 0;">
-              <p style="margin:0;font-size:11px;font-weight:700;color:rgba(255,255,255,0.6);letter-spacing:0.1em;text-transform:uppercase;">Fynit — Confirmacion de recepcion</p>
-              <h1 style="margin:6px 0 0;font-size:18px;font-weight:700;color:#ffffff;">Recibimos tu articulo</h1>
-            </td>
-          </tr>
+    <!-- Greeting -->
+    <p style="margin:0 0 20px;font-size:16px;line-height:1.6;color:#111111;">
+      Hola <strong>${nombres}</strong>,
+    </p>
 
-          <!-- BODY -->
-          <tr>
-            <td class="wrapper" style="padding:28px 32px;">
+    <!-- Intro -->
+    <p style="margin:0 0 30px;font-size:16px;line-height:1.6;color:#444444;">
+      Te escribimos para confirmar que hemos recibido correctamente tu documento <strong>${file.originalname}</strong>. Nuestro equipo de revisión ha sido notificado y el análisis comenzará de inmediato.
+    </p>
 
-              <p style="margin:0 0 16px;font-size:14px;color:#374151;line-height:1.7;">Hola, <strong>${nombres}</strong>:</p>
-              <p style="margin:0 0 20px;font-size:14px;color:#374151;line-height:1.7;">
-                Confirmamos la recepcion del documento <strong>${file.originalname}</strong>. Nuestro equipo lo revisara y te contactara a la brevedad con los resultados del analisis.
-              </p>
+    <!-- Content Table -->
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:40px;border-collapse:collapse; max-width: 1000px;">
+      <tr>
+        <td colspan="2" style="padding:15px 0 5px;border-bottom:1px solid #eeeeee;font-size:12px;font-weight:700;color:#999999;text-transform:uppercase;letter-spacing:1px;">
+          Resumen de tu Solicitud
+        </td>
+      </tr>
+      <tr>
+        <td width="40%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;">Estado actual</td>
+        <td style="padding:15px 0;font-size:15px;color:#111111;">${estadoArticulo}</td>
+      </tr>
+      <tr>
+        <td width="40%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;">Publicación objetivo</td>
+        <td style="padding:15px 0;font-size:15px;color:#111111;">${queBuscas}</td>
+      </tr>
+      <tr>
+        <td width="40%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;border-bottom:1px solid #eeeeee;">Indexación deseada</td>
+        <td style="padding:15px 0;font-size:15px;color:#111111;border-bottom:1px solid #eeeeee;">${indexacion}</td>
+      </tr>
+    </table>
 
-              <!-- RESUMEN -->
-              <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:0.1em;">Resumen de tu solicitud</p>
-              <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                style="border:1px solid #e4e4e4;border-radius:4px;margin-bottom:24px;">
-                <tr>
-                  <td style="padding:10px 16px;border-bottom:1px solid #f3f4f6;">
-                    <p style="margin:0;font-size:11px;color:#9ca3af;">Estado del articulo</p>
-                    <p style="margin:4px 0 0;font-size:13px;font-weight:600;color:#111827;">${estadoArticulo}</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding:10px 16px;border-bottom:1px solid #f3f4f6;">
-                    <p style="margin:0;font-size:11px;color:#9ca3af;">Tipo de publicacion</p>
-                    <p style="margin:4px 0 0;font-size:13px;font-weight:600;color:#111827;">${queBuscas}</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding:10px 16px;">
-                    <p style="margin:0;font-size:11px;color:#9ca3af;">Indexacion objetivo</p>
-                    <p style="margin:4px 0 0;font-size:13px;font-weight:600;color:#111827;">${indexacion}</p>
-                  </td>
-                </tr>
-              </table>
+    <p style="margin:0 0 40px;font-size:16px;line-height:1.6;color:#444444;">
+      Nos pondremos en contacto contigo respondiendo a este mismo correo con los resultados y los próximos pasos recomendados para publicar tu investigación.
+    </p>
 
-              <p style="margin:0;font-size:12px;color:#9ca3af;line-height:1.6;">Si tienes alguna consulta, puedes responder directamente a este correo.</p>
-            </td>
-          </tr>
-
-          <!-- FOOTER -->
-          <tr>
-            <td style="padding:16px 32px;border-top:1px solid #e4e4e4;">
-              <p style="margin:0;font-size:11px;color:#9ca3af;">Fynit — Tu investigacion es confidencial y no sera compartida con terceros.</p>
-            </td>
-          </tr>
-
-        </table>
-      </td>
-    </tr>
-  </table>
+    <!-- Footer -->
+    <div style="border-top:1px solid #eeeeee;padding-top:20px;font-size:12px;color:#999999;line-height:1.5;">
+      <p style="margin:0 0 5px;">Si tienes alguna pregunta adicional, puedes responder directamente a este correo.</p>
+      <p style="margin:0;">&copy; ${new Date().getFullYear()} Fynit. Tu investigación es estrictamente confidencial.</p>
+    </div>
+  </div>
 </body>
 </html>
             `
