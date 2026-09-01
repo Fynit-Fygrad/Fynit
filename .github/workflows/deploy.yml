@@ -23,3 +23,5 @@ jobs:
             git reset --hard origin/main
             chown -R www-data:www-data /var/www/Fynit
             chmod -R 755 /var/www/Fynit
+            npm install
+            pm2 restart all

@@ -5898,3 +5898,31 @@ input:checked+.pricing-slider:before {
   transform: translateY(0) !important;
   cursor: not-allowed !important;
 }
+
+/* Botón de Contacto en sidebar */
+.sidebar-contact-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 13px 20px;
+  background: linear-gradient(135deg, #1B60DF, #1a9fbf);
+  border-radius: 12px;
+  color: #fff !important;
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 6px 20px rgba(27, 96, 223, 0.35);
+}
+
+.sidebar-contact-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(27, 96, 223, 0.5);
+}
+
+/* Placeholder inputs del form de contacto */
+#contactForm input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
