@@ -1,6 +1,8 @@
 const express = require('express');
 const multer = require('multer');
 const { Resend } = require('resend');
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
 const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
@@ -9,9 +11,20 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(require('cors')());
+app.use(helmet());
+app.use(express.json({ limit: '100kb' }));
+app.use(express.urlencoded({ extended: true, limit: '100kb' }));
+
+const allowedOrigins = ['http://localhost:3000', 'https://fynit.app', 'https://www.fynit.app'];
+app.use(require('cors')({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}));
 
 // Servir archivos estáticos (tu página web)
 app.use(express.static(path.join(__dirname, '')));
@@ -32,7 +45,21 @@ const storage = multer.diskStorage({
         cb(null, uniqueSuffix + '-' + file.originalname);
     }
 });
-const upload = multer({ storage: storage });
+const upload = multer({ 
+    storage: storage,
+    fileFilter: function (req, file, cb) {
+        const allowedMimeTypes = [
+            'application/pdf', 
+            'application/msword', 
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        ];
+        if (allowedMimeTypes.includes(file.mimetype)) {
+            cb(null, true);
+        } else {
+            cb(new Error('Formato de archivo no válido. Solo se permiten PDF y Word.'));
+        }
+    }
+});
 
 // Configurar cliente de Resend
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -51,8 +78,17 @@ function labelIndexacion(val) {
     return map[val] || val || 'No especificado';
 }
 
+// Limitador de solicitudes (Rate Limiter): Máximo 3 por día (24 horas)
+const apiLimiter = rateLimit({
+    windowMs: 24 * 60 * 60 * 1000, // 24 horas
+    max: 3, // Limita cada IP a 3 peticiones por 'window' (por día)
+    message: { error: 'Has alcanzado el límite de 3 envíos por día. Por favor, intenta de nuevo mañana.' },
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+
 // Ruta API para recibir el formulario
-app.post('/api/enviar-articulo', upload.single('documento'), async (req, res) => {
+app.post('/api/enviar-articulo', apiLimiter, upload.single('documento'), async (req, res) => {
     try {
         const file = req.file;
         const nombres = req.body.nombres || 'No especificado';
