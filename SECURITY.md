@@ -26,3 +26,8 @@ Las peticiones JSON y de formularios están restringidas mediante `express.json`
 El servidor utiliza la librería `helmet` para configurar de manera invisible y automática varios encabezados HTTP de seguridad.
 - Protege la aplicación contra vulnerabilidades web conocidas (por ejemplo, previniendo ataques de tipo *Clickjacking* y *Cross-Site Scripting* (XSS)).
 - Oculta información tecnológica sensible para dificultar la perfilación por parte de atacantes.
+
+## 6. Mantenimiento y Privacidad (Auto-Limpieza)
+Se ha implementado una tarea programada interna (`node-cron`) dedicada a la gestión del almacenamiento.
+- **Limpieza Automática:** Cada domingo a las 3:00 AM, el sistema escanea automáticamente la carpeta de subidas (`uploads/`).
+- **Privacidad y Espacio:** Todo archivo PDF que supere los 15 días de antigüedad en el servidor es eliminado de forma permanente. Esto garantiza que el disco duro del VPS no colapse y asegura una ventana de retención limitada de los documentos en el servidor por motivos de privacidad (la copia oficial permanece segura en el buzón de correo de recepción).

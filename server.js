@@ -3,6 +3,7 @@ const multer = require('multer');
 const { Resend } = require('resend');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
+const cron = require('node-cron');
 const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
@@ -293,6 +294,41 @@ app.post('/api/enviar-articulo', apiLimiter, upload.single('documento'), async (
         console.error('Error al procesar la solicitud:', error);
         res.status(500).json({ error: 'Ocurrió un error al procesar el archivo o enviar el correo.' });
     }
+});
+
+// Tarea programada (Cron Job): Limpieza automática de la carpeta uploads
+// Se ejecuta todos los domingos a las 3:00 AM
+cron.schedule('0 3 * * 0', () => {
+    console.log('Iniciando limpieza de la carpeta uploads...');
+    const directory = path.join(__dirname, 'uploads');
+    
+    fs.readdir(directory, (err, files) => {
+        if (err) {
+            console.error('Error al leer el directorio uploads:', err);
+            return;
+        }
+
+        const now = Date.now();
+        const quinceDiasEnMs = 15 * 24 * 60 * 60 * 1000;
+
+        files.forEach(file => {
+            const filePath = path.join(directory, file);
+            fs.stat(filePath, (err, stats) => {
+                if (err) {
+                    console.error('Error al obtener estadísticas del archivo:', err);
+                    return;
+                }
+
+                // Si el archivo tiene más de 15 días de antigüedad, eliminarlo
+                if (now - stats.mtimeMs > quinceDiasEnMs) {
+                    fs.unlink(filePath, err => {
+                        if (err) console.error(`Error al eliminar el archivo ${file}:`, err);
+                        else console.log(`Archivo eliminado por antigüedad: ${file}`);
+                    });
+                }
+            });
+        });
+    });
 });
 
 // Iniciar servidor
