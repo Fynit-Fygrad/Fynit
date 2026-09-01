@@ -1,3 +1,59 @@
+window.showComingSoon = function(e) {
+  if(e) e.preventDefault();
+  
+  // Si ya existe un toast, lo removemos para no apilarlos
+  const existingToast = document.getElementById('fynit-toast');
+  if(existingToast) existingToast.remove();
+
+  // Crear el toast
+  const toast = document.createElement('div');
+  toast.id = 'fynit-toast';
+  toast.style.cssText = `
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #111827;
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  `;
+  
+  toast.innerHTML = `
+    <div style="background: rgba(255,255,255,0.1); padding: 6px; border-radius: 50%; display: flex;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+      </svg>
+    </div>
+    <span>¡Próximamente! Estamos preparando esta sección para ti.</span>
+  `;
+
+  document.body.appendChild(toast);
+
+  // Animar entrada
+  requestAnimationFrame(() => {
+    toast.style.transform = 'translateY(0)';
+    toast.style.opacity = '1';
+  });
+
+  // Animar salida
+  setTimeout(() => {
+    toast.style.transform = 'translateY(20px)';
+    toast.style.opacity = '0';
+    setTimeout(() => toast.remove(), 400);
+  }, 4000);
+};
+
 (function () {
       "use strict";
 
