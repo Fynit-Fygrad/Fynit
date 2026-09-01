@@ -523,7 +523,7 @@
                             W</div> DOCX
                         </span>
                       </div>
-                      <p style="color:#9ca3af;font-size:11px;margin:0;font-weight:500;">Tamaño máximo: 20 MB</p>
+                      <p style="color:#9ca3af;font-size:11px;margin:0;font-weight:500;">Tamaño máximo: 15 MB</p>
                     </div>
 
                     <!-- Simulating upload state (hidden initially, matches exactly the requested image) -->
@@ -672,6 +672,12 @@
       });
 
       function handleFile(file) {
+        if (file.size > 15 * 1024 * 1024) {
+          alert(`Tu archivo pesa ${(file.size / (1024 * 1024)).toFixed(1)} MB. Por favor comprímelo para que pese máximo 15 MB.`);
+          document.getElementById('cf-archivo').value = ""; // Limpiar el input
+          return;
+        }
+
         const dropContent = document.getElementById('dropContent');
         const fileInfo = document.getElementById('fileInfo');
         const fileNameSpan = document.getElementById('fileName');
