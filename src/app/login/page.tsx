@@ -1,65 +1,67 @@
 
 'use client';
+import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
 export default function Page() {
   const containerRef = useRef(null);
 
   return (
-    <div ref={containerRef} dangerouslySetInnerHTML={{ __html: `
+    <div ref={containerRef}>
 
-    <!-- Card Container -->
-    <div class="bg-white w-full max-w-md rounded-2xl shadow-xl border border-gray-100 p-8 sm:p-10 transition-all">
 
-        <!-- Header / Logo -->
-        <div class="text-center mb-8">
-            <a href="/" class="inline-flex items-center justify-center gap-2 mb-6">
-                <img src="assets/logos%20svg/favicon.svg" alt="Fynit" class="h-9 w-auto">
-            </a>
-            <h1 class="text-2xl font-bold text-gray-900 mb-2">Bienvenido de nuevo</h1>
-            <p class="text-sm text-gray-500">Ingresa tus credenciales para acceder a tu panel.</p>
+    {/*  Card Container  */}
+    <div className="bg-white w-full max-w-md rounded-2xl shadow-xl border border-gray-100 p-8 sm:p-10 transition-all">
+
+        {/*  Header / Logo  */}
+        <div className="text-center mb-8">
+            <Link href="/" className="inline-flex items-center justify-center gap-2 mb-6">
+                <img src="assets/logos%20svg/favicon.svg" alt="Fynit" className="h-9 w-auto" />
+            </Link>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Bienvenido de nuevo</h1>
+            <p className="text-sm text-gray-500">Ingresa tus credenciales para acceder a tu panel.</p>
         </div>
 
-        <!-- Formulario -->
-        <form action="#" method="POST" class="space-y-5">
+        {/*  Formulario  */}
+        <form action="#" method="POST" className="space-y-5">
 
-            <!-- Email -->
+            {/*  Email  */}
             <div>
-                <label for="email" class="block text-sm font-medium text-gray-700 mb-1.5">Correo electrónico</label>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">Correo electrónico</label>
                 <input type="email" id="email" name="email" placeholder="ejemplo@universidad.edu" required
-                    class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-colors">
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-colors" />
             </div>
 
-            <!-- Password -->
+            {/*  Password  */}
             <div>
-                <div class="flex items-center justify-between mb-1.5">
-                    <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                    <a href="#"
-                        class="text-sm font-medium text-brand-600 hover:text-brand-700 transition-colors">¿Olvidaste tu
-                        contraseña?</a>
+                <div className="flex items-center justify-between mb-1.5">
+                    <label htmlFor="password" className="block text-sm font-medium text-gray-700">Contraseña</label>
+                    <Link href="#"
+                        className="text-sm font-medium text-brand-600 hover:text-brand-700 transition-colors">¿Olvidaste tu
+                        contraseña?</Link>
                 </div>
                 <input type="password" id="password" name="password" placeholder="••••••••" required
-                    class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-colors">
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-colors" />
             </div>
 
-            <!-- Submit Button -->
+            {/*  Submit Button  */}
             <button type="submit"
-                class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 px-4 rounded-xl shadow-sm shadow-brand-500/30 transition-all hover:shadow-md hover:-translate-y-0.5 mt-2">
+                className="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 px-4 rounded-xl shadow-sm shadow-brand-500/30 transition-all hover:shadow-md hover:-translate-y-0.5 mt-2">
                 Iniciar sesión
             </button>
         </form>
 
-        <!-- Divider -->
-        <div class="my-6 flex items-center">
-            <div class="flex-grow border-t border-gray-200"></div>
-            <span class="px-3 text-sm text-gray-400">o continuar con</span>
-            <div class="flex-grow border-t border-gray-200"></div>
+        {/*  Divider  */}
+        <div className="my-6 flex items-center">
+            <div className="flex-grow border-t border-gray-200"></div>
+            <span className="px-3 text-sm text-gray-400">o continuar con</span>
+            <div className="flex-grow border-t border-gray-200"></div>
         </div>
 
-        <!-- Google Button -->
+        {/*  Google Button  */}
         <button type="button"
-            class="w-full flex items-center justify-center gap-3 bg-white border border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-3 px-4 rounded-xl transition-colors">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            className="w-full flex items-center justify-center gap-3 bg-white border border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-3 px-4 rounded-xl transition-colors">
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                     fill="#4285F4" />
@@ -76,14 +78,15 @@ export default function Page() {
             Continuar con Google
         </button>
 
-        <!-- Footer link -->
-        <p class="text-center text-sm text-gray-500 mt-8">
+        {/*  Footer link  */}
+        <p className="text-center text-sm text-gray-500 mt-8">
             ¿No tienes cuenta?
-            <a href="javascript:void(0)" onclick="showComingSoon(event)"
-                class="font-semibold text-brand-600 hover:text-brand-700 transition-colors">Regístrate aquí</a>
+            <Link href="javascript:void(0)" onClick={(event) => { (window as any).showComingSoon && (window as any).showComingSoon(event) }}
+                className="font-semibold text-brand-600 hover:text-brand-700 transition-colors">Regístrate aquí</Link>
         </p>
 
     </div>
-` }} />
+
+</div>
   );
 }

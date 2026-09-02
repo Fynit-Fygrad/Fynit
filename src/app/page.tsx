@@ -1,235 +1,271 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
+import { showComingSoon } from '@/components/Toaster';
 
-export default function LegacyComponent() {
-  const containerRef = useRef(null);
+export default function Home() {
+  const [currentStep, setCurrentStep] = useState(1);
+  const [userInteracted, setUserInteracted] = useState(false);
+  const [countersVisible, setCountersVisible] = useState(false);
+  const howSectionRef = useRef<HTMLElement>(null);
+  const countersRef = useRef<HTMLElement>(null);
+
+  // Autoplay para "Cómo funciona"
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (!userInteracted) {
+      timer = setInterval(() => {
+        setCurrentStep(prev => (prev % 4) + 1);
+      }, 5000);
+    }
+    return () => clearInterval(timer);
+  }, [userInteracted]);
+
+  // Observer para "Contador de números"
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setCountersVisible(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.5 });
+    
+    if (countersRef.current) {
+      observer.observe(countersRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
+  const handleStepClick = (step: number) => {
+    setCurrentStep(step);
+    setUserInteracted(true);
+  };
 
   return (
-    <div ref={containerRef} dangerouslySetInnerHTML={{ __html: `
-
-
-    <!-- ============ HERO ============ -->
-    <section class="hero" id="inicio">
-      <div class="container hero-grid">
-        <div class="hero-copy" data-aos="fade-up">
-          <span class="eyebrow">IA ACADÉMICA · DIAGNÓSTICO EDITORIAL</span>
+    <>
+    {/*  ============ HERO ============  */}
+    <section className="hero" id="inicio">
+      <div className="container hero-grid">
+        <div className="hero-copy" data-aos="fade-up">
+          <span className="eyebrow">IA ACADÉMICA · DIAGNÓSTICO EDITORIAL</span>
           <h1>
-            De tu investigación a una
-            <span class="highlight">ruta publicable
+            De tu investigación a una{' '}
+            <span className="highlight">ruta publicable
               <svg viewBox="0 0 300 24" preserveAspectRatio="none">
-                <path d="M2 18C60 8 240 8 298 18" fill="none" stroke-width="9" stroke-linecap="round" />
+                <path d="M2 18C60 8 240 8 298 18" fill="none" strokeWidth="9" strokeLinecap="round" />
               </svg>
-            </span>, sin adivinar.
+            </span>
+            , sin adivinar.
           </h1>
-          <p class="lead">Sube tu documento y en pocos segundos obtén un diagnóstico honesto: qué tan cerca estás de
+          <p className="lead">Sube tu documento y en pocos segundos obtén un diagnóstico honesto: qué tan cerca estás de
             publicar, en qué revista tienes opciones reales y qué corregir primero.</p>
-          <div class="hero-ctas">
-            <a href="javascript:void(0)" onclick="showComingSoon(event)" class="btn btn-primary">Registrarse</a>
-            <a href="#como-funciona" class="btn btn-ghost">Ver cómo funciona</a>
+          <div className="hero-ctas">
+            <a href="#" onClick={showComingSoon} className="btn btn-primary">Registrarse</a>
+            <Link href="#como-funciona" className="btn btn-ghost">Ver cómo funciona</Link>
           </div>
-          <div class="hero-honest"></div>
+          <div className="hero-honest"></div>
         </div>
 
-        <div class="hero-visual" style="display: flex; align-items: center; justify-content: center;" data-aos="zoom-in"
+        <div className="hero-visual" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} data-aos="zoom-in"
           data-aos-delay="200">
           <img src="assets/imgs png/hero-mockup.webp" alt="Mockup de Fynit en laptop y smartphone"
-            style="width: 100%; max-width: 850px; height: auto; object-fit: contain; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));"
-            loading="eager">
+            style={{ width: '100%', maxWidth: '850px', height: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))' }}
+            loading="eager" />
         </div>
       </div>
     </section>
 
-    <!-- ============ MARQUEE DISCIPLINAS ============ -->
-    <section class="marquee-section" id="disciplinas">
-      <div class="marquee-head" data-aos="fade-up">
-        <span class="eyebrow">Para toda el área académica</span>
-        <h2 style="font-size:clamp(1.7rem,2.6vw,2.2rem)">No importa tu disciplina, hablamos tu idioma editorial</h2>
+    {/*  ============ MARQUEE DISCIPLINAS ============  */}
+    <section className="marquee-section" id="disciplinas">
+      <div className="marquee-head" data-aos="fade-up">
+        <span className="eyebrow">Para toda el área académica</span>
+        <h2 style={{ fontSize: 'clamp(1.7rem,2.6vw,2.2rem)' }}>No importa tu disciplina, hablamos tu idioma editorial</h2>
       </div>
-      <div class="marquee-wrap">
-        <div class="marquee-track-left">
-          <!-- Set 1 (1-6) duplicated for seamless loop -->
-          <span class="pill"><svg class="ic-svg">
+      <div className="marquee-wrap">
+        <div className="marquee-track-left">
+          {/*  Set 1 (1-6) duplicated for seamless loop  */}
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-bio" />
             </svg> Biología Avanzada</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-laptop" />
             </svg> Ciencias de la Computación</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-scale" />
             </svg> Derecho Corporativo</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-brain" />
             </svg> Psicología Cognitiva</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-chart-bar" />
             </svg> Administración y Negocios</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-stethoscope" />
             </svg> Medicina Clínica</span>
-          <!-- Duplicate 1 -->
-          <span class="pill"><svg class="ic-svg">
+          {/*  Duplicate 1  */}
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-bio" />
             </svg> Biología Avanzada</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-laptop" />
             </svg> Ciencias de la Computación</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-scale" />
             </svg> Derecho Corporativo</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-brain" />
             </svg> Psicología Cognitiva</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-chart-bar" />
             </svg> Administración y Negocios</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-stethoscope" />
             </svg> Medicina Clínica</span>
-          <!-- Duplicate 2 -->
-          <span class="pill"><svg class="ic-svg">
+          {/*  Duplicate 2  */}
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-bio" />
             </svg> Biología Avanzada</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-laptop" />
             </svg> Ciencias de la Computación</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-scale" />
             </svg> Derecho Corporativo</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-brain" />
             </svg> Psicología Cognitiva</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-chart-bar" />
             </svg> Administración y Negocios</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-stethoscope" />
             </svg> Medicina Clínica</span>
-          <!-- Duplicate 3 -->
-          <span class="pill"><svg class="ic-svg">
+          {/*  Duplicate 3  */}
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-bio" />
             </svg> Biología Avanzada</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-laptop" />
             </svg> Ciencias de la Computación</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-scale" />
             </svg> Derecho Corporativo</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-brain" />
             </svg> Psicología Cognitiva</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-chart-bar" />
             </svg> Administración y Negocios</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-stethoscope" />
             </svg> Medicina Clínica</span>
         </div>
       </div>
 
-      <div class="marquee-wrap">
-        <div class="marquee-track-right">
-          <!-- Set 2 (7-12) duplicated for seamless loop -->
-          <span class="pill"><svg class="ic-svg">
+      <div className="marquee-wrap">
+        <div className="marquee-track-right">
+          {/*  Set 2 (7-12) duplicated for seamless loop  */}
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-leaf" />
             </svg> Ciencias Ambientales</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-book" />
             </svg> Educación</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-cog" />
             </svg> Ingeniería y Tecnología</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-coins" />
             </svg> Economía</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-landmark" />
             </svg> Ciencias Sociales</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-flask" />
             </svg> Química</span>
-          <!-- Duplicate 1 -->
-          <span class="pill"><svg class="ic-svg">
+          {/*  Duplicate 1  */}
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-leaf" />
             </svg> Ciencias Ambientales</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-book" />
             </svg> Educación</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-cog" />
             </svg> Ingeniería y Tecnología</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-coins" />
             </svg> Economía</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-landmark" />
             </svg> Ciencias Sociales</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-flask" />
             </svg> Química</span>
-          <!-- Duplicate 2 -->
-          <span class="pill"><svg class="ic-svg">
+          {/*  Duplicate 2  */}
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-leaf" />
             </svg> Ciencias Ambientales</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-book" />
             </svg> Educación</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-cog" />
             </svg> Ingeniería y Tecnología</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-coins" />
             </svg> Economía</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-landmark" />
             </svg> Ciencias Sociales</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-flask" />
             </svg> Química</span>
-          <!-- Duplicate 3 -->
-          <span class="pill"><svg class="ic-svg">
+          {/*  Duplicate 3  */}
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-leaf" />
             </svg> Ciencias Ambientales</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-book" />
             </svg> Educación</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-cog" />
             </svg> Ingeniería y Tecnología</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-coins" />
             </svg> Economía</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-landmark" />
             </svg> Ciencias Sociales</span>
-          <span class="pill"><svg class="ic-svg">
+          <span className="pill"><svg className="ic-svg">
               <use href="/sprite.svg#ic-flask" />
             </svg> Química</span>
         </div>
       </div>
     </section>
 
-    <!-- ============ SOBRE FYNIT / PROBLEMA ============ -->
-    <section class="section about" id="nosotros">
-      <div class="container about-grid">
-        <div class="about-copy" data-aos="fade-up">
-          <div class="about-hero-image" style="margin-bottom: 24px; animation: floaty 6s ease-in-out infinite;">
+    {/*  ============ SOBRE FYNIT / PROBLEMA ============  */}
+    <section className="section about" id="nosotros">
+      <div className="container about-grid">
+        <div className="about-copy" data-aos="fade-up">
+          <div className="about-hero-image" style={{ marginBottom: '24px', animation: 'floaty 6s ease-in-out infinite' }}>
             <img src="assets/imgs png/mascot_about.webp" alt="Fynit Mascota"
-              style="width: 100%; max-width: 220px; height: auto; object-fit: contain;">
+              style={{ width: '100%', maxWidth: '220px', height: 'auto', objectFit: 'contain' }} />
           </div>
           <h2>De investigadores para investigadores.</h2>
-          <p style="text-align: justify;">Fynit nace de un equipo de académicos que vivió de cerca la frustración de
+          <p style={{ textAlign: 'justify' }}>Fynit nace de un equipo de académicos que vivió de cerca la frustración de
             redactar y publicar a ciegas. Por eso, hemos desarrollado una inteligencia artificial especializada y
             entrenada para hacer tu camino editorial claro, riguroso y, sobre todo, predecible.</p>
-          <div style="margin-top:32px;">
-            <a href="#equipo" class="btn btn-ghost">Más sobre nosotros <svg>
+          <div style={{ marginTop: '32px' }}>
+            <Link href="#equipo" className="btn btn-ghost">Más sobre nosotros <svg>
                 <use href="/sprite.svg#ic-arrow" />
-              </svg></a>
+              </svg></Link>
           </div>
         </div>
 
-        <div class="pain-grid">
-          <div class="pain-card" data-aos="fade-up" data-aos-delay="100">
-            <div class="icon-wrap">
+        <div className="pain-grid">
+          <div className="pain-card" data-aos="fade-up" data-aos-delay="100">
+            <div className="icon-wrap">
               <svg>
                 <use href="/sprite.svg#ic-alert" />
               </svg>
@@ -238,8 +274,8 @@ export default function LegacyComponent() {
             <p>Revisas y revisas sin una señal clara de si tu metodología o tu argumento realmente sostienen una
               publicación.</p>
           </div>
-          <div class="pain-card" data-aos="fade-up" data-aos-delay="200">
-            <div class="icon-wrap">
+          <div className="pain-card" data-aos="fade-up" data-aos-delay="200">
+            <div className="icon-wrap">
               <svg>
                 <use href="/sprite.svg#ic-list" />
               </svg>
@@ -248,8 +284,8 @@ export default function LegacyComponent() {
             <p>El asesor lo dice por correo, el jurado en la sustentación, la revista al rechazarte. Casi nunca a
               tiempo.</p>
           </div>
-          <div class="pain-card" data-aos="fade-up" data-aos-delay="300">
-            <div class="icon-wrap">
+          <div className="pain-card" data-aos="fade-up" data-aos-delay="300">
+            <div className="icon-wrap">
               <svg>
                 <use href="/sprite.svg#ic-journal" />
               </svg>
@@ -258,65 +294,63 @@ export default function LegacyComponent() {
             <p>Cientos de revistas y conferencias, y ningún criterio claro sobre cuál se ajusta a tu perfil y tus
               tiempos.</p>
           </div>
-          <div class="pain-card" data-aos="fade-up" data-aos-delay="400">
-            <div class="icon-wrap">
+          <div className="pain-card" data-aos="fade-up" data-aos-delay="400">
+            <div className="icon-wrap">
               <svg>
                 <use href="/sprite.svg#ic-target" />
               </svg>
             </div>
             <h3>El detalle que baja tu originalidad</h3>
-            <p>Frases parafraseadas de más, citas mal formateadas: pequeños descuidos que restan sin que los notes.
-            </p>
+            <p>Frases parafraseadas de más, citas mal formateadas: pequeños descuidos que restan sin que los notes.</p>
           </div>
         </div>
-      </div>
       </div>
     </section>
 
 
-    <!-- ============ COMO FUNCIONA (núcleo interactivo) ============ -->
-    <section class="section how" id="como-funciona">
-      <div class="container" style="position:relative;">
-        <!-- Mascota Fynit 2 3D -->
-        <img src="assets/imgs png/fynit_mascot_2.webp" alt="Fynit Bot" class="fynit-mascot-active" loading="lazy"
-          style="margin-top: 20px;">
+    {/*  ============ COMO FUNCIONA (núcleo interactivo) ============  */}
+    <section className="section how" id="como-funciona" ref={howSectionRef}>
+      <div className="container" style={{ position: 'relative' }}>
+        {/*  Mascota Fynit 2 3D  */}
+        <img src="assets/imgs png/fynit_mascot_2.webp" alt="Fynit Bot" className="fynit-mascot-active" loading="lazy"
+          style={{ marginTop: '20px' }} />
 
-        <div class="section-head" data-aos="fade-up">
-          <span class="eyebrow">Cómo funciona</span>
+        <div className="section-head" data-aos="fade-up">
+          <span className="eyebrow">Cómo funciona</span>
           <h2>De tu manuscrito al plan de publicación</h2>
           <p>Cuatro pasos precisos. Sin código, sin esperas, sin adivinar.</p>
         </div>
 
-        <div class="how-grid">
-          <div class="how-steps" id="howSteps">
-            <div class="step-card is-active" data-step="1">
-              <span class="step-num">01</span>
-              <div class="step-body">
+        <div className="how-grid">
+          <div className="how-steps" id="howSteps">
+            <div className={`step-card ${currentStep === 1 ? "is-active" : ""}`} onClick={() => handleStepClick(1)} style={{ cursor: "pointer" }}>
+              <span className="step-num">01</span>
+              <div className="step-body">
                 <h3>Carga y Diagnóstico Inmediato</h3>
                 <p>Sube tu artículo (PDF/Word) y en segundos nuestra IA evalúa similitud, readiness y calidad
                   metodológica.</p>
               </div>
             </div>
-            <div class="step-card" data-step="2">
-              <span class="step-num">02</span>
-              <div class="step-body">
+            <div className={`step-card ${currentStep === 2 ? "is-active" : ""}`} onClick={() => handleStepClick(2)} style={{ cursor: "pointer" }}>
+              <span className="step-num">02</span>
+              <div className="step-body">
                 <h3>Detección de Riesgos y Cuartil</h3>
                 <p>Descubre qué secciones necesitan trabajo y conoce tu nivel de publicación actual (Q1-Q4) sin
                   adivinar.</p>
               </div>
             </div>
-            <div class="step-card" data-step="3">
-              <span class="step-num">03</span>
-              <div class="step-body">
+            <div className={`step-card ${currentStep === 3 ? "is-active" : ""}`} onClick={() => handleStepClick(3)} style={{ cursor: "pointer" }}>
+              <span className="step-num">03</span>
+              <div className="step-body">
                 <h3>Match con Revistas Ideales</h3>
                 <p>Recibe recomendaciones precisas de revistas y conferencias indexadas (Scopus, WoS) según tu fit
                   real.
                 </p>
               </div>
             </div>
-            <div class="step-card" data-step="4">
-              <span class="step-num">04</span>
-              <div class="step-body">
+            <div className={`step-card ${currentStep === 4 ? "is-active" : ""}`} onClick={() => handleStepClick(4)} style={{ cursor: "pointer" }}>
+              <span className="step-num">04</span>
+              <div className="step-body">
                 <h3>Plan de Acción y Red de Expertos</h3>
                 <p>Sigue una ruta de mejora paso a paso o conecta con metedólogos y editores verificados para potenciar
                   tu paper.</p>
@@ -324,34 +358,34 @@ export default function LegacyComponent() {
             </div>
           </div>
 
-          <div class="how-visual">
-            <div class="visual-frame">
-              <!-- Badges flotantes eliminados -->
-              <div class="visual-chrome"><span></span><span></span><span></span></div>
-              <div class="visual-body" id="visualBody">
+          <div className="how-visual">
+            <div className="visual-frame">
+              {/*  Badges flotantes eliminados  */}
+              <div className="visual-chrome"><span></span><span></span><span></span></div>
+              <div className="visual-body" id="visualBody">
 
-                <!-- Panel 1: Carga -->
-                <div class="visual-panel is-active" data-panel="1">
+                {/*  Panel 1: Carga  */}
+                <div className={`visual-panel ${currentStep === 1 ? "is-active" : ""}`}>
                   <img src="assets/imgs png/paso1_laptop_carga.webp" alt="Dashboard Fynit - Carga de documento"
-                    style="width:100%; height:100%; object-fit:contain; border-radius:8px;">
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '8px' }} />
                 </div>
 
-                <!-- Panel 2: Diagnóstico -->
-                <div class="visual-panel" data-panel="2">
+                {/*  Panel 2: Diagnóstico  */}
+                <div className={`visual-panel ${currentStep === 2 ? "is-active" : ""}`}>
                   <img src="assets/imgs png/paso2_laptop_diagnostico.webp" alt="Dashboard Fynit - Diagnóstico con IA"
-                    style="width:100%; height:100%; object-fit:contain; border-radius:8px;">
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '8px' }} />
                 </div>
 
-                <!-- Panel 3: Match con Revistas -->
-                <div class="visual-panel" data-panel="3">
+                {/*  Panel 3: Match con Revistas  */}
+                <div className={`visual-panel ${currentStep === 3 ? "is-active" : ""}`}>
                   <img src="assets/imgs png/paso3_laptop_revistas.webp" alt="Dashboard Fynit - Match con Revistas"
-                    style="width:100%; height:100%; object-fit:contain; border-radius:8px;">
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '8px' }} />
                 </div>
 
-                <!-- Panel 4: Plan de Acción y Red de Expertos -->
-                <div class="visual-panel" data-panel="4">
+                {/*  Panel 4: Plan de Acción y Red de Expertos  */}
+                <div className={`visual-panel ${currentStep === 4 ? "is-active" : ""}`}>
                   <img src="assets/imgs png/paso4_laptop_plan.webp" alt="Dashboard Fynit - Plan de Acción"
-                    style="width:100%; height:100%; object-fit:contain; border-radius:8px;">
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '8px' }} />
                 </div>
 
               </div>
@@ -361,147 +395,148 @@ export default function LegacyComponent() {
       </div>
     </section>
 
-    <!-- ============ NUMEROS ============ -->
-    <section class="numbers">
-      <div class="container" style="position:relative; z-index:2;">
+    {/*  ============ NUMEROS ============  */}
+    <section className="numbers" ref={countersRef}>
+      <div className="container" style={{ position: 'relative', zIndex: '2' }}>
 
-        <div class="numbers-grid">
-          <div class="number-item" data-aos="fade-up" data-aos-delay="100">
-            <div class="icon-wrap"><svg>
+        <div className="numbers-grid">
+          <div className="number-item" data-aos="fade-up" data-aos-delay="100">
+            <div className="icon-wrap"><svg>
                 <use href="/sprite.svg#ic-sparkles" />
               </svg></div>
-            <div class="num"><span class="accent">Segundos</span></div>
-            <div class="lbl">Para tu diagnóstico inicial completo — no días, no horas</div>
+            <div className="num"><span className="accent">Segundos</span></div>
+            <div className="lbl">Para tu diagnóstico inicial completo — no días, no horas</div>
           </div>
-          <div class="number-item" data-aos="fade-up" data-aos-delay="200">
-            <div class="icon-wrap"><svg>
+          <div className="number-item" data-aos="fade-up" data-aos-delay="200">
+            <div className="icon-wrap"><svg>
                 <use href="/sprite.svg#ic-target" />
               </svg></div>
-            <div class="num" data-count="6"><span class="accent">6</span></div>
-            <div class="metric-word">Métricas</div>
-            <div class="lbl">Evaluadas en cada análisis con IA: similitud, metodología, readiness y más</div>
+            <div className="num"><AnimatedCounter target={6} visible={countersVisible} /></div>
+            <div className="metric-word">Métricas</div>
+            <div className="lbl">Evaluadas en cada análisis con IA: similitud, metodología, readiness y más</div>
           </div>
-          <div class="number-item" data-aos="fade-up" data-aos-delay="300">
-            <div class="icon-wrap"><svg>
+          <div className="number-item" data-aos="fade-up" data-aos-delay="300">
+            <div className="icon-wrap"><svg>
                 <use href="/sprite.svg#ic-alert" />
               </svg></div>
-            <div class="num"><span class="accent">3 a 5</span></div>
-            <div class="metric-word">Riesgos</div>
-            <div class="lbl">Priorizados automáticamente, no listados al azar</div>
+            <div className="num"><span className="accent">3 a 5</span></div>
+            <div className="metric-word">Riesgos</div>
+            <div className="lbl">Priorizados automáticamente, no listados al azar</div>
           </div>
-          <div class="number-item" data-aos="fade-up" data-aos-delay="400">
-            <div class="icon-wrap"><svg>
+          <div className="number-item" data-aos="fade-up" data-aos-delay="400">
+            <div className="icon-wrap"><svg>
                 <use href="/sprite.svg#ic-journal" />
               </svg></div>
-            <div class="num" data-count="1"><span class="accent">1</span></div>
-            <div class="metric-word">Ruta clara</div>
-            <div class="lbl">Hacia la revista que sí tiene sentido para ti</div>
-          </div>
-        </div>
-    </section>
-
-    <!-- ============ INDEXACIONES (Marquee) ============ -->
-    <section class="indexing-marquee">
-      <div class="indexing-label">Compatible con indexaciones y estándares de</div>
-      <div class="marquee-outer" aria-hidden="true">
-        <div class="marquee-reel">
-          <!-- Scopus -->
-          <div class="idx-logo">
-            <img src="assets/logos svg/logo-scopus.svg" alt="Scopus" loading="lazy">
-          </div>
-          <!-- Web of Science -->
-          <div class="idx-logo">
-            <img src="assets/logos svg/logo-wos.svg" alt="Web of Science" loading="lazy">
-          </div>
-          <!-- IEEE -->
-          <div class="idx-logo">
-            <img src="assets/logos svg/logo-ieee.svg" alt="IEEE Xplore" loading="lazy">
-          </div>
-          <!-- DOAJ -->
-          <div class="idx-logo">
-            <img src="assets/logos svg/logo-doaj.svg" alt="DOAJ" loading="lazy">
-          </div>
-          <!-- Latindex -->
-          <div class="idx-logo">
-            <img src="assets/logos svg/logo-latindex.svg" alt="Latindex" loading="lazy">
-          </div>
-          <!-- SciELO -->
-          <div class="idx-logo">
-            <img src="assets/logos svg/logo-scielo.svg" alt="SciELO" loading="lazy">
-          </div>
-          <!-- Duplicate set for seamless loop -->
-          <div class="idx-logo">
-            <img src="assets/logos svg/logo-scopus.svg" alt="Scopus" loading="lazy">
-          </div>
-          <div class="idx-logo">
-            <img src="assets/logos svg/logo-wos.svg" alt="Web of Science" loading="lazy">
-          </div>
-          <div class="idx-logo">
-            <img src="assets/logos svg/logo-ieee.svg" alt="IEEE Xplore" loading="lazy">
-          </div>
-          <div class="idx-logo">
-            <img src="assets/logos svg/logo-doaj.svg" alt="DOAJ" loading="lazy">
-          </div>
-          <div class="idx-logo">
-            <img src="assets/logos svg/logo-latindex.svg" alt="Latindex" loading="lazy">
-          </div>
-          <div class="idx-logo">
-            <img src="assets/logos svg/logo-scielo.svg" alt="SciELO" loading="lazy">
+            <div className="num"><AnimatedCounter target={1} visible={countersVisible} /></div>
+            <div className="metric-word">Ruta clara</div>
+            <div className="lbl">Hacia la revista que sí tiene sentido para ti</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ TESTIMONIOS ============ -->
-    <section class="section testimonials" id="testimonios">
-      <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow">Lo que dicen los primeros usuarios</span>
+    {/*  ============ INDEXACIONES (Marquee) ============  */}
+    <section className="indexing-marquee">
+      <div className="indexing-label">Compatible con indexaciones y estándares de</div>
+      <div className="marquee-outer" aria-hidden="true">
+        <div className="marquee-reel">
+          {/*  Scopus  */}
+          <div className="idx-logo">
+            <img src="assets/logos svg/logo-scopus.svg" alt="Scopus" loading="lazy" />
+          </div>
+          {/*  Web of Science  */}
+          <div className="idx-logo">
+            <img src="assets/logos svg/logo-wos.svg" alt="Web of Science" loading="lazy" />
+          </div>
+          {/*  IEEE  */}
+          <div className="idx-logo">
+            <img src="assets/logos svg/logo-ieee.svg" alt="IEEE Xplore" loading="lazy" />
+          </div>
+          {/*  DOAJ  */}
+          <div className="idx-logo">
+            <img src="assets/logos svg/logo-doaj.svg" alt="DOAJ" loading="lazy" />
+          </div>
+          {/*  Latindex  */}
+          <div className="idx-logo">
+            <img src="assets/logos svg/logo-latindex.svg" alt="Latindex" loading="lazy" />
+          </div>
+          {/*  SciELO  */}
+          <div className="idx-logo">
+            <img src="assets/logos svg/logo-scielo.svg" alt="SciELO" loading="lazy" />
+          </div>
+          {/*  Duplicate set for seamless loop  */}
+          <div className="idx-logo">
+            <img src="assets/logos svg/logo-scopus.svg" alt="Scopus" loading="lazy" />
+          </div>
+          <div className="idx-logo">
+            <img src="assets/logos svg/logo-wos.svg" alt="Web of Science" loading="lazy" />
+          </div>
+          <div className="idx-logo">
+            <img src="assets/logos svg/logo-ieee.svg" alt="IEEE Xplore" loading="lazy" />
+          </div>
+          <div className="idx-logo">
+            <img src="assets/logos svg/logo-doaj.svg" alt="DOAJ" loading="lazy" />
+          </div>
+          <div className="idx-logo">
+            <img src="assets/logos svg/logo-latindex.svg" alt="Latindex" loading="lazy" />
+          </div>
+          <div className="idx-logo">
+            <img src="assets/logos svg/logo-scielo.svg" alt="SciELO" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/*  ============ TESTIMONIOS ============  */}
+    <section className="section testimonials" id="testimonios">
+      <div className="container">
+        <div className="section-head center">
+          <span className="eyebrow">Lo que dicen los primeros usuarios</span>
           <h2>Investigadores que ya lo probaron</h2>
           <p>Estos son los primeros investigadores que confiaron en Fynit. Su feedback construyó la herramienta.</p>
         </div>
-        <div class="testi-grid">
-          <div class="testi-card">
-            <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div className="testi-grid">
+          <div className="testi-card">
+            <div className="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <blockquote>"Tenía un artículo dando vueltas sin saber a dónde enviarlo. Fynit me dijo en minutos que
               tenía
               potencial Q3 y cuatro cosas concretas que mejorar. No me dio una lista genérica: me dió foco."
             </blockquote>
-            <div class="testi-author">
-              <div class="testi-avatar"><img
+            <div className="testi-author">
+              <div className="testi-avatar"><img
                   src="https://ui-avatars.com/api/?name=Maria+Quispe&background=009ca6&color=fff&size=128"
-                  alt="Investigadora" loading="lazy"></div>
-              <div class="testi-info">
+                  alt="Investigadora" loading="lazy" /></div>
+              <div className="testi-info">
                 <strong>Dra. María Sol Quispe</strong>
                 <span>Investigadora en Educación, UNMSM</span>
               </div>
             </div>
           </div>
-          <div class="testi-card featured">
-            <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div className="testi-card featured">
+            <div className="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <blockquote>"Subi mi tesis de maestría y en cuestión de segundos tenía un reporte que nunca había visto
               igual: similitud, metodología, cuartil alcanzable. Mi asesor quedó impresionado con el nivel del
               análisis."</blockquote>
-            <div class="testi-author">
-              <div class="testi-avatar"><img
+            <div className="testi-author">
+              <div className="testi-avatar"><img
                   src="https://ui-avatars.com/api/?name=Rodrigo+Salas&background=101728&color=fff&size=128"
-                  alt="Investigador" loading="lazy"></div>
-              <div class="testi-info">
+                  alt="Investigador" loading="lazy" /></div>
+              <div className="testi-info">
                 <strong>Mg. Rodrigo Salas</strong>
                 <span>Doctorado en Ing. Civil, PUCP</span>
               </div>
             </div>
           </div>
-          <div class="testi-card">
-            <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div className="testi-card">
+            <div className="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <blockquote>"Lo que más me impresionó fue la honestidad del diagnóstico. No infla los números. Te dice
               exactamente dónde estás y cuánto te falta para el siguiente nivel editorial. Eso no tiene precio."
             </blockquote>
-            <div class="testi-author">
-              <div class="testi-avatar"><img
+            <div className="testi-author">
+              <div className="testi-avatar"><img
                   src="https://ui-avatars.com/api/?name=Carmen+Vidal&background=ff8c00&color=fff&size=128"
-                  alt="Investigadora" loading="lazy"></div>
-              <div class="testi-info">
+                  alt="Investigadora" loading="lazy" /></div>
+              <div className="testi-info">
                 <strong>Prof. Carmen Vidal, PhD</strong>
                 <span>Directora de Investigación, UPC</span>
               </div>
@@ -511,22 +546,22 @@ export default function LegacyComponent() {
       </div>
     </section>
 
-    <!-- ============ PRECIOS ============ -->
-    <section class="section pricing" id="precios">
-      <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow">Planes &amp; Precios</span>
+    {/*  ============ PRECIOS ============  */}
+    <section className="section pricing" id="precios">
+      <div className="container">
+        <div className="section-head center">
+          <span className="eyebrow">Planes &amp; Precios</span>
           <h2>Elige el plan que se ajusta a tu etapa</h2>
           <p>Sin sorpresas. Empieza y escala cuando estés listo.</p>
         </div>
-        <div class="pricing-grid">
-          <!-- Plan Gratuito -->
-          <div class="price-card">
-            <div class="price-badge">Gratis</div>
-            <div class="price-title">Explorador</div>
-            <div class="price-amount"><span class="price-num">$0</span><span class="price-per">/mes</span></div>
-            <p class="price-desc">Ideal para evaluar el potencial de tus primeros manuscritos.</p>
-            <ul class="price-features">
+        <div className="pricing-grid">
+          {/*  Plan Gratuito  */}
+          <div className="price-card">
+            <div className="price-badge">Gratis</div>
+            <div className="price-title">Explorador</div>
+            <div className="price-amount"><span className="price-num">$0</span><span className="price-per">/mes</span></div>
+            <p className="price-desc">Ideal para evaluar el potencial de tus primeros manuscritos.</p>
+            <ul className="price-features">
               <li><svg>
                   <use href="/sprite.svg#ic-check" />
                 </svg> Hasta 2 manuscritos al mes</li>
@@ -539,20 +574,20 @@ export default function LegacyComponent() {
               <li><svg>
                   <use href="/sprite.svg#ic-check" />
                 </svg> Plan de mejora (Vista parcial)</li>
-              <li class="off"><svg>
+              <li className="off"><svg>
                   <use href="/sprite.svg#ic-close" />
                 </svg> Reporte completo descargable</li>
             </ul>
-            <a href="analizar.html" class="btn btn-ghost btn-block">Empezar</a>
+            <Link href="analizar.html" className="btn btn-ghost btn-block">Empezar</Link>
           </div>
-          <!-- Plan Pro -->
-          <div class="price-card popular">
-            <div class="price-pop-label">Más popular</div>
-            <div class="price-badge pro">Pro</div>
-            <div class="price-title">Investigador</div>
-            <div class="price-amount"><span class="price-num">$19</span><span class="price-per">/mes</span></div>
-            <p class="price-desc">Para investigadores activos que quieren publicar este año.</p>
-            <ul class="price-features">
+          {/*  Plan Pro  */}
+          <div className="price-card popular">
+            <div className="price-pop-label">Más popular</div>
+            <div className="price-badge pro">Pro</div>
+            <div className="price-title">Investigador</div>
+            <div className="price-amount"><span className="price-num">$19</span><span className="price-per">/mes</span></div>
+            <p className="price-desc">Para investigadores activos que quieren publicar este año.</p>
+            <ul className="price-features">
               <li><svg>
                   <use href="/sprite.svg#ic-check" />
                 </svg> Análisis ilimitados</li>
@@ -569,17 +604,17 @@ export default function LegacyComponent() {
                   <use href="/sprite.svg#ic-check" />
                 </svg> Seguimiento de versiones</li>
             </ul>
-            <a href="analizar.html" class="btn btn-primary btn-block">Empezar 14 días gratis <svg>
+            <Link href="analizar.html" className="btn btn-primary btn-block">Empezar 14 días gratis <svg>
                 <use href="/sprite.svg#ic-arrow" />
-              </svg></a>
+              </svg></Link>
           </div>
-          <!-- Plan Institucional -->
-          <div class="price-card">
-            <div class="price-badge inst">Institucional</div>
-            <div class="price-title">Facultad</div>
-            <div class="price-amount"><span class="price-num" style="font-size:2rem">A medida</span></div>
-            <p class="price-desc">Para universidades, facultades y grupos de investigación.</p>
-            <ul class="price-features">
+          {/*  Plan Institucional  */}
+          <div className="price-card">
+            <div className="price-badge inst">Institucional</div>
+            <div className="price-title">Facultad</div>
+            <div className="price-amount"><span className="price-num" style={{ fontSize: '2rem' }}>A medida</span></div>
+            <p className="price-desc">Para universidades, facultades y grupos de investigación.</p>
+            <ul className="price-features">
               <li><svg>
                   <use href="/sprite.svg#ic-check" />
                 </svg> Licencias múltiples</li>
@@ -596,67 +631,93 @@ export default function LegacyComponent() {
                   <use href="/sprite.svg#ic-check" />
                 </svg> SLA garantizado</li>
             </ul>
-            <a href="analizar.html" class="btn btn-ghost btn-block">Contactar ventas</a>
+            <Link href="analizar.html" className="btn btn-ghost btn-block">Contactar ventas</Link>
           </div>
         </div>
-        <div style="text-align: center; margin-top: 32px; margin-bottom: 24px;">
-          <a href="precios.html" class="btn btn-ghost">Ver más detalle</a>
+        <div style={{ textAlign: 'center', marginTop: '32px', marginBottom: '24px' }}>
+          <Link href="precios.html" className="btn btn-ghost">Ver más detalle</Link>
         </div>
-        <p class="pricing-note">Todos los planes incluyen seguridad de datos y privacidad de tu investigación. <a
-            href="seguridad.html">Ver política de datos &rarr;</a></p>
+        <p className="pricing-note">Todos los planes incluyen seguridad de datos y privacidad de tu investigación. <Link
+            href="seguridad.html">Ver política de datos &rarr;</Link></p>
       </div>
     </section>
 
-    <!-- ============ PRE-BLOG ============ -->
-    <section class="section" id="blog">
-      <div class="container">
-        <div class="blog-head">
-          <div class="section-head" style="margin-bottom:0">
-            <span class="eyebrow">Recursos</span>
+    {/*  ============ PRE-BLOG ============  */}
+    <section className="section" id="blog">
+      <div className="container">
+        <div className="blog-head">
+          <div className="section-head" style={{ marginBottom: '0' }}>
+            <span className="eyebrow">Recursos</span>
             <h2>Últimos artículos</h2>
           </div>
-          <a href="blog.html" class="see-all">Ver todos <svg>
+          <Link href="blog.html" className="see-all">Ver todos <svg>
               <use href="/sprite.svg#ic-arrow" />
-            </svg></a>
+            </svg></Link>
         </div>
 
-        <div class="blog-grid">
-          <a href="blog.html#q1-vs-q2" class="article-card">
-            <div class="article-thumb t1"><span>Publicación académica</span></div>
-            <div class="article-body">
+        <div className="blog-grid">
+          <Link href="blog.html#q1-vs-q2" className="article-card">
+            <div className="article-thumb t1"><span>Publicación académica</span></div>
+            <div className="article-body">
               <h3>Q1 vs Q2: cómo decidir sin perder el semestre</h3>
               <p>Una guía directa para elegir tu revista objetivo según tu perfil real, no según el prestigio.</p>
-              <div class="article-meta"><span>12 jul 2026</span><span class="rd">6 min <svg>
+              <div className="article-meta"><span>12 jul 2026</span><span className="rd">6 min <svg>
                     <use href="/sprite.svg#ic-arrow" />
                   </svg></span></div>
             </div>
-          </a>
-          <a href="blog.html#errores-citacion" class="article-card">
-            <div class="article-thumb t2"><span>Buenas prácticas</span></div>
-            <div class="article-body">
+          </Link>
+          <Link href="blog.html#errores-citacion" className="article-card">
+            <div className="article-thumb t2"><span>Buenas prácticas</span></div>
+            <div className="article-body">
               <h3>5 errores de citación que más bajan tu originalidad</h3>
               <p>Los descuidos más comunes al parafrasear — y cómo detectarlos antes que el sistema antiplagio.</p>
-              <div class="article-meta"><span>3 jul 2026</span><span class="rd">4 min <svg>
+              <div className="article-meta"><span>3 jul 2026</span><span className="rd">4 min <svg>
                     <use href="/sprite.svg#ic-arrow" />
                   </svg></span></div>
             </div>
-          </a>
-          <a href="blog.html#checklist-revision" class="article-card">
-            <div class="article-thumb t3"><span>Checklist</span></div>
-            <div class="article-body">
+          </Link>
+          <Link href="blog.html#checklist-revision" className="article-card">
+            <div className="article-thumb t3"><span>Checklist</span></div>
+            <div className="article-body">
               <h3>Qué revisar antes de enviar a revisión por pares</h3>
               <p>Ocho puntos que casi nadie verifica antes de enviar — y que sí revisa el comité editorial.</p>
-              <div class="article-meta"><span>28 jun 2026</span><span class="rd">5 min <svg>
+              <div className="article-meta"><span>28 jun 2026</span><span className="rd">5 min <svg>
                     <use href="/sprite.svg#ic-arrow" />
                   </svg></span></div>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
 
-  
-    ` }}>
-    </div>
+    </>
   );
+}
+
+
+function AnimatedCounter({ target, visible }: { target: number, visible: boolean }) {
+  const [count, setCount] = useState(0);
+  
+  useEffect(() => {
+    if (!visible) return;
+    let start: number;
+    const duration = 1100;
+    let animationFrameId: number;
+
+    const step = (timestamp: number) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * target));
+      
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(step);
+      }
+    };
+    
+    animationFrameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [target, visible]);
+  
+  return <span className="accent">{count}</span>;
 }

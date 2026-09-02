@@ -94,14 +94,85 @@ export async function POST(req: NextRequest) {
             to: destino,
             replyTo: email,
             subject: `Nueva evaluacion — ${apellidos}, ${nombres}`,
-            html: `
-              <h2>Nueva Solicitud de Evaluación</h2>
-              <p>Investigador: ${nombres} ${apellidos}</p>
-              <p>Email: ${email}</p>
-              <p>Estado: ${estadoArticulo}</p>
-              <p>Publicación: ${queBuscas}</p>
-              <p>Indexación: ${indexacion}</p>
-            `,
+            html: `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+</head>
+<body style="margin:0;padding:0;background:#ffffff;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;color:#333333;">
+  <div style="padding:40px 40px; width: 100%; box-sizing: border-box;">
+    
+    <!-- Logo / Header -->
+    <div style="border-bottom:2px solid #1B60DF;padding-bottom:20px;margin-bottom:30px;">
+      <h1 style="margin:0;color:#1B60DF;font-size:28px;font-weight:800;letter-spacing:-1px;">Fynit</h1>
+      <p style="margin:5px 0 0;color:#666666;font-size:14px;text-transform:uppercase;letter-spacing:1px;">Nueva Solicitud de Evaluación</p>
+    </div>
+
+    <!-- Intro -->
+    <p style="margin:0 0 30px;font-size:16px;line-height:1.6;color:#444444;">
+      Se ha recibido una nueva solicitud de evaluación de artículo científico. A continuación se presentan los detalles del investigador y el documento adjunto.
+    </p>
+
+    <!-- Content Table -->
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:40px;border-collapse:collapse; max-width: 1000px;">
+      <!-- Section 1 -->
+      <tr>
+        <td colspan="2" style="padding:15px 0 5px;border-bottom:1px solid #eeeeee;font-size:12px;font-weight:700;color:#999999;text-transform:uppercase;letter-spacing:1px;">
+          Datos del Investigador
+        </td>
+      </tr>
+      <tr>
+        <td width="30%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;">Nombre Completo</td>
+        <td style="padding:15px 0;font-size:15px;color:#111111;">${nombres} ${apellidos}</td>
+      </tr>
+      <tr>
+        <td width="30%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;border-bottom:1px solid #eeeeee;">Correo Electrónico</td>
+        <td style="padding:15px 0;font-size:15px;border-bottom:1px solid #eeeeee;">
+          <a href="mailto:${email}" style="color:#1B60DF;text-decoration:none;">${email}</a>
+        </td>
+      </tr>
+      
+      <!-- Section 2 -->
+      <tr>
+        <td colspan="2" style="padding:30px 0 5px;border-bottom:1px solid #eeeeee;font-size:12px;font-weight:700;color:#999999;text-transform:uppercase;letter-spacing:1px;">
+          Detalles del Documento
+        </td>
+      </tr>
+      <tr>
+        <td width="30%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;">Estado del Artículo</td>
+        <td style="padding:15px 0;font-size:15px;color:#111111;">${estadoArticulo}</td>
+      </tr>
+      <tr>
+        <td width="30%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;">Tipo de Publicación</td>
+        <td style="padding:15px 0;font-size:15px;color:#111111;">${queBuscas}</td>
+      </tr>
+      <tr>
+        <td width="30%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;">Indexación Deseada</td>
+        <td style="padding:15px 0;font-size:15px;color:#111111;">${indexacion}</td>
+      </tr>
+      <tr>
+        <td width="30%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;border-bottom:1px solid #eeeeee;">Archivo Adjunto</td>
+        <td style="padding:15px 0;font-size:15px;color:#111111;border-bottom:1px solid #eeeeee;">
+          <strong>${file.name}</strong> <span style="color:#999999;font-size:13px;">(${(file.size/1024/1024).toFixed(2)} MB)</span>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Action -->
+    <div style="margin-bottom:40px;">
+      <a href="mailto:${email}?subject=Re: Evaluación de tu artículo — Fynit" style="display:inline-block;background:#1B60DF;color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;padding:12px 24px;border-radius:4px;">
+        Responder al investigador
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <div style="border-top:1px solid #eeeeee;padding-top:20px;font-size:12px;color:#999999;">
+      <p style="margin:0;">Enviado el ${fechaEnvio} — Fynit. Mensaje generado automáticamente.</p>
+    </div>
+  </div>
+</body>
+</html>`,
             attachments: [
                 {
                     filename: file.name,
@@ -114,26 +185,83 @@ export async function POST(req: NextRequest) {
             from: `Fynit <${emailFrom}>`,
             to: email,
             subject: `Confirmacion de recepcion — Fynit`,
-            html: `
-              <h2>Confirmación de Recepción</h2>
-              <p>Hola ${nombres}, hemos recibido tu documento: ${file.name}.</p>
-              <p>Nuestro equipo de revisión ha sido notificado.</p>
-            `
+            html: `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+</head>
+<body style="margin:0;padding:0;background:#ffffff;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;color:#333333;">
+  <div style="padding:40px 40px; width: 100%; box-sizing: border-box;">
+    
+    <!-- Logo / Header -->
+    <div style="border-bottom:2px solid #1B60DF;padding-bottom:20px;margin-bottom:30px;">
+      <h1 style="margin:0;color:#1B60DF;font-size:28px;font-weight:800;letter-spacing:-1px;">Fynit</h1>
+      <p style="margin:5px 0 0;color:#666666;font-size:14px;text-transform:uppercase;letter-spacing:1px;">Confirmación de Recepción</p>
+    </div>
+
+    <!-- Greeting -->
+    <p style="margin:0 0 20px;font-size:16px;line-height:1.6;color:#111111;">
+      Hola <strong>${nombres}</strong>,
+    </p>
+
+    <!-- Intro -->
+    <p style="margin:0 0 30px;font-size:16px;line-height:1.6;color:#444444;">
+      Te escribimos para confirmar que hemos recibido correctamente tu documento <strong>${file.name}</strong>. Nuestro equipo de revisión ha sido notificado y el análisis comenzará de inmediato.
+    </p>
+
+    <!-- Content Table -->
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:40px;border-collapse:collapse; max-width: 1000px;">
+      <tr>
+        <td colspan="2" style="padding:15px 0 5px;border-bottom:1px solid #eeeeee;font-size:12px;font-weight:700;color:#999999;text-transform:uppercase;letter-spacing:1px;">
+          Resumen de tu Solicitud
+        </td>
+      </tr>
+      <tr>
+        <td width="40%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;">Estado actual</td>
+        <td style="padding:15px 0;font-size:15px;color:#111111;">${estadoArticulo}</td>
+      </tr>
+      <tr>
+        <td width="40%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;">Publicación objetivo</td>
+        <td style="padding:15px 0;font-size:15px;color:#111111;">${queBuscas}</td>
+      </tr>
+      <tr>
+        <td width="40%" style="padding:15px 0;font-size:14px;color:#666666;font-weight:600;border-bottom:1px solid #eeeeee;">Indexación deseada</td>
+        <td style="padding:15px 0;font-size:15px;color:#111111;border-bottom:1px solid #eeeeee;">${indexacion}</td>
+      </tr>
+    </table>
+
+    <p style="margin:0 0 40px;font-size:16px;line-height:1.6;color:#444444;">
+      Nos pondremos en contacto contigo respondiendo a este mismo correo con los resultados y los próximos pasos recomendados para publicar tu investigación.
+    </p>
+
+    <!-- Footer -->
+    <div style="border-top:1px solid #eeeeee;padding-top:20px;font-size:12px;color:#999999;line-height:1.5;">
+      <p style="margin:0 0 5px;">Si tienes alguna pregunta adicional, puedes responder directamente a este correo.</p>
+      <p style="margin:0;">&copy; ${new Date().getFullYear()} Fynit. Tu investigación es estrictamente confidencial.</p>
+    </div>
+  </div>
+</body>
+</html>`
         };
 
         // --- 6. Enviar vía Resend ---
-        // Descomentar cuando la API Key sea válida
-        /*
-        await Promise.all([
+        // Se ejecuta el envío de correo
+        const [resEquipo, resCliente] = await Promise.all([
             resend.emails.send(mailEquipo),
             resend.emails.send(mailCliente)
         ]);
-        */
-        
-        // Simular envío por seguridad si no hay key de Resend en este entorno (Evitar crash 500)
-        console.log("Simulando envío de correos, archivo recibido en memoria de:", file.size, "bytes");
 
-        return NextResponse.json({ success: true, message: 'Artículo recibido y correos enviados correctamente.' }, { status: 200 });
+        if (resEquipo.error) {
+            console.error("Error al enviar correo al equipo:", resEquipo.error);
+        }
+        if (resCliente.error) {
+            console.error("Error al enviar correo al cliente (Probablemente dominio no verificado):", resCliente.error);
+        }
+        
+        console.log("Correos procesados, archivo recibido en memoria de:", file.size, "bytes");
+
+        return NextResponse.json({ success: true, message: 'Artículo recibido y procesado.' }, { status: 200 });
 
     } catch (error) {
         console.error('Error al procesar la solicitud:', error);

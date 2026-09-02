@@ -3,6 +3,7 @@ import { Sora, Manrope } from "next/font/google";
 import Script from "next/script";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Toaster from "@/components/Toaster";
 import "./globals.css";
 import "./legacy-styles.css"; // Imported original styles
 
@@ -40,8 +41,8 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <Toaster />
         <Script src="https://unpkg.com/aos@2.3.1/dist/aos.js" strategy="lazyOnload" />
-        <Script src="/js/main.js" strategy="lazyOnload" />
       </body>
     </html>
   );
