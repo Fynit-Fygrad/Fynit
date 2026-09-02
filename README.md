@@ -1,51 +1,36 @@
-# Fynit
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-**Ecosistema Digital y Soluciones Tecnológicas.**
+## Getting Started
 
-Fynit es la plataforma web de la suite Fynit-FyGrad, diseñada para presentar servicios, soluciones tecnológicas, módulo de usuario, precios y blog corporativo.
+First, run the development server:
 
----
-
-## 🚀 Vista Previa y Uso Local
-
-Al ser un sitio desarrollado con **HTML5, CSS3 y JavaScript vanilla**, no requiere proceso de compilación previo.
-
-### Pasos para ejecutar localmente:
-1. **Clona el repositorio:**
-   ```bash
-   git clone https://github.com/Fynit-Fygrad/Fynit.git
-   ```
-2. **Abre el proyecto:**
-   - Puedes abrir directamente `index.html` o `fynit_landing.html` en cualquier navegador web.
-   - O utilizar una extensión como **Live Server** en VS Code / Cursor para recarga en tiempo real.
-
----
-
-## 📁 Estructura del Proyecto
-
-```text
-Fynit/
-├── assets/                 # Recursos multimedia, imágenes, logos y vectoriales
-├── css/                    # Hojas de estilo CSS del proyecto
-├── js/                     # Scripts y lógica interactiva en JavaScript
-├── index.html              # Entrada principal / Landing Page
-├── fynit_landing.html      # Vista principal de la Landing Page
-├── nosotros.html           # Información sobre Fynit, visión y equipo
-├── equipo.html             # Miembros y especialistas del equipo
-├── servicios.html / precios.html # Planes, precios y servicios
-├── contacto.html           # Formulario y canales de contacto
-├── blog.html               # Publicaciones y artículos
-├── dashboard.html          # Panel de administración / usuario
-├── faq.html                # Preguntas frecuentes
-├── login.html              # Inicio de sesión
-└── registro.html           # Registro de usuarios
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
----
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 🛠 Buenas Prácticas Aplicadas
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-- **Diseño Responsive:** Adaptado para dispositivos móviles, tablets y escritorio.
-- **Navegación Intuitiva:** Redirecciones limpias entre pantallas y secciones.
-- **SEO & Semántica:** Estructura de etiquetas HTML5 semánticas (`<header>`, `<main>`, `<section>`, `<footer>`).
-- **Optimización de Recursos:** Organización limpia de scripts y estilos independientes en carpetas dedicadas.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

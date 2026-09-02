@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-fynit-navy: #071742;
+  --color-fynit-navy-soft: #0E2159;
+  --color-fynit-blue: #1B60DF;
+  --color-fynit-blue-light: #4371EC;
+  --color-fynit-yellow: #FEC600;
+  --color-fynit-tint: #EEF3FF;
+  --color-fynit-tint-2: #E7EDFF;
+  
+  --font-sans: var(--font-sora), sans-serif;
+  --font-display: var(--font-manrope), sans-serif;
+  
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+}
+
+body {
+  background: #ffffff;
+  color: #071742;
+  font-family: var(--font-sans);
+}
