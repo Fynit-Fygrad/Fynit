@@ -83,6 +83,11 @@ export default function Navbar() {
           </div>
 
           <Link href="/precios">Precios</Link>
+          
+          <div style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <a href="#" onClick={(e) => { e.preventDefault(); showComingSoon(); }} style={{ textAlign: 'center', padding: '12px', border: '1px solid rgba(255,255,255,0.3)', borderRadius: '8px', color: '#ffffff', textDecoration: 'none', fontWeight: 600 }}>Registrarse</a>
+            <a href="#" onClick={(e) => { e.preventDefault(); showComingSoon(); }} style={{ textAlign: 'center', padding: '12px', color: '#ffffff', textDecoration: 'none', fontWeight: 600 }}>Iniciar Sesión</a>
+          </div>
         </nav>
       </aside>
 
