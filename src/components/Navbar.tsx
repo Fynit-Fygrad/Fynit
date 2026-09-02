@@ -1,18 +1,21 @@
 'use client';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { showComingSoon } from './Toaster';
 import { gsap } from 'gsap';
-import { useRef, useLayoutEffect } from 'react';
+import { useTheme } from 'next-themes';
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 12);
     };
@@ -52,27 +55,28 @@ export default function Navbar() {
         const tl = gsap.timeline();
         tlRef.current = tl;
 
-        // Reset positions (clean slate)
-        gsap.set(overlay, { pointerEvents: 'auto', display: 'block' });
+        // Play sequence
+        tl.set(sidebar, { visibility: 'visible' });
+        tl.set(overlay, { pointerEvents: 'auto', display: 'block' });
 
         // Animate overlay
-        tl.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0);
+        tl.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0);
 
         // Animate pre-layers
         layers.forEach((layer, i) => {
-          tl.fromTo(layer, { x: '100%' }, { x: '0%', duration: 0.5, ease: 'power4.out' }, i * 0.08);
+          tl.fromTo(layer, { x: '100%' }, { x: '0%', duration: 0.25, ease: 'power4.out' }, i * 0.04);
         });
 
         // Animate sidebar panel
-        const panelTime = layers.length * 0.08 + 0.1;
-        tl.fromTo(sidebar, { x: '100%' }, { x: '0%', duration: 0.6, ease: 'power4.out', clearProps: 'transform' }, panelTime);
+        const panelTime = layers.length * 0.04 + 0.05;
+        tl.fromTo(sidebar, { x: '100%' }, { x: '0%', duration: 0.35, ease: 'power4.out', clearProps: 'transform' }, panelTime);
 
         // Stagger nav items
         tl.fromTo(
           navItems,
           { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.5, stagger: 0.05, ease: 'power2.out' },
-          panelTime + 0.15
+          { y: 0, opacity: 1, duration: 0.3, stagger: 0.03, ease: 'power2.out' },
+          panelTime + 0.1
         );
       } else {
         // CLOSE ANIMATION
@@ -81,8 +85,8 @@ export default function Navbar() {
         tlRef.current = tl;
 
         const all = [...layers, sidebar];
-        tl.to(overlay, { opacity: 0, pointerEvents: 'none', duration: 0.3 }, 0);
-        tl.to(all, { x: '100%', duration: 0.4, ease: 'power3.in' }, 0);
+        tl.to(overlay, { opacity: 0, pointerEvents: 'none', duration: 0.2 }, 0);
+        tl.to(all, { x: '100%', duration: 0.2, ease: 'power3.in' }, 0);
         tl.set(overlay, { display: 'none' });
       }
     });
@@ -166,7 +170,7 @@ export default function Navbar() {
 
       <header className="floating-navbar" id="siteHeader">
         <Link href="/" className="logo" aria-label="Fynit inicio">
-          <img src="assets/logos svg/logo-fynit.svg" alt="Fynit" style={{ height: '32px', width: 'auto' }} />
+          <img src={mounted && theme === 'dark' ? "assets/logos svg/logo-fynit-white.svg" : "assets/logos svg/logo-fynit.svg"} alt="Fynit" style={{ height: '32px', width: 'auto' }} />
         </Link>
 
         {/* Espacio central vacío como en el diseño */}
@@ -174,6 +178,20 @@ export default function Navbar() {
         </div>
 
         <div className="nav-actions">
+          {mounted && (
+            <button 
+              className="btn-circle" 
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              aria-label="Alternar Modo Oscuro"
+              style={{ width: '42px', height: '42px', display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'var(--white)', border: '1px solid rgba(128,128,128,0.2)' }}
+            >
+              {theme === 'dark' ? (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+              ) : (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+              )}
+            </button>
+          )}
           <a href="#" onClick={(e) => { e.preventDefault(); showComingSoon(); }} className="nav-link-subtle">Iniciar Sesión</a>
           <a href="#" onClick={(e) => { e.preventDefault(); showComingSoon(); }} className="btn-pill-outline">Registrarse</a>
           <Link href="/analizar" className="btn-pill-blue">Analizar</Link>

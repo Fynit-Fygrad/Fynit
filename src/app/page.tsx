@@ -2,12 +2,16 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { showComingSoon } from '@/components/Toaster';
+import { useTheme } from 'next-themes';
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
   const [userInteracted, setUserInteracted] = useState(false);
   const [countersVisible, setCountersVisible] = useState(false);
   const howSectionRef = useRef<HTMLElement>(null);
+  
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const countersRef = useRef<HTMLElement>(null);
 
   // Autoplay para "Cómo funciona"
@@ -23,6 +27,8 @@ export default function Home() {
 
   // Observer para "Contador de números"
   useEffect(() => {
+    setMounted(true);
+
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         setCountersVisible(true);
@@ -41,17 +47,21 @@ export default function Home() {
     setUserInteracted(true);
   };
 
+  const isDark = mounted && theme === 'dark';
+  const heroBg = isDark ? "assets/imgs png/hero-bg-dark.webp" : "assets/imgs png/hero-bg.webp";
+  const mascotImg = isDark ? "assets/imgs png/epic-mascot-dark.webp" : "assets/imgs png/epic-mascot.webp";
+
   return (
     <>
-      <link rel="preload" as="image" href="assets/imgs png/hero-bg.webp" />
-      <link rel="preload" as="image" href="assets/imgs png/epic-mascot.webp" />
+      <link rel="preload" as="image" href={heroBg} fetchPriority="high" />
+      <link rel="preload" as="image" href={mascotImg} fetchPriority="high" />
 
       {/*  ============ EPIC HERO ============  */}
       <section className="epic-hero-section" id="inicio">
 
         {/* Full-bleed background image */}
         <div className="epic-hero-bg"
-          style={{ backgroundImage: "url('assets/imgs png/hero-bg.webp')" }}
+          style={{ backgroundImage: `url('${heroBg}')` }}
           aria-hidden="true"
         />
 
@@ -102,12 +112,14 @@ export default function Home() {
           </div>
 
           {/* ── CENTER: mascot in its own column ── */}
-          <div className="epic-center">
+          <div className="epic-center" data-aos="zoom-in" data-aos-delay="400">
             <img
-              src="assets/imgs png/epic-mascot.webp"
-              alt="Fynit mascot robot 3D"
+              src={mascotImg}
+              alt="Fynit AI Mascot"
               className="epic-mascot"
               fetchPriority="high"
+              width={800}
+              height={800}
             />
           </div>
 

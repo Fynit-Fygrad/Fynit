@@ -1,9 +1,23 @@
 
 'use client';
 import Link from 'next/link';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useTheme } from 'next-themes';
 
 export default function Page() {
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  const isDark = mounted && theme === 'dark';
+  const cardBg = isDark ? '#071742' : '#fff';
+  const softBg = isDark ? '#0B1425' : '#f8fbff';
+  const softBgHover = isDark ? '#101B2E' : '#f0f6ff';
+  const textColor = isDark ? '#fff' : '#111827';
+  const textMuted = isDark ? '#A3B5D1' : '#6b7280';
+  const borderColor = isDark ? 'rgba(255,255,255,0.1)' : '#e1ecfb';
+  const borderHover = isDark ? 'rgba(255,255,255,0.2)' : '#bcd4fc';
   const containerRef = useRef(null);
   const [file, setFile] = useState<File | null>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -129,9 +143,9 @@ export default function Page() {
               style={{ width: '24px', height: '2px', background: 'transparent' }}></span>
           </span>
           <h1
-            style={{ fontFamily: '\'Sora\',sans-serif', fontSize: '32px', fontWeight: '700', color: '#0e1f45', margin: '12px 0 16px', letterSpacing: '-0.02em' }}>
+            style={{ fontFamily: '\'Sora\',sans-serif', fontSize: '32px', fontWeight: '700', color: textColor, margin: '12px 0 16px', letterSpacing: '-0.02em' }}>
             Hablemos de tu investigación</h1>
-          <p style={{ color: '#6b7280', fontSize: '15px', maxWidth: '540px', margin: '0 auto', lineHeight: '1.6' }}>Envíanos tu artículo
+          <p style={{ color: textMuted, fontSize: '15px', maxWidth: '540px', margin: '0 auto', lineHeight: '1.6' }}>Envíanos tu artículo
             científico para un diagnóstico inicial rápido<br />y personalizado sobre su potencial editorial.</p>
         </div>
 
@@ -148,7 +162,7 @@ export default function Page() {
               {/* Honeypot field - Invisible for humans, tempting for bots */}
               <input type="text" name="telefono_secundario" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" aria-hidden="true" />
 
-              <div className="contact-form-grid">
+              <div className="contact-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', background: cardBg, padding: '40px', borderRadius: '24px', boxShadow: isDark ? '0 12px 40px rgba(0,0,0,0.5)' : '0 12px 40px rgba(27,96,223,0.08)', position: 'relative', zIndex: '2' }}>
 
                 {/*  LEFT COLUMN: TUS DATOS  */}
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -171,7 +185,7 @@ export default function Page() {
                   {/*  Input Apellidos  */}
                   <div style={{ marginBottom: '16px' }}>
                     <label
-                      style={{ display: 'block', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', fontWeight: '600', color: '#111827', marginBottom: '6px' }}>Apellidos</label>
+                      style={{ display: 'block', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', fontWeight: '600', color: textColor, marginBottom: '6px' }}>Apellidos</label>
                     <div style={{ position: 'relative' }}>
                       <div
                         style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: '#9ca3af' }}>
@@ -181,17 +195,17 @@ export default function Page() {
                           <circle cx="12" cy="7" r="4" />
                         </svg>
                       </div>
-                      <input type="text" name="apellidos" placeholder="Tus apellidos" required
-                        style={{ width: '100%', boxSizing: 'border-box', border: '1px solid #f3f4f6', background: '#f9fafb', borderRadius: '10px', padding: '12px 12px 12px 42px', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', color: '#111827', outline: 'none', transition: 'all 0.2s' }}
-                        onFocus={(event) => { event.currentTarget.style.borderColor='#1B60DF';event.currentTarget.style.background='#fff';event.currentTarget.style.boxShadow='0 0 0 4px rgba(27,96,223,0.1)'; }}
-                        onBlur={(event) => { event.currentTarget.style.borderColor='#f3f4f6';event.currentTarget.style.background='#f9fafb';event.currentTarget.style.boxShadow='none'; }} />
+                      <input type="text" name="apellidos" required placeholder="Tus apellidos"
+                        style={{ width: '100%', boxSizing: 'border-box', border: '1px solid #f3f4f6', background: softBg, borderRadius: '10px', padding: '12px 12px 12px 42px', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', color: textColor, outline: 'none', transition: 'all 0.2s' }}
+                        onFocus={(event) => { event.currentTarget.style.borderColor='#1B60DF';event.currentTarget.style.background=isDark ? '#101B2E' : '#fff';event.currentTarget.style.boxShadow='0 0 0 4px rgba(27,96,223,0.1)'; }}
+                        onBlur={(event) => { event.currentTarget.style.borderColor='#f3f4f6';event.currentTarget.style.background=softBg;event.currentTarget.style.boxShadow='none'; }} />
                     </div>
                   </div>
 
                   {/*  Input Nombres  */}
                   <div style={{ marginBottom: '16px' }}>
                     <label
-                      style={{ display: 'block', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', fontWeight: '600', color: '#111827', marginBottom: '6px' }}>Nombres</label>
+                      style={{ display: 'block', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', fontWeight: '600', color: textColor, marginBottom: '6px' }}>Nombres</label>
                     <div style={{ position: 'relative' }}>
                       <div
                         style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: '#9ca3af' }}>
@@ -202,16 +216,16 @@ export default function Page() {
                         </svg>
                       </div>
                       <input type="text" name="nombres" placeholder="Tus nombres" required
-                        style={{ width: '100%', boxSizing: 'border-box', border: '1px solid #f3f4f6', background: '#f9fafb', borderRadius: '10px', padding: '12px 12px 12px 42px', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', color: '#111827', outline: 'none', transition: 'all 0.2s' }}
-                        onFocus={(event) => { event.currentTarget.style.borderColor='#1B60DF';event.currentTarget.style.background='#fff';event.currentTarget.style.boxShadow='0 0 0 4px rgba(27,96,223,0.1)'; }}
-                        onBlur={(event) => { event.currentTarget.style.borderColor='#f3f4f6';event.currentTarget.style.background='#f9fafb';event.currentTarget.style.boxShadow='none'; }} />
+                        style={{ width: '100%', boxSizing: 'border-box', border: '1px solid #f3f4f6', background: softBg, borderRadius: '10px', padding: '12px 12px 12px 42px', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', color: textColor, outline: 'none', transition: 'all 0.2s' }}
+                        onFocus={(event) => { event.currentTarget.style.borderColor='#1B60DF';event.currentTarget.style.background=isDark ? '#101B2E' : '#fff';event.currentTarget.style.boxShadow='0 0 0 4px rgba(27,96,223,0.1)'; }}
+                        onBlur={(event) => { event.currentTarget.style.borderColor='#f3f4f6';event.currentTarget.style.background=softBg;event.currentTarget.style.boxShadow='none'; }} />
                     </div>
                   </div>
 
                   {/*  Input Correo  */}
                   <div style={{ marginBottom: '16px' }}>
                     <label
-                      style={{ display: 'block', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', fontWeight: '600', color: '#111827', marginBottom: '6px' }}>Correo
+                      style={{ display: 'block', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', fontWeight: '600', color: textColor, marginBottom: '6px' }}>Correo
                       electrónico </label>
                     <div style={{ position: 'relative' }}>
                       <div
@@ -223,15 +237,15 @@ export default function Page() {
                         </svg>
                       </div>
                       <input type="email" name="email" placeholder="tu@correo.com" required
-                        style={{ width: '100%', boxSizing: 'border-box', border: '1px solid #f3f4f6', background: '#f9fafb', borderRadius: '10px', padding: '12px 12px 12px 42px', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', color: '#111827', outline: 'none', transition: 'all 0.2s' }}
-                        onFocus={(event) => { event.currentTarget.style.borderColor='#1B60DF';event.currentTarget.style.background='#fff';event.currentTarget.style.boxShadow='0 0 0 4px rgba(27,96,223,0.1)'; }}
-                        onBlur={(event) => { event.currentTarget.style.borderColor='#f3f4f6';event.currentTarget.style.background='#f9fafb';event.currentTarget.style.boxShadow='none'; }} />
+                        style={{ width: '100%', boxSizing: 'border-box', border: '1px solid #f3f4f6', background: softBg, borderRadius: '10px', padding: '12px 12px 12px 42px', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', color: textColor, outline: 'none', transition: 'all 0.2s' }}
+                        onFocus={(event) => { event.currentTarget.style.borderColor='#1B60DF';event.currentTarget.style.background=isDark ? '#101B2E' : '#fff';event.currentTarget.style.boxShadow='0 0 0 4px rgba(27,96,223,0.1)'; }}
+                        onBlur={(event) => { event.currentTarget.style.borderColor='#f3f4f6';event.currentTarget.style.background=softBg;event.currentTarget.style.boxShadow='none'; }} />
                     </div>
                   </div>
 
                   {/*  Estado del artículo  */}
                   <div style={{ marginBottom: '16px' }}>
-                    <label style={{ display: 'block', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', fontWeight: '600', color: '#111827', marginBottom: '6px' }}>Estado del artículo</label>
+                    <label style={{ display: 'block', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', fontWeight: '600', color: textColor, marginBottom: '6px' }}>Estado del artículo</label>
                     <div className="custom-radio-group grid-4">
                       <label>
                         <input type="radio" name="estado_articulo" value="borrador" className="custom-radio-input" />
@@ -274,7 +288,7 @@ export default function Page() {
 
                   {/*  ¿Qué buscas?  */}
                   <div style={{ marginBottom: '16px' }}>
-                    <label style={{ display: 'block', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', fontWeight: '600', color: '#111827', marginBottom: '6px' }}>¿Qué buscas?</label>
+                    <label style={{ display: 'block', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', fontWeight: '600', color: textColor, marginBottom: '6px' }}>¿Qué buscas?</label>
                     <div className="custom-radio-group grid-3">
                       <label>
                         <input type="radio" name="que_buscas" value="revista" className="custom-radio-input" />
@@ -308,7 +322,7 @@ export default function Page() {
 
                   {/*  ¿Qué indexación buscas?  */}
                   <div style={{ marginBottom: 'auto' }}>
-                    <label style={{ display: 'block', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', fontWeight: '600', color: '#111827', marginBottom: '6px' }}>¿Qué indexación buscas?</label>
+                    <label style={{ display: 'block', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', fontWeight: '600', color: textColor, marginBottom: '6px' }}>¿Qué indexación buscas?</label>
                     <div className="custom-radio-group grid-4">
                       <label>
                         <input type="radio" name="indexacion" value="scopus" className="custom-radio-input" />
@@ -350,14 +364,14 @@ export default function Page() {
                   </div>
 
                   {/*  Tu Investigación es confidencial info box  */}
-                  <div style={{ background: '#ffffff', borderRadius: '10px', padding: '12px', display: 'flex', gap: '12px', alignItems: 'flex-start', marginTop: '8px', border: '1px solid #eef4ff' }}>
+                  <div style={{ background: softBg, borderRadius: '10px', padding: '12px', display: 'flex', gap: '12px', alignItems: 'flex-start', marginTop: '8px', border: `1px solid ${borderColor}` }}>
                     <div style={{ color: '#1B60DF', flexShrink: '0' }}>
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
                     </div>
                     <div>
-                      <h4 style={{ fontFamily: '\'Sora\',sans-serif', fontSize: '12px', fontWeight: '700', color: '#111827', margin: '0 0 4px' }}>Tu Investigación es confidencial</h4>
-                      <p style={{ margin: '0 0 4px', fontSize: '11px', color: '#6b7280', lineHeight: '1.4' }}>Usamos tu documento únicamente para realizar el análisis solicitado.<br />No publicamos ni adquirimos derechos sobre tu investigación.</p>
-                      <p style={{ margin: '0', fontSize: '11px', color: '#6b7280', lineHeight: '1.4' }}>Consulta nuestra <Link href="javascript:void(0)" onClick={(event) => { setIsModalOpen(true) }} style={{ color: '#1B60DF', fontWeight: '600', textDecoration: 'none' }}>política de privacidad</Link>.</p>
+                      <h4 style={{ fontFamily: '\'Sora\',sans-serif', fontSize: '12px', fontWeight: '700', color: textColor, margin: '0 0 4px' }}>Tu Investigación es confidencial</h4>
+                      <p style={{ margin: '0 0 4px', fontSize: '11px', color: textMuted, lineHeight: '1.4' }}>Usamos tu documento únicamente para realizar el análisis solicitado.<br />No publicamos ni adquirimos derechos sobre tu investigación.</p>
+                      <p style={{ margin: '0', fontSize: '11px', color: textMuted, lineHeight: '1.4' }}>Consulta nuestra <Link href="javascript:void(0)" onClick={(event) => { setIsModalOpen(true) }} style={{ color: '#1B60DF', fontWeight: '600', textDecoration: 'none' }}>política de privacidad</Link>.</p>
                     </div>
                   </div>
 
@@ -389,7 +403,7 @@ export default function Page() {
                     onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
                     onDragLeave={(e) => { e.preventDefault(); setIsDragging(false); }}
                     onDrop={handleDrop}
-                    style={{ position: 'relative', flexGrow: '1', borderRadius: '16px', padding: '32px', textAlign: 'center', cursor: 'pointer', background: isDragging ? 'linear-gradient(180deg, #f0f6ff 0%, #e1ecfb 100%)' : 'linear-gradient(180deg, #f8fbff 0%, #f0f6ff 100%)', overflow: 'hidden', border: isDragging ? '1px solid #1B60DF' : '1px solid #e1ecfb', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box', boxShadow: 'inset 0 0 20px rgba(255,255,255,0.5)' }}
+                    style={{ position: 'relative', flexGrow: '1', borderRadius: '16px', padding: '32px', textAlign: 'center', cursor: 'pointer', background: isDragging ? 'linear-gradient(180deg, #f0f6ff 0%, #e1ecfb 100%)' : softBg, overflow: 'hidden', border: isDragging ? '1px solid #1B60DF' : `1px solid ${borderColor}`, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', boxSizing: 'border-box', boxShadow: isDark ? 'inset 0 0 20px rgba(0,0,0,0.2)' : 'inset 0 0 20px rgba(255,255,255,0.5)' }}
                     onClick={() => { if(fileInputRef.current) fileInputRef.current.click() }}>
 
                     {/*  Tech border accents  */}
@@ -422,7 +436,7 @@ export default function Page() {
                     {!file && (<div id="dropContent" style={{ position: 'relative', zIndex: '2', width: '100%' }}>
                       {/*  AI Document Icon  */}
                       <div
-                        style={{ margin: '0 auto 16px', width: '64px', height: '64px', background: 'linear-gradient(135deg, #ffffff, #f0f6ff)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 16px 32px rgba(27,96,223,0.15), inset 0 2px 4px rgba(255,255,255,1)', border: '2px solid #fff', position: 'relative' }}>
+                        style={{ margin: '0 auto 16px', width: '64px', height: '64px', background: isDark ? '#101B2E' : 'linear-gradient(135deg, #ffffff, #f0f6ff)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 16px 32px rgba(27,96,223,0.15), inset 0 2px 4px rgba(255,255,255,1)', border: '2px solid #fff', position: 'relative' }}>
                         {/*  Rings  */}
                         <div
                           style={{ position: 'absolute', inset: '-10px', borderRadius: '50%', border: '1px solid rgba(27,96,223,0.1)', transform: 'rotateX(60deg)' }}>
@@ -441,19 +455,19 @@ export default function Page() {
                       </div>
 
                       <h4
-                        style={{ fontFamily: '\'Sora\',sans-serif', fontSize: '15px', fontWeight: '700', color: '#111827', margin: '0 0 6px' }}>
+                        style={{ fontFamily: '\'Sora\',sans-serif', fontSize: '15px', fontWeight: '700', color: textColor, margin: '0 0 6px' }}>
                         Arrastra tu artículo aquí</h4>
-                      <p style={{ color: '#6b7280', fontSize: '12px', margin: '0 0 16px' }}>o haz clic para seleccionar</p>
+                      <p style={{ color: textMuted, fontSize: '12px', margin: '0 0 16px' }}>o haz clic para seleccionar</p>
 
                       <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginBottom: '16px' }}>
                         <span
-                          style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '10px', fontWeight: '700', color: '#374151', background: '#fff', padding: '4px 10px', borderRadius: '6px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                          style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '10px', fontWeight: '700', color: textColor, background: cardBg, padding: '4px 10px', borderRadius: '6px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
                           <div
                             style={{ background: '#ef4444', color: '#fff', borderRadius: '4px', width: '16px', height: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '8px' }}>
                             PDF</div> PDF
                         </span>
                         <span
-                          style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '10px', fontWeight: '700', color: '#374151', background: '#fff', padding: '4px 10px', borderRadius: '6px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                          style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '10px', fontWeight: '700', color: textColor, background: cardBg, padding: '4px 10px', borderRadius: '6px', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
                           <div
                             style={{ background: '#2563eb', color: '#fff', borderRadius: '4px', width: '16px', height: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '8px' }}>
                             W</div> DOCX
@@ -464,14 +478,14 @@ export default function Page() {
 
                     {file && (<div id="fileInfo" style={{ display: 'block', position: 'relative', zIndex: '2', width: '100%' }}>
                       <div
-                        style={{ background: '#fff', borderRadius: '12px', padding: '16px', border: '1px solid #e1ecfb', display: 'flex', flexDirection: 'column', gap: '12px', boxShadow: '0 8px 16px rgba(27,96,223,0.06)' }}>
+                        style={{ background: cardBg, borderRadius: '12px', padding: '16px', border: `1px solid ${borderColor}`, display: 'flex', flexDirection: 'column', gap: '12px', boxShadow: isDark ? '0 8px 16px rgba(0,0,0,0.2)' : '0 8px 16px rgba(27,96,223,0.06)' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                             <div className="file-badge-icon"
                               style={{ width: '28px', height: '28px', background: (file.name.toLowerCase().endsWith('.pdf') || file.type === 'application/pdf') ? '#ef4444' : '#2563eb', color: '#fff', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', fontSize: (file.name.toLowerCase().endsWith('.pdf') || file.type === 'application/pdf') ? '9px' : '12px' }}>
                               {(file.name.toLowerCase().endsWith('.pdf') || file.type === 'application/pdf') ? 'PDF' : 'W'}</div>
                             <span id="fileName"
-                              style={{ fontFamily: '\'Inter\',sans-serif', fontSize: '13px', fontWeight: '600', color: '#111827', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '140px' }}>{file.name}</span>
+                              style={{ fontFamily: '\'Inter\',sans-serif', fontSize: '13px', fontWeight: '600', color: textColor, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '140px' }}>{file.name}</span>
                           </div>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                             <span id="fileSize" style={{ fontSize: '12px', color: '#6b7280', fontWeight: '500' }}>
@@ -509,13 +523,13 @@ export default function Page() {
 
                 {/*  Checkbox de Privacidad  */}
                 <label
-                  style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '16px', cursor: 'pointer', padding: '12px', background: '#f8fbff', border: '1px solid #e1ecfb', borderRadius: '10px', transition: 'all 0.2s' }}
-                  onMouseOver={(event) => { event.currentTarget.style.background='#f0f6ff';event.currentTarget.style.borderColor='#bcd4fc'; }}
-                  onMouseOut={(event) => { event.currentTarget.style.background='#f8fbff';event.currentTarget.style.borderColor='#e1ecfb'; }}>
+                  style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '16px', cursor: 'pointer', padding: '12px', background: softBg, border: `1px solid ${borderColor}`, borderRadius: '10px', transition: 'all 0.2s' }}
+                  onMouseOver={(event) => { event.currentTarget.style.background=softBgHover;event.currentTarget.style.borderColor=borderHover; }}
+                  onMouseOut={(event) => { event.currentTarget.style.background=softBg;event.currentTarget.style.borderColor=borderColor; }}>
                   <input type="checkbox" required name="terminos" id="aceptoTerminos"
                     style={{ width: '16px', height: '16px', marginTop: '2px', accentColor: '#1B60DF', cursor: 'pointer' }} />
                   <span
-                    style={{ fontFamily: '\'Inter\', sans-serif', fontSize: '12px', color: '#4b5563', lineHeight: '1.4', userSelect: 'none' }}>
+                    style={{ fontFamily: '\'Inter\', sans-serif', fontSize: '12px', color: textMuted, lineHeight: '1.4', userSelect: 'none' }}>
                     He leído y acepto la <Link href="javascript:void(0)" onClick={(event) => { setIsModalOpen(true) }}
                       style={{ color: '#1B60DF', fontWeight: '600', textDecoration: 'none' }}
                       onMouseOver={(event) => { event.currentTarget.style.textDecoration='underline' }}

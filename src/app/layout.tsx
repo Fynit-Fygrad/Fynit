@@ -4,6 +4,7 @@ import Script from "next/script";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Toaster from "@/components/Toaster";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 import "./legacy-styles.css"; // Imported original styles
 
@@ -34,14 +35,17 @@ export default function RootLayout({
     <html
       lang="es"
       className={`${sora.variable} ${manrope.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body>
-        <Navbar />
-        <main>
-          {children}
-        </main>
-        <Footer />
-        <Toaster />
+        <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
+          <Navbar />
+          <main>
+            {children}
+          </main>
+          <Footer />
+          <Toaster />
+        </ThemeProvider>
         <Script src="https://unpkg.com/aos@2.3.1/dist/aos.js" strategy="lazyOnload" />
       </body>
     </html>
