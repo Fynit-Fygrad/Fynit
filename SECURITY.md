@@ -8,7 +8,7 @@ En Fynit nos tomamos muy en serio la seguridad y la privacidad de las investigac
 **¿Qué es?** Es una doble trampa y un límite de velocidad para los envíos.
 **¿Cómo nos protege?** 
 1. **El Límite de Velocidad (Rate Limiting):** Si alguien intenta enviar correos basura a través del formulario, el sistema detecta su IP y le permite un máximo de 3 envíos por día por persona. Al cuarto intento, el servidor lo bloqueará automáticamente.
-2. **El Tarro de Miel (Honeypot):** El formulario tiene un campo invisible para los humanos pero visible en el código para los bots. Si un bot rellena este campo invisible, el servidor intercepta el formulario y lo destruye silenciosamente sin gastar tu cuota de envíos. ¡Protección anti-spam garantizada sin molestar a tus clientes con captchas visuales!
+2. **El Tarro de Miel atrapa osos (Honeypot):** El formulario tiene un campo invisible para los humanos pero visible en el código para los bots. Si un bot rellena este campo invisible, el servidor intercepta el formulario y lo destruye silenciosamente sin gastar tu cuota de envíos. ¡Protección anti-spam garantizada sin molestar a tus clientes con captchas visuales!
 
 ## 2. Privacidad Absoluta (Procesamiento en Memoria)
 **¿Qué es?** Los documentos nunca tocan nuestro disco duro.
