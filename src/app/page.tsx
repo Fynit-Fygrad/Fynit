@@ -43,6 +43,9 @@ export default function Home() {
 
   return (
     <>
+      <link rel="preload" as="image" href="assets/imgs png/hero-bg.webp" />
+      <link rel="preload" as="image" href="assets/imgs png/epic-mascot.webp" />
+
       {/*  ============ EPIC HERO ============  */}
       <section className="epic-hero-section" id="inicio">
 
@@ -104,6 +107,7 @@ export default function Home() {
               src="assets/imgs png/epic-mascot.webp"
               alt="Fynit mascot robot 3D"
               className="epic-mascot"
+              fetchPriority="high"
             />
           </div>
 
