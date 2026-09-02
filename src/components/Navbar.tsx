@@ -86,26 +86,24 @@ export default function Navbar() {
         </nav>
       </aside>
 
-      <header className={`site-header ${isScrolled ? 'is-scrolled' : ''}`} id="siteHeader">
-        <div className="header-row">
-          <Link href="/" className="logo" aria-label="Fynit inicio">
-            <img src="assets/logos svg/logo-fynit.svg" alt="Fynit" className="logo-img" />
-          </Link>
+      <header className="floating-navbar" id="siteHeader">
+        <Link href="/" className="logo" aria-label="Fynit inicio">
+          <img src="assets/logos svg/logo-fynit.svg" alt="Fynit" style={{ height: '32px', width: 'auto' }} />
+        </Link>
 
-          <div className="header-actions" style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <a href="#" onClick={showComingSoon}
-              style={{ fontFamily: "'Sora',sans-serif", fontWeight: 600, fontSize: '14.5px', color: 'var(--ink-70)', textDecoration: 'none', padding: '6px 0', marginRight: '4px' }}>
-              Iniciar Sesión
-            </a>
-            <a href="#" onClick={showComingSoon} className="btn btn-ghost btn-sm">Registrarse</a>
-            <Link href="/analizar" className="btn btn-primary btn-sm" id="headerCta">Analizar</Link>
-            <button className="hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded={isSidebarOpen} onClick={() => setIsSidebarOpen(true)}
-              aria-controls="sidebar" style={{ display: 'flex' }}>
-              <svg>
-                <use href="/sprite.svg#ic-menu" />
-              </svg>
-            </button>
-          </div>
+        {/* Espacio central vacío como en el diseño */}
+        <div className="nav-links">
+        </div>
+
+        <div className="nav-actions">
+          <a href="#" onClick={(e) => { e.preventDefault(); showComingSoon(); }} className="nav-link-subtle">Iniciar Sesión</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); showComingSoon(); }} className="btn-pill-outline">Registrarse</a>
+          <Link href="/analizar" className="btn-pill-blue">Analizar</Link>
+          <button className="btn-circle" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded={isSidebarOpen} onClick={() => setIsSidebarOpen(true)} aria-controls="sidebar">
+            <svg>
+              <use href="/sprite.svg#ic-menu" />
+            </svg>
+          </button>
         </div>
       </header>
     </>
