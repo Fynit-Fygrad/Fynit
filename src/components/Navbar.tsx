@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { showComingSoon } from './Toaster';
+import { gsap } from 'gsap';
+import { useRef, useLayoutEffect } from 'react';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -30,15 +32,86 @@ export default function Navbar() {
     setOpenAccordion(openAccordion === name ? null : name);
   };
 
+  const sidebarRef = useRef<HTMLElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const preLayersRef = useRef<HTMLDivElement>(null);
+  const tlRef = useRef<gsap.core.Timeline | null>(null);
+
+  useLayoutEffect(() => {
+    const sidebar = sidebarRef.current;
+    const overlay = overlayRef.current;
+    const preLayers = preLayersRef.current;
+    if (!sidebar || !overlay || !preLayers) return;
+
+    const layers = Array.from(preLayers.querySelectorAll('.fynit-prelayer'));
+    const navItems = Array.from(sidebar.querySelectorAll('.sidebar-nav > *'));
+
+    const ctx = gsap.context(() => {
+      if (isSidebarOpen) {
+        tlRef.current?.kill();
+        const tl = gsap.timeline();
+        tlRef.current = tl;
+
+        // Reset positions (clean slate)
+        gsap.set(overlay, { pointerEvents: 'auto', display: 'block' });
+
+        // Animate overlay
+        tl.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0);
+
+        // Animate pre-layers
+        layers.forEach((layer, i) => {
+          tl.fromTo(layer, { x: '100%' }, { x: '0%', duration: 0.5, ease: 'power4.out' }, i * 0.08);
+        });
+
+        // Animate sidebar panel
+        const panelTime = layers.length * 0.08 + 0.1;
+        tl.fromTo(sidebar, { x: '100%' }, { x: '0%', duration: 0.6, ease: 'power4.out', clearProps: 'transform' }, panelTime);
+
+        // Stagger nav items
+        tl.fromTo(
+          navItems,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.5, stagger: 0.05, ease: 'power2.out' },
+          panelTime + 0.15
+        );
+      } else {
+        // CLOSE ANIMATION
+        tlRef.current?.kill();
+        const tl = gsap.timeline();
+        tlRef.current = tl;
+
+        const all = [...layers, sidebar];
+        tl.to(overlay, { opacity: 0, pointerEvents: 'none', duration: 0.3 }, 0);
+        tl.to(all, { x: '100%', duration: 0.4, ease: 'power3.in' }, 0);
+        tl.set(overlay, { display: 'none' });
+      }
+    });
+
+    return () => ctx.revert();
+  }, [isSidebarOpen]);
+
   return (
     <>
       <div 
+        ref={overlayRef}
         className={`sidebar-overlay ${isSidebarOpen ? 'is-open' : ''}`} 
         id="sidebarOverlay"
         onClick={() => setIsSidebarOpen(false)}
+        style={{ transition: 'none' }}
       ></div>
+
+      <div ref={preLayersRef} style={{ position: 'fixed', top: 0, right: 0, height: '100vh', width: 'min(400px, 88vw)', zIndex: 9998, pointerEvents: 'none' }}>
+        <div className="fynit-prelayer" style={{ position: 'absolute', inset: 0, background: '#1B60DF', transform: 'translateX(100%)' }}></div>
+        <div className="fynit-prelayer" style={{ position: 'absolute', inset: 0, background: '#071742', transform: 'translateX(100%)' }}></div>
+      </div>
       
-      <aside className={`sidebar ${isSidebarOpen ? 'is-open' : ''}`} id="sidebar" aria-hidden={!isSidebarOpen}>
+      <aside 
+        ref={sidebarRef}
+        className={`sidebar ${isSidebarOpen ? 'is-open' : ''}`} 
+        id="sidebar" 
+        aria-hidden={!isSidebarOpen}
+        style={{ transition: 'none' }}
+      >
         <div className="sidebar-top">
           <div className="logo">
             <img src="assets/logos svg/logo-fynit-white.svg" alt="Fynit" className="logo-img" />

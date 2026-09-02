@@ -1,0 +1,182 @@
+.staggered-menu-wrapper {
+  /* position: relative; */
+  /* Remove position relative so the menu panel can be fixed to the viewport if needed */
+  /* Actually, the React Bits code uses position: absolute for the panel relative to this wrapper,
+     but in Navbar.tsx the wrapper will be inside .nav-actions! 
+     We must use fixed positioning for the panel to cover the whole screen. */
+}
+
+/* Modifying to allow the panel to be fixed regardless of wrapper */
+.staggered-menu-panel, .sm-prelayers {
+  position: fixed !important;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  z-index: 1000;
+}
+
+.sm-prelayers {
+  width: clamp(260px, 38vw, 420px);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.staggered-menu-panel {
+  width: clamp(260px, 38vw, 420px);
+  background: white;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  padding: 6em 2em 2em 2em;
+  overflow-y: auto;
+  pointer-events: auto;
+  opacity: 0;
+}
+
+[data-position='left'] .staggered-menu-panel,
+[data-position='left'] .sm-prelayers {
+  right: auto;
+  left: 0;
+}
+
+.sm-prelayer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  transform: translateX(0);
+  opacity: 0;
+}
+
+
+/* Overlay for backdrop blur */
+.sm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 23, 66, 0.4); /* Fynit Navy */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Panel content */
+.sm-panel-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sm-panel-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sm-panel-itemWrap {
+  position: relative;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.sm-panel-item {
+  position: relative;
+  color: #071742; /* Navy */
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem; /* Slightly smaller than original 3.5rem */
+  cursor: pointer;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  transition: color 0.25s;
+  display: inline-block;
+  text-decoration: none;
+  padding-right: 1.4em;
+}
+
+.sm-panel-item:hover {
+  color: var(--blue, #1B60DF);
+}
+
+.sm-panel-itemLabel {
+  display: inline-block;
+  will-change: transform;
+  transform-origin: 50% 100%;
+}
+
+.sm-panel-list[data-numbering] {
+  counter-reset: smItem;
+}
+
+.sm-panel-list[data-numbering] .sm-panel-item::after {
+  counter-increment: smItem;
+  content: "0" counter(smItem, decimal-leading-zero);
+  position: absolute;
+  top: 0.1em;
+  right: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--blue, #1B60DF);
+  letter-spacing: 0;
+  pointer-events: none;
+  user-select: none;
+  opacity: var(--sm-num-opacity, 0);
+}
+
+.sm-socials {
+  margin-top: auto;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sm-socials-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Sora', sans-serif;
+  color: var(--blue, #1B60DF);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sm-socials-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column; /* Vertical in Fynit design */
+  gap: 1rem;
+}
+
+.sm-socials-link {
+  font-size: 1rem;
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  color: #596273;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.sm-socials-link:hover {
+  color: var(--navy, #071742);
+}
+
+@media (max-width: 1024px) {
+  .staggered-menu-panel, .sm-prelayers {
+    width: 100%;
+  }
+}
+
+
