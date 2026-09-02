@@ -145,6 +145,8 @@ export default function Page() {
 
 
             <form id="contactForm" ref={formRef} onSubmit={handleSubmit} encType="multipart/form-data">
+              {/* Honeypot field - Invisible for humans, tempting for bots */}
+              <input type="text" name="telefono_secundario" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" aria-hidden="true" />
 
               <div className="contact-form-grid">
 

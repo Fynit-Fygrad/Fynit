@@ -44,8 +44,17 @@ export async function POST(req: NextRequest) {
             rateLimitMap.set(ip, { count: 1, date: now });
         }
 
-        // --- 2. Procesar FormData (No necesitamos multer ni cron jobs!) ---
+        // --- 2. Procesar FormData y Honeypot ---
         const formData = await req.formData();
+        
+        // Honeypot check: si el campo invisible tiene texto, es un bot.
+        const honeypot = formData.get('telefono_secundario');
+        if (honeypot) {
+            console.log(`🛡️ Honeypot activado. Spam bloqueado de la IP: ${ip}`);
+            // Falso positivo para engañar al bot
+            return NextResponse.json({ success: true, message: 'Artículo recibido y procesado.' }, { status: 200 });
+        }
+
         const file = formData.get('documento') as File | null;
         
         if (!file) {
