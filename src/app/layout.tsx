@@ -6,7 +6,32 @@ import Footer from "@/components/Footer";
 import Toaster from "@/components/Toaster";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
-import "./legacy-styles.css"; // Imported original styles
+// Global Styles
+import "@/styles/variables.css";
+import "@/styles/dark-mode.css";
+import "@/styles/global.css";
+
+// Layout Styles
+import "@/styles/layout/sidebar.css";
+import "@/styles/layout/header.css";
+
+// Home Components
+import "@/styles/home/hero.css";
+import "@/styles/home/marquee.css";
+import "@/styles/home/about-how.css";
+import "@/styles/home/equipo-home.css";
+import "@/styles/home/numbers-mascot.css";
+import "@/styles/home/testimonials.css";
+import "@/styles/home/pricing.css";
+
+// Footer
+import "@/styles/layout/footer.css";
+
+// Page Specific Styles
+import "@/styles/pages/blog.css";
+import "@/styles/pages/equipo.css";
+import "@/styles/pages/contacto.css";
+import "@/styles/pages/epic-hero.css";
 
 const sora = Sora({
   variable: "--font-sora",

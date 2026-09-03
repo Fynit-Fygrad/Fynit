@@ -1,0 +1,349 @@
+/* ============ ABOUT / PROBLEM ============ */
+/* ============ ABOUT / PROBLEM ============ */
+.about-grid {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 72px;
+  align-items: start;
+}
+
+.about-copy {
+  /* Removed sticky positioning as per user request */
+}
+
+.about-copy h2 {
+  font-size: clamp(1.9rem, 3vw, 2.5rem);
+  margin-bottom: 18px;
+}
+
+.about-copy p {
+  color: var(--ink-70);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 460px;
+}
+
+.about-hero-image img {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  object-fit: contain;
+  animation: floaty 6s ease-in-out infinite;
+}
+
+.pain-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pain-card {
+  display: flex;
+  gap: 20px;
+  background: var(--white);
+  padding: 24px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 40px rgba(7, 23, 66, 0.04);
+  max-width: 480px;
+  margin-right: auto;
+  margin-left: 0;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.pain-card.staggered {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.pain-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 50px rgba(7, 23, 66, 0.08);
+}
+
+.pain-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.pain-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pain-content h3 {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--navy);
+  margin: 0;
+}
+
+.pain-content p {
+  font-size: 14px;
+  color: var(--ink-70);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ============ COMO FUNCIONA ============ */
+.how {
+  background: var(--white);
+}
+
+.how-grid {
+  display: grid;
+  grid-template-columns: .92fr 1.08fr;
+  gap: 64px;
+  align-items: flex-start;
+}
+
+.how-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.step-card {
+  display: flex;
+  gap: 18px;
+  padding: 22px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+  background: transparent;
+}
+
+.step-card:hover {
+  background: var(--tint);
+}
+
+.step-card.is-active {
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+  border-color: var(--line);
+}
+
+.step-num {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--ink-50);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--tint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background .3s, color .3s;
+}
+
+.step-card.is-active .step-num {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.step-body h3 {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+  color: var(--navy);
+}
+
+.step-body p {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.55;
+  max-height: none;
+  opacity: 1;
+  overflow: visible;
+  margin-top: 4px;
+}
+
+.step-card.is-active .step-body p {
+  max-height: none;
+  opacity: 1;
+  margin-top: 4px;
+}
+
+.how-visual {
+  position: relative;
+  z-index: 10;
+}
+
+.visual-frame {
+  position: relative;
+  background: var(--navy);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  box-shadow: var(--shadow-lg);
+  overflow: visible;
+}
+
+.visual-chrome {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px 14px;
+}
+
+.visual-chrome span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .25);
+}
+
+.visual-body {
+  background: var(--white);
+  border-radius: calc(var(--radius-lg) - 8px);
+  padding: 30px;
+  min-height: 420px;
+  position: relative;
+}
+
+.visual-panel {
+  position: absolute;
+  inset: 30px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity .4s var(--ease), transform .4s var(--ease), visibility .4s;
+}
+
+.visual-panel.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  position: relative;
+  inset: auto;
+}
+
+@media (max-width: 1024px) {
+  .nav-desktop {
+    display: none !important;
+  }
+
+  .lang-switcher {
+    display: none !important;
+  }
+
+  .hamburger {
+    display: flex !important;
+  }
+
+  .section {
+    padding: 90px 0;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    text-align: center;
+  }
+
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-copy p.lead {
+    max-width: none;
+    font-size: 1rem;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+  }
+
+  .hero-visual {
+    order: 1;
+    /* imagen debajo del texto */
+    min-height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .desktop-frame {
+    right: 90px;
+  }
+
+  .phone {
+    width: 190px;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .how-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .how-visual {
+    position: relative;
+    top: 0;
+    order: -1;
+  }
+
+  /* Mobile: step cards text visibility */
+  .step-card {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .step-card .step-body p {
+    max-height: none;
+    opacity: 1;
+    display: block;
+    margin-top: 8px;
+  }
+
+  /* Hide right-side visual frame on mobile; panels are inline */
+  .how-visual {
+    display: none;
+  }
+
+  /* Show inline mobile panel after each active step */
+  .step-card .mobile-panel-inline {
+    display: none;
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #475569;
+    border: 1px solid var(--line);
+  }
+
+  .step-card.is-active .mobile-panel-inline {
+    display: block;
+  }
+
+  .numbers-grid {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 40px;
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 44px;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+

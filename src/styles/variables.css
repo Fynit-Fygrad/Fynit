@@ -1,0 +1,64 @@
+/* ============================================================
+   FYNIT � Landing principal
+   Sistema de diseño: Light theme / Manrope (display) + Sora (body)
+   Paleta extraída del manual de marca:
+   Azul Marino Oscuro #071742 · Azul Vibrante #1B60DF
+   Azul Secundario #4371EC · Amarillo #FEC600
+   ============================================================ */
+
+:root {
+  --navy: #071742;
+  --navy-soft: #0E2159;
+  --blue: #1B60DF;
+  --blue-2: #4371EC;
+  --yellow: #FEC600;
+  --tint: #EEF3FF;
+  --tint-2: #E7EDFF;
+  --white: #FFFFFF;
+  --ink-70: rgba(7, 23, 66, .72);
+  --ink-50: rgba(7, 23, 66, .52);
+  --ink-30: rgba(7, 23, 66, .14);
+  --line: rgba(7, 23, 66, .10);
+  --shadow-sm: 0 2px 10px rgba(7, 23, 66, .06);
+  --shadow-md: 0 12px 34px rgba(7, 23, 66, .10);
+  --shadow-lg: 0 24px 60px rgba(7, 23, 66, .16);
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --container: 1200px;
+  --ease: cubic-bezier(.22, .9, .3, 1);
+  --bg-grid: none; /* Light mode no grid */
+}
+
+/* ============================================================
+   FYNIT � Landing principal
+   Sistema de diseño: Light theme / Manrope (display) + Sora (body)
+   Paleta extraída del manual de marca:
+   Azul Marino Oscuro #071742 · Azul Vibrante #1B60DF
+   Azul Secundario #4371EC · Amarillo #FEC600
+   ============================================================ */
+
+:root {
+  --navy: #071742;
+  --navy-soft: #0E2159;
+  --blue: #1B60DF;
+  --blue-2: #4371EC;
+  --yellow: #FEC600;
+  --tint: #EEF3FF;
+  --tint-2: #E7EDFF;
+  --white: #FFFFFF;
+  --ink-70: rgba(7, 23, 66, .72);
+  --ink-50: rgba(7, 23, 66, .52);
+  --ink-30: rgba(7, 23, 66, .14);
+  --line: rgba(7, 23, 66, .10);
+  --shadow-sm: 0 2px 10px rgba(7, 23, 66, .06);
+  --shadow-md: 0 12px 34px rgba(7, 23, 66, .10);
+  --shadow-lg: 0 24px 60px rgba(7, 23, 66, .16);
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --container: 1200px;
+  --ease: cubic-bezier(.22, .9, .3, 1);
+  --bg-grid: none; /* Light mode no grid */
+}
+

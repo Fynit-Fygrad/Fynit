@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { showComingSoon } from '@/components/Toaster';
 import { useTheme } from 'next-themes';
+import DisciplinesCarousel from '@/components/DisciplinesCarousel';
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -174,178 +175,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/*  ============ MARQUEE DISCIPLINAS ============  */}
-      <section className="marquee-section" id="disciplinas">
-        <div className="marquee-head" data-aos="fade-up">
-          <span className="eyebrow">Para toda el área académica</span>
-          <h2 style={{ fontSize: 'clamp(1.7rem,2.6vw,2.2rem)' }}>No importa tu disciplina, hablamos tu idioma editorial</h2>
-        </div>
-        <div className="marquee-wrap">
-          <div className="marquee-track-left">
-            {/*  Set 1 (1-6) duplicated for seamless loop  */}
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-bio" />
-            </svg> Biología Avanzada</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-laptop" />
-            </svg> Ciencias de la Computación</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-scale" />
-            </svg> Derecho Corporativo</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-brain" />
-            </svg> Psicología Cognitiva</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-chart-bar" />
-            </svg> Administración y Negocios</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-stethoscope" />
-            </svg> Medicina Clínica</span>
-            {/*  Duplicate 1  */}
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-bio" />
-            </svg> Biología Avanzada</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-laptop" />
-            </svg> Ciencias de la Computación</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-scale" />
-            </svg> Derecho Corporativo</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-brain" />
-            </svg> Psicología Cognitiva</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-chart-bar" />
-            </svg> Administración y Negocios</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-stethoscope" />
-            </svg> Medicina Clínica</span>
-            {/*  Duplicate 2  */}
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-bio" />
-            </svg> Biología Avanzada</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-laptop" />
-            </svg> Ciencias de la Computación</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-scale" />
-            </svg> Derecho Corporativo</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-brain" />
-            </svg> Psicología Cognitiva</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-chart-bar" />
-            </svg> Administración y Negocios</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-stethoscope" />
-            </svg> Medicina Clínica</span>
-            {/*  Duplicate 3  */}
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-bio" />
-            </svg> Biología Avanzada</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-laptop" />
-            </svg> Ciencias de la Computación</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-scale" />
-            </svg> Derecho Corporativo</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-brain" />
-            </svg> Psicología Cognitiva</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-chart-bar" />
-            </svg> Administración y Negocios</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-stethoscope" />
-            </svg> Medicina Clínica</span>
-          </div>
-        </div>
-
-        <div className="marquee-wrap">
-          <div className="marquee-track-right">
-            {/*  Set 2 (7-12) duplicated for seamless loop  */}
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-leaf" />
-            </svg> Ciencias Ambientales</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-book" />
-            </svg> Educación</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-cog" />
-            </svg> Ingeniería y Tecnología</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-coins" />
-            </svg> Economía</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-landmark" />
-            </svg> Ciencias Sociales</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-flask" />
-            </svg> Química</span>
-            {/*  Duplicate 1  */}
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-leaf" />
-            </svg> Ciencias Ambientales</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-book" />
-            </svg> Educación</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-cog" />
-            </svg> Ingeniería y Tecnología</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-coins" />
-            </svg> Economía</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-landmark" />
-            </svg> Ciencias Sociales</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-flask" />
-            </svg> Química</span>
-            {/*  Duplicate 2  */}
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-leaf" />
-            </svg> Ciencias Ambientales</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-book" />
-            </svg> Educación</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-cog" />
-            </svg> Ingeniería y Tecnología</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-coins" />
-            </svg> Economía</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-landmark" />
-            </svg> Ciencias Sociales</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-flask" />
-            </svg> Química</span>
-            {/*  Duplicate 3  */}
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-leaf" />
-            </svg> Ciencias Ambientales</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-book" />
-            </svg> Educación</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-cog" />
-            </svg> Ingeniería y Tecnología</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-coins" />
-            </svg> Economía</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-landmark" />
-            </svg> Ciencias Sociales</span>
-            <span className="pill"><svg className="ic-svg">
-              <use href="/sprite.svg#ic-flask" />
-            </svg> Química</span>
-          </div>
-        </div>
-      </section>
+      {/*  ============ CAROUSEL 3D DISCIPLINAS ============  */}
+      <DisciplinesCarousel />
 
       {/*  ============ SOBRE FYNIT / PROBLEMA ============  */}
       <section className="section about" id="nosotros">
         <div className="container about-grid">
+          {/* Izquierda: Texto y Mascota */}
           <div className="about-copy" data-aos="fade-up">
             <div className="about-hero-image" style={{ marginBottom: '24px', animation: 'floaty 6s ease-in-out infinite' }}>
               <img src="assets/imgs png/mascot_about.webp" alt="Fynit Mascota"
@@ -362,45 +198,35 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Derecha: Tarjetas Zig-Zag */}
           <div className="pain-grid">
             <div className="pain-card" data-aos="fade-up" data-aos-delay="100">
-              <div className="icon-wrap">
-                <svg>
-                  <use href="/sprite.svg#ic-alert" />
-                </svg>
+              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=200&auto=format&fit=crop" alt="Review" className="pain-img" />
+              <div className="pain-content">
+                <h3>Meses sin saber si vas bien</h3>
+                <p>Revisas y revisas sin una señal clara de si tu metodología o tu argumento realmente sostienen una publicación.</p>
               </div>
-              <h3>Meses sin saber si vas bien</h3>
-              <p>Revisas y revisas sin una señal clara de si tu metodología o tu argumento realmente sostienen una
-                publicación.</p>
             </div>
-            <div className="pain-card" data-aos="fade-up" data-aos-delay="200">
-              <div className="icon-wrap">
-                <svg>
-                  <use href="/sprite.svg#ic-list" />
-                </svg>
+            <div className="pain-card staggered" data-aos="fade-up" data-aos-delay="200">
+              <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=200&auto=format&fit=crop" alt="Feedback" className="pain-img" />
+              <div className="pain-content">
+                <h3>Feedback disperso y tardío</h3>
+                <p>El asesor lo dice por correo, el jurado en la sustentación, la revista al rechazarte. Casi nunca a tiempo.</p>
               </div>
-              <h3>Feedback disperso y tardío</h3>
-              <p>El asesor lo dice por correo, el jurado en la sustentación, la revista al rechazarte. Casi nunca a
-                tiempo.</p>
             </div>
             <div className="pain-card" data-aos="fade-up" data-aos-delay="300">
-              <div className="icon-wrap">
-                <svg>
-                  <use href="/sprite.svg#ic-journal" />
-                </svg>
+              <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=200&auto=format&fit=crop" alt="Journal" className="pain-img" />
+              <div className="pain-content">
+                <h3>No sabes dónde postular</h3>
+                <p>Cientos de revistas y conferencias, y ningún criterio claro sobre cuál se ajusta a tu perfil y tus tiempos.</p>
               </div>
-              <h3>No sabes dónde postular</h3>
-              <p>Cientos de revistas y conferencias, y ningún criterio claro sobre cuál se ajusta a tu perfil y tus
-                tiempos.</p>
             </div>
-            <div className="pain-card" data-aos="fade-up" data-aos-delay="400">
-              <div className="icon-wrap">
-                <svg>
-                  <use href="/sprite.svg#ic-target" />
-                </svg>
+            <div className="pain-card staggered" data-aos="fade-up" data-aos-delay="400">
+              <img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?q=80&w=200&auto=format&fit=crop" alt="Details" className="pain-img" />
+              <div className="pain-content">
+                <h3>El detalle que baja tu originalidad</h3>
+                <p>Frases parafraseadas de más, citas mal formateadas: pequeños descuidos que restan sin que los notes.</p>
               </div>
-              <h3>El detalle que baja tu originalidad</h3>
-              <p>Frases parafraseadas de más, citas mal formateadas: pequeños descuidos que restan sin que los notes.</p>
             </div>
           </div>
         </div>

@@ -22,6 +22,7 @@ export default function Page() {
   const [file, setFile] = useState<File | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [submitState, setSubmitState] = useState<'idle'|'loading'|'success'|'error'>('idle');
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [errorMsg, setErrorMsg] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -77,6 +78,15 @@ export default function Page() {
     }
 
     setSubmitState('loading');
+    setUploadProgress(0);
+    
+    // Simular progreso de subida realista (llega rápido a 85-90% y espera al backend)
+    let currentProg = 0;
+    const progressInterval = setInterval(() => {
+      currentProg += Math.random() * 15;
+      if (currentProg > 92) currentProg = 92;
+      setUploadProgress(Math.floor(currentProg));
+    }, 200);
     
     try {
       const response = await fetch('/api/enviar-articulo', {
@@ -85,12 +95,16 @@ export default function Page() {
       });
       const result = await response.json();
       
+      clearInterval(progressInterval);
+      
       if (response.ok) {
+        setUploadProgress(100);
         setSubmitState('success');
         setTimeout(() => {
           if (formRef.current) formRef.current.reset();
           setFile(null);
           setSubmitState('idle');
+          setUploadProgress(0);
         }, 4000);
       } else {
         setSubmitState('error');
@@ -98,6 +112,7 @@ export default function Page() {
         setTimeout(() => setSubmitState('idle'), 3500);
       }
     } catch (error) {
+      clearInterval(progressInterval);
       setSubmitState('error');
       setErrorMsg('Sin conexión con el servidor');
       setTimeout(() => setSubmitState('idle'), 3500);
@@ -115,16 +130,27 @@ export default function Page() {
         @keyframes spinBtn { to { transform: rotate(360deg); } }
         @keyframes successPulse {
           0%   { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
-          70%  { box-shadow: 0 0 0 12px rgba(34,197,94,0); }
+          70%  { box-shadow: 0 0 0 16px rgba(34,197,94,0); }
           100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
         }
         @keyframes checkDraw {
-          from { stroke-dashoffset: 30; }
-          to   { stroke-dashoffset: 0; }
+          0%   { stroke-dashoffset: 40; opacity: 0; transform: scale(0.5); }
+          50%  { opacity: 1; transform: scale(1.2); }
+          100% { stroke-dashoffset: 0; opacity: 1; transform: scale(1); }
         }
-        .state-loading { cursor: wait !important; background: linear-gradient(90deg,#1652cf,#1B60DF,#2374ff) !important; }
-        .state-success { background: #16a34a !important; box-shadow: 0 12px 24px rgba(22,163,74,0.35) !important; animation: successPulse 0.6s ease-out; }
-        .state-error   { background: #dc2626 !important; box-shadow: 0 12px 24px rgba(220,38,38,0.3) !important; }
+        .state-loading { cursor: wait !important; background: #0B1425 !important; border: 1px solid rgba(27,96,223,0.3) !important; color: #fff !important; }
+        .state-success { background: #16a34a !important; color: #fff !important; border-color: #16a34a !important; box-shadow: 0 12px 24px rgba(22,163,74,0.35) !important; animation: successPulse 0.8s ease-out; }
+        .state-error   { background: #dc2626 !important; color: #fff !important; border-color: #dc2626 !important; box-shadow: 0 12px 24px rgba(220,38,38,0.3) !important; }
+        
+        .progress-bar-bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          background: linear-gradient(90deg, #1652cf, #2374ff);
+          transition: width 0.3s ease-out;
+          z-index: 0;
+        }
     `}} />
     
     <section className="contact-hero-section">
@@ -539,42 +565,72 @@ export default function Page() {
 
                 <button id="submitBtn" type="submit"
                   disabled={submitState === 'loading' || submitState === 'success'}
-                  className={`state-${submitState !== 'idle' ? submitState : ''}`}
-                  style={{ width: '100%', padding: '14px', background: 'linear-gradient(90deg, #1652cf, #1B60DF, #2374ff)', border: 'none', borderRadius: '10px', color: '#fff', fontFamily: '\'Sora\', sans-serif', fontSize: '14px', fontWeight: '700', cursor: submitState === 'loading' ? 'wait' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: '0 12px 24px rgba(27,96,223,0.3)', transition: 'transform 0.2s, box-shadow 0.2s, background 0.4s', position: 'relative', overflow: 'hidden' }}
-                  onMouseOver={(event) => { if(!event.currentTarget.disabled){event.currentTarget.style.transform='translateY(-2px)';event.currentTarget.style.boxShadow='0 16px 32px rgba(27,96,223,0.4)';} }} 
-                  onMouseOut={(event) => { if(!event.currentTarget.disabled){event.currentTarget.style.transform='translateY(0)';event.currentTarget.style.boxShadow='0 12px 24px rgba(27,96,223,0.3)';} }}> 
+                  className={`state-${submitState !== 'idle' ? submitState : 'idle'}`}
+                  style={{ 
+                    width: '100%', 
+                    padding: '16px', 
+                    background: submitState === 'success' ? '#16a34a' : submitState === 'error' ? '#dc2626' : submitState === 'loading' ? '#0B1425' : 'linear-gradient(90deg, #1652cf, #1B60DF, #2374ff)', 
+                    border: submitState === 'loading' ? '1px solid rgba(27,96,223,0.3)' : '1px solid transparent', 
+                    borderRadius: '12px', 
+                    color: '#fff', 
+                    fontFamily: '\'Sora\', sans-serif', 
+                    fontSize: '15px', 
+                    fontWeight: '700', 
+                    cursor: submitState === 'loading' ? 'wait' : 'pointer', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center', 
+                    gap: '10px', 
+                    boxShadow: submitState === 'success' ? '0 12px 24px rgba(22,163,74,0.35)' : submitState === 'error' ? '0 12px 24px rgba(220,38,38,0.3)' : '0 12px 24px rgba(27,96,223,0.3)', 
+                    transition: 'all 0.3s ease', 
+                    position: 'relative', 
+                    overflow: 'hidden' 
+                  }}
+                  onMouseOver={(event) => { if(!event.currentTarget.disabled){event.currentTarget.style.transform='translateY(-2px)';event.currentTarget.style.boxShadow=submitState === 'success' ? '0 16px 32px rgba(22,163,74,0.45)' : '0 16px 32px rgba(27,96,223,0.4)';} }} 
+                  onMouseOut={(event) => { if(!event.currentTarget.disabled){event.currentTarget.style.transform='translateY(0)';event.currentTarget.style.boxShadow=submitState === 'success' ? '0 12px 24px rgba(22,163,74,0.35)' : '0 12px 24px rgba(27,96,223,0.3)';} }}> 
                   
                   {submitState === 'loading' && (
-                     <span style={{ width: '18px', height: '18px', border: '2.5px solid rgba(255,255,255,0.3)', borderTopColor: '#fff', borderRadius: '50%', animation: 'spinBtn 0.7s linear infinite', flexShrink: '0' }}></span>
+                     <div className="progress-bar-bg" style={{ width: `${uploadProgress}%` }}></div>
                   )}
-                  
-                  {submitState === 'success' && (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: '0' }}>
-                        <polyline points="20 6 9 17 4 12" strokeDasharray="30" strokeDashoffset="30" style={{animation: 'checkDraw 0.4s ease-out 0.05s forwards'}}/>
-                    </svg>
-                  )}
-                  
-                  {submitState === 'error' && (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: '0' }}>
-                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                    </svg>
-                  )}
-                  
-                  {submitState === 'idle' && (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                        style={{ transform: 'rotate(45deg)', marginTop: '-2px', flexShrink: '0' }}>
-                        <line x1="22" y1="2" x2="11" y2="13" />
-                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                    </svg>
-                  )}
-                  
-                  <span>
-                    {submitState === 'idle' && 'Enviar Artículo'}
-                    {submitState === 'loading' && 'Enviando...'}
-                    {submitState === 'success' && 'Artículo enviado'}
-                    {submitState === 'error' && (errorMsg || 'Error al enviar')}
-                  </span>
+
+                  <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    {submitState === 'loading' && (
+                       <>
+                         <span style={{ width: '18px', height: '18px', border: '2.5px solid rgba(255,255,255,0.3)', borderTopColor: '#fff', borderRadius: '50%', animation: 'spinBtn 0.7s linear infinite', flexShrink: '0' }}></span>
+                         <span>Analizando documento... {uploadProgress}%</span>
+                       </>
+                    )}
+                    
+                    {submitState === 'success' && (
+                      <>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: '0' }}>
+                            <polyline points="20 6 9 17 4 12" strokeDasharray="40" strokeDashoffset="40" style={{animation: 'checkDraw 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards'}}/>
+                        </svg>
+                        <span>Artículo enviado con éxito</span>
+                      </>
+                    )}
+                    
+                    {submitState === 'error' && (
+                      <>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: '0' }}>
+                            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        <span>{errorMsg || 'Error al analizar'}</span>
+                      </>
+                    )}
+                    
+                    {submitState === 'idle' && (
+                      <>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                            style={{ transform: 'rotate(45deg)', marginTop: '-2px', flexShrink: '0' }}>
+                            <line x1="22" y1="2" x2="11" y2="13" />
+                            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                        </svg>
+                        <span>Enviar Artículo</span>
+                      </>
+                    )}
+                  </div>
                 </button>
               </div>
 

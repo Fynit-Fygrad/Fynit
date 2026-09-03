@@ -1,0 +1,31 @@
+.scroll-reveal {
+  /* Minimal wrapper styles, relies on textClassName for typography */
+  display: block;
+}
+
+.scroll-reveal-text {
+  /* Inherit typography from parent classes (like .epic-lead) */
+  margin: 0;
+  padding: 0;
+}
+
+.word {
+  display: inline-block;
+  white-space: pre-wrap; /* Preserve spaces if any */
+  margin-right: 0.25em; /* Fallback spacing, but usually the split regex keeps the space */
+}
+
+/* If the split regex keeps the spaces as separate items, we might not need margin-right. 
+   Wait, the regex is `/(\s+)/`, so spaces ARE their own elements! 
+   If word contains only space, we don't need margin. 
+   I'll just keep it clean. */
+.word {
+  display: inline-block;
+}
+
+.justify-text {
+  text-align: justify;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #4a5568; /* a nice slate gray for readable text */
+}
