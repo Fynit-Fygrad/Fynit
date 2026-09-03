@@ -47,7 +47,10 @@ export const metadata: Metadata = {
   title: "Fynit | Impulsa tu Investigación Científica",
   description: "Fynit ayuda a investigadores a evaluar y corregir sus artículos científicos antes de enviarlos a revistas top (Scopus, WoS) mediante herramientas automatizadas.",
   icons: {
-    icon: "/assets/logos svg/favicon.svg"
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon.svg",
   }
 };
 
