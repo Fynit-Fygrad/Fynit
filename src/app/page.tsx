@@ -201,31 +201,71 @@ export default function Home() {
           {/* Derecha: Tarjetas Zig-Zag */}
           <div className="pain-grid">
             <div className="pain-card" data-aos="fade-up" data-aos-delay="100">
-              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=200&auto=format&fit=crop" alt="Review" className="pain-img" />
-              <div className="pain-content">
-                <h3>Meses sin saber si vas bien</h3>
-                <p>Revisas y revisas sin una señal clara de si tu metodología o tu argumento realmente sostienen una publicación.</p>
+              <div className="flip-card-inner">
+                <div className="flip-front">
+                  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=400&auto=format&fit=crop" alt="Review" className="flip-img" />
+                  <div className="flip-front-label">
+                    <h3>Meses sin saber si vas bien</h3>
+                  </div>
+                </div>
+                <div className="flip-back">
+                  <div className="flip-back-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                  </div>
+                  <h3>Meses sin saber si vas bien</h3>
+                  <p>Revisas y revisas sin una señal clara de si tu metodología o tu argumento realmente sostienen una publicación.</p>
+                </div>
               </div>
             </div>
             <div className="pain-card staggered" data-aos="fade-up" data-aos-delay="200">
-              <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=200&auto=format&fit=crop" alt="Feedback" className="pain-img" />
-              <div className="pain-content">
-                <h3>Feedback disperso y tardío</h3>
-                <p>El asesor lo dice por correo, el jurado en la sustentación, la revista al rechazarte. Casi nunca a tiempo.</p>
+              <div className="flip-card-inner">
+                <div className="flip-front">
+                  <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=400&auto=format&fit=crop" alt="Feedback" className="flip-img" />
+                  <div className="flip-front-label">
+                    <h3>Feedback disperso y tardío</h3>
+                  </div>
+                </div>
+                <div className="flip-back">
+                  <div className="flip-back-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                  </div>
+                  <h3>Feedback disperso y tardío</h3>
+                  <p>El asesor lo dice por correo, el jurado en la sustentación, la revista al rechazarte. Casi nunca a tiempo.</p>
+                </div>
               </div>
             </div>
             <div className="pain-card" data-aos="fade-up" data-aos-delay="300">
-              <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=200&auto=format&fit=crop" alt="Journal" className="pain-img" />
-              <div className="pain-content">
-                <h3>No sabes dónde postular</h3>
-                <p>Cientos de revistas y conferencias, y ningún criterio claro sobre cuál se ajusta a tu perfil y tus tiempos.</p>
+              <div className="flip-card-inner">
+                <div className="flip-front">
+                  <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=400&auto=format&fit=crop" alt="Journal" className="flip-img" />
+                  <div className="flip-front-label">
+                    <h3>No sabes dónde postular</h3>
+                  </div>
+                </div>
+                <div className="flip-back">
+                  <div className="flip-back-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                  </div>
+                  <h3>No sabes dónde postular</h3>
+                  <p>Cientos de revistas y conferencias, y ningún criterio claro sobre cuál se ajusta a tu perfil y tus tiempos.</p>
+                </div>
               </div>
             </div>
             <div className="pain-card staggered" data-aos="fade-up" data-aos-delay="400">
-              <img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?q=80&w=200&auto=format&fit=crop" alt="Details" className="pain-img" />
-              <div className="pain-content">
-                <h3>El detalle que baja tu originalidad</h3>
-                <p>Frases parafraseadas de más, citas mal formateadas: pequeños descuidos que restan sin que los notes.</p>
+              <div className="flip-card-inner">
+                <div className="flip-front">
+                  <img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?q=80&w=400&auto=format&fit=crop" alt="Details" className="flip-img" />
+                  <div className="flip-front-label">
+                    <h3>El detalle que baja tu originalidad</h3>
+                  </div>
+                </div>
+                <div className="flip-back">
+                  <div className="flip-back-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  </div>
+                  <h3>El detalle que baja tu originalidad</h3>
+                  <p>Frases parafraseadas de más, citas mal formateadas: pequeños descuidos que restan sin que los notes.</p>
+                </div>
               </div>
             </div>
           </div>

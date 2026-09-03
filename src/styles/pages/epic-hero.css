@@ -597,11 +597,14 @@
     left: auto;
     bottom: auto;
     transform: none;
-    margin: 40px 0;
+    margin: 0 0 0;
+    display: flex;
+    justify-content: center;
   }
 
   .epic-mascot {
-    height: 45svh;
+    height: 36svh;
+    max-height: 260px;
   }
 
   .epic-features {
