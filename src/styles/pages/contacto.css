@@ -322,7 +322,7 @@
 }
 
 /* Button disabled state */
-#submitBtn:disabled {
+#submitBtn:disabled:not(.state-success):not(.state-loading) {
   background: #9ca3af !important;
   box-shadow: none !important;
   transform: translateY(0) !important;

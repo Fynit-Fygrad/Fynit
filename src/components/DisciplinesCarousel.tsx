@@ -7,86 +7,103 @@ const disciplines = [
   {
     id: 1,
     title: 'Biología Avanzada',
-    icon: 'ic-bio',
-    image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80',
-    description: 'Analizamos metodologías experimentales, revisamos citas de papers recientes y estructuramos tu artículo para journals científicos de alto impacto.'
+    image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80',
+    description: 'Revisamos metodologías experimentales y estructuramos tu artículo para journals científicos de alto impacto.',
   },
   {
     id: 2,
     title: 'Ciencias de la Computación',
-    icon: 'ic-laptop',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80',
-    description: 'Validamos el formato IEEE o ACM, revisamos la claridad de tu pseudocódigo y comprobamos el estado del arte de algoritmos similares.'
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80',
+    description: 'Validamos el formato IEEE o ACM y verificamos el rigor técnico del estado del arte.',
   },
   {
     id: 3,
     title: 'Medicina Clínica',
-    icon: 'ic-stethoscope',
-    image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80',
-    description: 'Aseguramos que tu reporte de caso clínico o ensayo randomizado cumpla con las guías CONSORT y los rigurosos estándares médicos.'
+    image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=400&q=80',
+    description: 'Aseguramos que tu reporte o ensayo cumpla con guías como CONSORT y estándares médicos internacionales.',
   },
   {
     id: 4,
     title: 'Derecho Corporativo',
-    icon: 'ic-scale',
-    image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=800&q=80',
-    description: 'Adaptamos tu redacción al lenguaje jurídico formal, verificamos jurisprudencia y estructuramos argumentos para revistas de derecho.'
+    image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=400&q=80',
+    description: 'Adaptamos tu redacción al lenguaje jurídico formal y estructuramos argumentos para revistas de derecho.',
   },
   {
     id: 5,
     title: 'Economía y Finanzas',
-    icon: 'ic-coins',
-    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80',
-    description: 'Evaluamos el rigor de tus modelos econométricos y la presentación de tus datos financieros para publicaciones Q1 en economía.'
+    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=400&q=80',
+    description: 'Evaluamos la presentación de tus datos financieros y modelos para publicaciones Q1 en economía.',
   },
   {
     id: 6,
     title: 'Ingeniería y Tecnología',
-    icon: 'ic-cog',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80',
-    description: 'Desde ingeniería civil hasta nanotecnología. Organizamos tus resultados de laboratorio en tablas y gráficos listos para publicar.'
+    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80',
+    description: 'Organizamos tus resultados de laboratorio en tablas y gráficos rigurosos listos para publicar.',
   }
 ];
 
 export default function DisciplinesCarousel() {
   return (
     <section className="disciplines-3d-section" id="disciplinas">
-      <div className="disciplines-head" data-aos="fade-up">
-        <span className="disciplines-eyebrow">Múltiples Disciplinas</span>
-        <h2>No importa tu área,<br />hablamos tu idioma editorial</h2>
-      </div>
+      <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+        
+        <div className="disciplines-grid">
+          
+          {/* Columna Izquierda: Carrusel 3D Puro */}
+          <div className="disciplines-carousel-col" data-aos="fade-right">
+            <div className="scene-3d">
+              <div className="carousel-3d">
+                {disciplines.map((d, index) => {
+                  const rotateY = index * (360 / disciplines.length);
+                  return (
+                    <div 
+                      key={d.id} 
+                      className="carousel-item-wrapper" 
+                      style={{ 
+                        transform: `rotateY(${rotateY}deg) translateZ(220px)` 
+                      }}
+                    >
+                      <div className="carousel-item-inner">
+                        {/* Frente de la tarjeta (Imagen) */}
+                        <div className="card-face card-front">
+                          <img src={d.image} alt={d.title} />
+                          <div className="carousel-item-overlay">
+                            <h4>{d.title}</h4>
+                          </div>
+                        </div>
 
-      <div className="marquee-3d-wrap" data-aos="fade-up" data-aos-delay="100">
-        <div className="marquee-3d-track">
-          {/* Se mapea 3 veces para asegurar que el loop infinito nunca se corte */}
-          {[...disciplines, ...disciplines, ...disciplines].map((d, index) => (
-            <div className="flip-card-container" key={`${d.id}-${index}`}>
-              <div className="flip-card-inner">
-                
-                {/* FRENTE DE LA TARJETA */}
-                <div 
-                  className="flip-card-front" 
-                  style={{ backgroundImage: `url(${d.image})` }}
-                >
-                  <div className="flip-card-content-front">
-                    <div className="flip-icon-wrap">
-                      <svg width="24" height="24">
-                        <use href={`/sprite.svg#${d.icon}`} />
-                      </svg>
+                        {/* Reverso de la tarjeta (Texto) */}
+                        <div className="card-face card-back">
+                          <div className="card-back-content">
+                            <h4>{d.title}</h4>
+                            <p>{d.description}</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <h3>{d.title}</h3>
-                  </div>
-                </div>
-
-                {/* DORSO DE LA TARJETA */}
-                <div className="flip-card-back">
-                  <h4>{d.title}</h4>
-                  <p>{d.description}</p>
-                </div>
-
+                  );
+                })}
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Columna Derecha: Texto */}
+          <div className="disciplines-text-col" data-aos="fade-left">
+            <span className="disciplines-eyebrow">Múltiples Disciplinas</span>
+            <h2>Adaptabilidad para<br/>cualquier área</h2>
+            <p className="disciplines-description">
+              No importa el campo de tu investigación, nuestro equipo domina el lenguaje, la terminología y las normativas de formato de las revistas científicas más exigentes de todas las áreas del conocimiento.
+            </p>
+            <ul className="disciplines-features">
+              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B60DF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Rigor científico garantizado</li>
+              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B60DF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Formatos específicos (APA, IEEE, etc.)</li>
+              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B60DF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Estructurado para revistas Q1-Q2</li>
+            </ul>
+            <a href="/analizar" className="btn-disciplines-cta">
+              Solicitar análisis editorial
+            </a>
+          </div>
+
         </div>
       </div>
     </section>
