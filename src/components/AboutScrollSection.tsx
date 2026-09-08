@@ -1,6 +1,6 @@
 'use client';
 import { useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 import TextType from './TextType';
 import BlurText from './BlurText';
@@ -9,7 +9,7 @@ export default function AboutScrollSection() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Variantes para la animación de entrada
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: (custom: number) => ({
       opacity: 1,
@@ -23,7 +23,7 @@ export default function AboutScrollSection() {
   };
 
   // Variantes para la animación de flotación constante (micro-interacción)
-  const floatVariants = {
+  const floatVariants: Variants = {
     float: (custom: number) => ({
       y: [0, -15, 0],
       transition: {
