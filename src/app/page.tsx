@@ -5,6 +5,10 @@ import { motion, useScroll } from 'framer-motion';
 import { showComingSoon } from '@/components/Toaster';
 import { useTheme } from 'next-themes';
 import DisciplinesCarousel from '@/components/DisciplinesCarousel';
+import AboutScrollSection from '@/components/AboutScrollSection';
+import TextType from '@/components/TextType';
+import BlurText from '@/components/BlurText';
+import OrbitalIndexaciones from '@/components/OrbitalIndexaciones';
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -186,100 +190,8 @@ export default function Home() {
       {/*  ============ CAROUSEL 3D DISCIPLINAS ============  */}
       <DisciplinesCarousel />
 
-      {/*  ============ SOBRE FYNIT / PROBLEMA ============  */}
-      <section className="section about" id="nosotros">
-        <div className="container about-grid">
-          {/* Izquierda: Texto y Mascota */}
-          <div className="about-copy" data-aos="fade-up">
-            <div className="about-hero-image" style={{ marginBottom: '24px', animation: 'floaty 6s ease-in-out infinite' }}>
-              <img src="assets/imgs png/mascot_about.webp" alt="Fynit Mascota"
-                style={{ width: '100%', maxWidth: '220px', height: 'auto', objectFit: 'contain' }} />
-            </div>
-            <h2>De investigadores para investigadores.</h2>
-            <p style={{ textAlign: 'justify' }}>Fynit nace de un equipo de académicos que vivió de cerca la frustración de
-              redactar y publicar a ciegas. Por eso, hemos desarrollado una inteligencia artificial especializada y
-              entrenada para hacer tu camino editorial claro, riguroso y, sobre todo, predecible.</p>
-            <div style={{ marginTop: '32px' }}>
-              <Link href="#equipo" className="btn btn-ghost">Más sobre nosotros <svg>
-                <use href="/sprite.svg#ic-arrow" />
-              </svg></Link>
-            </div>
-          </div>
-
-          {/* Derecha: Tarjetas Zig-Zag */}
-          <div className="pain-grid">
-            <div className="pain-card" data-aos="fade-up" data-aos-delay="100">
-              <div className="flip-card-inner">
-                <div className="flip-front">
-                  <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=400&auto=format&fit=crop" alt="Review" className="flip-img" />
-                  <div className="flip-front-label">
-                    <h3>Meses sin saber si vas bien</h3>
-                  </div>
-                </div>
-                <div className="flip-back">
-                  <div className="flip-back-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-                  </div>
-                  <h3>Meses sin saber si vas bien</h3>
-                  <p>Revisas y revisas sin una señal clara de si tu metodología o tu argumento realmente sostienen una publicación.</p>
-                </div>
-              </div>
-            </div>
-            <div className="pain-card staggered" data-aos="fade-up" data-aos-delay="200">
-              <div className="flip-card-inner">
-                <div className="flip-front">
-                  <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=400&auto=format&fit=crop" alt="Feedback" className="flip-img" />
-                  <div className="flip-front-label">
-                    <h3>Feedback disperso y tardío</h3>
-                  </div>
-                </div>
-                <div className="flip-back">
-                  <div className="flip-back-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                  </div>
-                  <h3>Feedback disperso y tardío</h3>
-                  <p>El asesor lo dice por correo, el jurado en la sustentación, la revista al rechazarte. Casi nunca a tiempo.</p>
-                </div>
-              </div>
-            </div>
-            <div className="pain-card" data-aos="fade-up" data-aos-delay="300">
-              <div className="flip-card-inner">
-                <div className="flip-front">
-                  <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=400&auto=format&fit=crop" alt="Journal" className="flip-img" />
-                  <div className="flip-front-label">
-                    <h3>No sabes dónde postular</h3>
-                  </div>
-                </div>
-                <div className="flip-back">
-                  <div className="flip-back-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-                  </div>
-                  <h3>No sabes dónde postular</h3>
-                  <p>Cientos de revistas y conferencias, y ningún criterio claro sobre cuál se ajusta a tu perfil y tus tiempos.</p>
-                </div>
-              </div>
-            </div>
-            <div className="pain-card staggered" data-aos="fade-up" data-aos-delay="400">
-              <div className="flip-card-inner">
-                <div className="flip-front">
-                  <img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?q=80&w=400&auto=format&fit=crop" alt="Details" className="flip-img" />
-                  <div className="flip-front-label">
-                    <h3>El detalle que baja tu originalidad</h3>
-                  </div>
-                </div>
-                <div className="flip-back">
-                  <div className="flip-back-icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                  </div>
-                  <h3>El detalle que baja tu originalidad</h3>
-                  <p>Frases parafraseadas de más, citas mal formateadas: pequeños descuidos que restan sin que los notes.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      {/*  ============ SOBRE FYNIT / PROBLEMA (Rediseñado Scroll Storytelling) ============  */}
+      <AboutScrollSection />
 
       {/*  ============ COMO FUNCIONA (núcleo interactivo) ============  */}
       <section className="section how" id="como-funciona" ref={howSectionRef}>
@@ -288,9 +200,17 @@ export default function Home() {
           <img src="assets/imgs png/fynit_mascot_2.webp" alt="Fynit Bot" className="fynit-mascot-active" loading="lazy"
             style={{ marginTop: '20px' }} />
 
-          <div className="section-head" data-aos="fade-up">
-            <span className="eyebrow">Cómo funciona</span>
-            <h2>De tu manuscrito al plan de publicación</h2>
+          <div className="section-head" data-aos="fade-up" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+            <div className="title-wrapper" style={{ alignItems: 'flex-start', marginBottom: '16px' }}>
+              <TextType 
+                text={["Cómo funciona", "El proceso", "Paso a paso"]} 
+                typingSpeed={70} pauseDuration={1500} showCursor cursorCharacter="_" deletingSpeed={40} 
+                className="premium-typing-text"
+              />
+              <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                <BlurText text="DE TU MANUSCRITO AL PLAN DE PUBLICACIÓN" className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ fontSize: 'clamp(1.5rem, 3vw, 40px)' }} />
+              </div>
+            </div>
             <p>Cuatro pasos precisos. Sin código, sin esperas, sin adivinar.</p>
           </div>
 
@@ -424,64 +344,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/*  ============ INDEXACIONES (Marquee) ============  */}
-      <section className="indexing-marquee">
-        <div className="indexing-label">Compatible con indexaciones y estándares de</div>
-        <div className="marquee-outer" aria-hidden="true">
-          <div className="marquee-reel">
-            {/*  Scopus  */}
-            <div className="idx-logo">
-              <img src="assets/logos svg/logo-scopus.svg" alt="Scopus" loading="lazy" />
-            </div>
-            {/*  Web of Science  */}
-            <div className="idx-logo">
-              <img src="assets/logos svg/logo-wos.svg" alt="Web of Science" loading="lazy" />
-            </div>
-            {/*  IEEE  */}
-            <div className="idx-logo">
-              <img src="assets/logos svg/logo-ieee.svg" alt="IEEE Xplore" loading="lazy" />
-            </div>
-            {/*  DOAJ  */}
-            <div className="idx-logo">
-              <img src="assets/logos svg/logo-doaj.svg" alt="DOAJ" loading="lazy" />
-            </div>
-            {/*  Latindex  */}
-            <div className="idx-logo">
-              <img src="assets/logos svg/logo-latindex.svg" alt="Latindex" loading="lazy" />
-            </div>
-            {/*  SciELO  */}
-            <div className="idx-logo">
-              <img src="assets/logos svg/logo-scielo.svg" alt="SciELO" loading="lazy" />
-            </div>
-            {/*  Duplicate set for seamless loop  */}
-            <div className="idx-logo">
-              <img src="assets/logos svg/logo-scopus.svg" alt="Scopus" loading="lazy" />
-            </div>
-            <div className="idx-logo">
-              <img src="assets/logos svg/logo-wos.svg" alt="Web of Science" loading="lazy" />
-            </div>
-            <div className="idx-logo">
-              <img src="assets/logos svg/logo-ieee.svg" alt="IEEE Xplore" loading="lazy" />
-            </div>
-            <div className="idx-logo">
-              <img src="assets/logos svg/logo-doaj.svg" alt="DOAJ" loading="lazy" />
-            </div>
-            <div className="idx-logo">
-              <img src="assets/logos svg/logo-latindex.svg" alt="Latindex" loading="lazy" />
-            </div>
-            <div className="idx-logo">
-              <img src="assets/logos svg/logo-scielo.svg" alt="SciELO" loading="lazy" />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/*  ============ INDEXACIONES (Orbital 3D / ANUBI style) ============  */}
+      <OrbitalIndexaciones />
 
       {/*  ============ TESTIMONIOS ============  */}
       <section className="section testimonials" id="testimonios">
         <div className="container">
-          <div className="section-head center">
-            <span className="eyebrow">Lo que dicen los primeros usuarios</span>
-            <h2>Investigadores que ya lo probaron</h2>
+          <div className="section-head center" data-aos="fade-up" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div className="title-wrapper" style={{ alignItems: 'center', marginBottom: '16px' }}>
+              <TextType 
+                text={["Lo que dicen los usuarios", "Casos de éxito", "Nuestra comunidad"]} 
+                typingSpeed={70} pauseDuration={1500} showCursor cursorCharacter="_" deletingSpeed={40} 
+                className="premium-typing-text"
+              />
+              <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <BlurText text="INVESTIGADORES QUE YA LO PROBARON" className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ fontSize: 'clamp(1.5rem, 3vw, 40px)', justifyContent: 'center' }} />
+              </div>
+            </div>
             <p>Estos son los primeros investigadores que confiaron en Fynit. Su feedback construyó la herramienta.</p>
           </div>
           <div className="testi-grid">
@@ -538,9 +417,17 @@ export default function Home() {
       {/*  ============ PRECIOS ============  */}
       <section className="section pricing" id="precios">
         <div className="container">
-          <div className="section-head center">
-            <span className="eyebrow">Planes &amp; Precios</span>
-            <h2>Elige el plan que se ajusta a tu etapa</h2>
+          <div className="section-head center" data-aos="fade-up" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
+            <div className="title-wrapper" style={{ alignItems: 'center', marginBottom: '16px' }}>
+              <TextType 
+                text={["Planes & Precios", "Tu inversión", "Escala tu impacto"]} 
+                typingSpeed={70} pauseDuration={1500} showCursor cursorCharacter="_" deletingSpeed={40} 
+                className="premium-typing-text"
+              />
+              <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <BlurText text="ELIGE EL PLAN QUE SE AJUSTA A TU ETAPA" className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ fontSize: 'clamp(1.5rem, 3vw, 40px)', justifyContent: 'center' }} />
+              </div>
+            </div>
             <p>Sin sorpresas. Empieza y escala cuando estés listo.</p>
           </div>
           <div className="pricing-grid">
@@ -635,9 +522,17 @@ export default function Home() {
       <section className="section" id="blog">
         <div className="container">
           <div className="blog-head">
-            <div className="section-head" style={{ marginBottom: '0' }}>
-              <span className="eyebrow">Recursos</span>
-              <h2>Últimos artículos</h2>
+            <div className="section-head" style={{ marginBottom: '0', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+              <div className="title-wrapper" style={{ alignItems: 'flex-start', marginBottom: '8px' }}>
+                <TextType 
+                  text={["Recursos", "Blog y Guías", "Aprende más"]} 
+                  typingSpeed={70} pauseDuration={1500} showCursor cursorCharacter="_" deletingSpeed={40} 
+                  className="premium-typing-text"
+                />
+                <div style={{ width: '100%', maxWidth: '600px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                  <BlurText text="ÚLTIMOS ARTÍCULOS" className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ fontSize: 'clamp(1.5rem, 3vw, 40px)' }} />
+                </div>
+              </div>
             </div>
             <Link href="blog.html" className="see-all">Ver todos <svg>
               <use href="/sprite.svg#ic-arrow" />

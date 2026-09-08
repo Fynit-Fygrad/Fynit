@@ -1,0 +1,15 @@
+<svg viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" fill-rule="evenodd">
+    <!-- EBSCO Dots Icon -->
+    <g transform="translate(10, 15)">
+      <circle cx="15" cy="15" r="10" fill="#0072ce"/>
+      <circle cx="45" cy="15" r="10" fill="#84bd00"/>
+      <circle cx="15" cy="45" r="10" fill="#003087"/>
+      <circle cx="45" cy="45" r="10" fill="#00a3e0"/>
+    </g>
+
+    <!-- Text: EBSCO -->
+    <text x="88" y="58" font-family="'Sora', 'Segoe UI', system-ui, sans-serif" font-size="46" font-weight="900" fill="#003087" letter-spacing="1">EBSCO</text>
+    <text x="90" y="74" font-family="'Sora', 'Segoe UI', system-ui, sans-serif" font-size="11" font-weight="600" fill="#667085" letter-spacing="2">INFORMATION SERVICES</text>
+  </g>
+</svg>

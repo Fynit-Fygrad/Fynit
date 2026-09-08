@@ -3,6 +3,9 @@
 import React from 'react';
 import '@/styles/components/disciplines-carousel.css';
 
+import TextType from './TextType';
+import BlurText from './BlurText';
+
 const disciplines = [
   {
     id: 1,
@@ -89,8 +92,16 @@ export default function DisciplinesCarousel() {
 
           {/* Columna Derecha: Texto */}
           <div className="disciplines-text-col" data-aos="fade-left">
-            <span className="disciplines-eyebrow">Múltiples Disciplinas</span>
-            <h2>Adaptabilidad para<br/>cualquier área</h2>
+            <div className="title-wrapper" style={{ alignItems: 'flex-start', marginBottom: '16px' }}>
+              <TextType 
+                text={["Múltiples Disciplinas", "Expertise por área", "Formato especializado"]} 
+                typingSpeed={70} pauseDuration={1500} showCursor cursorCharacter="_" deletingSpeed={40} 
+                className="premium-typing-text"
+              />
+              <div style={{ width: '100%', maxWidth: '600px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                <BlurText text="ADAPTABILIDAD PARA CUALQUIER ÁREA" className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ fontSize: 'clamp(1.5rem, 3vw, 40px)' }} />
+              </div>
+            </div>
             <p className="disciplines-description">
               No importa el campo de tu investigación, nuestro equipo domina el lenguaje, la terminología y las normativas de formato de las revistas científicas más exigentes de todas las áreas del conocimiento.
             </p>

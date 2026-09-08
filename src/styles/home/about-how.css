@@ -52,6 +52,25 @@
   margin-right: 0;
 }
 
+.mascot-peeking {
+  position: absolute;
+  top: 50%;
+  left: -110px; /* Pushed out so the right edge (hands) touches the card */
+  transform: translateY(-50%) scaleX(-1); /* Flipped horizontally so hands face the card */
+  width: 140px;
+  height: auto;
+  z-index: -1;
+  pointer-events: none;
+  animation: floaty 6s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .mascot-peeking {
+    left: -80px;
+    width: 100px;
+  }
+}
+
 .flip-card-inner {
   position: relative;
   width: 100%;

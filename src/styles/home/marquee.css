@@ -93,93 +93,298 @@
   }
 }
 
-/* ============ INDEXING MARQUEE ============ */
-.indexing-marquee {
-  padding: 40px 0;
-  background: transparent;
-  overflow: hidden;
+/* ============================================================
+   ORBITAL INDEXACIONES  —  Estilo ANUBI
+   Tarjetas rotando en órbita elíptica continua alrededor del título
+   ============================================================ */
+
+.orbital-section {
   position: relative;
+  width: 100%;
+  min-height: 600px;
+  height: 620px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+  background: transparent;
+  padding: 40px 0;
 }
 
-.indexing-marquee::before,
-.indexing-marquee::after {
-  content: '';
+.orbital-section:active {
+  cursor: grabbing;
+}
+
+/* ── Fondo sutil y resplandor ── */
+.orbital-glow-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 420px;
+  background: radial-gradient(ellipse at center, rgba(27, 96, 223, 0.08) 0%, rgba(6, 182, 212, 0.04) 45%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(40px);
+}
+
+[data-theme='dark'] .orbital-glow-bg {
+  background: radial-gradient(ellipse at center, rgba(27, 96, 223, 0.16) 0%, rgba(139, 92, 246, 0.08) 50%, transparent 70%);
+}
+
+/* ── Elementos decorativos SVG (Ruta orbital y cintas ANUBI) ── */
+.orbital-svg-decor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 1280px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.anubi-ribbon {
+  filter: drop-shadow(0 4px 12px rgba(27, 96, 223, 0.25));
+  opacity: 0.85;
+}
+
+/* ── Escenario de órbita ── */
+.orbital-orbit-stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  z-index: 5;
+  pointer-events: auto;
+}
+
+/* ── Cada tarjeta en órbita (Medidas idénticas y uniformes) ── */
+.orbital-card-wrapper {
   position: absolute;
   top: 0;
-  bottom: 0;
-  width: 120px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.indexing-marquee::before {
   left: 0;
-  background: transparent;
+  will-change: transform, opacity;
+  cursor: pointer;
+  touch-action: none;
+  width: 176px;
+  height: 112px;
+  margin-left: -88px;
+  margin-top: -56px;
 }
 
-.indexing-marquee::after {
-  right: 0;
-  background: transparent;
-}
-
-.indexing-label {
-  text-align: center;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: rgba(7, 23, 66, .4);
-  margin-bottom: 18px;
-  padding: 0 32px;
-}
-[data-theme='dark'] .indexing-label {
-  color: rgba(255, 255, 255, .35);
-}
-
-.marquee-outer {
+/* ── Tarjeta Full Bleed (Consume todo el cuadro estilo ANUBI) ── */
+.orbital-card-inner.full-bleed {
   width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  border: 1.5px solid rgba(255, 255, 255, 0.24);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px 10px 7px;
+  position: relative;
   overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease;
 }
 
-.marquee-reel {
+.orbital-card-wrapper:hover .orbital-card-inner.full-bleed {
+  border-color: rgba(255, 255, 255, 0.55);
+  transform: translateY(-2px);
+}
+
+/* Fila Superior: Badge de Categoría */
+.card-top-row {
   display: flex;
   align-items: center;
-  gap: 0;
-  width: max-content;
-  animation: idx-scroll 24s linear infinite;
+  justify-content: space-between;
+  width: 100%;
+  line-height: 1;
+  z-index: 2;
 }
 
-.marquee-reel:hover {
-  animation-play-state: paused;
+.card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Sora', sans-serif;
+  font-size: 8px;
+  font-weight: 750;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
 }
 
-@keyframes idx-scroll {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(-50%);
-  }
+.tag-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 6px currentColor;
 }
 
-.idx-logo {
-  padding: 0 48px;
-  opacity: 1;
+.card-sparkle {
+  font-size: 8px;
+  opacity: 0.85;
+}
+
+/* Placa Blanca Iluminada (Garantiza 100% de visibilidad en Modo Claro y Oscuro) */
+.orbital-logo-plate {
+  width: 100%;
+  height: 52px;
+  background: #ffffff;
+  border-radius: 8px;
   display: flex;
   align-items: center;
-  color: var(--white);
+  justify-content: center;
+  padding: 5px 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  z-index: 2;
+  transition: transform 0.25s ease;
 }
 
-.idx-logo svg,
-.idx-logo img {
-  height: 45px;
+.orbital-card-wrapper:hover .orbital-logo-plate {
+  transform: scale(1.02);
+}
+
+.orbital-card-img {
+  max-width: 90%;
+  max-height: 40px;
   width: auto;
-  display: block;
-  filter: grayscale(100%) opacity(0.6);
+  height: auto;
+  object-fit: contain;
+  filter: none !important;
 }
-[data-theme='dark'] .idx-logo svg,
-[data-theme='dark'] .idx-logo img {
-  filter: brightness(0) invert(1);
+
+/* Fila Inferior: Metadata Editorial */
+.card-bottom-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 3px;
 }
+
+.card-sub-text {
+  font-family: 'Sora', sans-serif;
+  font-size: 8px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.25px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Centro de la órbita (Título ANUBI) ── */
+.orbital-center-focus {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  max-width: 720px;
+  padding: 0 20px;
+}
+
+.orbital-center-focus .premium-typing-text {
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.orbital-tagline {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(13.5px, 1.5vw, 15.5px);
+  color: #64748b;
+  line-height: 1.55;
+  margin: 0 0 18px;
+  max-width: 520px;
+  font-weight: 400;
+}
+
+.orbital-tagline strong {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+[data-theme='dark'] .orbital-tagline {
+  color: #94a3b8;
+}
+
+[data-theme='dark'] .orbital-tagline strong {
+  color: #f8fafc;
+}
+
+.orbital-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.orbital-chip {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-family: 'Sora', sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  color: #475569;
+  letter-spacing: 0.2px;
+}
+
+[data-theme='dark'] .orbital-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+}
+
+/* ── Responsivo ── */
+@media (max-width: 768px) {
+  .orbital-section {
+    min-height: 480px;
+    height: 500px;
+    padding: 30px 0;
+  }
+  .orbital-card-wrapper {
+    width: 134px !important;
+    height: 86px !important;
+    margin-left: -67px !important;
+    margin-top: -43px !important;
+  }
+  .orbital-logo-plate {
+    height: 38px;
+    padding: 3px 8px;
+  }
+  .orbital-card-img {
+    max-height: 28px;
+  }
+  .card-tag {
+    font-size: 7px;
+  }
+  .card-sub-text {
+    font-size: 7px;
+  }
+  .orbital-tagline {
+    font-size: 12.5px;
+    padding: 0 10px;
+  }
+  .orbital-chips-row {
+    display: none;
+  }
+}
+
 

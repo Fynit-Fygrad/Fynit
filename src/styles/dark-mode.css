@@ -129,3 +129,14 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* Fix Chatbot styling in Dark Mode */
+[data-theme='dark'] .chat-header {
+  background: #071742 !important;
+}
+[data-theme='dark'] .chat-header-info strong {
+  color: #FFFFFF !important;
+}
+[data-theme='dark'] .chat-close {
+  color: #FFFFFF !important;
+}
+

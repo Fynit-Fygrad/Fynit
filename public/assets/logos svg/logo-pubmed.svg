@@ -1,0 +1,14 @@
+<svg viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" fill-rule="evenodd">
+    <!-- PubMed Icon -->
+    <rect width="80" height="80" rx="18" fill="#20558a" x="5" y="5"/>
+    <!-- Caduceus / Cross medical motif -->
+    <path d="M45 22v46M31 36h28M35 52h20" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="45" cy="22" r="4" fill="#ffffff"/>
+    <path d="M35 28c4 4 16 4 20 0M33 44c6 5 18 5 24 0" stroke="#68b4e8" stroke-width="3" fill="none" stroke-linecap="round"/>
+    
+    <!-- Text: PubMed -->
+    <text x="100" y="58" font-family="'Sora', 'Segoe UI', system-ui, sans-serif" font-size="44" font-weight="800" fill="#20558a" letter-spacing="-1">Pub<tspan fill="#0071bc">Med</tspan></text>
+    <text x="102" y="74" font-family="'Sora', 'Segoe UI', system-ui, sans-serif" font-size="12" font-weight="600" fill="#667085" letter-spacing="2">NCBI / NLM</text>
+  </g>
+</svg>
