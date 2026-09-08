@@ -1,7 +1,7 @@
 /* ============ BLOG PREVIEW ============ */
 /* ============ TESTIMONIOS ============ */
 .testimonials {
-  background: var(--tint);
+  background: transparent;
 }
 
 .testi-grid {

@@ -22,13 +22,10 @@
 /* FIXING FYNIT'S HARDCODED BACKGROUNDS */
 [data-theme='dark'] .sidebar,
 [data-theme='dark'] .site-footer,
-[data-theme='dark'] .numbers,
-[data-theme='dark'] .indexing-marquee,
 [data-theme='dark'] .testi-card.featured,
 [data-theme='dark'] .contact-form-card,
 [data-theme='dark'] .article-card,
 [data-theme='dark'] .featured-card,
-[data-theme='dark'] .blog-grid-section,
 [data-theme='dark'] .team-teaser {
   background: #071742 !important; /* Force original navy background */
   color: #FFFFFF !important;

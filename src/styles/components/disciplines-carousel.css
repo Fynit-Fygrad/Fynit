@@ -2,10 +2,17 @@
 .disciplines-3d-section {
   position: relative;
   padding: 100px 0;
-  background: #0B1425; /* Oscuro, para resaltar el efecto 3D luminoso de tu captura */
-  color: #fff;
+  background: transparent;
+  color: #071742; /* Texto oscuro por defecto */
   overflow: hidden;
   font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Modo oscuro */
+[data-theme='dark'] .disciplines-3d-section {
+  background: transparent;
+  color: #fff;
 }
 
 .disciplines-grid {
@@ -38,6 +45,7 @@
   position: absolute;
   transform-style: preserve-3d;
   animation: spinCarousel 20s infinite linear;
+  will-change: transform; /* Optmización para GPU en móviles */
 }
 
 /* Pausar animación si el usuario pone el mouse encima */
@@ -53,7 +61,12 @@
   left: 10px;
   top: 10px;
   transform-style: preserve-3d;
-  /* El reflejo se aplica al wrapper para que siga existiendo al girar */
+  /* El reflejo en modo claro puede ser más suave */
+  -webkit-box-reflect: below 15px linear-gradient(transparent, transparent, rgba(0,0,0,0.1));
+  will-change: transform; /* Optmización extra */
+}
+
+[data-theme='dark'] .carousel-item-wrapper {
   -webkit-box-reflect: below 15px linear-gradient(transparent, transparent, rgba(0,0,0,0.3));
 }
 
@@ -78,6 +91,11 @@
   backface-visibility: hidden;
   border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 10px 30px rgba(7, 23, 66, 0.1);
+  border: 1px solid rgba(7, 23, 66, 0.1);
+}
+
+[data-theme='dark'] .card-face {
   box-shadow: 0 0 15px rgba(255,255,255,0.1);
   border: 1px solid rgba(255,255,255,0.1);
 }
@@ -96,7 +114,7 @@
   left: 0;
   width: 100%;
   padding: 20px 10px;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
   color: #fff;
   text-align: center;
 }
@@ -110,7 +128,7 @@
 
 /* Reverso de la tarjeta */
 .card-back {
-  background: #111827; /* Fondo oscuro elegante */
+  background: #ffffff; /* Fondo claro por defecto */
   transform: rotateY(180deg);
   display: flex;
   align-items: center;
@@ -119,19 +137,31 @@
   text-align: center;
 }
 
+[data-theme='dark'] .card-back {
+  background: #111827;
+}
+
 .card-back-content h4 {
   font-family: 'Sora', sans-serif;
   font-size: 15px;
   font-weight: 700;
-  color: #4b9fff;
+  color: #1B60DF; /* Azul brillante en modo claro */
   margin-bottom: 12px;
+}
+
+[data-theme='dark'] .card-back-content h4 {
+  color: #4b9fff;
 }
 
 .card-back-content p {
   font-size: 12px;
   line-height: 1.5;
-  color: #A3B5D1;
+  color: #475569; /* Gris oscuro en modo claro */
   margin: 0;
+}
+
+[data-theme='dark'] .card-back-content p {
+  color: #A3B5D1;
 }
 
 @keyframes spinCarousel {
@@ -155,7 +185,7 @@
   font-family: 'Sora', sans-serif;
   font-size: 13px;
   font-weight: 700;
-  color: #4b9fff;
+  color: #1B60DF; /* Azul brillante en light mode */
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-bottom: 16px;
@@ -163,11 +193,17 @@
   align-items: center;
   gap: 12px;
 }
+[data-theme='dark'] .disciplines-eyebrow {
+  color: #4b9fff;
+}
 .disciplines-eyebrow::before {
   content: "";
   display: block;
   width: 24px;
   height: 2px;
+  background: #1B60DF;
+}
+[data-theme='dark'] .disciplines-eyebrow::before {
   background: #4b9fff;
 }
 
@@ -181,9 +217,12 @@
 
 .disciplines-description {
   font-size: 16px;
-  color: #A3B5D1;
+  color: #475569; /* Gris oscuro en light mode */
   line-height: 1.6;
   margin-bottom: 32px;
+}
+[data-theme='dark'] .disciplines-description {
+  color: #A3B5D1;
 }
 
 .disciplines-features {
@@ -201,6 +240,9 @@
   gap: 12px;
   font-size: 15px;
   font-weight: 500;
+  color: #071742; /* Navy en light mode */
+}
+[data-theme='dark'] .disciplines-features li {
   color: #fff;
 }
 
@@ -236,5 +278,17 @@
   }
   .disciplines-text-col {
     align-items: center;
+  }
+}
+
+/* Optimización extrema para móviles (evitar lag) */
+@media (max-width: 768px) {
+  .carousel-item-wrapper {
+    /* El reflejo 3D consume muchísimos recursos en GPUs de celulares */
+    -webkit-box-reflect: none !important;
+  }
+  .card-face {
+    /* Reducir sombras también ayuda a los FPS en celulares */
+    box-shadow: none !important;
   }
 }

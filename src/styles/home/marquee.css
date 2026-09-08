@@ -95,10 +95,9 @@
 
 /* ============ INDEXING MARQUEE ============ */
 .indexing-marquee {
-  background: var(--navy);
-  padding: 28px 0;
+  padding: 40px 0;
+  background: transparent;
   overflow: hidden;
-  border-top: 1px solid rgba(255, 255, 255, .07);
   position: relative;
 }
 
@@ -115,12 +114,12 @@
 
 .indexing-marquee::before {
   left: 0;
-  background: linear-gradient(to right, var(--navy), transparent);
+  background: transparent;
 }
 
 .indexing-marquee::after {
   right: 0;
-  background: linear-gradient(to left, var(--navy), transparent);
+  background: transparent;
 }
 
 .indexing-label {
@@ -129,9 +128,12 @@
   font-weight: 600;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, .35);
+  color: rgba(7, 23, 66, .4);
   margin-bottom: 18px;
   padding: 0 32px;
+}
+[data-theme='dark'] .indexing-label {
+  color: rgba(255, 255, 255, .35);
 }
 
 .marquee-outer {
@@ -174,6 +176,10 @@
   height: 45px;
   width: auto;
   display: block;
+  filter: grayscale(100%) opacity(0.6);
+}
+[data-theme='dark'] .idx-logo svg,
+[data-theme='dark'] .idx-logo img {
   filter: brightness(0) invert(1);
 }
 

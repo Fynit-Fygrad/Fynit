@@ -156,7 +156,7 @@
 
 /* ============ COMO FUNCIONA ============ */
 .how {
-  background: var(--white);
+  background: transparent;
 }
 
 .how-grid {

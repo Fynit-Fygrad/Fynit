@@ -188,3 +188,8 @@
 
 /* sidebar-bottom removed for minimalist look */
 
+@media (min-width: 1025px) {
+  .sidebar-auth-btns {
+    display: none !important;
+  }
+}

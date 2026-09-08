@@ -1,10 +1,13 @@
 /* ============ NUMBERS & MASCOT ============ */
 .numbers {
-  background: var(--navy);
-  color: var(--white);
+  background: transparent;
+  color: #071742;
   padding: 110px 0;
   position: relative;
   overflow: hidden;
+}
+[data-theme='dark'] .numbers {
+  color: var(--white);
 }
 
 .numbers::before {
@@ -77,9 +80,12 @@
 
 .number-item {
   text-align: left;
-  border-left: 1px solid rgba(255, 255, 255, .12);
+  border-left: 1px solid rgba(7, 23, 66, .12);
   padding: 0 40px;
   transition: background .3s;
+}
+[data-theme='dark'] .number-item {
+  border-left: 1px solid rgba(255, 255, 255, .12);
 }
 
 .number-item:hover {
@@ -95,11 +101,14 @@
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, .08);
+  background: rgba(7, 23, 66, .08);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
+}
+[data-theme='dark'] .number-item .icon-wrap {
+  background: rgba(255, 255, 255, .08);
 }
 
 .number-item .icon-wrap svg {
@@ -113,10 +122,13 @@
   font-weight: 800;
   font-size: clamp(2.6rem, 4.4vw, 4.2rem);
   line-height: 1;
-  color: var(--white);
+  color: #071742;
   display: flex;
   align-items: baseline;
   gap: 4px;
+}
+[data-theme='dark'] .number-item .num {
+  color: var(--white);
 }
 
 .number-item .num .accent {
@@ -126,16 +138,22 @@
 .number-item .metric-word {
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--white);
+  color: #071742;
   margin-top: 4px;
+}
+[data-theme='dark'] .number-item .metric-word {
+  color: var(--white);
 }
 
 .number-item .lbl {
   margin-top: 10px;
   font-size: 14px;
-  color: rgba(255, 255, 255, .55);
+  color: rgba(7, 23, 66, .7);
   line-height: 1.6;
   max-width: 200px;
+}
+[data-theme='dark'] .number-item .lbl {
+  color: rgba(255, 255, 255, .55);
 }
 
 @media (max-width: 1024px) {

@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import { motion, useScroll } from 'framer-motion';
 import { showComingSoon } from '@/components/Toaster';
 import { useTheme } from 'next-themes';
 import DisciplinesCarousel from '@/components/DisciplinesCarousel';
@@ -15,16 +16,22 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const countersRef = useRef<HTMLElement>(null);
 
-  // Autoplay para "Cómo funciona"
+  // Scrollytelling para "Cómo funciona"
+  const { scrollYProgress } = useScroll({
+    target: howSectionRef,
+    offset: ["start center", "end center"]
+  });
+
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (!userInteracted) {
-      timer = setInterval(() => {
-        setCurrentStep(prev => (prev % 4) + 1);
-      }, 5000);
-    }
-    return () => clearInterval(timer);
-  }, [userInteracted]);
+    if (userInteracted) return;
+    const unsubscribe = scrollYProgress.on("change", (latest) => {
+      if (latest < 0.25) setCurrentStep(1);
+      else if (latest < 0.5) setCurrentStep(2);
+      else if (latest < 0.75) setCurrentStep(3);
+      else setCurrentStep(4);
+    });
+    return () => unsubscribe();
+  }, [scrollYProgress, userInteracted]);
 
   // Observer para "Contador de números"
   useEffect(() => {
@@ -61,7 +68,8 @@ export default function Home() {
       <section className="epic-hero-section" id="inicio">
 
         {/* Full-bleed background image */}
-        <div className="epic-hero-bg"
+        <div
+          className="epic-hero-bg"
           style={{ backgroundImage: `url('${heroBg}')` }}
           aria-hidden="true"
         />
@@ -287,38 +295,54 @@ export default function Home() {
           </div>
 
           <div className="how-grid">
-            <div className="how-steps" id="howSteps">
-              <div className={`step-card ${currentStep === 1 ? "is-active" : ""}`} onClick={() => handleStepClick(1)} style={{ cursor: "pointer" }}>
-                <span className="step-num">01</span>
-                <div className="step-body">
-                  <h3>Carga y Diagnóstico Inmediato</h3>
-                  <p>Sube tu artículo (PDF/Word) y en segundos nuestra IA evalúa similitud, readiness y calidad
-                    metodológica.</p>
-                </div>
+            <div className="how-steps-container" style={{ display: 'flex', gap: '20px', position: 'relative' }}>
+              {/* Vertical Scroll Track */}
+              <div className="scroll-timeline-track" style={{ width: '4px', background: 'var(--line)', borderRadius: '4px', position: 'relative', overflow: 'hidden', marginTop: '22px', marginBottom: '22px' }}>
+                <motion.div 
+                  className="scroll-timeline-fill"
+                  style={{
+                    position: 'absolute',
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    background: 'var(--blue)',
+                    transformOrigin: 'top',
+                    scaleY: scrollYProgress
+                  }}
+                />
               </div>
-              <div className={`step-card ${currentStep === 2 ? "is-active" : ""}`} onClick={() => handleStepClick(2)} style={{ cursor: "pointer" }}>
-                <span className="step-num">02</span>
-                <div className="step-body">
-                  <h3>Detección de Riesgos y Cuartil</h3>
-                  <p>Descubre qué secciones necesitan trabajo y conoce tu nivel de publicación actual (Q1-Q4) sin
-                    adivinar.</p>
+
+              <div className="how-steps" id="howSteps" style={{ flex: 1 }}>
+                <div className={`step-card ${currentStep === 1 ? "is-active" : ""}`} onClick={() => handleStepClick(1)} style={{ cursor: "pointer" }}>
+                  <span className="step-num">01</span>
+                  <div className="step-body">
+                    <h3>Carga y Diagnóstico Inmediato</h3>
+                    <p>Sube tu artículo (PDF/Word) y en segundos nuestra IA evalúa similitud, readiness y calidad
+                      metodológica.</p>
+                  </div>
                 </div>
-              </div>
-              <div className={`step-card ${currentStep === 3 ? "is-active" : ""}`} onClick={() => handleStepClick(3)} style={{ cursor: "pointer" }}>
-                <span className="step-num">03</span>
-                <div className="step-body">
-                  <h3>Match con Revistas Ideales</h3>
-                  <p>Recibe recomendaciones precisas de revistas y conferencias indexadas (Scopus, WoS) según tu fit
-                    real.
-                  </p>
+                <div className={`step-card ${currentStep === 2 ? "is-active" : ""}`} onClick={() => handleStepClick(2)} style={{ cursor: "pointer" }}>
+                  <span className="step-num">02</span>
+                  <div className="step-body">
+                    <h3>Detección de Riesgos y Cuartil</h3>
+                    <p>Descubre qué secciones necesitan trabajo y conoce tu nivel de publicación actual (Q1-Q4) sin
+                      adivinar.</p>
+                  </div>
                 </div>
-              </div>
-              <div className={`step-card ${currentStep === 4 ? "is-active" : ""}`} onClick={() => handleStepClick(4)} style={{ cursor: "pointer" }}>
-                <span className="step-num">04</span>
-                <div className="step-body">
-                  <h3>Plan de Acción y Red de Expertos</h3>
-                  <p>Sigue una ruta de mejora paso a paso o conecta con metedólogos y editores verificados para potenciar
-                    tu paper.</p>
+                <div className={`step-card ${currentStep === 3 ? "is-active" : ""}`} onClick={() => handleStepClick(3)} style={{ cursor: "pointer" }}>
+                  <span className="step-num">03</span>
+                  <div className="step-body">
+                    <h3>Match con Revistas Ideales</h3>
+                    <p>Recibe recomendaciones precisas de revistas y conferencias indexadas (Scopus, WoS) según tu fit
+                      real.
+                    </p>
+                  </div>
+                </div>
+                <div className={`step-card ${currentStep === 4 ? "is-active" : ""}`} onClick={() => handleStepClick(4)} style={{ cursor: "pointer" }}>
+                  <span className="step-num">04</span>
+                  <div className="step-body">
+                    <h3>Plan de Acción y Red de Expertos</h3>
+                    <p>Sigue una ruta de mejora paso a paso o conecta con metedólogos y editores verificados para potenciar
+                      tu paper.</p>
+                  </div>
                 </div>
               </div>
             </div>

@@ -1,0 +1,78 @@
+/* ============ ANIMATED BACKGROUND ============ */
+.animated-bg-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: #FFFFFF;
+}
+[data-theme='dark'] .animated-bg-container {
+  background-color: #050B14 !important;
+}
+
+/* Mesh Gradient Orbs */
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 1;
+  animation: orb-float 20s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+  width: 60vw;
+  height: 60vw;
+  top: -20vh;
+  left: -10vw;
+  background: rgba(27, 96, 223, 0.22); /* Fynit Blue 22% */
+  animation: orb-float-1 25s ease-in-out infinite alternate;
+}
+
+.orb-2 {
+  width: 50vw;
+  height: 50vw;
+  bottom: -15vh;
+  right: -5vw;
+  background: rgba(254, 198, 0, 0.15); /* Fynit Yellow 15% */
+  animation: orb-float-2 28s ease-in-out infinite alternate-reverse;
+}
+
+.orb-3 {
+  width: 40vw;
+  height: 40vw;
+  top: 30vh;
+  left: 40vw;
+  background: rgba(67, 113, 236, 0.18); /* Secondary Blue 18% */
+  animation: orb-float-3 30s ease-in-out infinite alternate;
+}
+
+/* Dark mode overrides */
+[data-theme='dark'] .orb-1 {
+  background: rgba(27, 96, 223, 0.15);
+}
+
+[data-theme='dark'] .orb-2 {
+  background: rgba(7, 23, 66, 0.4);
+}
+
+[data-theme='dark'] .orb-3 {
+  background: rgba(30, 58, 138, 0.2);
+}
+
+@keyframes orb-float {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(5vw, 10vh) scale(1.1);
+  }
+  66% {
+    transform: translate(-5vw, 5vh) scale(0.9);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}

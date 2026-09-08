@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Toaster from "@/components/Toaster";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import AnimatedBackground from "@/components/AnimatedBackground";
 import "./globals.css";
 // Global Styles
 import "@/styles/variables.css";
@@ -23,6 +24,9 @@ import "@/styles/home/equipo-home.css";
 import "@/styles/home/numbers-mascot.css";
 import "@/styles/home/testimonials.css";
 import "@/styles/home/pricing.css";
+
+// Components
+import "@/styles/components/animated-background.css";
 
 // Footer
 import "@/styles/layout/footer.css";
@@ -67,6 +71,7 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
+          <AnimatedBackground />
           <Navbar />
           <main>
             {children}
