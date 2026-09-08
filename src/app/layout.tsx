@@ -47,6 +47,8 @@ const manrope = Manrope({
   subsets: ["latin"],
 });
 
+import { GoogleAnalytics } from '@next/third-parties/google';
+
 export const metadata: Metadata = {
   title: "Fynit | Impulsa tu Investigación Científica",
   description: "Fynit ayuda a investigadores a evaluar y corregir sus artículos científicos antes de enviarlos a revistas top (Scopus, WoS) mediante herramientas automatizadas.",
@@ -83,6 +85,7 @@ export default function RootLayout({
         </ThemeProvider>
         <Script src="https://unpkg.com/aos@2.3.1/dist/aos.js" strategy="lazyOnload" />
       </body>
+      <GoogleAnalytics gaId="G-PVYLFYNETX" />
     </html>
   );
 }
