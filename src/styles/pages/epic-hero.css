@@ -567,13 +567,18 @@
 
 /* Mobile */
 @media (max-width: 900px) {
+  .epic-hero-section {
+    height: auto;
+    min-height: 100svh;
+  }
+
   .epic-left {
     position: relative;
     left: auto;
     top: auto;
     transform: none;
     width: 100%;
-    padding: 120px 24px 40px 24px;
+    padding: 120px 24px 20px 24px;
     display: flex;
     flex-direction: column;
     align-items: center;

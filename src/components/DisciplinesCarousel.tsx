@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import '@/styles/components/disciplines-carousel.css';
 
 import TextType from './TextType';
@@ -52,9 +52,10 @@ export default function DisciplinesCarousel() {
         
         <div className="disciplines-grid">
           
-          {/* Columna Izquierda: Carrusel 3D Puro */}
+          {/* Columna Izquierda: Carrusel 3D Puro (Desktop) & Marquee Slider (Mobile) */}
           <div className="disciplines-carousel-col" data-aos="fade-right">
-            <div className="scene-3d">
+            {/* Desktop 3D Scene */}
+            <div className="scene-3d desktop-only">
               <div className="carousel-3d">
                 {disciplines.map((d, index) => {
                   const rotateY = index * (360 / disciplines.length);
@@ -86,6 +87,23 @@ export default function DisciplinesCarousel() {
                     </div>
                   );
                 })}
+              </div>
+            </div>
+
+            {/* Mobile Marquee Slider */}
+            <div className="mobile-snap-slider mobile-only">
+              <div className="mobile-marquee-track">
+                {[...disciplines, ...disciplines].map((d, idx) => (
+                  <div key={`${d.id}-${idx}`} className="snap-card">
+                    <div className="snap-card-inner">
+                      <div className="snap-content">
+                        <h4>{d.title}</h4>
+                        <p>{d.description}</p>
+                      </div>
+                      <img src={d.image} alt={d.title} className="snap-img" />
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

@@ -141,8 +141,72 @@ export default function OrbitalIndexaciones() {
         background:     'linear-gradient(135deg, #dbeafe 0%, #e0e7ff 40%, #ede9fe 70%, #fce7f3 100%)',
       }}
     >
+      <style>{`
+        .desktop-only { display: block !important; }
+        .mobile-only { display: none !important; }
+        
+        @media (max-width: 768px) {
+          .desktop-only { display: none !important; }
+          .mobile-only { display: flex !important; }
+          
+          #indexaciones {
+            flex-direction: column !important;
+            padding: 40px 0 60px 0 !important;
+            min-height: auto !important;
+          }
+        }
+
+        .marquee-wrapper {
+          width: 100vw;
+          overflow: hidden;
+          position: relative;
+          padding: 30px 0;
+          margin-top: 40px;
+          /* display: flex is handled by .mobile-only */
+        }
+
+        .marquee-content {
+          display: flex;
+          gap: 20px;
+          animation: marquee 50s linear infinite;
+          padding-left: 20px;
+        }
+
+        .marquee-card {
+          flex: 0 0 auto;
+          width: 140px;
+          height: 75px;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 12px 16px;
+          background: rgba(255,255,255,0.82);
+          border: 1px solid rgba(255,255,255,0.95);
+          box-shadow: 0 10px 32px -6px rgba(80,100,200,0.14);
+        }
+
+        [data-theme='dark'] .marquee-card {
+          background: linear-gradient(145deg, #112057 0%, #0d1a4a 100%);
+          border: 1px solid rgba(99,179,237,0.15);
+          box-shadow: 0 12px 36px -6px rgba(0,0,0,0.65);
+        }
+
+        .marquee-card img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(calc(-100% - 20px)); }
+        }
+      `}</style>
+
       {/* ── SVG orbit track ── */}
       <svg
+        className="desktop-only"
         style={{
           position:      'absolute',
           top:           0, left: 0,
@@ -167,6 +231,7 @@ export default function OrbitalIndexaciones() {
       {/* ── Orbit origin ── */}
       <div
         ref={orbitRef}
+        className="desktop-only"
         style={{ position: 'absolute', top: '50%', left: '50%', width: 0, height: 0, zIndex: 5 }}
       >
         {INDEXATIONS.map((item, idx) => (
@@ -255,6 +320,18 @@ export default function OrbitalIndexaciones() {
           <strong style={{ color: isDark ? '#e2e8f0' : '#0f172a' }}>Renacyt, MinCiencias, Concytec</strong>{' '}
           y comités editoriales internacionales.
         </p>
+      </div>
+
+      {/* ── Mobile Marquee (replaces Orbit on small screens) ── */}
+      <div className="mobile-only marquee-wrapper">
+        <div className="marquee-content">
+          {/* Double the list to make infinite scrolling smooth */}
+          {[...INDEXATIONS, ...INDEXATIONS].map((item, idx) => (
+            <div key={`${item.id}-${idx}`} className="marquee-card">
+              <img src={item.logo} alt={item.name} draggable={false} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

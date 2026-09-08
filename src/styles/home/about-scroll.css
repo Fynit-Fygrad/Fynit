@@ -1,31 +1,35 @@
 /* =========================================================================
-   NUEVA SECCIÓN: SOBRE NOSOTROS (Scroll Storytelling)
+   NUEVA SECCIÓN: SOBRE NOSOTROS (Estática con Micro-animaciones y Bento Grid)
    ========================================================================= */
 
-.about-scroll-container {
+.about-static-container {
   position: relative;
-  height: 400vh; /* 4 screens height for scrolling */
+  min-height: 100vh;
   background: transparent;
   width: 100%;
-}
-
-.about-sticky-view {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
+  padding: 120px 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+}
+
+.about-static-view {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
 }
 
 .about-center-content {
   position: relative;
   text-align: center;
   z-index: 30;
-  max-width: 520px; /* Reduced to prevent overlapping */
-  padding: 0 20px;
+  max-width: 800px;
 }
 
 .title-wrapper {
@@ -68,20 +72,24 @@
 
 .massive-title {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 6.5rem); /* Truly massive */
-  line-height: 0.85; /* Extremely tight */
+  font-size: clamp(2.5rem, 6vw, 4.5rem); 
+  line-height: 0.9;
   font-weight: 900;
   color: var(--navy);
-  letter-spacing: -3px; /* Condensed */
+  letter-spacing: -2px;
   text-transform: uppercase;
   position: relative;
   z-index: 2;
   margin: 0;
   width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .black-title {
-  color: #000; /* Pure black */
+  color: #000;
 }
 
 [data-theme='dark'] .massive-title,
@@ -94,7 +102,7 @@
   color: var(--navy);
   opacity: 0.8;
   line-height: 1.6;
-  max-width: 540px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
@@ -102,26 +110,38 @@
   color: #fff;
 }
 
+/* =========================================================================
+   BENTO GRID
+   ========================================================================= */
+
+.about-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  width: 100%;
+  max-width: 1000px;
+  z-index: 20;
+}
+
 /* Glass Panels (Premium Redesign) */
 .glass-panel {
-  position: absolute;
-  width: 280px; /* Thinner */
-  padding: 24px;
+  position: relative;
+  padding: 30px;
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 20px;
+  border-radius: 24px;
   box-shadow: 0 20px 40px rgba(7, 23, 66, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
   display: flex;
   flex-direction: column;
   gap: 12px;
-  z-index: 20;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden; /* Keeps mascot inside bounds */
 }
 
 .glass-panel:hover {
-  transform: translateY(-5px) !important; /* Slight lift on hover */
+  transform: translateY(-5px) !important;
   box-shadow: 0 30px 60px rgba(7, 23, 66, 0.12), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
@@ -131,12 +151,7 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-[data-theme='dark'] .about-center-content h2,
-[data-theme='dark'] .about-center-content p {
-  color: #fff;
-}
-
-/* Panel Number as a sleek badge */
+/* Panel Number */
 .panel-number {
   font-size: 13px;
   font-weight: 800;
@@ -146,15 +161,18 @@
   padding: 4px 10px;
   border-radius: 20px;
   letter-spacing: 1px;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
+  z-index: 2;
 }
 
 .glass-panel h3 {
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: var(--navy);
   margin: 0;
   line-height: 1.3;
+  z-index: 2;
+  max-width: 80%;
 }
 
 [data-theme='dark'] .glass-panel h3 {
@@ -162,48 +180,58 @@
 }
 
 .glass-panel p {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--navy);
   opacity: 0.75;
   margin: 0;
   line-height: 1.5;
+  z-index: 2;
+  max-width: 85%;
 }
 
 [data-theme='dark'] .glass-panel p {
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Panel positions relative to center - Pushed further to edges */
-.panel-1 { top: 12%; left: 3%; }
-.panel-2 { bottom: 12%; right: 3%; }
-.panel-3 { top: 18%; right: 5%; }
-.panel-4 { bottom: 18%; left: 5%; }
+/* =========================================================================
+   MASCOTS INSIDE CARDS
+   ========================================================================= */
 
-/* Peeking Mascot classes */
-.peeking-mascot-left {
+.bento-mascot {
   position: absolute;
-  top: 50%;
-  left: -80px;
   width: 120px;
-  transform: translateY(-50%) scaleX(-1);
-  z-index: -1;
+  opacity: 0.8;
   pointer-events: none;
+  z-index: 1;
 }
 
-.peeking-mascot-right {
-  position: absolute;
-  top: 50%;
-  right: -80px;
-  width: 120px;
-  transform: translateY(-50%) scaleX(1);
-  z-index: -1;
-  pointer-events: none;
+.flip-horizontal {
+  transform: scaleX(-1);
+}
+
+.bento-mascot.bottom-right {
+  bottom: -20px;
+  right: -20px;
+}
+
+.bento-mascot.top-right {
+  top: -20px;
+  right: -20px;
+}
+
+.bento-mascot.bottom-left {
+  bottom: -20px;
+  left: -20px;
+}
+
+.bento-mascot.top-left {
+  top: -20px;
+  left: -20px;
 }
 
 @media (max-width: 1024px) {
-  .about-scroll-container { height: auto; padding: 100px 0; }
-  .about-sticky-view { position: relative; height: auto; flex-direction: column; padding: 0 20px; gap: 40px; }
-  .glass-panel { position: relative; width: 100%; top: auto !important; left: auto !important; right: auto !important; bottom: auto !important; transform: none !important; opacity: 1 !important; margin-bottom: 20px;}
-  .about-center-content { margin-bottom: 40px; }
-  .about-center-content h2 { font-size: 2.2rem; }
+  .about-static-container { padding: 80px 20px; }
+  .about-bento-grid { grid-template-columns: 1fr; gap: 20px; }
+  .glass-panel { margin-bottom: 0; }
+  .massive-title { font-size: clamp(2rem, 8vw, 3rem); }
 }

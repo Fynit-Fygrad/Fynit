@@ -273,8 +273,9 @@
     text-align: center;
   }
   .disciplines-carousel-col {
-    order: -1; /* Mantiene el carrusel arriba en móviles */
-    margin-bottom: 30px;
+    order: 2; /* Move the carousel below the text on mobile */
+    margin-top: 30px;
+    margin-bottom: 0;
   }
   .disciplines-text-col {
     align-items: center;
@@ -284,11 +285,111 @@
 /* Optimización extrema para móviles (evitar lag) */
 @media (max-width: 768px) {
   .carousel-item-wrapper {
-    /* El reflejo 3D consume muchísimos recursos en GPUs de celulares */
     -webkit-box-reflect: none !important;
   }
   .card-face {
-    /* Reducir sombras también ayuda a los FPS en celulares */
     box-shadow: none !important;
+  }
+}
+
+/* ============ MOBILE SNAP SLIDER ============ */
+.mobile-only {
+  display: none;
+}
+.desktop-only {
+  display: block;
+}
+
+@media (max-width: 992px) {
+  .mobile-only {
+    display: flex;
+  }
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-snap-slider {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    padding: 20px 0 40px 0;
+    display: flex;
+  }
+
+  .mobile-marquee-track {
+    display: flex;
+    gap: 20px;
+    animation: disciplineMarquee 25s linear infinite;
+    padding-left: 20px;
+  }
+
+  /* Pause on touch/hover so user can read */
+  .mobile-marquee-track:hover,
+  .mobile-marquee-track:active {
+    animation-play-state: paused;
+  }
+
+  @keyframes disciplineMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 10px)); } /* Since we doubled the array, translate by half */
+  }
+
+  .snap-card {
+    scroll-snap-align: center;
+    flex: 0 0 85%;
+    max-width: 320px;
+  }
+
+  .snap-card-inner {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(7, 23, 66, 0.1);
+    border: 1px solid rgba(7, 23, 66, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  [data-theme='dark'] .snap-card-inner {
+    background: #111827;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 15px rgba(255,255,255,0.05);
+  }
+
+  .snap-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .snap-content {
+    padding: 20px;
+    text-align: left;
+  }
+
+  .snap-content h4 {
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1B60DF;
+    margin-bottom: 10px;
+  }
+
+  [data-theme='dark'] .snap-content h4 {
+    color: #4b9fff;
+  }
+
+  .snap-content p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #475569;
+    margin: 0;
+  }
+
+  [data-theme='dark'] .snap-content p {
+    color: #A3B5D1;
   }
 }

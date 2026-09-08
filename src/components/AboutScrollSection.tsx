@@ -1,6 +1,6 @@
 'use client';
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import TextType from './TextType';
 import BlurText from './BlurText';
@@ -8,40 +8,45 @@ import BlurText from './BlurText';
 export default function AboutScrollSection() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
+  // Variantes para la animación de entrada
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: (custom: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: { 
+        delay: custom * 0.15,
+        duration: 0.8,
+        ease: [0.25, 0.1, 0.25, 1]
+      }
+    })
+  };
 
-  // Animaciones Tarjeta 1 (Top Left)
-  const opacity1 = useTransform(scrollYProgress, [0, 0.1, 0.2], [0, 1, 1]);
-  const y1 = useTransform(scrollYProgress, [0, 0.2], [100, 0]);
-  const rotate1 = useTransform(scrollYProgress, [0, 0.2], [10, -5]);
-
-  // Animaciones Tarjeta 2 (Bottom Right)
-  const opacity2 = useTransform(scrollYProgress, [0.15, 0.25, 0.35], [0, 1, 1]);
-  const y2 = useTransform(scrollYProgress, [0.15, 0.35], [100, 0]);
-  const rotate2 = useTransform(scrollYProgress, [0.15, 0.35], [-10, 3]);
-
-  // Animaciones Tarjeta 3 (Top Right)
-  const opacity3 = useTransform(scrollYProgress, [0.3, 0.4, 0.5], [0, 1, 1]);
-  const y3 = useTransform(scrollYProgress, [0.3, 0.5], [100, 0]);
-  const rotate3 = useTransform(scrollYProgress, [0.3, 0.5], [5, 4]);
-
-  // Animaciones Tarjeta 4 (Bottom Left)
-  const opacity4 = useTransform(scrollYProgress, [0.45, 0.55, 0.65], [0, 1, 1]);
-  const y4 = useTransform(scrollYProgress, [0.45, 0.65], [100, 0]);
-  const rotate4 = useTransform(scrollYProgress, [0.45, 0.65], [-5, -2]);
-
-  // Central Text Scale
-  const titleScale = useTransform(scrollYProgress, [0, 0.8], [1, 0.95]);
+  // Variantes para la animación de flotación constante (micro-interacción)
+  const floatVariants = {
+    float: (custom: number) => ({
+      y: [0, -15, 0],
+      transition: {
+        duration: 4 + (custom % 2), // Tiempos ligeramente distintos para que sea orgánico
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay: custom * 0.5
+      }
+    })
+  };
 
   return (
-    <section ref={containerRef} className="about-scroll-container">
-      <div className="about-sticky-view">
+    <section ref={containerRef} className="about-static-container">
+      <div className="about-static-view">
         
         {/* Título Central */}
-        <motion.div className="about-center-content" style={{ scale: titleScale }}>
+        <motion.div 
+          className="about-center-content"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+        >
           <div className="title-wrapper">
             <TextType 
               text={[
@@ -57,14 +62,13 @@ export default function AboutScrollSection() {
               className="premium-typing-text"
             />
             
-            <div style={{ width: '100%', maxWidth: '750px', display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: '100%', maxWidth: '800px', display: 'flex', justifyContent: 'center' }}>
               <BlurText
                 text="DE INVESTIGADORES PARA INVESTIGADORES"
                 className="massive-title black-title"
                 delay={30}
                 animateBy="words"
                 direction="top"
-                style={{ justifyContent: 'center', textAlign: 'center', fontSize: 'clamp(1.5rem, 3vw, 40px)' }}
               />
             </div>
           </div>
@@ -74,53 +78,92 @@ export default function AboutScrollSection() {
           </p>
         </motion.div>
 
-        {/* Tarjeta 1 */}
-        <motion.div className="glass-panel panel-1" style={{ opacity: opacity1, y: y1, rotate: rotate1 }}>
-          <motion.img 
-            src="assets/imgs png/mascot_peeking.webp" 
-            alt="Mascot Peeking" 
-            className="peeking-mascot-right"
-          />
-          <span className="panel-number">01</span>
-          <h3>Meses sin saber si vas bien</h3>
-          <p>Revisas y revisas sin una señal clara de si tu argumento sostiene una publicación.</p>
-        </motion.div>
+        {/* Contenedor de Tarjetas (Bento Grid) */}
+        <div className="about-bento-grid">
+          {/* Tarjeta 1 */}
+          <motion.div 
+            className="glass-panel"
+            custom={1}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+          >
+            <motion.div variants={floatVariants} animate="float" custom={1} style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <span className="panel-number">01</span>
+              <h3>Meses sin saber si vas bien</h3>
+              <p>Revisas y revisas sin una señal clara de si tu argumento sostiene una publicación.</p>
+              <img 
+                src="assets/imgs png/mascot_peeking.webp" 
+                alt="Mascot Peeking" 
+                className="bento-mascot bottom-right"
+              />
+            </motion.div>
+          </motion.div>
 
-        {/* Tarjeta 2 */}
-        <motion.div className="glass-panel panel-2" style={{ opacity: opacity2, y: y2, rotate: rotate2 }}>
-          <motion.img 
-            src="assets/imgs png/mascot_peeking.webp" 
-            alt="Mascot Peeking" 
-            className="peeking-mascot-left"
-          />
-          <span className="panel-number">02</span>
-          <h3>Feedback disperso y tardío</h3>
-          <p>El asesor lo dice por correo, el jurado en la sustentación, casi nunca a tiempo.</p>
-        </motion.div>
+          {/* Tarjeta 2 */}
+          <motion.div 
+            className="glass-panel"
+            custom={2}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+          >
+            <motion.div variants={floatVariants} animate="float" custom={2} style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <span className="panel-number">02</span>
+              <h3>Feedback disperso y tardío</h3>
+              <p>El asesor lo dice por correo, el jurado en la sustentación, casi nunca a tiempo.</p>
+              <img 
+                src="assets/imgs png/mascot_peeking.webp" 
+                alt="Mascot Peeking" 
+                className="bento-mascot top-right flip-horizontal"
+              />
+            </motion.div>
+          </motion.div>
 
-        {/* Tarjeta 3 */}
-        <motion.div className="glass-panel panel-3" style={{ opacity: opacity3, y: y3, rotate: rotate3 }}>
-          <motion.img 
-            src="assets/imgs png/mascot_peeking.webp" 
-            alt="Mascot Peeking" 
-            className="peeking-mascot-left"
-          />
-          <span className="panel-number">03</span>
-          <h3>No sabes dónde postular</h3>
-          <p>Cientos de revistas y ningún criterio claro sobre cuál se ajusta a tu perfil.</p>
-        </motion.div>
+          {/* Tarjeta 3 */}
+          <motion.div 
+            className="glass-panel"
+            custom={3}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+          >
+            <motion.div variants={floatVariants} animate="float" custom={3} style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <span className="panel-number">03</span>
+              <h3>No sabes dónde postular</h3>
+              <p>Cientos de revistas y ningún criterio claro sobre cuál se ajusta a tu perfil.</p>
+              <img 
+                src="assets/imgs png/mascot_peeking.webp" 
+                alt="Mascot Peeking" 
+                className="bento-mascot bottom-right"
+              />
+            </motion.div>
+          </motion.div>
 
-        {/* Tarjeta 4 */}
-        <motion.div className="glass-panel panel-4" style={{ opacity: opacity4, y: y4, rotate: rotate4 }}>
-          <motion.img 
-            src="assets/imgs png/mascot_peeking.webp" 
-            alt="Mascot Peeking" 
-            className="peeking-mascot-right"
-          />
-          <span className="panel-number">04</span>
-          <h3>El detalle que baja tu originalidad</h3>
-          <p>Frases mal formateadas: pequeños descuidos que restan sin que los notes.</p>
-        </motion.div>
+          {/* Tarjeta 4 */}
+          <motion.div 
+            className="glass-panel"
+            custom={4}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+          >
+            <motion.div variants={floatVariants} animate="float" custom={4} style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <span className="panel-number">04</span>
+              <h3>El detalle que baja tu originalidad</h3>
+              <p>Frases mal formateadas: pequeños descuidos que restan sin que los notes.</p>
+              <img 
+                src="assets/imgs png/mascot_peeking.webp" 
+                alt="Mascot Peeking" 
+                className="bento-mascot top-right flip-horizontal"
+              />
+            </motion.div>
+          </motion.div>
+        </div>
 
       </div>
     </section>
