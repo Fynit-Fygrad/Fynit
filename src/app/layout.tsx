@@ -3,6 +3,7 @@ import { Sora, Manrope } from "next/font/google";
 import Script from "next/script";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CookieBanner from "@/components/CookieBanner";
 import Toaster from "@/components/Toaster";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import AnimatedBackground from "@/components/AnimatedBackground";
@@ -27,6 +28,7 @@ import "@/styles/home/pricing.css";
 
 // Components
 import "@/styles/components/animated-background.css";
+import "@/styles/components/cookie-banner.css";
 
 // Footer
 import "@/styles/layout/footer.css";
@@ -46,8 +48,6 @@ const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
 });
-
-import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
   title: "Fynit | Impulsa tu Investigación Científica",
@@ -81,11 +81,11 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <CookieBanner />
           <Toaster />
         </ThemeProvider>
         <Script src="https://unpkg.com/aos@2.3.1/dist/aos.js" strategy="lazyOnload" />
       </body>
-      <GoogleAnalytics gaId="G-PVYLFYNETX" />
     </html>
   );
 }
