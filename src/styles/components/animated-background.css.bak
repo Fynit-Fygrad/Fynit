@@ -23,29 +23,29 @@
 }
 
 .orb-1 {
-  width: 75vw;
-  height: 75vw;
-  top: -30vh;
-  left: -20vw;
-  background: rgba(27, 96, 223, 0.19); /* Fynit Blue — protagonista */
+  width: 60vw;
+  height: 60vw;
+  top: -20vh;
+  left: -10vw;
+  background: rgba(27, 96, 223, 0.22); /* Fynit Blue 22% */
   animation: orb-float-1 25s ease-in-out infinite alternate;
 }
 
 .orb-2 {
-  width: 55vw;
-  height: 55vw;
-  bottom: -20vh;
-  right: -10vw;
-  background: rgba(99, 102, 241, 0.10); /* Indigo — profundidad */
+  width: 50vw;
+  height: 50vw;
+  bottom: -15vh;
+  right: -5vw;
+  background: rgba(254, 198, 0, 0.15); /* Fynit Yellow 15% */
   animation: orb-float-2 28s ease-in-out infinite alternate-reverse;
 }
 
 .orb-3 {
-  width: 45vw;
-  height: 45vw;
-  top: 55vh;
-  left: 28vw;
-  background: rgba(139, 92, 246, 0.07); /* Violet — transición suave */
+  width: 40vw;
+  height: 40vw;
+  top: 30vh;
+  left: 40vw;
+  background: rgba(67, 113, 236, 0.18); /* Secondary Blue 18% */
   animation: orb-float-3 30s ease-in-out infinite alternate;
 }
 

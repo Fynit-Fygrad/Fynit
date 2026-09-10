@@ -19,10 +19,42 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-20px); }
   }
+
+  /* Exact Hero Gradients extracted from the image */
+  --bg-gradient-hero-light: linear-gradient(135deg, #DFEFFF 0%, #FAFCFF 80%);
+  --bg-gradient-hero-dark: linear-gradient(135deg, #0C1F42 0%, #050B14 80%);
+}
+
+.bg-hero-gradient {
+  background: var(--bg-gradient-hero-light) !important;
+}
+[data-theme='dark'] .bg-hero-gradient {
+  background: var(--bg-gradient-hero-dark) !important;
 }
 
 body {
   background: #FAFCFF;
   color: #071742;
   font-family: var(--font-sans);
+  position: relative;
+}
+
+[data-theme='dark'] body {
+  background: #050B14;
+}
+
+/* Global Grain Texture (Same as Hero) */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+[data-theme='dark'] body::before {
+  opacity: 0.06;
 }

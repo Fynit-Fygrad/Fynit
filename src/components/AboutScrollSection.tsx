@@ -65,6 +65,7 @@ export default function AboutScrollSection() {
             <div style={{ width: '100%', maxWidth: '800px', display: 'flex', justifyContent: 'center' }}>
               <BlurText
                 text="DE INVESTIGADORES PARA INVESTIGADORES"
+                highlightIndices={[3]}
                 className="massive-title black-title"
                 delay={30}
                 animateBy="words"

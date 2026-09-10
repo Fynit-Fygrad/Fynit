@@ -2,8 +2,12 @@
 import Link from 'next/link';
 import Chatbot from './Chatbot';
 import { showComingSoon } from './Toaster';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname.startsWith('/dashboard')) return null;
+
   return (
     <>
       <footer className="site-footer">

@@ -20,7 +20,8 @@
     "react-dom": "19.2.8",
     "resend": "^6.25.0",
     "swiper": "^14.2.0",
-    "tsparticles": "^4.4.0"
+    "tsparticles": "^4.4.0",
+    "unpdf": "^1.8.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

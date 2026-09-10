@@ -11,25 +11,11 @@
 }
 
 .numbers::before {
-  content: '';
-  position: absolute;
-  width: 700px;
-  height: 700px;
-  border-radius: 50%;
-  top: -350px;
-  left: -200px;
-  background: radial-gradient(circle, rgba(27, 96, 223, .45), transparent 70%);
+  display: none; /* removed color blob */
 }
 
 .numbers::after {
-  content: '';
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  bottom: -250px;
-  right: -100px;
-  background: radial-gradient(circle, rgba(217, 138, 26, .2), transparent 70%);
+  display: none; /* removed color blob */
 }
 
 .fynit-mascot {
@@ -59,14 +45,7 @@
 }
 
 .numbers::after {
-  content: '';
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  bottom: -250px;
-  right: -100px;
-  background: radial-gradient(circle, rgba(217, 138, 26, .2), transparent 70%);
+  display: none; /* removed color blob */
 }
 
 .numbers-grid {

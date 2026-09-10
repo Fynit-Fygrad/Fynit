@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Sora, Manrope } from "next/font/google";
+import { Sora, Manrope, Bebas_Neue } from "next/font/google";
 import Script from "next/script";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -29,6 +29,7 @@ import "@/styles/home/pricing.css";
 // Components
 import "@/styles/components/animated-background.css";
 import "@/styles/components/cookie-banner.css";
+import "@/styles/components/custom-cursor.css";
 
 // Footer
 import "@/styles/layout/footer.css";
@@ -46,6 +47,12 @@ const sora = Sora({
 
 const manrope = Manrope({
   variable: "--font-manrope",
+  subsets: ["latin"],
+});
+
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas",
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -70,12 +77,12 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${sora.variable} ${manrope.variable} h-full antialiased`}
+      className={`${sora.variable} ${manrope.variable} ${bebasNeue.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body>
         <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
-          <AnimatedBackground />
+
           <Navbar />
           <main>
             {children}

@@ -1,47 +1,52 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 import '@/styles/components/disciplines-carousel.css';
-
-import TextType from './TextType';
-import BlurText from './BlurText';
+import TextType from '@/components/TextType';
 
 const disciplines = [
   {
     id: 1,
     title: 'Biología Avanzada',
-    image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80',
+    image: 'assets/imgs png/cover_biology.jpg',
     description: 'Revisamos metodologías experimentales y estructuramos tu artículo para journals científicos de alto impacto.',
+    color: '#00C9A7',
   },
   {
     id: 2,
     title: 'Ciencias de la Computación',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80',
+    image: 'assets/imgs png/cover_cs.jpg',
     description: 'Validamos el formato IEEE o ACM y verificamos el rigor técnico del estado del arte.',
+    color: '#1B60DF',
   },
   {
     id: 3,
     title: 'Medicina Clínica',
-    image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=400&q=80',
+    image: 'assets/imgs png/cover_medicine.jpg',
     description: 'Aseguramos que tu reporte o ensayo cumpla con guías como CONSORT y estándares médicos internacionales.',
+    color: '#FF5757',
   },
   {
     id: 4,
     title: 'Derecho Corporativo',
-    image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=400&q=80',
+    image: 'assets/imgs png/cover_law.jpg',
     description: 'Adaptamos tu redacción al lenguaje jurídico formal y estructuramos argumentos para revistas de derecho.',
+    color: '#FEC600',
   },
   {
     id: 5,
     title: 'Economía y Finanzas',
-    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=400&q=80',
+    image: 'assets/imgs png/cover_economics.jpg',
     description: 'Evaluamos la presentación de tus datos financieros y modelos para publicaciones Q1 en economía.',
+    color: '#00E5FF',
   },
   {
     id: 6,
     title: 'Ingeniería y Tecnología',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80',
+    image: 'assets/imgs png/cover_engineering.jpg',
     description: 'Organizamos tus resultados de laboratorio en tablas y gráficos rigurosos listos para publicar.',
+    color: '#8B5CF6',
   }
 ];
 
@@ -52,8 +57,8 @@ export default function DisciplinesCarousel() {
         
         <div className="disciplines-grid">
           
-          {/* Columna Izquierda: Carrusel 3D Puro (Desktop) & Marquee Slider (Mobile) */}
-          <div className="disciplines-carousel-col" data-aos="fade-right">
+          {/* Columna Izquierda: Cards de iconos en lugar de foto stock */}
+          <div className="disciplines-carousel-col">
             {/* Desktop 3D Scene */}
             <div className="scene-3d desktop-only">
               <div className="carousel-3d">
@@ -68,12 +73,11 @@ export default function DisciplinesCarousel() {
                       }}
                     >
                       <div className="carousel-item-inner">
-                        {/* Frente de la tarjeta (Imagen) */}
-                        <div className="card-face card-front">
-                          <img src={d.image} alt={d.title} />
-                          <div className="carousel-item-overlay">
-                            <h4>{d.title}</h4>
-                          </div>
+                        {/* Frente de la tarjeta (Cover Image + Título) */}
+                        <div className="card-face card-front" style={{ padding: 0 }}>
+                          <img src={d.image} alt={d.title} className="card-cover-image" />
+                          <div className="card-cover-overlay"></div>
+                          <h4 className="card-cover-title">{d.title}</h4>
                         </div>
 
                         {/* Reverso de la tarjeta (Texto) */}
@@ -96,11 +100,13 @@ export default function DisciplinesCarousel() {
                 {[...disciplines, ...disciplines].map((d, idx) => (
                   <div key={`${d.id}-${idx}`} className="snap-card">
                     <div className="snap-card-inner">
+                      <div className="snap-icon-wrap cover-wrap" style={{ padding: 0, height: '200px', overflow: 'hidden', position: 'relative' }}>
+                        <img src={d.image} alt={d.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      </div>
                       <div className="snap-content">
                         <h4>{d.title}</h4>
                         <p>{d.description}</p>
                       </div>
-                      <img src={d.image} alt={d.title} className="snap-img" />
                     </div>
                   </div>
                 ))}
@@ -109,27 +115,47 @@ export default function DisciplinesCarousel() {
           </div>
 
           {/* Columna Derecha: Texto */}
-          <div className="disciplines-text-col" data-aos="fade-left">
-            <div className="title-wrapper" style={{ alignItems: 'flex-start', marginBottom: '16px' }}>
+          <div className="disciplines-text-col">
+            <div style={{ marginBottom: '16px' }}>
               <TextType 
-                text={["Múltiples Disciplinas", "Expertise por área", "Formato especializado"]} 
-                typingSpeed={70} pauseDuration={1500} showCursor cursorCharacter="_" deletingSpeed={40} 
+                text={[
+                  "02 — DISCIPLINAS", 
+                  "Múltiples áreas de estudio", 
+                  "Adaptabilidad garantizada"
+                ]} 
+                typingSpeed={70} 
+                pauseDuration={1500} 
+                showCursor 
+                cursorCharacter="_" 
+                deletingSpeed={40} 
                 className="premium-typing-text"
               />
-              <div style={{ width: '100%', maxWidth: '600px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                <BlurText text="ADAPTABILIDAD PARA CUALQUIER ÁREA" className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ fontSize: 'clamp(1.5rem, 3vw, 40px)' }} />
-              </div>
             </div>
+            <h2 className="disc-title">
+              ADAPTABILIDAD<br />
+              PARA CUALQUIER<br />
+              <em>ÁREA</em>
+            </h2>
             <p className="disciplines-description">
               No importa el campo de tu investigación, nuestro equipo domina el lenguaje, la terminología y las normativas de formato de las revistas científicas más exigentes de todas las áreas del conocimiento.
             </p>
             <ul className="disciplines-features">
-              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B60DF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Rigor científico garantizado</li>
-              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B60DF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Formatos específicos (APA, IEEE, etc.)</li>
-              <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B60DF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Estructurado para revistas Q1-Q2</li>
+              <li>
+                <span className="disc-feat-dot"></span>
+                Rigor científico garantizado
+              </li>
+              <li>
+                <span className="disc-feat-dot"></span>
+                Formatos específicos (APA, IEEE, CONSORT, etc.)
+              </li>
+              <li>
+                <span className="disc-feat-dot"></span>
+                Estructurado para revistas Q1-Q2
+              </li>
             </ul>
-            <a href="/analizar" className="btn-disciplines-cta">
-              Solicitar análisis editorial
+            <a href="/analizar" className="btn-disciplines-cta" data-cursor>
+              <span>Solicitar análisis editorial</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
           </div>
 

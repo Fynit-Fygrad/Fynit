@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTheme } from 'next-themes';
 import TextType from './TextType';
 import BlurText from './BlurText';
@@ -31,6 +31,7 @@ const INDEXATIONS: IndexationItem[] = [
 
 export default function OrbitalIndexaciones() {
   const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const sectionRef    = useRef<HTMLElement>(null);
   const orbitRef      = useRef<HTMLDivElement>(null);
   const cardRefs      = useRef<(HTMLDivElement | null)[]>([]);
@@ -38,7 +39,10 @@ export default function OrbitalIndexaciones() {
   const angleRef      = useRef<number>(0);
   const themeRef      = useRef<string>('light');
 
+  useEffect(() => { setMounted(true); }, []);
   useEffect(() => { themeRef.current = resolvedTheme ?? 'light'; }, [resolvedTheme]);
+
+  const isDark = mounted && resolvedTheme === 'dark';
 
   useEffect(() => {
     let animId: number;
@@ -122,12 +126,13 @@ export default function OrbitalIndexaciones() {
     return () => cancelAnimationFrame(animId);
   }, []);
 
-  const isDark = resolvedTheme === 'dark';
+
 
   return (
     <section
       ref={sectionRef}
       id="indexaciones"
+      className="bg-hero-gradient"
       style={{
         position:       'relative',
         width:          '100%',
@@ -137,8 +142,6 @@ export default function OrbitalIndexaciones() {
         alignItems:     'center',
         justifyContent: 'center',
         padding:        '60px 0',
-        transition:     'background 0.5s ease',
-        background:     'linear-gradient(135deg, #dbeafe 0%, #e0e7ff 40%, #ede9fe 70%, #fce7f3 100%)',
       }}
     >
       <style>{`
@@ -302,10 +305,11 @@ export default function OrbitalIndexaciones() {
             delay={30}
             animateBy="words"
             direction="top"
-            style={{ fontSize: 'clamp(1.5rem, 3vw, 40px)', justifyContent: 'center' }}
+            style={{ justifyContent: 'center' }}
           />
         </div>
         <p
+          suppressHydrationWarning
           style={{
             fontFamily: 'Sora, sans-serif',
             fontSize:   'clamp(13px, 1.4vw, 15.5px)',
@@ -317,7 +321,7 @@ export default function OrbitalIndexaciones() {
           }}
         >
           Validadas para convocatorias{' '}
-          <strong style={{ color: isDark ? '#e2e8f0' : '#0f172a' }}>Renacyt, MinCiencias, Concytec</strong>{' '}
+          <strong suppressHydrationWarning style={{ color: isDark ? '#e2e8f0' : '#0f172a' }}>Renacyt, MinCiencias, Concytec</strong>{' '}
           y comités editoriales internacionales.
         </p>
       </div>

@@ -8,6 +8,7 @@ import { useTheme } from 'next-themes';
 
 export default function Navbar() {
   const pathname = usePathname();
+  if (pathname.startsWith('/dashboard')) return null;
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);

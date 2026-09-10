@@ -24,7 +24,9 @@ const BlurText = ({
   easing = (t: number) => t,
   onAnimationComplete,
   stepDuration = 0.12,
-  style
+  style,
+  highlightWords = [],
+  highlightIndices = []
 }: any) => {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
@@ -72,7 +74,7 @@ const BlurText = ({
   const times = Array.from({ length: stepCount }, (_, i) => (stepCount === 1 ? 0 : i / (stepCount - 1)));
 
   return (
-    <h2 ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap', margin: 0, padding: 0, ...(style || {}) }}>
+    <h2 ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', margin: 0, padding: 0, ...(style || {}) }}>
       {elements.map((segment: string, index: number) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
 
@@ -83,9 +85,11 @@ const BlurText = ({
           ease: easing
         };
 
+        const isHighlighted = highlightWords.includes(segment.replace(/[.,]/g, '')) || highlightIndices.includes(index);
+        
         return (
           <motion.span
-            className="inline-block will-change-[transform,filter,opacity]"
+            className={`inline-block will-change-[transform,filter,opacity] ${isHighlighted ? 'highlight-yellow' : ''}`}
             key={index}
             initial={fromSnapshot}
             animate={inView ? animateKeyframes : fromSnapshot}

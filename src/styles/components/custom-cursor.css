@@ -1,0 +1,70 @@
+/* ===== CUSTOM CURSOR ===== */
+
+/* Hide native cursor globally when custom cursor is active */
+.custom-cursor-active,
+.custom-cursor-active * {
+  cursor: none !important;
+}
+
+/* Small dot — tracks exact position */
+.cursor-dot {
+  position: fixed;
+  top: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blue, #1B60DF);
+  pointer-events: none;
+  z-index: 99999;
+  transition: width 0.2s cubic-bezier(0.23, 1, 0.32, 1),
+              height 0.2s cubic-bezier(0.23, 1, 0.32, 1),
+              background 0.2s ease;
+  will-change: transform;
+}
+
+/* Ring — follows with lerp lag */
+.cursor-ring {
+  position: fixed;
+  top: -20px;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(27, 96, 223, 0.5);
+  pointer-events: none;
+  z-index: 99998;
+  transition: width 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+              height 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+              border-color 0.2s ease,
+              top 0.3s,
+              left 0.3s;
+  will-change: transform;
+}
+
+/* Hover state — ring expands, dot shrinks, blend mode inverts */
+.cursor-ring--hover {
+  width: 64px;
+  height: 64px;
+  top: -32px;
+  left: -32px;
+  border-color: rgba(27, 96, 223, 0.8);
+  mix-blend-mode: difference;
+  background: rgba(27, 96, 223, 0.08);
+}
+
+.cursor-dot--hover {
+  width: 4px;
+  height: 4px;
+  top: -2px;
+  left: -2px;
+  background: #fff;
+}
+
+/* Hide cursor elements on touch devices */
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}

@@ -21,7 +21,6 @@
 
 /* FIXING FYNIT'S HARDCODED BACKGROUNDS */
 [data-theme='dark'] .sidebar,
-[data-theme='dark'] .site-footer,
 [data-theme='dark'] .testi-card.featured,
 [data-theme='dark'] .contact-form-card,
 [data-theme='dark'] .article-card,
@@ -29,6 +28,13 @@
 [data-theme='dark'] .team-teaser {
   background: #071742 !important; /* Force original navy background */
   color: #FFFFFF !important;
+}
+
+[data-theme='dark'] .site-footer {
+  background: #071742 !important;
+  color: #FFFFFF !important;
+  border-top: 2px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 -1px 0 0 rgba(255, 255, 255, 0.15), inset 0 1px 0 0 rgba(255, 255, 255, 0.08) !important;
 }
 
 [data-theme='dark'] .contact-hero-section {
@@ -54,7 +60,15 @@
 }
 
 [data-theme='dark'] .epic-feat-icon {
-  color: #071742 !important;
+  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+/* Mascot dark mode position correction — dark image has heavier base */
+[data-theme='dark'] .epic-center {
+  left: 36% !important;
+  bottom: 30px !important;
 }
 
 [data-theme='dark'] .custom-radio-label {

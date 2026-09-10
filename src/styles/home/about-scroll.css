@@ -4,15 +4,19 @@
 
 .about-static-container {
   position: relative;
-  min-height: 100vh;
-  background: transparent;
+  min-height: auto;
+  background: var(--bg-gradient-hero-light);
   width: 100%;
-  padding: 120px 20px;
+  padding: 60px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+}
+
+[data-theme='dark'] .about-static-container {
+  background: var(--bg-gradient-hero-dark);
 }
 
 .about-static-view {
@@ -69,14 +73,13 @@
 [data-theme='dark'] .premium-typing-text::before {
   background-color: #60A5FA;
 }
-
 .massive-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 4.5rem); 
-  line-height: 0.9;
-  font-weight: 900;
-  color: var(--navy);
-  letter-spacing: -2px;
+  font-family: var(--font-bebas, "Bebas Neue"), sans-serif;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 5.5vw, 5.5rem);
+  line-height: 0.93;
+  letter-spacing: 1px;
+  color: var(--navy, #071742);
   text-transform: uppercase;
   position: relative;
   z-index: 2;
@@ -89,12 +92,16 @@
 }
 
 .black-title {
-  color: #000;
+  color: var(--navy, #071742);
 }
 
 [data-theme='dark'] .massive-title,
 [data-theme='dark'] .black-title {
-  color: #ffffff;
+  color: #EDEFF2;
+}
+
+.highlight-yellow {
+  color: #FEC600 !important;
 }
 
 .subtitle-text {
@@ -233,5 +240,5 @@
   .about-static-container { padding: 80px 20px; }
   .about-bento-grid { grid-template-columns: 1fr; gap: 20px; }
   .glass-panel { margin-bottom: 0; }
-  .massive-title { font-size: clamp(2rem, 8vw, 3rem); }
+  .massive-title { font-size: clamp(2.2rem, 10vw, 4rem); }
 }

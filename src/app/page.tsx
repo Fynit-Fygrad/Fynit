@@ -78,14 +78,11 @@ export default function Home() {
           aria-hidden="true"
         />
 
-        {/* Grid overlay */}
-        <div className="epic-grid-overlay" aria-hidden="true" />
-
         {/* Main content grid: Left | Center | Right */}
         <div className="epic-main-grid">
 
           {/* ── LEFT: copy ── */}
-          <div className="epic-left" data-aos="fade-up">
+          <div className="epic-left">
             <div className="epic-eyebrow">
               <span className="epic-num">01</span>
               <span>PLATAFORMA DE INTELIGENCIA ARTIFICIAL</span>
@@ -98,34 +95,29 @@ export default function Home() {
             </h1>
 
             <p className="epic-lead">
-              Fynit es la plataforma de IA que potencia cada etapa<br />
-              de tu investigación, desde la idea hasta la publicación<br />
+              Fynit es la plataforma de IA que potencia cada etapa
+              de tu investigación, desde la idea hasta la publicación
               en revistas de alto impacto.
             </p>
 
             <div className="epic-ctas">
-              <a href="#" onClick={(e) => { e.preventDefault(); showComingSoon(); }} className="epic-btn-yellow">
-                Registrarse
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+              <a
+                href="#"
+                onClick={(e) => { e.preventDefault(); showComingSoon(); }}
+                className="epic-btn-yellow"
+                data-cursor
+              >
+                <span>Registrarse</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </a>
-              <Link href="#demo" className="epic-btn-ghost">
-                Ver como funciona ·
+              <Link href="#demo" className="epic-btn-ghost" data-cursor>
+                Ver cómo funciona →
               </Link>
-            </div>
-
-            <div className="epic-trusted">
-              <p className="epic-trusted-label">COMPATIBLE CON ESTÁNDARES E INDEXACIONES</p>
-              <div className="epic-logos-row" style={{ gap: '28px' }}>
-                <img src="assets/logos svg/logo-scopus.svg" alt="Scopus" style={{ height: '22px', opacity: 0.7, filter: 'grayscale(100%)' }} />
-                <img src="assets/logos svg/logo-wos.svg" alt="Web of Science" style={{ height: '22px', opacity: 0.7, filter: 'grayscale(100%)' }} />
-                <img src="assets/logos svg/logo-ieee.svg" alt="IEEE" style={{ height: '20px', opacity: 0.7, filter: 'grayscale(100%)' }} />
-                <img src="assets/logos svg/logo-scielo.svg" alt="SciELO" style={{ height: '20px', opacity: 0.7, filter: 'grayscale(100%)' }} />
-              </div>
             </div>
           </div>
 
-          {/* ── CENTER: mascot in its own column ── */}
-          <div className="epic-center" data-aos="zoom-in" data-aos-delay="400">
+          {/* ── CENTER: mascot ── */}
+          <div className="epic-center">
             <img
               src={mascotImg}
               alt="Fynit AI Mascot"
@@ -137,12 +129,12 @@ export default function Home() {
           </div>
 
           {/* ── RIGHT: features ── */}
-          <aside className="epic-features" data-aos="fade-left" data-aos-delay="300">
+          <aside className="epic-features">
 
             <div className="epic-feature">
               <div className="epic-feat-connector"></div>
               <div className="epic-feat-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg>
               </div>
               <div className="epic-feat-text">
                 <h3>ANÁLISIS<br />INTELIGENTE</h3>
@@ -153,7 +145,7 @@ export default function Home() {
             <div className="epic-feature">
               <div className="epic-feat-connector"></div>
               <div className="epic-feat-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>
               </div>
               <div className="epic-feat-text">
                 <h3>SUGERENCIAS<br />PERSONALIZADAS</h3>
@@ -164,7 +156,7 @@ export default function Home() {
             <div className="epic-feature">
               <div className="epic-feat-connector"></div>
               <div className="epic-feat-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>
               </div>
               <div className="epic-feat-text">
                 <h3>PUBLICACIÓN<br />ESTRATÉGICA</h3>
@@ -174,18 +166,20 @@ export default function Home() {
 
           </aside>
 
-          {/* Pager arrows */}
+          {/* Pager */}
           <div className="epic-pager">
             <button aria-label="Anterior">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
             </button>
             <button aria-label="Siguiente">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </button>
           </div>
 
+
         </div>
       </section>
+
 
       {/*  ============ CAROUSEL 3D DISCIPLINAS ============  */}
       <DisciplinesCarousel />
@@ -194,7 +188,7 @@ export default function Home() {
       <AboutScrollSection />
 
       {/*  ============ COMO FUNCIONA (núcleo interactivo) ============  */}
-      <section className="section how" id="como-funciona" ref={howSectionRef}>
+      <section className="section how bg-hero-gradient" id="como-funciona" ref={howSectionRef}>
         <div className="container" style={{ position: 'relative' }}>
           {/*  Mascota Fynit 2 3D  */}
           <img src="assets/imgs png/fynit_mascot_2.webp" alt="Fynit Bot" className="fynit-mascot-active" loading="lazy"
@@ -208,7 +202,7 @@ export default function Home() {
                 className="premium-typing-text"
               />
               <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                <BlurText text="DE TU MANUSCRITO AL PLAN DE PUBLICACIÓN" className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ fontSize: 'clamp(1.5rem, 3vw, 40px)' }} />
+                <BlurText text="DE TU MANUSCRITO AL PLAN DE PUBLICACIÓN" highlightWords={['PUBLICACIÓN']} className="massive-title black-title" delay={30} animateBy="words" direction="top" />
               </div>
             </div>
             <p>Cuatro pasos precisos. Sin código, sin esperas, sin adivinar.</p>
@@ -305,7 +299,7 @@ export default function Home() {
       </section>
 
       {/*  ============ NUMEROS ============  */}
-      <section className="numbers" ref={countersRef}>
+      <section className="numbers bg-hero-gradient" ref={countersRef}>
         <div className="container" style={{ position: 'relative', zIndex: '2' }}>
 
           <div className="numbers-grid">
@@ -348,7 +342,7 @@ export default function Home() {
       <OrbitalIndexaciones />
 
       {/*  ============ TESTIMONIOS ============  */}
-      <section className="section testimonials" id="testimonios">
+      <section className="section testimonials bg-hero-gradient" id="testimonios">
         <div className="container">
           <div className="section-head center" data-aos="fade-up" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div className="title-wrapper" style={{ alignItems: 'center', marginBottom: '16px' }}>
@@ -358,7 +352,7 @@ export default function Home() {
                 className="premium-typing-text"
               />
               <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <BlurText text="INVESTIGADORES QUE YA LO PROBARON" className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ fontSize: 'clamp(1.5rem, 3vw, 40px)', justifyContent: 'center' }} />
+                <BlurText text="INVESTIGADORES QUE YA LO PROBARON" highlightWords={['PROBARON']} className="massive-title black-title" delay={30} animateBy="words" direction="top" />
               </div>
             </div>
             <p>Estos son los primeros investigadores que confiaron en Fynit. Su feedback construyó la herramienta.</p>
@@ -415,7 +409,7 @@ export default function Home() {
       </section>
 
       {/*  ============ PRECIOS ============  */}
-      <section className="section pricing" id="precios">
+      <section className="section pricing bg-hero-gradient" id="precios">
         <div className="container">
           <div className="section-head center" data-aos="fade-up" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
             <div className="title-wrapper" style={{ alignItems: 'center', marginBottom: '16px' }}>
@@ -425,7 +419,7 @@ export default function Home() {
                 className="premium-typing-text"
               />
               <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <BlurText text="ELIGE EL PLAN QUE SE AJUSTA A TU ETAPA" className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ fontSize: 'clamp(1.5rem, 3vw, 40px)', justifyContent: 'center' }} />
+                <BlurText text="ELIGE EL PLAN QUE SE AJUSTA A TU ETAPA" highlightWords={['PLAN']} className="massive-title black-title" delay={30} animateBy="words" direction="top" />
               </div>
             </div>
             <p>Sin sorpresas. Empieza y escala cuando estés listo.</p>
@@ -519,7 +513,7 @@ export default function Home() {
       </section>
 
       {/*  ============ PRE-BLOG ============  */}
-      <section className="section" id="blog">
+      <section className="section bg-hero-gradient" id="blog">
         <div className="container">
           <div className="blog-head">
             <div className="section-head" style={{ marginBottom: '0', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -530,7 +524,7 @@ export default function Home() {
                   className="premium-typing-text"
                 />
                 <div style={{ width: '100%', maxWidth: '600px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                  <BlurText text="ÚLTIMOS ARTÍCULOS" className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ fontSize: 'clamp(1.5rem, 3vw, 40px)' }} />
+                  <BlurText text="ÚLTIMOS ARTÍCULOS" highlightWords={['ARTÍCULOS']} className="massive-title black-title" delay={30} animateBy="words" direction="top" />
                 </div>
               </div>
             </div>
