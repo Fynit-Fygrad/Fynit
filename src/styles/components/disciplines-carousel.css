@@ -81,13 +81,18 @@
 
 .card-face {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(7, 23, 66, 0.1);
   border: 1px solid rgba(7, 23, 66, 0.1);
+  transform: translateZ(0); /* Hardware acceleration fix for flipping down */
 }
 [data-theme='dark'] .card-face {
   box-shadow: 0 0 15px rgba(255,255,255,0.05);
@@ -97,11 +102,10 @@
 /* Card Front: SVG Icon & Label */
 .card-front {
   background: rgba(255,255,255,0.8);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.3);
   position: relative;
   overflow: hidden;
   padding: 0;
+  transform: rotateY(0deg) translateZ(1px); /* Ensures front stays in front during rotation */
 }
 [data-theme='dark'] .card-front {
   background: rgba(255,255,255,0.04);
@@ -123,32 +127,76 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 60%;
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+  height: 80%;
+  background: linear-gradient(to top, #0B1120 15%, transparent 100%);
   z-index: 2;
   border-radius: 0 0 20px 20px;
 }
 
-.card-cover-title {
+.theme-light .card-cover-overlay {
+  background: linear-gradient(to top, #FFFFFF 15%, rgba(255,255,255,0) 100%);
+}
+
+.theme-light .card-front {
+  background-color: #FFFFFF;
+}
+
+.theme-dark .card-front {
+  background-color: #0B1120;
+}
+
+.card-bottom-content {
   position: absolute;
-  bottom: 25px;
+  bottom: 0;
   left: 0;
   width: 100%;
-  text-align: center;
-  color: white;
+  padding: 24px;
   z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.card-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card-icon-wrapper svg {
+  width: 24px;
+  height: 24px;
+}
+
+.card-cover-title {
+  color: white;
   margin: 0;
   font-family: var(--font-display, "Space Grotesk"), sans-serif;
   font-weight: 700;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+  line-height: 1.1;
   letter-spacing: -0.5px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  text-align: left;
+}
+
+.theme-light .card-cover-title {
+  color: #071742;
+}
+
+.theme-dark .card-cover-title {
+  color: #FFFFFF;
 }
 
 /* Card Back: Text */
 .card-back {
   background: white;
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(1px); /* Ensures backface depth */
   padding: 40px 30px;
   display: flex;
   align-items: center;

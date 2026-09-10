@@ -202,7 +202,7 @@ export default function Home() {
                 className="premium-typing-text"
               />
               <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                <BlurText text="DE TU MANUSCRITO AL PLAN DE PUBLICACIÓN" highlightWords={['PUBLICACIÓN']} className="massive-title black-title" delay={30} animateBy="words" direction="top" />
+                <BlurText text="DE TU MANUSCRITO AL PLAN DE PUBLICACIÓN" highlightWords={['PUBLICACIÓN']} className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ justifyContent: 'flex-start' }} />
               </div>
             </div>
             <p>Cuatro pasos precisos. Sin código, sin esperas, sin adivinar.</p>
