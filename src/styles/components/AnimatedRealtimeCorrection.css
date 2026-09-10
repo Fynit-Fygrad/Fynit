@@ -1,0 +1,293 @@
+.areal-wrapper {
+  background-color: #F1F5F9; /* plomo */
+  border-radius: 20px;
+  padding: 16px;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+[data-theme='dark'] .areal-wrapper {
+  background-color: #0B1220;
+}
+
+.areal-container {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(11, 18, 32, 0.08);
+  padding: 16px;
+  width: 100%;
+  max-width: 580px; /* Igual que pasos 02, 03, 04 */
+  height: auto;
+  min-height: 380px; 
+  font-family: var(--font-inter), sans-serif;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme='dark'] .areal-container {
+  background-color: #151F32;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Header general */
+.areal-header {
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+[data-theme='dark'] .areal-header {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: #0F172A;
+}
+
+.areal-h-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.areal-h-icon {
+  width: 24px;
+  height: 24px;
+  background-color: #FEF2F2;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #EF4444;
+}
+
+[data-theme='dark'] .areal-h-icon {
+  background-color: rgba(239, 68, 68, 0.15);
+}
+
+.areal-h-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 2px 0;
+}
+
+[data-theme='dark'] .areal-h-title {
+  color: #F8FAFC;
+}
+
+.areal-h-sub {
+  font-size: 8px;
+  color: #64748B;
+  margin: 0;
+}
+
+.areal-header-stats {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.areal-header-badge {
+  background: #FEE2E2;
+  color: #EF4444;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 7px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.areal-header-value {
+  font-size: 16px;
+  font-weight: 800;
+  color: #EF4444;
+  line-height: 1;
+}
+
+[data-theme='dark'] .areal-header-badge { background: rgba(239, 68, 68, 0.15); }
+
+/* Main Grid */
+.areal-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex: 1;
+}
+
+/* Left panel: Document View */
+.areal-doc {
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 12px;
+  background: #FAFAFA;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+[data-theme='dark'] .areal-doc {
+  background: #0F172A;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.areal-doc-section h4 {
+  font-size: 10px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 6px 0;
+}
+
+[data-theme='dark'] .areal-doc-section h4 { color: #F8FAFC; }
+
+.areal-doc-section p {
+  font-size: 8px;
+  line-height: 1.5;
+  color: #475569;
+  margin: 0;
+}
+
+[data-theme='dark'] .areal-doc-section p { color: #CBD5E1; }
+
+.areal-hl-red {
+  background-color: #FEE2E2;
+  color: #B91C1C;
+  border-radius: 2px;
+  padding: 0 2px;
+  transition: all 0.5s ease;
+}
+
+[data-theme='dark'] .areal-hl-red {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #FCA5A5;
+}
+
+.areal-hl-orange {
+  background-color: #FEF3C7;
+  color: #B45309;
+  border-radius: 2px;
+  padding: 0 2px;
+  transition: all 0.5s ease;
+}
+
+[data-theme='dark'] .areal-hl-orange {
+  background-color: rgba(245, 158, 11, 0.2);
+  color: #FCD34D;
+}
+
+/* Simulate cursor */
+.areal-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 10px;
+  background-color: #2563EB;
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+  margin-left: 2px;
+  opacity: 0;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Right panel: Risk Cards */
+.areal-risks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.areal-risk-card {
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 10px;
+  background: white;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+[data-theme='dark'] .areal-risk-card {
+  background: #0F172A;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.areal-rc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+
+.areal-rc-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.areal-rc-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+}
+
+.areal-rc-title h5 {
+  font-size: 9px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+}
+
+[data-theme='dark'] .areal-rc-title h5 { color: #F8FAFC; }
+
+.areal-rc-desc {
+  font-size: 7px;
+  color: #64748B;
+  margin: 0 0 6px 0;
+  padding-left: 26px;
+  line-height: 1.3;
+}
+
+.areal-badge-risk {
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 7px;
+  font-weight: 600;
+  transition: all 0.5s ease;
+}
+
+.areal-toast-success {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #10B981;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+  z-index: 10;
+}

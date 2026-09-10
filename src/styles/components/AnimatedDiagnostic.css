@@ -1,0 +1,278 @@
+.adiag-wrapper {
+  background-color: #F1F5F9; /* plomo */
+  border-radius: 20px;
+  padding: 16px;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+[data-theme='dark'] .adiag-wrapper {
+  background-color: #0B1220;
+}
+
+.adiag-container {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(11, 18, 32, 0.08);
+  padding: 16px;
+  width: 100%;
+  max-width: 580px; /* Reducción a escala exacta del paso 01 */
+  height: auto;
+  font-family: var(--font-inter), sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme='dark'] .adiag-container {
+  background-color: #151F32;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Header */
+.adiag-header {
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+[data-theme='dark'] .adiag-header {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: #0F172A;
+}
+
+.adiag-h-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.adiag-h-icon {
+  width: 28px;
+  height: 28px;
+  background-color: #EFF6FF;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2563EB;
+}
+
+[data-theme='dark'] .adiag-h-icon {
+  background-color: rgba(37, 99, 235, 0.15);
+  color: #60A5FA;
+}
+
+.adiag-h-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 2px 0;
+}
+
+[data-theme='dark'] .adiag-h-title {
+  color: #F8FAFC;
+}
+
+.adiag-h-sub {
+  font-size: 9px;
+  color: #64748B;
+  margin: 0;
+}
+
+.adiag-h-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.adiag-h-status-text {
+  font-size: 9px;
+  font-weight: 600;
+  color: #10B981;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.adiag-h-time {
+  font-size: 8px;
+  color: #94A3B8;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.adiag-h-btn-download {
+  margin-left: 12px;
+  border: 1px solid #2563EB;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: #2563EB;
+  font-size: 9px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+/* Grid de métricas */
+.adiag-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.adiag-card {
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+[data-theme='dark'] .adiag-card {
+  background-color: #0F172A;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.adiag-card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.adiag-c-title {
+  font-size: 8px;
+  font-weight: 600;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.adiag-c-value {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0 0 4px 0;
+  line-height: 1;
+}
+
+[data-theme='dark'] .adiag-c-value {
+  color: #F8FAFC;
+}
+
+.adiag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 8px;
+  font-weight: 600;
+  width: fit-content;
+  margin-bottom: 6px;
+}
+
+.adiag-badge.green { background: #ECFDF5; color: #10B981; }
+.adiag-badge.blue { background: #EFF6FF; color: #2563EB; }
+.adiag-badge.orange { background: #FFF7ED; color: #EA580C; }
+
+[data-theme='dark'] .adiag-badge.green { background: rgba(16, 185, 129, 0.15); }
+[data-theme='dark'] .adiag-badge.blue { background: rgba(37, 99, 235, 0.15); }
+[data-theme='dark'] .adiag-badge.orange { background: rgba(234, 88, 12, 0.15); }
+
+.adiag-c-desc {
+  font-size: 8px;
+  color: #64748B;
+  margin: 0;
+  line-height: 1.4;
+  max-width: 90%;
+}
+
+.adiag-chart-ring {
+  width: 56px;
+  height: 56px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.adiag-ring-text {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.adiag-ring-val {
+  font-size: 11px;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1;
+}
+
+[data-theme='dark'] .adiag-ring-val {
+  color: #F8FAFC;
+}
+
+.adiag-ring-sub {
+  font-size: 7px;
+  color: #94A3B8;
+}
+
+/* Bottom Row */
+.adiag-bottom-row {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr;
+  gap: 10px;
+}
+
+.adiag-line-chart {
+  position: relative;
+  height: 80px;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.adiag-summary-bar-bg {
+  width: 100%;
+  height: 4px;
+  background-color: #E2E8F0;
+  border-radius: 2px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+[data-theme='dark'] .adiag-summary-bar-bg {
+  background-color: #334155;
+}
+
+.adiag-summary-bar-fill {
+  height: 100%;
+  background-color: #2563EB;
+  border-radius: 2px;
+}

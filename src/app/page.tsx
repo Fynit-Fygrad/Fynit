@@ -1,41 +1,35 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { motion, useScroll } from 'framer-motion';
+import { motion, useScroll, AnimatePresence } from 'framer-motion';
 import { showComingSoon } from '@/components/Toaster';
 import { useTheme } from 'next-themes';
 import DisciplinesCarousel from '@/components/DisciplinesCarousel';
 import AboutScrollSection from '@/components/AboutScrollSection';
-import TextType from '@/components/TextType';
 import BlurText from '@/components/BlurText';
+import TextType from '@/components/TextType';
+import AnimatedDropzone from '@/components/AnimatedDropzone';
+import AnimatedDiagnostic from '@/components/AnimatedDiagnostic';
+import AnimatedMatch from '@/components/AnimatedMatch';
+import AnimatedActionPlan from '@/components/AnimatedActionPlan';
+import AnimatedRealtimeCorrection from '@/components/AnimatedRealtimeCorrection';
 import OrbitalIndexaciones from '@/components/OrbitalIndexaciones';
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
-  const [userInteracted, setUserInteracted] = useState(false);
+  const [stepKey, setStepKey] = useState(0);
   const [countersVisible, setCountersVisible] = useState(false);
   const howSectionRef = useRef<HTMLElement>(null);
-  
+
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const countersRef = useRef<HTMLElement>(null);
 
-  // Scrollytelling para "Cómo funciona"
+  // Only used to animate the scroll timeline fill bar
   const { scrollYProgress } = useScroll({
     target: howSectionRef,
     offset: ["start center", "end center"]
   });
-
-  useEffect(() => {
-    if (userInteracted) return;
-    const unsubscribe = scrollYProgress.on("change", (latest) => {
-      if (latest < 0.25) setCurrentStep(1);
-      else if (latest < 0.5) setCurrentStep(2);
-      else if (latest < 0.75) setCurrentStep(3);
-      else setCurrentStep(4);
-    });
-    return () => unsubscribe();
-  }, [scrollYProgress, userInteracted]);
 
   // Observer para "Contador de números"
   useEffect(() => {
@@ -56,7 +50,7 @@ export default function Home() {
 
   const handleStepClick = (step: number) => {
     setCurrentStep(step);
-    setUserInteracted(true);
+    setStepKey(k => k + 1);
   };
 
   const isDark = mounted && theme === 'dark';
@@ -196,23 +190,23 @@ export default function Home() {
 
           <div className="section-head" data-aos="fade-up" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <div className="title-wrapper" style={{ alignItems: 'flex-start', marginBottom: '16px' }}>
-              <TextType 
-                text={["Cómo funciona", "El proceso", "Paso a paso"]} 
-                typingSpeed={70} pauseDuration={1500} showCursor cursorCharacter="_" deletingSpeed={40} 
+              <TextType
+                text={["Cómo funciona", "El proceso", "Paso a paso"]}
+                typingSpeed={70} pauseDuration={1500} showCursor cursorCharacter="_" deletingSpeed={40}
                 className="premium-typing-text"
               />
               <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                 <BlurText text="DE TU MANUSCRITO AL PLAN DE PUBLICACIÓN" highlightWords={['PUBLICACIÓN']} className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ justifyContent: 'flex-start' }} />
               </div>
             </div>
-            <p>Cuatro pasos precisos. Sin código, sin esperas, sin adivinar.</p>
+            <p>Vista simulada de las funciones. La experiencia real es mejor regístrate para que puedas verlo. </p>
           </div>
 
           <div className="how-grid">
             <div className="how-steps-container" style={{ display: 'flex', gap: '20px', position: 'relative' }}>
               {/* Vertical Scroll Track */}
               <div className="scroll-timeline-track" style={{ width: '4px', background: 'var(--line)', borderRadius: '4px', position: 'relative', overflow: 'hidden', marginTop: '22px', marginBottom: '22px' }}>
-                <motion.div 
+                <motion.div
                   className="scroll-timeline-fill"
                   style={{
                     position: 'absolute',
@@ -258,40 +252,130 @@ export default function Home() {
                       tu paper.</p>
                   </div>
                 </div>
+                <div className={`step-card ${currentStep === 5 ? "is-active" : ""}`} onClick={() => handleStepClick(5)} style={{ cursor: "pointer" }}>
+                  <span className="step-num">05</span>
+                  <div className="step-body">
+                    <h3>Corrección en Tiempo Real</h3>
+                    <p>Edita tu manuscrito y observa cómo baja tu porcentaje de similitud al instante, como un Turnitin en vivo que premia cada buen cambio.</p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="how-visual">
-              <div className="visual-frame">
-                {/*  Badges flotantes eliminados  */}
-                <div className="visual-chrome"><span></span><span></span><span></span></div>
-                <div className="visual-body" id="visualBody">
-
-                  {/*  Panel 1: Carga  */}
-                  <div className={`visual-panel ${currentStep === 1 ? "is-active" : ""}`}>
-                    <img src="assets/imgs png/paso1_laptop_carga.webp" alt="Dashboard Fynit - Carga de documento"
-                      style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '8px' }} />
-                  </div>
-
-                  {/*  Panel 2: Diagnóstico  */}
-                  <div className={`visual-panel ${currentStep === 2 ? "is-active" : ""}`}>
-                    <img src="assets/imgs png/paso2_laptop_diagnostico.webp" alt="Dashboard Fynit - Diagnóstico con IA"
-                      style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '8px' }} />
-                  </div>
-
-                  {/*  Panel 3: Match con Revistas  */}
-                  <div className={`visual-panel ${currentStep === 3 ? "is-active" : ""}`}>
-                    <img src="assets/imgs png/paso3_laptop_revistas.webp" alt="Dashboard Fynit - Match con Revistas"
-                      style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '8px' }} />
-                  </div>
-
-                  {/*  Panel 4: Plan de Acción y Red de Expertos  */}
-                  <div className={`visual-panel ${currentStep === 4 ? "is-active" : ""}`}>
-                    <img src="assets/imgs png/paso4_laptop_plan.webp" alt="Dashboard Fynit - Plan de Acción"
-                      style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '8px' }} />
-                  </div>
-
+            <div className="how-visual" style={{ display: 'grid' }}>
+              {/* Special Animated Dropzone for Step 1, bypassing the macOS frame */}
+              <div
+                className="step1-special-wrapper"
+                style={{
+                  gridArea: '1 / 1 / 2 / 2',
+                  opacity: currentStep === 1 ? 1 : 0,
+                  visibility: currentStep === 1 ? 'visible' : 'hidden',
+                  transition: 'all 0.4s ease-in-out',
+                  zIndex: currentStep === 1 ? 20 : 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <div style={{ margin: '24px 0 16px', fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '6px', textAlign: 'center' }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
+                  Animación ilustrativa de cómo funciona —
+                  <span onClick={() => showComingSoon()} style={{ color: '#2563EB', fontWeight: 600, cursor: 'pointer' }}>Regístrate para probarlo tú mismo</span>
                 </div>
+                <AnimatedDropzone key={`dropzone-${stepKey}`} />
+              </div>
+
+              {/* Special Animated Diagnostic for Step 2, bypassing the macOS frame */}
+              <div
+                className="step2-special-wrapper"
+                style={{
+                  gridArea: '1 / 1 / 2 / 2',
+                  opacity: currentStep === 2 ? 1 : 0,
+                  visibility: currentStep === 2 ? 'visible' : 'hidden',
+                  transition: 'all 0.4s ease-in-out',
+                  zIndex: currentStep === 2 ? 20 : 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <div style={{ margin: '24px 0 16px', fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '6px', textAlign: 'center' }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
+                  Animación ilustrativa de cómo funciona —
+                  <span onClick={() => showComingSoon()} style={{ color: '#2563EB', fontWeight: 600, cursor: 'pointer' }}>Regístrate para probarlo tú mismo</span>
+                </div>
+                <AnimatedDiagnostic key={`diag-${stepKey}`} />
+              </div>
+
+              {/* Special Animated Match for Step 3, bypassing the macOS frame */}
+              <div
+                className="step3-special-wrapper"
+                style={{
+                  gridArea: '1 / 1 / 2 / 2',
+                  opacity: currentStep === 3 ? 1 : 0,
+                  visibility: currentStep === 3 ? 'visible' : 'hidden',
+                  transition: 'all 0.4s ease-in-out',
+                  zIndex: currentStep === 3 ? 20 : 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <div style={{ margin: '24px 0 16px', fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '6px', textAlign: 'center' }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
+                  Animación ilustrativa de cómo funciona —
+                  <span onClick={() => showComingSoon()} style={{ color: '#2563EB', fontWeight: 600, cursor: 'pointer' }}>Regístrate para probarlo tú mismo</span>
+                </div>
+                <AnimatedMatch key={`match-${stepKey}`} />
+              </div>
+
+              {/* Special Animated Action Plan for Step 4 */}
+              <div
+                className="step4-special-wrapper"
+                style={{
+                  gridArea: '1 / 1 / 2 / 2',
+                  opacity: currentStep === 4 ? 1 : 0,
+                  visibility: currentStep === 4 ? 'visible' : 'hidden',
+                  transition: 'all 0.4s ease-in-out',
+                  zIndex: currentStep === 4 ? 20 : 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <div style={{ margin: '24px 0 16px', fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '6px', textAlign: 'center' }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
+                  Animación ilustrativa de cómo funciona —
+                  <span onClick={() => showComingSoon()} style={{ color: '#2563EB', fontWeight: 600, cursor: 'pointer' }}>Regístrate para probarlo tú mismo</span>
+                </div>
+                <AnimatedActionPlan key={`aplan-${stepKey}`} />
+              </div>
+
+              {/* Special Animated Realtime Correction for Step 5 */}
+              <div
+                className="step5-special-wrapper"
+                style={{
+                  gridArea: '1 / 1 / 2 / 2',
+                  opacity: currentStep === 5 ? 1 : 0,
+                  visibility: currentStep === 5 ? 'visible' : 'hidden',
+                  transition: 'all 0.4s ease-in-out',
+                  zIndex: currentStep === 5 ? 20 : 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <div style={{ margin: '24px 0 16px', fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '6px', textAlign: 'center' }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
+                  Animación ilustrativa de cómo funciona —
+                  <span onClick={() => showComingSoon()} style={{ color: '#2563EB', fontWeight: 600, cursor: 'pointer' }}>Regístrate para probarlo tú mismo</span>
+                </div>
+                <AnimatedRealtimeCorrection key={`areal-${stepKey}`} />
               </div>
             </div>
           </div>
@@ -346,9 +430,9 @@ export default function Home() {
         <div className="container">
           <div className="section-head center" data-aos="fade-up" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div className="title-wrapper" style={{ alignItems: 'center', marginBottom: '16px' }}>
-              <TextType 
-                text={["Lo que dicen los usuarios", "Casos de éxito", "Nuestra comunidad"]} 
-                typingSpeed={70} pauseDuration={1500} showCursor cursorCharacter="_" deletingSpeed={40} 
+              <TextType
+                text={["Lo que dicen los usuarios", "Casos de éxito", "Nuestra comunidad"]}
+                typingSpeed={70} pauseDuration={1500} showCursor cursorCharacter="_" deletingSpeed={40}
                 className="premium-typing-text"
               />
               <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -413,9 +497,9 @@ export default function Home() {
         <div className="container">
           <div className="section-head center" data-aos="fade-up" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
             <div className="title-wrapper" style={{ alignItems: 'center', marginBottom: '16px' }}>
-              <TextType 
-                text={["Planes & Precios", "Tu inversión", "Escala tu impacto"]} 
-                typingSpeed={70} pauseDuration={1500} showCursor cursorCharacter="_" deletingSpeed={40} 
+              <TextType
+                text={["Planes & Precios", "Tu inversión", "Escala tu impacto"]}
+                typingSpeed={70} pauseDuration={1500} showCursor cursorCharacter="_" deletingSpeed={40}
                 className="premium-typing-text"
               />
               <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -518,9 +602,9 @@ export default function Home() {
           <div className="blog-head">
             <div className="section-head" style={{ marginBottom: '0', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
               <div className="title-wrapper" style={{ alignItems: 'flex-start', marginBottom: '8px' }}>
-                <TextType 
-                  text={["Recursos", "Blog y Guías", "Aprende más"]} 
-                  typingSpeed={70} pauseDuration={1500} showCursor cursorCharacter="_" deletingSpeed={40} 
+                <TextType
+                  text={["Recursos", "Blog y Guías", "Aprende más"]}
+                  typingSpeed={70} pauseDuration={1500} showCursor cursorCharacter="_" deletingSpeed={40}
                   className="premium-typing-text"
                 />
                 <div style={{ width: '100%', maxWidth: '600px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>

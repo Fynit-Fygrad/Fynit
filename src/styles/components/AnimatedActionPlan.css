@@ -1,0 +1,536 @@
+.aplan-wrapper {
+  background-color: #F1F5F9; /* plomo */
+  border-radius: 20px;
+  padding: 16px;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+[data-theme='dark'] .aplan-wrapper {
+  background-color: #0B1220;
+}
+
+.aplan-container {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(11, 18, 32, 0.08);
+  padding: 16px;
+  width: 100%;
+  max-width: 580px; /* Igual que pasos 02 y 03 */
+  height: auto;
+  min-height: 380px; /* Para acomodar ambas pantallas */
+  font-family: var(--font-inter), sans-serif;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme='dark'] .aplan-container {
+  background-color: #151F32;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Screens */
+.aplan-screen {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header general */
+.aplan-header {
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+[data-theme='dark'] .aplan-header {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: #0F172A;
+}
+
+.aplan-h-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.aplan-h-icon {
+  width: 24px;
+  height: 24px;
+  background-color: #EFF6FF;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2563EB;
+}
+
+[data-theme='dark'] .aplan-h-icon {
+  background-color: rgba(37, 99, 235, 0.15);
+  color: #60A5FA;
+}
+
+.aplan-h-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 2px 0;
+}
+
+[data-theme='dark'] .aplan-h-title {
+  color: #F8FAFC;
+}
+
+.aplan-h-sub {
+  font-size: 8px;
+  color: #64748B;
+  margin: 0;
+}
+
+.aplan-h-status-text {
+  font-size: 9px;
+  font-weight: 600;
+  color: #10B981;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.aplan-btn-outline {
+  border: 1px solid #2563EB;
+  padding: 4px 8px;
+  border-radius: 6px;
+  color: #2563EB;
+  font-size: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: default;
+}
+
+/* Screen A: Action Plan */
+.aplan-steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+.aplan-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #E2E8F0;
+  background: #ffffff;
+  position: relative;
+  z-index: 2;
+}
+
+[data-theme='dark'] .aplan-step {
+  background: #0F172A;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.aplan-step-num {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #2563EB;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.aplan-step-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: #EFF6FF;
+  color: #2563EB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+[data-theme='dark'] .aplan-step-icon {
+  background: rgba(37, 99, 235, 0.15);
+  color: #60A5FA;
+}
+
+.aplan-step-content {
+  flex: 1;
+}
+
+.aplan-step-content h4 {
+  font-size: 10px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 2px 0;
+}
+
+[data-theme='dark'] .aplan-step-content h4 {
+  color: #F8FAFC;
+}
+
+.aplan-step-content p {
+  font-size: 8px;
+  color: #64748B;
+  margin: 0;
+}
+
+.aplan-badge {
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-size: 7px;
+  font-weight: 600;
+}
+
+.aplan-badge.alta { background: #FEE2E2; color: #EF4444; }
+.aplan-badge.media { background: #FEF3C7; color: #D97706; }
+
+[data-theme='dark'] .aplan-badge.alta { background: rgba(239, 68, 68, 0.15); }
+[data-theme='dark'] .aplan-badge.media { background: rgba(217, 119, 6, 0.15); }
+
+.aplan-experts-row {
+  margin-top: 12px;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+[data-theme='dark'] .aplan-experts-row {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: #0F172A;
+}
+
+.aplan-avatar-group {
+  display: flex;
+  align-items: center;
+}
+
+.aplan-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: #E2E8F0;
+  margin-left: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: 700;
+  color: #475569;
+}
+
+[data-theme='dark'] .aplan-avatar {
+  border-color: #0F172A;
+  background: #334155;
+  color: #CBD5E1;
+}
+
+.aplan-avatar:first-child {
+  margin-left: 0;
+}
+
+.aplan-banner {
+  margin-top: auto;
+  background: #2563EB;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+}
+
+.aplan-banner h3 {
+  font-size: 11px;
+  font-weight: 700;
+  margin: 0 0 2px 0;
+}
+
+.aplan-banner p {
+  font-size: 8px;
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* Screen B: Experts */
+.aplan-search-bar {
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #94A3B8;
+  font-size: 9px;
+  margin-bottom: 12px;
+}
+
+[data-theme='dark'] .aplan-search-bar {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: #0F172A;
+}
+
+.aplan-experts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.aplan-expert-card {
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 12px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+
+[data-theme='dark'] .aplan-expert-card {
+  background: #0F172A;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.aplan-exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.aplan-exp-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #F3E8FF;
+  color: #9333EA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+[data-theme='dark'] .aplan-exp-avatar {
+  background: rgba(147, 51, 234, 0.15);
+}
+
+.aplan-exp-status {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 7px;
+  font-weight: 600;
+  color: #10B981;
+}
+
+.aplan-exp-status::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.aplan-exp-status.ocupado {
+  color: #EA580C;
+}
+
+.aplan-exp-info h4 {
+  font-size: 10px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 2px 0;
+}
+
+[data-theme='dark'] .aplan-exp-info h4 {
+  color: #F8FAFC;
+}
+
+.aplan-exp-info p {
+  font-size: 7px;
+  color: #64748B;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.aplan-exp-stats {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.aplan-exp-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 8px;
+  color: #475569;
+}
+
+[data-theme='dark'] .aplan-exp-stat {
+  color: #94A3B8;
+}
+
+.aplan-btn-contact {
+  margin-top: 10px;
+  border: 1px solid #2563EB;
+  padding: 6px;
+  border-radius: 6px;
+  color: #2563EB;
+  font-size: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* Screen C: Chat */
+.aplan-chat-header {
+  border-bottom: 1px solid #E2E8F0;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+[data-theme='dark'] .aplan-chat-header {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.aplan-chat-back {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #F1F5F9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748B;
+  cursor: pointer;
+}
+
+[data-theme='dark'] .aplan-chat-back {
+  background: rgba(255, 255, 255, 0.1);
+  color: #CBD5E1;
+}
+
+.aplan-chat-messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.aplan-chat-msg {
+  max-width: 80%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 9px;
+  line-height: 1.4;
+  position: relative;
+}
+
+.aplan-chat-msg.user {
+  align-self: flex-end;
+  background: #2563EB;
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.aplan-chat-msg.expert {
+  align-self: flex-start;
+  background: #F1F5F9;
+  color: #0F172A;
+  border-bottom-left-radius: 4px;
+}
+
+[data-theme='dark'] .aplan-chat-msg.expert {
+  background: #1E293B;
+  color: #F8FAFC;
+}
+
+.aplan-chat-input-area {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 1px solid #E2E8F0;
+  background: #F8FAFC;
+}
+
+[data-theme='dark'] .aplan-chat-input-area {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: #0F172A;
+}
+
+.aplan-chat-input {
+  flex: 1;
+  font-size: 9px;
+  color: #94A3B8;
+}
+
+.aplan-chat-send {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #2563EB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.aplan-typing {
+  display: flex;
+  gap: 3px;
+  padding: 4px 8px;
+  align-items: center;
+  height: 16px;
+}
+
+.aplan-typing-dot {
+  width: 4px;
+  height: 4px;
+  background: #94A3B8;
+  border-radius: 50%;
+}

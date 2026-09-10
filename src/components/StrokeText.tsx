@@ -170,6 +170,10 @@ const StrokeText = ({
       };
       root.addEventListener('pointerenter', play);
       removeHover = () => root.removeEventListener('pointerenter', play);
+    } else if (trigger === 'manual') {
+      // Manual mode: setup strokes hidden, don't play. External GSAP can target them.
+      setStart();
+      timeline = build();
     } else {
       timeline = build();
       if (trigger === 'scroll') {
