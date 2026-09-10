@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, useAnimation, Variants, useMotionValue, useTransform, animate } from 'framer-motion';
 import '@/styles/components/AnimatedDiagnostic.css';
 import { useMockupCursor } from '@/hooks/useMockupCursor';
@@ -23,16 +23,20 @@ export default function AnimatedDiagnostic() {
   const metText = useTransform(metVal, Math.round);
   const sumText = useTransform(sumVal, v => `${Math.round(v)}/100`);
 
+  const mountedRef = useRef(false);
+
   useEffect(() => {
-    let isMounted = true;
+    mountedRef.current = true;
+    const sleep = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
 
     const runSequence = async () => {
-      while (isMounted) {
+      while (mountedRef.current) {
         // 1. Reset
         controls.set("reset");
         simVal.set(0); readVal.set(0); metVal.set(0); sumVal.set(0);
         cursorReset(280, 130);
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await sleep(500);
+        if (!mountedRef.current) return;
 
         // 2. Fade in + stagger cards
         controls.start("visible");
@@ -43,7 +47,8 @@ export default function AnimatedDiagnostic() {
 
         // Cursor scans cards while they appear
         moveTo(140, 190, 350);
-        await new Promise(resolve => setTimeout(resolve, 600));
+        await sleep(600);
+        if (!mountedRef.current) return;
 
         // 3. Fill donuts & counters
         controls.start("fillDonut");
@@ -51,24 +56,29 @@ export default function AnimatedDiagnostic() {
         animate(readVal, 72, { duration: 1, ease: "easeOut" });
         animate(metVal, 68, { duration: 1, ease: "easeOut" });
         moveTo(330, 190, 400);
-        await new Promise(resolve => setTimeout(resolve, 800));
+        await sleep(800);
+        if (!mountedRef.current) return;
 
         // 4. Line chart + summary
         controls.start("drawLine");
-        await new Promise(resolve => setTimeout(resolve, 400));
+        await sleep(400);
+        if (!mountedRef.current) return;
         controls.start("popDot");
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await sleep(200);
+        if (!mountedRef.current) return;
         controls.start("fillBar");
         animate(sumVal, 66, { duration: 0.8, ease: "easeOut" });
         moveTo(280, 360, 350);
-        await new Promise(resolve => setTimeout(resolve, 800));
+        await sleep(800);
+        if (!mountedRef.current) return;
 
-        // 5. Cursor goes to Download button — arrives, THEN click fires
+        // 5. Cursor goes to Download button
         await moveTo(432, 42, 320);
+        if (!mountedRef.current) return;
         await cursorClick(432, 42);
-        // Click fires simultaneously with buttonControls
+        if (!mountedRef.current) return;
         await buttonControls.start({ scale: 0.95, transition: { duration: 0.1 } });
-        await buttonControls.start({ scale: 1,    transition: { duration: 0.1 } });
+        await buttonControls.start({ scale: 1, transition: { duration: 0.1 } });
         cursorHide(200);
 
         // 6. Download toast
@@ -76,21 +86,27 @@ export default function AnimatedDiagnostic() {
         spinnerControls.set({ opacity: 1, rotate: 0 });
         checkControls.set({ opacity: 0, scale: 0.5 });
         await downloadControls.start({ opacity: 1, y: 0, transition: { duration: 0.3 } });
+        if (!mountedRef.current) return;
         spinnerControls.start({ rotate: 360, transition: { duration: 0.6, ease: "linear", repeat: 1 } });
-        await new Promise(resolve => setTimeout(resolve, 600));
+        await sleep(600);
+        if (!mountedRef.current) return;
         spinnerControls.start({ opacity: 0, transition: { duration: 0.2 } });
         await checkControls.start({ opacity: 1, scale: 1, transition: { type: "spring", duration: 0.4 } });
+        if (!mountedRef.current) return;
 
         // 7. Hold then fade
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        await sleep(1500);
+        if (!mountedRef.current) return;
         await controls.start("fadeOut");
+        if (!mountedRef.current) return;
         downloadControls.start({ opacity: 0, transition: { duration: 0.5 } });
       }
     };
 
     runSequence();
-    return () => { isMounted = false; };
-  }, [controls, simVal, readVal, metVal, sumVal, buttonControls, cursorReset, moveTo, cursorClick, cursorHide]);
+    return () => { mountedRef.current = false; };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const containerVariants: Variants = {
     reset: { opacity: 0 },

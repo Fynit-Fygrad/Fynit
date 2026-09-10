@@ -256,7 +256,7 @@ export default function Home() {
                   <span className="step-num">05</span>
                   <div className="step-body">
                     <h3>Corrección en Tiempo Real</h3>
-                    <p>Edita tu manuscrito y observa cómo baja tu porcentaje de similitud al instante, como un Turnitin en vivo que premia cada buen cambio.</p>
+                    <p>Edita tu manuscrito y observa cómo baja tu porcentaje de similitud al instante: un detector de originalidad en vivo que premia cada mejora que realizas.</p>
                   </div>
                 </div>
               </div>

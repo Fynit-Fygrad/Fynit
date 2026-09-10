@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, useAnimation, useMotionValue, useTransform, animate } from 'framer-motion';
 import '@/styles/components/AnimatedRealtimeCorrection.css';
 import { useMockupCursor } from '@/hooks/useMockupCursor';
@@ -49,11 +49,14 @@ export default function AnimatedRealtimeCorrection() {
   const toastControls = useAnimation();
   const { reset: cursorReset, moveTo, click: cursorClick, hide: cursorHide, CursorNode } = useMockupCursor();
 
+  const mountedRef = useRef(false);
+
   useEffect(() => {
-    let isMounted = true;
+    mountedRef.current = true;
+    const sleep = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
 
     const runSequence = async () => {
-      while (isMounted) {
+      while (mountedRef.current) {
         // 1. Reset
         containerControls.set("reset");
         simVal.set(18);
@@ -71,57 +74,73 @@ export default function AnimatedRealtimeCorrection() {
         risk2IconControls.set({ backgroundColor: '#FEF3C7', color: '#D97706' });
         toastControls.set({ opacity: 0, y: 20 });
         cursorReset(110, 215);
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await sleep(500);
+        if (!mountedRef.current) return;
 
         // 2. Fade in
         containerControls.start("visible");
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        await sleep(1500);
+        if (!mountedRef.current) return;
 
-        // 3. Cursor moves to text 1, click + text edit start simultaneously
+        // 3. Cursor moves to text 1
         await moveTo(195, 215, 300);
+        if (!mountedRef.current) return;
         await cursorClick(195, 215);
-        // cursor1Controls and text deletion start right after click
+        if (!mountedRef.current) return;
         cursor1Controls.set({ display: 'inline-block' });
-        await new Promise(resolve => setTimeout(resolve, 400));
+        await sleep(400);
+        if (!mountedRef.current) return;
         await animate(t1Idx, 0, { duration: 0.5, ease: "linear" });
+        if (!mountedRef.current) return;
         hl1Controls.set({ display: 'none' });
         await animate(t1NIdx, t1New.length, { duration: 0.6, ease: "linear" });
+        if (!mountedRef.current) return;
         cursor1Controls.set({ display: 'none' });
         cursorHide(150);
 
         animate(simVal, 14, { duration: 0.6, ease: "easeInOut" });
         risk1BadgeControls.start({ backgroundColor: '#FEF3C7', color: '#D97706', transition: { duration: 0.5 } });
         risk1IconControls.start({ backgroundColor: '#FEF3C7', color: '#D97706', transition: { duration: 0.5 } });
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        await sleep(1500);
+        if (!mountedRef.current) return;
 
-        // 4. Cursor moves to text 2, click + text edit start simultaneously
+        // 4. Cursor moves to text 2
         await moveTo(200, 282, 300);
+        if (!mountedRef.current) return;
         await cursorClick(200, 282);
+        if (!mountedRef.current) return;
         cursor2Controls.set({ display: 'inline-block' });
-        await new Promise(resolve => setTimeout(resolve, 400));
+        await sleep(400);
+        if (!mountedRef.current) return;
         await animate(t2Idx, 0, { duration: 0.4, ease: "linear" });
+        if (!mountedRef.current) return;
         hl2Controls.set({ display: 'none' });
         await animate(t2NIdx, t2New.length, { duration: 0.5, ease: "linear" });
+        if (!mountedRef.current) return;
         cursor2Controls.set({ display: 'none' });
         cursorHide(150);
 
         animate(simVal, 9, { duration: 0.6, ease: "easeInOut" });
         risk2BadgeControls.start({ backgroundColor: '#DCFCE7', color: '#10B981', transition: { duration: 0.5 } });
         risk2IconControls.start({ backgroundColor: '#DCFCE7', color: '#10B981', transition: { duration: 0.5 } });
-        await new Promise(resolve => setTimeout(resolve, 800));
+        await sleep(800);
+        if (!mountedRef.current) return;
 
         // 5. Success toast
         await toastControls.start({ opacity: 1, y: 0, transition: { type: "spring", damping: 15 } });
+        if (!mountedRef.current) return;
 
         // 6. Hold then fade
-        await new Promise(resolve => setTimeout(resolve, 2500));
+        await sleep(2500);
+        if (!mountedRef.current) return;
         await containerControls.start("fadeOut");
       }
     };
 
     runSequence();
-    return () => { isMounted = false; };
-  }, [containerControls, simVal, hl1Controls, hl2Controls, cursor1Controls, cursor2Controls, risk1BadgeControls, risk1IconControls, risk2BadgeControls, risk2IconControls, toastControls, cursorReset, moveTo, cursorClick, cursorHide]);
+    return () => { mountedRef.current = false; };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="areal-wrapper" style={{ position: 'relative' }}>

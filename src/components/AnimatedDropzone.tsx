@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation, Variants, useMotionValue, useTransform, animate } from 'framer-motion';
 import '@/styles/components/AnimatedDropzone.css';
 import { useMockupCursor } from '@/hooks/useMockupCursor';
@@ -14,46 +14,62 @@ export default function AnimatedDropzone() {
   const [buttonState, setButtonState] = useState<'realizar' | 'analizando' | 'ir'>('realizar');
   const { reset: cursorReset, moveTo, click: cursorClick, hide: cursorHide, CursorNode } = useMockupCursor();
 
+  const mountedRef = useRef(false);
+
   useEffect(() => {
-    let isMounted = true;
+    mountedRef.current = true;
+    const sleep = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
 
     const runSequence = async () => {
-      while (isMounted) {
+      while (mountedRef.current) {
         // 0. Reset
         controls.set("reset");
         fillControls.set({ width: "0%" });
         progress.set(0);
         setButtonState('realizar');
-        cursorReset(115, 185); // dropzone center
-        await new Promise(resolve => setTimeout(resolve, 800));
+        cursorReset(115, 185);
+        await sleep(800);
+        if (!mountedRef.current) return;
 
-        // 1. PDF flies in — cursor moves to dropzone to "receive" it
+        // 1. PDF flies in
         controls.start("flyIn");
-        await moveTo(115, 185, 320); // move arrives as PDF finishes flying
+        await moveTo(115, 185, 320);
+        if (!mountedRef.current) return;
 
-        // 2. Dropzone activates — cursor click triggers drop
+        // 2. Dropzone activates
         controls.start("active");
-        await new Promise(resolve => setTimeout(resolve, 150));
-        await cursorClick(115, 185); // click fires: drop + success start simultaneously
+        await sleep(150);
+        if (!mountedRef.current) return;
+        await cursorClick(115, 185);
+        if (!mountedRef.current) return;
         await controls.start("drop");
+        if (!mountedRef.current) return;
         controls.start("success");
-        await new Promise(resolve => setTimeout(resolve, 300));
+        await sleep(300);
+        if (!mountedRef.current) return;
 
-        // 3. File appears in sidebar — cursor slides right to see it
+        // 3. File appears in sidebar
         controls.start("sidebarFile");
-        moveTo(380, 175, 350); // move in parallel with sidebar animation
-        await new Promise(resolve => setTimeout(resolve, 400));
+        moveTo(380, 175, 350);
+        await sleep(400);
+        if (!mountedRef.current) return;
 
-        // 4. Cursor goes to checkbox — click ticks it
+        // 4. Cursor goes to checkbox
         await moveTo(365, 282, 300);
+        if (!mountedRef.current) return;
         await cursorClick(365, 282);
-        controls.start("checkboxTick"); // ticks right after click
-        await new Promise(resolve => setTimeout(resolve, 400));
+        if (!mountedRef.current) return;
+        controls.start("checkboxTick");
+        await sleep(400);
+        if (!mountedRef.current) return;
 
-        // 5. Cursor goes to button — click starts loading
+        // 5. Cursor goes to button
         await moveTo(370, 314, 300);
+        if (!mountedRef.current) return;
         await cursorClick(370, 314);
-        await controls.start("buttonActive"); // button scales right after click
+        if (!mountedRef.current) return;
+        await controls.start("buttonActive");
+        if (!mountedRef.current) return;
 
         // Progress bar fills
         setButtonState('analizando');
@@ -67,14 +83,15 @@ export default function AnimatedDropzone() {
           ease: "easeInOut"
         });
 
-        // Cursor idles near the button while loading
         cursorHide(200);
         await progressAnim;
+        if (!mountedRef.current) return;
 
         // 6. Done
         setButtonState('ir');
         controls.start("buttonFinish");
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await sleep(2000);
+        if (!mountedRef.current) return;
 
         // 7. Fade out
         await controls.start("fadeOut");
@@ -82,9 +99,9 @@ export default function AnimatedDropzone() {
     };
 
     runSequence();
-
-    return () => { isMounted = false; };
-  }, [controls, fillControls, progress, cursorReset, moveTo, cursorClick, cursorHide]);
+    return () => { mountedRef.current = false; };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Framer Motion Variants
   const dropzoneVariants: Variants = {

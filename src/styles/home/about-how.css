@@ -257,6 +257,40 @@
   margin-top: 4px;
 }
 
+/* ── Dark mode overrides ── */
+[data-theme='dark'] .step-card {
+  background: transparent;
+}
+[data-theme='dark'] .step-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+[data-theme='dark'] .step-card.is-active {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.3);
+}
+[data-theme='dark'] .step-num {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.55);
+}
+[data-theme='dark'] .step-card.is-active .step-num {
+  background: var(--blue);
+  color: #fff;
+}
+[data-theme='dark'] .step-body h3 {
+  color: #E2E8F0;
+}
+[data-theme='dark'] .step-body p {
+  color: #94A3B8;
+}
+[data-theme='dark'] .step-card.is-active .step-body h3 {
+  color: #F1F5F9;
+}
+[data-theme='dark'] .step-card.is-active .step-body p {
+  color: #CBD5E1;
+}
+
+
 .how-visual {
   position: relative;
   z-index: 10;
