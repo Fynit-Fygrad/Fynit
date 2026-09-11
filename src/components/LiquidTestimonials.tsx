@@ -78,9 +78,7 @@ function Particles({ isDark }: { isDark: boolean }) {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={300}
-          array={new Float32Array(900).map(() => (Math.random() - 0.5) * 15)}
-          itemSize={3}
+          args={[new Float32Array(900).map(() => (Math.random() - 0.5) * 15), 3]}
         />
       </bufferGeometry>
       <pointsMaterial 
