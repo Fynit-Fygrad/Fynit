@@ -121,7 +121,7 @@
   margin-top: 4px;
 }
 [data-theme='dark'] .number-item .metric-word {
-  color: var(--white);
+  color: #ffffff;
 }
 
 .number-item .lbl {

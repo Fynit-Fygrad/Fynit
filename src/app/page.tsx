@@ -1,19 +1,17 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { showComingSoon } from '@/components/Toaster';
 import { useTheme } from 'next-themes';
 import DisciplinesCarousel from '@/components/DisciplinesCarousel';
 import AboutScrollSection from '@/components/AboutScrollSection';
-import BlurText from '@/components/BlurText';
-import TextType from '@/components/TextType';
-import AnimatedDropzone from '@/components/AnimatedDropzone';
-import AnimatedDiagnostic from '@/components/AnimatedDiagnostic';
-import AnimatedMatch from '@/components/AnimatedMatch';
-import AnimatedActionPlan from '@/components/AnimatedActionPlan';
-import AnimatedRealtimeCorrection from '@/components/AnimatedRealtimeCorrection';
 import OrbitalIndexaciones from '@/components/OrbitalIndexaciones';
+import AwwwardsStats from '@/components/AwwwardsStats';
+import HowSection from '@/components/HowSection';
+import TextType from '@/components/TextType';
+import BlurText from '@/components/BlurText';
+import LusionCard from '@/components/LusionCard';
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -23,13 +21,8 @@ export default function Home() {
 
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const countersRef = useRef<HTMLElement>(null);
-
-  // Only used to animate the scroll timeline fill bar
-  const { scrollYProgress } = useScroll({
-    target: howSectionRef,
-    offset: ["start center", "end center"]
-  });
 
   // Observer para "Contador de números"
   useEffect(() => {
@@ -51,6 +44,7 @@ export default function Home() {
   const handleStepClick = (step: number) => {
     setCurrentStep(step);
     setStepKey(k => k + 1);
+    setHasInteracted(true);
   };
 
   const isDark = mounted && theme === 'dark';
@@ -59,13 +53,17 @@ export default function Home() {
 
   return (
     <>
+      <div style={{ position: 'relative', zIndex: 1 }}>
       <link rel="preload" as="image" href={heroBg} fetchPriority="high" />
       <link rel="preload" as="image" href={mascotImg} fetchPriority="high" />
 
       {/*  ============ EPIC HERO ============  */}
       <section className="epic-hero-section" id="inicio">
-
-        {/* Full-bleed background image */}
+      {/* 
+        Hero Section
+        NOTA: Hemos eliminado WebGLBackground global para mejorar radicalmente 
+        el rendimiento y eliminar el lag en el modo oscuro.
+      */} 
         <div
           className="epic-hero-bg"
           style={{ backgroundImage: `url('${heroBg}')` }}
@@ -181,246 +179,12 @@ export default function Home() {
       {/*  ============ SOBRE FYNIT / PROBLEMA (Rediseñado Scroll Storytelling) ============  */}
       <AboutScrollSection />
 
-      {/*  ============ COMO FUNCIONA (núcleo interactivo) ============  */}
-      <section className="section how bg-hero-gradient" id="como-funciona" ref={howSectionRef}>
-        <div className="container" style={{ position: 'relative' }}>
-          {/*  Mascota Fynit 2 3D  */}
-          <img src="assets/imgs png/fynit_mascot_2.webp" alt="Fynit Bot" className="fynit-mascot-active" loading="lazy"
-            style={{ marginTop: '20px' }} />
+      {/*  ============ COMO FUNCIONA (GSAP Stagger + click) ============  */}
+      <HowSection />
 
-          <div className="section-head" data-aos="fade-up" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            <div className="title-wrapper" style={{ alignItems: 'flex-start', marginBottom: '16px' }}>
-              <TextType
-                text={["Cómo funciona", "El proceso", "Paso a paso"]}
-                typingSpeed={70} pauseDuration={1500} showCursor cursorCharacter="_" deletingSpeed={40}
-                className="premium-typing-text"
-              />
-              <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                <BlurText text="DE TU MANUSCRITO AL PLAN DE PUBLICACIÓN" highlightWords={['PUBLICACIÓN']} className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ justifyContent: 'flex-start' }} />
-              </div>
-            </div>
-            <p>Vista simulada de las funciones. La experiencia real es mejor regístrate para que puedas verlo. </p>
-          </div>
 
-          <div className="how-grid">
-            <div className="how-steps-container" style={{ display: 'flex', gap: '20px', position: 'relative' }}>
-              {/* Vertical Scroll Track */}
-              <div className="scroll-timeline-track" style={{ width: '4px', background: 'var(--line)', borderRadius: '4px', position: 'relative', overflow: 'hidden', marginTop: '22px', marginBottom: '22px' }}>
-                <motion.div
-                  className="scroll-timeline-fill"
-                  style={{
-                    position: 'absolute',
-                    top: 0, left: 0, right: 0, bottom: 0,
-                    background: 'var(--blue)',
-                    transformOrigin: 'top',
-                    scaleY: scrollYProgress
-                  }}
-                />
-              </div>
-
-              <div className="how-steps" id="howSteps" style={{ flex: 1 }}>
-                <div className={`step-card ${currentStep === 1 ? "is-active" : ""}`} onClick={() => handleStepClick(1)} style={{ cursor: "pointer" }}>
-                  <span className="step-num">01</span>
-                  <div className="step-body">
-                    <h3>Carga y Diagnóstico Inmediato</h3>
-                    <p>Sube tu artículo (PDF/Word) y en segundos nuestra IA evalúa similitud, readiness y calidad
-                      metodológica.</p>
-                  </div>
-                </div>
-                <div className={`step-card ${currentStep === 2 ? "is-active" : ""}`} onClick={() => handleStepClick(2)} style={{ cursor: "pointer" }}>
-                  <span className="step-num">02</span>
-                  <div className="step-body">
-                    <h3>Detección de Riesgos y Cuartil</h3>
-                    <p>Descubre qué secciones necesitan trabajo y conoce tu nivel de publicación actual (Q1-Q4) sin
-                      adivinar.</p>
-                  </div>
-                </div>
-                <div className={`step-card ${currentStep === 3 ? "is-active" : ""}`} onClick={() => handleStepClick(3)} style={{ cursor: "pointer" }}>
-                  <span className="step-num">03</span>
-                  <div className="step-body">
-                    <h3>Match con Revistas Ideales</h3>
-                    <p>Recibe recomendaciones precisas de revistas y conferencias indexadas (Scopus, WoS) según tu fit
-                      real.
-                    </p>
-                  </div>
-                </div>
-                <div className={`step-card ${currentStep === 4 ? "is-active" : ""}`} onClick={() => handleStepClick(4)} style={{ cursor: "pointer" }}>
-                  <span className="step-num">04</span>
-                  <div className="step-body">
-                    <h3>Plan de Acción y Red de Expertos</h3>
-                    <p>Sigue una ruta de mejora paso a paso o conecta con metedólogos y editores verificados para potenciar
-                      tu paper.</p>
-                  </div>
-                </div>
-                <div className={`step-card ${currentStep === 5 ? "is-active" : ""}`} onClick={() => handleStepClick(5)} style={{ cursor: "pointer" }}>
-                  <span className="step-num">05</span>
-                  <div className="step-body">
-                    <h3>Corrección en Tiempo Real</h3>
-                    <p>Edita tu manuscrito y observa cómo baja tu porcentaje de similitud al instante: un detector de originalidad en vivo que premia cada mejora que realizas.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="how-visual" style={{ display: 'grid' }}>
-              {/* Special Animated Dropzone for Step 1, bypassing the macOS frame */}
-              <div
-                className="step1-special-wrapper"
-                style={{
-                  gridArea: '1 / 1 / 2 / 2',
-                  opacity: currentStep === 1 ? 1 : 0,
-                  visibility: currentStep === 1 ? 'visible' : 'hidden',
-                  transition: 'all 0.4s ease-in-out',
-                  zIndex: currentStep === 1 ? 20 : 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                <div style={{ margin: '24px 0 16px', fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '6px', textAlign: 'center' }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
-                  Animación ilustrativa de cómo funciona —
-                  <span onClick={() => showComingSoon()} style={{ color: '#2563EB', fontWeight: 600, cursor: 'pointer' }}>Regístrate para probarlo tú mismo</span>
-                </div>
-                <AnimatedDropzone key={`dropzone-${stepKey}`} />
-              </div>
-
-              {/* Special Animated Diagnostic for Step 2, bypassing the macOS frame */}
-              <div
-                className="step2-special-wrapper"
-                style={{
-                  gridArea: '1 / 1 / 2 / 2',
-                  opacity: currentStep === 2 ? 1 : 0,
-                  visibility: currentStep === 2 ? 'visible' : 'hidden',
-                  transition: 'all 0.4s ease-in-out',
-                  zIndex: currentStep === 2 ? 20 : 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                <div style={{ margin: '24px 0 16px', fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '6px', textAlign: 'center' }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
-                  Animación ilustrativa de cómo funciona —
-                  <span onClick={() => showComingSoon()} style={{ color: '#2563EB', fontWeight: 600, cursor: 'pointer' }}>Regístrate para probarlo tú mismo</span>
-                </div>
-                <AnimatedDiagnostic key={`diag-${stepKey}`} />
-              </div>
-
-              {/* Special Animated Match for Step 3, bypassing the macOS frame */}
-              <div
-                className="step3-special-wrapper"
-                style={{
-                  gridArea: '1 / 1 / 2 / 2',
-                  opacity: currentStep === 3 ? 1 : 0,
-                  visibility: currentStep === 3 ? 'visible' : 'hidden',
-                  transition: 'all 0.4s ease-in-out',
-                  zIndex: currentStep === 3 ? 20 : 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                <div style={{ margin: '24px 0 16px', fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '6px', textAlign: 'center' }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
-                  Animación ilustrativa de cómo funciona —
-                  <span onClick={() => showComingSoon()} style={{ color: '#2563EB', fontWeight: 600, cursor: 'pointer' }}>Regístrate para probarlo tú mismo</span>
-                </div>
-                <AnimatedMatch key={`match-${stepKey}`} />
-              </div>
-
-              {/* Special Animated Action Plan for Step 4 */}
-              <div
-                className="step4-special-wrapper"
-                style={{
-                  gridArea: '1 / 1 / 2 / 2',
-                  opacity: currentStep === 4 ? 1 : 0,
-                  visibility: currentStep === 4 ? 'visible' : 'hidden',
-                  transition: 'all 0.4s ease-in-out',
-                  zIndex: currentStep === 4 ? 20 : 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                <div style={{ margin: '24px 0 16px', fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '6px', textAlign: 'center' }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
-                  Animación ilustrativa de cómo funciona —
-                  <span onClick={() => showComingSoon()} style={{ color: '#2563EB', fontWeight: 600, cursor: 'pointer' }}>Regístrate para probarlo tú mismo</span>
-                </div>
-                <AnimatedActionPlan key={`aplan-${stepKey}`} />
-              </div>
-
-              {/* Special Animated Realtime Correction for Step 5 */}
-              <div
-                className="step5-special-wrapper"
-                style={{
-                  gridArea: '1 / 1 / 2 / 2',
-                  opacity: currentStep === 5 ? 1 : 0,
-                  visibility: currentStep === 5 ? 'visible' : 'hidden',
-                  transition: 'all 0.4s ease-in-out',
-                  zIndex: currentStep === 5 ? 20 : 1,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                <div style={{ margin: '24px 0 16px', fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', gap: '6px', textAlign: 'center' }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
-                  Animación ilustrativa de cómo funciona —
-                  <span onClick={() => showComingSoon()} style={{ color: '#2563EB', fontWeight: 600, cursor: 'pointer' }}>Regístrate para probarlo tú mismo</span>
-                </div>
-                <AnimatedRealtimeCorrection key={`areal-${stepKey}`} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/*  ============ NUMEROS ============  */}
-      <section className="numbers bg-hero-gradient" ref={countersRef}>
-        <div className="container" style={{ position: 'relative', zIndex: '2' }}>
-
-          <div className="numbers-grid">
-            <div className="number-item" data-aos="fade-up" data-aos-delay="100">
-              <div className="icon-wrap"><svg>
-                <use href="/sprite.svg#ic-sparkles" />
-              </svg></div>
-              <div className="num"><span className="accent">Segundos</span></div>
-              <div className="lbl">Para tu diagnóstico inicial completo — no días, no horas</div>
-            </div>
-            <div className="number-item" data-aos="fade-up" data-aos-delay="200">
-              <div className="icon-wrap"><svg>
-                <use href="/sprite.svg#ic-target" />
-              </svg></div>
-              <div className="num"><AnimatedCounter target={6} visible={countersVisible} /></div>
-              <div className="metric-word">Métricas</div>
-              <div className="lbl">Evaluadas en cada análisis con IA: similitud, metodología, readiness y más</div>
-            </div>
-            <div className="number-item" data-aos="fade-up" data-aos-delay="300">
-              <div className="icon-wrap"><svg>
-                <use href="/sprite.svg#ic-alert" />
-              </svg></div>
-              <div className="num"><span className="accent">3 a 5</span></div>
-              <div className="metric-word">Riesgos</div>
-              <div className="lbl">Priorizados automáticamente, no listados al azar</div>
-            </div>
-            <div className="number-item" data-aos="fade-up" data-aos-delay="400">
-              <div className="icon-wrap"><svg>
-                <use href="/sprite.svg#ic-journal" />
-              </svg></div>
-              <div className="num"><AnimatedCounter target={1} visible={countersVisible} /></div>
-              <div className="metric-word">Ruta clara</div>
-              <div className="lbl">Hacia la revista que sí tiene sentido para ti</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/*  ============ ESTADÍSTICAS AWWWARDS ============  */}
+      <AwwwardsStats />
 
       {/*  ============ INDEXACIONES (Orbital 3D / ANUBI style) ============  */}
       <OrbitalIndexaciones />
@@ -436,7 +200,7 @@ export default function Home() {
                 className="premium-typing-text"
               />
               <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <BlurText text="INVESTIGADORES QUE YA LO PROBARON" highlightWords={['PROBARON']} className="massive-title black-title" delay={30} animateBy="words" direction="top" />
+                  <BlurText text="INVESTIGADORES QUE YA LO PROBARON" highlightWords={['PROBARON']} className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', lineHeight: '0.93' }} />
               </div>
             </div>
             <p>Estos son los primeros investigadores que confiaron en Fynit. Su feedback construyó la herramienta.</p>
@@ -503,7 +267,7 @@ export default function Home() {
                 className="premium-typing-text"
               />
               <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <BlurText text="ELIGE EL PLAN QUE SE AJUSTA A TU ETAPA" highlightWords={['PLAN']} className="massive-title black-title" delay={30} animateBy="words" direction="top" />
+                  <BlurText text="ELIGE EL PLAN QUE SE AJUSTA A TU ETAPA" highlightWords={['PLAN']} className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', lineHeight: '0.93' }} />
               </div>
             </div>
             <p>Sin sorpresas. Empieza y escala cuando estés listo.</p>
@@ -608,7 +372,7 @@ export default function Home() {
                   className="premium-typing-text"
                 />
                 <div style={{ width: '100%', maxWidth: '600px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                  <BlurText text="ÚLTIMOS ARTÍCULOS" highlightWords={['ARTÍCULOS']} className="massive-title black-title" delay={30} animateBy="words" direction="top" />
+                  <BlurText text="ÚLTIMOS ARTÍCULOS" highlightWords={['ARTÍCULOS']} className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', lineHeight: '0.93' }} />
                 </div>
               </div>
             </div>
@@ -651,7 +415,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+      </div>
     </>
   );
 }

@@ -33,6 +33,50 @@
   align-items: center;
   height: 450px;
   z-index: 1;
+  position: relative;
+}
+
+/* ============================================================
+   3D GRID FLOOR (Cyberpunk Stage)
+   ============================================================ */
+.disciplines-3d-floor {
+  position: absolute;
+  bottom: 0%;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  
+  /* Light mode: Visible Fynit Blue grid */
+  background-image: 
+    linear-gradient(rgba(27, 96, 223, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 96, 223, 0.35) 1px, transparent 1px);
+  background-size: 100px 100px;
+  
+  /* Perfect 3D floor perspective anchored to the bottom */
+  transform: perspective(800px) rotateX(75deg);
+  transform-origin: center bottom;
+  
+  /* Mask it to fade out smoothly at the top (horizon) and edges */
+  mask-image: radial-gradient(ellipse at center 100%, black 0%, transparent 55%);
+  -webkit-mask-image: radial-gradient(ellipse at center 100%, black 0%, transparent 55%);
+  
+  z-index: 0;
+  pointer-events: none;
+  animation: moveFloor 6s linear infinite;
+  will-change: background-position;
+  opacity: 1;
+}
+
+/* Dark mode: Glowing Cyan grid */
+[data-theme="dark"] .disciplines-3d-floor { 
+  background-image: 
+    linear-gradient(rgba(56, 189, 248, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.4) 1px, transparent 1px);
+}
+
+@keyframes moveFloor {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100px; }
 }
 
 .scene-3d {

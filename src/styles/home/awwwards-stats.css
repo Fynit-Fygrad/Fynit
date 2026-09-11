@@ -1,0 +1,235 @@
+/* =========================================================================
+   NUEVA SECCIÓN: ESTADÍSTICAS AWWWARDS (Scroll-Driven Typography)
+   ========================================================================= */
+
+.awwwards-stats-section {
+  position: relative;
+  width: 100%;
+  min-height: 60vh; /* Altura corregida, ya no hay espacio gigante */
+  background: var(--bg-gradient-hero-light);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0; /* Espaciado ajustado */
+}
+
+[data-theme='dark'] .awwwards-stats-section {
+  background: var(--bg-gradient-hero-dark);
+}
+
+.awwwards-stats-container {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  height: 100%;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+}
+
+/* =========================================================================
+   GIANT BACKGROUND NUMBERS (Parallax & Torch)
+   ========================================================================= */
+
+.giant-numbers-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+}
+
+.giant-number {
+  font-family: var(--font-bebas, "Bebas Neue"), sans-serif;
+  font-size: clamp(10rem, 20vw, 30rem);
+  line-height: 0.8;
+  color: var(--navy);
+  user-select: none;
+  white-space: nowrap;
+}
+
+[data-theme='dark'] .giant-number {
+  color: #ffffff;
+}
+
+.gn-1 {
+  transform: translateY(10%);
+}
+.gn-2 {
+  font-size: clamp(15rem, 30vw, 40rem);
+  transform: translateY(-5%);
+}
+.gn-3 {
+  transform: translateY(15%);
+}
+.gn-4 {
+  font-size: clamp(15rem, 30vw, 40rem);
+  transform: translateY(-2%);
+}
+
+/* =========================================================================
+   FOREGROUND CONTENT
+   ========================================================================= */
+
+.stats-content-grid {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+/* El grid principal captura el hover para hacer "dim" a los demás */
+.stats-content-grid:hover .stat-block {
+  opacity: 0.3;
+  filter: blur(2px);
+}
+
+.stat-block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 0;
+  transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
+  cursor: default;
+}
+
+/* El bloque hovered vuelve a 100% y se escala un poquito */
+.stats-content-grid .stat-block:hover {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(-10px);
+}
+
+.stat-value {
+  font-family: var(--font-bebas, "Bebas Neue"), sans-serif;
+  font-size: clamp(3rem, 5vw, 5rem);
+  line-height: 1;
+  color: #FEC600; /* Fallback */
+  margin: 0;
+  transition: text-shadow 0.4s ease;
+  position: relative;
+  /* Efecto OOOOF: Shimmer de oro metálico que pasa por las letras continuamente */
+  background: linear-gradient(110deg, #FEC600 30%, #fff4c2 50%, #FEC600 70%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine-gold 4s linear infinite;
+}
+
+@keyframes shine-gold {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.stats-content-grid .stat-block:hover .stat-value {
+  text-shadow: 0 0 20px rgba(254, 198, 0, 0.4);
+}
+
+.text-accent {
+  /* color se maneja con el gradiente de fondo ahora */
+}
+
+.stat-divider-wrapper {
+  width: 40px;
+  height: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-divider {
+  width: 100%;
+  height: 100%;
+  background-color: var(--navy);
+  opacity: 0.2;
+}
+
+[data-theme='dark'] .stat-divider {
+  background-color: #ffffff;
+  opacity: 0.3;
+}
+
+/* Cuando le pasas el ratón, la línea se estira de 40px a 100px */
+.stats-content-grid .stat-block:hover .stat-divider-wrapper {
+  width: 100px;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stat-desc {
+  font-family: var(--font-body), sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: var(--navy);
+  font-weight: 500;
+  margin: 0;
+  max-width: 90%;
+}
+
+[data-theme='dark'] .stat-desc {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* =========================================================================
+   HOVER MOUSE TORCH EFFECT (Linterna con el ratón)
+   ========================================================================= */
+.mouse-torch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  /* Este gradiente radial revelará ligeramente el fondo con un tono metálico/azulado */
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(254, 198, 0, 0.05),
+    transparent 40%
+  );
+}
+
+[data-theme='dark'] .mouse-torch {
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.03),
+    transparent 40%
+  );
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .stats-content-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px;
+  }
+  .giant-number {
+    font-size: clamp(8rem, 15vw, 20rem);
+  }
+  .gn-2, .gn-4 {
+    font-size: clamp(10rem, 20vw, 25rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .stats-content-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  .giant-numbers-wrapper {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .giant-number {
+    font-size: clamp(12rem, 30vw, 30rem) !important;
+  }
+}

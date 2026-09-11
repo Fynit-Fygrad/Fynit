@@ -1,244 +1,231 @@
 /* =========================================================================
-   NUEVA SECCIÓN: SOBRE NOSOTROS (Estática con Micro-animaciones y Bento Grid)
+   PINNED SCROLL STORYTELLING (About Section)
    ========================================================================= */
 
-.about-static-container {
+.pinned-scroll-section {
   position: relative;
-  min-height: auto;
-  background: var(--bg-gradient-hero-light);
   width: 100%;
-  padding: 60px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  /* La altura de la sección determina cuánto tiempo harás scroll. 400vh da tiempo de sobra para ver las 4 tarjetas */
+  height: 400vh; 
+  background: var(--bg-gradient-hero-light);
 }
 
-[data-theme='dark'] .about-static-container {
+[data-theme='dark'] .pinned-scroll-section {
   background: var(--bg-gradient-hero-dark);
 }
 
-.about-static-view {
-  position: relative;
+.pinned-sticky-container {
+  position: sticky;
+  top: 0;
   width: 100%;
-  max-width: 1200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 60px;
-}
-
-.about-center-content {
-  position: relative;
-  text-align: center;
-  z-index: 30;
-  max-width: 800px;
-}
-
-.title-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.premium-typing-text {
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--blue, #2563EB);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 12px;
-  min-height: 24px;
+  height: 100vh; /* Se ancla a la altura de la pantalla */
   display: flex;
   align-items: center;
-  gap: 12px;
-}
-
-.premium-typing-text::before {
-  content: '';
-  display: block;
-  width: 32px;
-  height: 2px;
-  background-color: var(--blue, #2563EB);
-}
-
-[data-theme='dark'] .premium-typing-text {
-  color: #60A5FA;
-}
-
-[data-theme='dark'] .premium-typing-text::before {
-  background-color: #60A5FA;
-}
-.massive-title {
-  font-family: var(--font-bebas, "Bebas Neue"), sans-serif;
-  font-weight: 400;
-  font-size: clamp(2.5rem, 5.5vw, 5.5rem);
-  line-height: 0.93;
-  letter-spacing: 1px;
-  color: var(--navy, #071742);
-  text-transform: uppercase;
-  position: relative;
-  z-index: 2;
-  margin: 0;
-  width: 100%;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
-  hyphens: auto;
-}
-
-.black-title {
-  color: var(--navy, #071742);
-}
-
-[data-theme='dark'] .massive-title,
-[data-theme='dark'] .black-title {
-  color: #EDEFF2;
-}
-
-.highlight-yellow {
-  color: #FEC600 !important;
-}
-
-.subtitle-text {
-  font-size: 1.125rem;
-  color: var(--navy);
-  opacity: 0.8;
-  line-height: 1.6;
-  max-width: 600px;
+  max-width: 1400px;
   margin: 0 auto;
-}
-
-[data-theme='dark'] .subtitle-text {
-  color: #fff;
+  padding: 0 40px;
+  overflow: hidden; /* Evita que las tarjetas se salgan de la pantalla por arriba/abajo */
 }
 
 /* =========================================================================
-   BENTO GRID
+   LEFT SIDE: Pinned Content
    ========================================================================= */
 
-.about-bento-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-  width: 100%;
-  max-width: 1000px;
-  z-index: 20;
-}
-
-/* Glass Panels (Premium Redesign) */
-.glass-panel {
-  position: relative;
-  padding: 30px;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 100%);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 24px;
-  box-shadow: 0 20px 40px rgba(7, 23, 66, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
+.pinned-left-content {
+  flex: 1;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  overflow: hidden; /* Keeps mascot inside bounds */
+  justify-content: center;
+  padding-right: 40px; /* Reducido para cerrar el abismo */
+  position: relative;
+  z-index: 10;
 }
 
-.glass-panel:hover {
-  transform: translateY(-5px) !important;
-  box-shadow: 0 30px 60px rgba(7, 23, 66, 0.12), inset 0 1px 0 rgba(255, 255, 255, 1);
+.pinned-header {
+  max-width: 600px;
 }
 
-[data-theme='dark'] .glass-panel {
-  background: linear-gradient(145deg, rgba(16, 25, 45, 0.8) 0%, rgba(7, 12, 23, 0.6) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+.pinned-paragraph {
+  font-family: var(--font-body), sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--color-fynit-navy-soft, #0E2159); /* Gris/Azul más suave */
+  margin-top: 30px;
+  max-width: 85%; /* Bloque editorial más ajustado */
 }
 
-/* Panel Number */
-.panel-number {
-  font-size: 13px;
-  font-weight: 800;
-  color: #fff;
-  background: var(--blue);
-  width: fit-content;
-  padding: 4px 10px;
-  border-radius: 20px;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
+[data-theme='dark'] .pinned-paragraph {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* =========================================================================
+   RIGHT SIDE: Scrolling Cards
+   ========================================================================= */
+
+.pinned-right-content {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  /* Centramos el track verticalmente en el contenedor */
+  display: flex;
+  align-items: flex-start;
+  padding-top: 50vh; /* Comienza en el medio de la pantalla */
+}
+
+.pinned-cards-track {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15vh; /* Espacio inmenso entre tarjetas para que se lean una por una */
+  padding-bottom: 50vh; /* Espacio extra al final para que la última suba completamente */
+  will-change: transform;
+}
+
+/* =========================================================================
+   PREMIUM GLASS CARDS
+   ========================================================================= */
+
+.pinned-card {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  padding: 50px;
+  border-radius: 32px; /* Más redondeado, más Apple */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  isolation: isolate; /* Para el glassmorphism */
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden; /* Para que el número de agua no se salga */
+}
+
+.pinned-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.12);
+}
+
+[data-theme='dark'] .pinned-card:hover {
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 40px rgba(255, 255, 255, 0.05);
+}
+
+.card-glass {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.4); /* Más transparente */
+  backdrop-filter: blur(40px); /* Desenfoque extremo */
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.6); /* Borde de luz sutil */
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5), 0 8px 32px rgba(31, 38, 135, 0.05);
+  z-index: -1;
+}
+
+[data-theme='dark'] .card-glass {
+  background: rgba(16, 23, 40, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.02), 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.card-number {
+  position: absolute;
+  top: -20px;
+  right: -10px;
+  font-family: var(--font-bebas, "Bebas Neue"), sans-serif;
+  font-size: 15rem; /* GIGANTE */
+  color: var(--navy);
+  opacity: 0.04; /* Casi invisible, marca de agua pura */
+  line-height: 1;
+  z-index: -1;
+  user-select: none;
+  pointer-events: none;
+}
+
+[data-theme='dark'] .card-number {
+  color: #ffffff;
+  opacity: 0.03;
+}
+
+.card-content {
+  position: relative;
   z-index: 2;
 }
 
-.glass-panel h3 {
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: var(--navy);
-  margin: 0;
-  line-height: 1.3;
-  z-index: 2;
-  max-width: 80%;
+.card-content h3 {
+  font-family: var(--font-display, var(--font-body)), sans-serif; /* Tipografía más premium */
+  font-size: 1.6rem;
+  font-weight: 800; /* Más peso */
+  letter-spacing: -0.5px;
+  color: var(--color-fynit-navy, #071742);
+  margin-bottom: 12px;
 }
 
-[data-theme='dark'] .glass-panel h3 {
-  color: #fff;
+[data-theme='dark'] .card-content h3 {
+  color: #ffffff;
 }
 
-.glass-panel p {
-  font-size: 0.95rem;
+.card-content p {
+  font-family: var(--font-body), sans-serif;
+  font-size: 1rem;
   color: var(--navy);
-  opacity: 0.75;
-  margin: 0;
+  opacity: 0.8;
   line-height: 1.5;
-  z-index: 2;
-  max-width: 85%;
 }
 
-[data-theme='dark'] .glass-panel p {
+[data-theme='dark'] .card-content p {
   color: rgba(255, 255, 255, 0.7);
 }
 
 /* =========================================================================
-   MASCOTS INSIDE CARDS
+   ABSTRACT ICONS (Replacing the blue mascot)
    ========================================================================= */
-
-.bento-mascot {
+.card-abstract-icon {
   position: absolute;
-  width: 120px;
-  opacity: 0.8;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.flip-horizontal {
-  transform: scaleX(-1);
-}
-
-.bento-mascot.bottom-right {
-  bottom: -20px;
-  right: -20px;
-}
-
-.bento-mascot.top-right {
   top: -20px;
-  right: -20px;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle at top left, var(--accent), #ff9d00);
+  opacity: 0.2;
+  filter: blur(20px);
+  z-index: -2;
+  transition: opacity 0.4s ease, filter 0.4s ease;
 }
 
-.bento-mascot.bottom-left {
-  bottom: -20px;
-  left: -20px;
+.pinned-card:hover .card-abstract-icon {
+  opacity: 0.5;
+  filter: blur(30px);
 }
 
-.bento-mascot.top-left {
-  top: -20px;
-  left: -20px;
-}
+/* Custom glow shapes per card */
+.icon-1 { background: radial-gradient(circle at top left, #ff3366, #ff9933); }
+.icon-2 { background: radial-gradient(circle at top left, #33ccff, #3366ff); }
+.icon-3 { background: radial-gradient(circle at top left, #33ff99, #00cc66); }
+.icon-4 { background: radial-gradient(circle at top left, #cc33ff, #6600cc); }
 
+
+/* RESPONSIVE */
 @media (max-width: 1024px) {
-  .about-static-container { padding: 80px 20px; }
-  .about-bento-grid { grid-template-columns: 1fr; gap: 20px; }
-  .glass-panel { margin-bottom: 0; }
-  .massive-title { font-size: clamp(2.2rem, 10vw, 4rem); }
+  .pinned-sticky-container {
+    flex-direction: column;
+    padding: 100px 20px;
+  }
+  .pinned-left-content {
+    flex: none;
+    height: auto;
+    padding-right: 0;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  .pinned-header {
+    margin: 0 auto;
+  }
+  .pinned-right-content {
+    width: 100%;
+    padding-top: 10vh;
+  }
+  .pinned-card {
+    max-width: 100%;
+  }
 }

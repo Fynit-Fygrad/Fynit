@@ -1,7 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from 'next-themes';
 import '@/styles/components/disciplines-carousel.css';
 import TextType from '@/components/TextType';
 
@@ -63,9 +64,21 @@ const disciplines = [
 ];
 
 export default function DisciplinesCarousel() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted && resolvedTheme === 'dark';
+
   return (
     <section className="disciplines-3d-section" id="disciplinas">
-      <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+      {/* The Cyberpunk Grid Floor (CSS-based, smooth animation) */}
+      <div className="disciplines-3d-floor"></div>
+
+      <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', position: 'relative', zIndex: 2 }}>
         
         <div className="disciplines-grid">
           
