@@ -27,6 +27,25 @@ export default function AboutScrollSection() {
     isMobile ? ["0%", "0%"] : ["0%", "-75%"]
   );
 
+  const CARDS = [
+    { num: "01", title: "Meses sin saber si vas bien", desc: "Revisas y revisas sin una señal clara de si tu argumento sostiene una publicación real.", iconClass: "icon-1" },
+    { num: "02", title: "Feedback disperso y tardío", desc: "El asesor lo dice por correo, el jurado en la sustentación, casi nunca a tiempo.", iconClass: "icon-2" },
+    { num: "03", title: "No sabes dónde postular", desc: "Cientos de revistas y ningún criterio claro sobre cuál se ajusta a tu perfil o nivel actual.", iconClass: "icon-3" },
+    { num: "04", title: "El detalle que baja tu originalidad", desc: "Frases mal formateadas o referencias incorrectas que restan calidad sin que lo notes.", iconClass: "icon-4" }
+  ];
+
+  const renderCards = () => CARDS.map((c, i) => (
+    <div key={i} className="pinned-card">
+      <div className="card-glass"></div>
+      <div className="card-number">{c.num}</div>
+      <div className="card-content">
+        <h3>{c.title}</h3>
+        <p>{c.desc}</p>
+      </div>
+      <div className={`card-abstract-icon ${c.iconClass}`}></div>
+    </div>
+  ));
+
   return (
     <section ref={containerRef} className="pinned-scroll-section">
       <div className="pinned-sticky-container">
@@ -65,53 +84,22 @@ export default function AboutScrollSection() {
 
         {/* Right Side: Scrolling Cards */}
         <div className="pinned-right-content">
-          <motion.div style={{ y: cardsY }} className="pinned-cards-track">
-
-            {/* CARD 01 */}
-            <div className="pinned-card">
-              <div className="card-glass"></div>
-              <div className="card-number">01</div>
-              <div className="card-content">
-                <h3>Meses sin saber si vas bien</h3>
-                <p>Revisas y revisas sin una señal clara de si tu argumento sostiene una publicación real.</p>
+          {isMobile ? (
+            <div className="pinned-cards-track-mobile">
+              <div className="mobile-horizontal-scroll">
+                {renderCards()}
               </div>
-              <div className="card-abstract-icon icon-1"></div>
-            </div>
-
-            {/* CARD 02 */}
-            <div className="pinned-card">
-              <div className="card-glass"></div>
-              <div className="card-number">02</div>
-              <div className="card-content">
-                <h3>Feedback disperso y tardío</h3>
-                <p>El asesor lo dice por correo, el jurado en la sustentación, casi nunca a tiempo.</p>
+              <div className="mobile-swipe-hint">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
+                <span>Deslizar tarjetas</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </div>
-              <div className="card-abstract-icon icon-2"></div>
             </div>
-
-            {/* CARD 03 */}
-            <div className="pinned-card">
-              <div className="card-glass"></div>
-              <div className="card-number">03</div>
-              <div className="card-content">
-                <h3>No sabes dónde postular</h3>
-                <p>Cientos de revistas y ningún criterio claro sobre cuál se ajusta a tu perfil o nivel actual.</p>
-              </div>
-              <div className="card-abstract-icon icon-3"></div>
-            </div>
-
-            {/* CARD 04 */}
-            <div className="pinned-card">
-              <div className="card-glass"></div>
-              <div className="card-number">04</div>
-              <div className="card-content">
-                <h3>El detalle que baja tu originalidad</h3>
-                <p>Frases mal formateadas o referencias incorrectas que restan calidad sin que lo notes.</p>
-              </div>
-              <div className="card-abstract-icon icon-4"></div>
-            </div>
-
-          </motion.div>
+          ) : (
+            <motion.div style={{ y: cardsY }} className="pinned-cards-track">
+              {renderCards()}
+            </motion.div>
+          )}
         </div>
 
       </div>

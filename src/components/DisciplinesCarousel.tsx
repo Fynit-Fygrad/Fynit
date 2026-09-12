@@ -178,16 +178,16 @@ export default function DisciplinesCarousel() {
                           <div className="card-cover-overlay"></div>
                           <div className="card-bottom-content">
                             <div className="card-icon-wrapper" style={{ 
-                              backgroundColor: d.theme === 'light' ? d.color : '#fff',
-                              color: d.theme === 'light' ? '#fff' : '#071742'
+                              background: d.theme === 'dark' ? '#0B1120' : '#ffffff',
+                              color: d.color,
                             }}>
                               {d.icon}
                             </div>
-                            <h4 className="card-cover-title">{d.title}</h4>
+                            <h4 style={{ color: d.theme === 'dark' ? '#ffffff' : '#071742' }}>{d.title}</h4>
                           </div>
                         </div>
 
-                        {/* Reverso de la tarjeta (Texto) */}
+                        {/* Reverso de la tarjeta (Descripción detallada) */}
                         <div className="card-face card-back">
                           <div className="card-back-content">
                             <h4>{d.title}</h4>
@@ -200,6 +200,16 @@ export default function DisciplinesCarousel() {
                 })}
               </div>
             </div>
+
+            {/* Hint de scroll manual en móviles (ubicado debajo de las tarjetas) */}
+            <div className="mobile-only" style={{ position: 'absolute', bottom: '-20px', left: '0', width: '100%', display: 'flex', justifyContent: 'center' }}>
+              <div className="mobile-swipe-hint" style={{ color: 'rgba(7, 23, 66, 0.6)' }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
+                <span>Deslizar</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+              </div>
+            </div>
+
           </div>
 
         </div>

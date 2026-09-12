@@ -48,22 +48,30 @@ const BlurText = ({
     return () => observer.disconnect();
   }, [threshold, rootMargin]);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+  }, []);
+
   const defaultFrom = useMemo(
     () =>
-      direction === 'top' ? { filter: 'blur(10px)', opacity: 0, y: -50 } : { filter: 'blur(10px)', opacity: 0, y: 50 },
-    [direction]
+      direction === 'top' 
+        ? { filter: isMobile ? 'none' : 'blur(10px)', opacity: 0, y: -50 } 
+        : { filter: isMobile ? 'none' : 'blur(10px)', opacity: 0, y: 50 },
+    [direction, isMobile]
   );
 
   const defaultTo = useMemo(
     () => [
       {
-        filter: 'blur(5px)',
+        filter: isMobile ? 'none' : 'blur(5px)',
         opacity: 0.5,
         y: direction === 'top' ? 5 : -5
       },
-      { filter: 'blur(0px)', opacity: 1, y: 0 }
+      { filter: isMobile ? 'none' : 'blur(0px)', opacity: 1, y: 0 }
     ],
-    [direction]
+    [direction, isMobile]
   );
 
   const fromSnapshot = animationFrom ?? defaultFrom;

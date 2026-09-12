@@ -290,13 +290,50 @@
   }
 
   .pinned-cards-track {
-    gap: 16px; 
-    padding-bottom: 0;
-    will-change: auto;
+    display: none; /* Hide the framer-motion track entirely on mobile */
   }
 
-  .pinned-card {
-    max-width: 100%;
+  .pinned-cards-track-mobile {
+    width: 100vw;
+    margin-left: -16px; /* Offset parent padding */
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .mobile-horizontal-scroll {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding: 10px 16px 20px 16px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .mobile-horizontal-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-swipe-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 12px;
+    font-family: var(--font-body), sans-serif;
+    color: rgba(7, 23, 66, 0.5);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  [data-theme='dark'] .mobile-swipe-hint {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .mobile-horizontal-scroll .pinned-card {
+    min-width: 280px;
+    max-width: 85vw;
+    scroll-snap-align: center;
     transform: none !important;
     opacity: 1 !important;
     padding: 24px !important; /* Padding más compacto en móvil */

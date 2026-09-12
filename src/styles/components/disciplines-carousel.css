@@ -742,9 +742,14 @@
     z-index: 1;
     display: flex;
     align-items: center;
-    overflow: hidden;
-    /* Hide overflow to let animation run cleanly */
+    overflow-x: auto; /* Re-enable native scroll */
+    scroll-snap-type: x mandatory;
     padding: 0 40px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .scene-3d::-webkit-scrollbar {
+    display: none;
   }
 
   .carousel-3d {
@@ -755,21 +760,8 @@
     display: flex;
     align-items: center;
     gap: 40px;
-    animation: mobileAutoScroll 16s ease-in-out infinite alternate !important;
-    /* Ping-pong auto scroll */
-    will-change: transform; /* HARDWARE ACCELERATION */
-  }
-
-  @keyframes mobileAutoScroll {
-    0% {
-      transform: translateX(0);
-    }
-
-    100% {
-      transform: translateX(calc(-100% + 500px));
-    }
-
-    /* Stops right before running out of cards */
+    animation: none !important; /* APAGADO PARA NO CAUSAR LAG */
+    will-change: auto;
   }
 
   .carousel-item-wrapper {
@@ -781,7 +773,7 @@
     width: 200px;
     height: 300px;
     flex-shrink: 0;
-    scroll-snap-align: center;
+    scroll-snap-align: center; /* Snap cards */
     -webkit-box-reflect: none !important;
     /* Remove laggy reflect */
   }
