@@ -49,10 +49,20 @@ export default function HowSection() {
   const [currentStep, setCurrentStep] = useState(1);
   const [stepKey, setStepKey] = useState(0);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const stepsRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
   const mascotRef = useRef<HTMLImageElement>(null);
+
+  // Check mobile to unmount heavy animations
+  import { useEffect } from 'react';
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleStepClick = (step: number) => {
     setCurrentStep(step);
@@ -104,19 +114,21 @@ export default function HowSection() {
     });
 
     // ── 3. Mac frame slides in from right ──────────────────────
-    gsap.from(frameRef.current, {
-      opacity: 0,
-      x: 60,
-      scale: 0.94,
-      duration: 0.65,
-      ease: 'power3.out',
-      delay: 0.15,
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top 70%',
-        toggleActions: 'play none none reverse', // replay on re-enter
-      },
-    });
+    if (frameRef.current) {
+      gsap.from(frameRef.current, {
+        opacity: 0,
+        x: 60,
+        scale: 0.94,
+        duration: 0.65,
+        ease: 'power3.out',
+        delay: 0.15,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 70%',
+          toggleActions: 'play none none reverse', // replay on re-enter
+        },
+      });
+    }
   }, { scope: sectionRef });
 
   return (
@@ -222,52 +234,54 @@ export default function HowSection() {
               </div>
             </div>
 
-            {/* Right: macOS frame */}
-            <div className="how-visual">
-              <div className="visual-frame" ref={frameRef}>
-                <div className="visual-chrome">
-                  <span /><span /><span />
-                </div>
-                <div
-                  className="visual-body"
-                  style={{ display: 'grid', position: 'relative', width: '100%', minHeight: '450px' }}
-                >
-                  {/* Hint label */}
-                  <div style={{ position: 'absolute', top: '12px', left: 0, right: 0, zIndex: 10, fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
-                    Animación ilustrativa de cómo funciona —
-                    <span onClick={() => showComingSoon()} style={{ color: '#2563EB', fontWeight: 600, cursor: 'pointer' }}>Regístrate para probarlo tú mismo</span>
+            {/* Right: macOS frame (HIDDEN ON MOBILE TO PREVENT CPU LAG FROM BACKGROUND ANIMATIONS) */}
+            {!isMobile && (
+              <div className="how-visual">
+                <div className="visual-frame" ref={frameRef}>
+                  <div className="visual-chrome">
+                    <span /><span /><span />
                   </div>
-
-                  {/* Step visuals stacked on same grid cell */}
-                  {[
-                    { comp: <AnimatedDropzone key={`drop-${stepKey}`} />, step: 1 },
-                    { comp: <AnimatedDiagnostic key={`diag-${stepKey}`} />, step: 2 },
-                    { comp: <AnimatedMatch key={`match-${stepKey}`} />, step: 3 },
-                    { comp: <AnimatedActionPlan key={`aplan-${stepKey}`} />, step: 4 },
-                    { comp: <AnimatedRealtimeCorrection key={`areal-${stepKey}`} />, step: 5 },
-                  ].map(({ comp, step }) => (
-                    <div
-                      key={step}
-                      style={{
-                        gridArea: '1 / 1 / 2 / 2',
-                        opacity: currentStep === step ? 1 : 0,
-                        visibility: currentStep === step ? 'visible' : 'hidden',
-                        transition: 'opacity 0.4s ease-in-out',
-                        zIndex: currentStep === step ? 20 : 1,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        paddingTop: '44px',
-                      }}
-                    >
-                      {comp}
+                  <div
+                    className="visual-body"
+                    style={{ display: 'grid', position: 'relative', width: '100%', minHeight: '450px' }}
+                  >
+                    {/* Hint label */}
+                    <div style={{ position: 'absolute', top: '12px', left: 0, right: 0, zIndex: 10, fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
+                      Animación ilustrativa de cómo funciona —
+                      <span onClick={() => showComingSoon()} style={{ color: '#2563EB', fontWeight: 600, cursor: 'pointer' }}>Regístrate para probarlo tú mismo</span>
                     </div>
-                  ))}
+
+                    {/* Step visuals stacked on same grid cell */}
+                    {[
+                      { comp: <AnimatedDropzone key={`drop-${stepKey}`} />, step: 1 },
+                      { comp: <AnimatedDiagnostic key={`diag-${stepKey}`} />, step: 2 },
+                      { comp: <AnimatedMatch key={`match-${stepKey}`} />, step: 3 },
+                      { comp: <AnimatedActionPlan key={`aplan-${stepKey}`} />, step: 4 },
+                      { comp: <AnimatedRealtimeCorrection key={`areal-${stepKey}`} />, step: 5 },
+                    ].map(({ comp, step }) => (
+                      <div
+                        key={step}
+                        style={{
+                          gridArea: '1 / 1 / 2 / 2',
+                          opacity: currentStep === step ? 1 : 0,
+                          visibility: currentStep === step ? 'visible' : 'hidden',
+                          transition: 'opacity 0.4s ease-in-out',
+                          zIndex: currentStep === step ? 20 : 1,
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          paddingTop: '44px',
+                        }}
+                      >
+                        {comp}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
           </div>
         </div>
