@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -56,7 +56,6 @@ export default function HowSection() {
   const mascotRef = useRef<HTMLImageElement>(null);
 
   // Check mobile to unmount heavy animations
-  import { useEffect } from 'react';
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 1024);
     checkMobile();
