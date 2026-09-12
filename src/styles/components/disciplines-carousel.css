@@ -620,24 +620,19 @@
   }
 
   .white-rounded-box {
-    background: linear-gradient(135deg, rgba(220, 238, 255, 0.85) 0%, rgba(230, 245, 255, 0.65) 100%);
-    /* Claramente celeste/azulado, no blanco */
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    background: #E8F2FF; /* Solid fallback color to avoid heavy blur rendering */
     padding: 16px 20px;
     margin: 0;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 16px 40px rgba(7, 23, 66, 0.08), inset 0 2px 10px rgba(255, 255, 255, 0.6);
+    box-shadow: 0 16px 40px rgba(7, 23, 66, 0.08); /* Simplified shadow */
     overflow: visible;
   }
 
   [data-theme='dark'] .white-rounded-box {
-    background: rgba(11, 17, 32, 0.6);
+    background: #0B1120; /* Solid dark color */
     border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    /* Elimina el halo blanco fuerte */
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
   }
 
   /* --- Nuevos estilos de tipografía móvil --- */
@@ -762,6 +757,7 @@
     gap: 40px;
     animation: mobileAutoScroll 16s ease-in-out infinite alternate !important;
     /* Ping-pong auto scroll */
+    will-change: transform; /* HARDWARE ACCELERATION */
   }
 
   @keyframes mobileAutoScroll {
@@ -795,33 +791,9 @@
     /* No flip on mobile */
   }
 
-  /* El "piso" triangular sci-fi exclusivo debajo de las tarjetas móviles (en la columna para evitar el escalado destructivo de 1px) */
+  /* El "piso" triangular sci-fi exclusivo debajo de las tarjetas móviles */
   .disciplines-carousel-col::before {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: -50%;
-    width: 200%;
-    height: 120px;
-    background-image:
-      repeating-linear-gradient(to right, transparent, transparent 30px, rgba(27, 96, 223, 0.5) 30px, rgba(27, 96, 223, 0.5) 31px),
-      repeating-linear-gradient(60deg, transparent, transparent 30px, rgba(27, 96, 223, 0.5) 30px, rgba(27, 96, 223, 0.5) 31px),
-      repeating-linear-gradient(120deg, transparent, transparent 30px, rgba(27, 96, 223, 0.5) 30px, rgba(27, 96, 223, 0.5) 31px);
-    background-size: 100% 100%;
-    transform: perspective(600px) rotateX(75deg);
-    transform-origin: center bottom;
-    mask-image: radial-gradient(ellipse at center 80%, black 0%, transparent 65%);
-    -webkit-mask-image: radial-gradient(ellipse at center 80%, black 0%, transparent 65%);
-    pointer-events: none;
-    z-index: 0;
-    animation: moveFloor 6s linear infinite;
-  }
-
-  [data-theme='dark'] .disciplines-carousel-col::before {
-    background-image:
-      repeating-linear-gradient(to right, transparent, transparent 30px, rgba(56, 189, 248, 0.5) 30px, rgba(56, 189, 248, 0.5) 31px),
-      repeating-linear-gradient(60deg, transparent, transparent 30px, rgba(56, 189, 248, 0.5) 30px, rgba(56, 189, 248, 0.5) 31px),
-      repeating-linear-gradient(120deg, transparent, transparent 30px, rgba(56, 189, 248, 0.5) 30px, rgba(56, 189, 248, 0.5) 31px);
+    display: none !important; /* APAGADO EN MÓVIL POR CULPA DEL LAG EXTREMO AL HACER SCROLL */
   }
 
   [data-theme="dark"] .disciplines-grid {
