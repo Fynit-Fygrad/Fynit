@@ -144,3 +144,142 @@
   font-weight: 600;
 }
 
+/* ============================================================
+   RESPONSIVE — Pricing (solo móvil, no toca PC)
+   ============================================================ */
+
+@media (max-width: 900px) {
+  /* Header izquierda en móvil */
+  .pricing .section-head {
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+
+  .pricing .section-head .title-wrapper {
+    align-items: flex-start !important;
+  }
+
+  .pricing .section-head .premium-typing-text {
+    justify-content: flex-start !important;
+  }
+
+  .pricing .section-head .massive-title > * {
+    justify-content: flex-start !important;
+  }
+
+  /* Título grande en móvil */
+  .pricing .section-head .massive-title,
+  .pricing .section-head .massive-title * {
+    font-size: clamp(30px, 9vw, 40px) !important;
+    line-height: 1.05 !important;
+  }
+
+  /* ── 3 tarjetas compactas en fila (como imagen referencia) ── */
+  .pricing-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    align-items: stretch !important; /* Iguala la altura de las 3 tarjetas */
+    gap: 8px !important;
+    margin-top: 24px !important;
+    overflow: visible !important;
+    padding-bottom: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .price-card.popular {
+    transform: none !important;
+  }
+
+  .price-card {
+    padding: 12px 8px !important;
+    gap: 6px !important;
+    border-radius: 12px !important;
+    flex: unset !important;
+    scroll-snap-align: unset !important;
+    height: 280px !important;   /* Altura fija igual para los 3 */
+    overflow: hidden !important; /* Recorta el contenido extra */
+    box-sizing: border-box !important;
+  }
+
+  /* Quitar flex:1 de features para que no alargue la tarjeta */
+  .price-features {
+    flex: 0 !important;
+    gap: 5px !important;
+  }
+
+  /* Ocultar features extra para mantener la tarjeta compacta */
+  .price-features li:nth-child(n+4) {
+    display: none !important;
+  }
+
+  .price-badge {
+    font-size: 9px !important;
+    padding: 3px 8px !important;
+  }
+
+  .price-title {
+    font-size: 0.95rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .price-num {
+    font-size: 1.7rem !important;
+  }
+
+  .price-per {
+    font-size: 10px !important;
+  }
+
+  .price-desc {
+    font-size: 9px !important;
+    line-height: 1.35 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  .price-features li {
+    font-size: 9px !important;
+    gap: 5px !important;
+  }
+
+  .price-features li svg {
+    width: 11px !important;
+    height: 11px !important;
+  }
+
+  .price-pop-label {
+    font-size: 9px !important;
+    padding: 3px 10px !important;
+  }
+
+  /* Botón compacto */
+  .price-card .btn {
+    font-size: 10px !important;
+    padding: 8px 10px !important;
+    border-radius: 8px !important;
+    margin-top: 4px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .pricing-grid {
+    gap: 6px !important;
+  }
+
+  .price-card {
+    padding: 10px 7px !important;
+  }
+
+  .price-title {
+    font-size: 0.85rem !important;
+  }
+
+  .price-num {
+    font-size: 1.5rem !important;
+  }
+}

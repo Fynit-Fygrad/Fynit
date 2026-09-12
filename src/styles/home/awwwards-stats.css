@@ -210,26 +210,49 @@
 @media (max-width: 1024px) {
   .stats-content-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 60px;
+    gap: 40px;
+    padding: 0 20px;
   }
   .giant-number {
-    font-size: clamp(8rem, 15vw, 20rem);
+    font-size: clamp(6rem, 12vw, 14rem);
   }
   .gn-2, .gn-4 {
-    font-size: clamp(10rem, 20vw, 25rem);
+    font-size: clamp(8rem, 16vw, 18rem);
   }
 }
 
 @media (max-width: 600px) {
+  /* Ocultar los números gigantes de fondo — causan overflow horizontal */
+  .giant-numbers-wrapper {
+    display: none;
+  }
+
+  .awwwards-stats-section {
+    padding: 60px 0;
+    min-height: auto;
+  }
+
+  .awwwards-stats-container {
+    padding: 0 16px;
+  }
+
+  .stats-content-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .stat-value {
+    font-size: clamp(2.2rem, 10vw, 3rem);
+  }
+
+  .stat-desc {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
   .stats-content-grid {
     grid-template-columns: 1fr;
-    gap: 50px;
-  }
-  .giant-numbers-wrapper {
-    flex-direction: column;
-    justify-content: space-around;
-  }
-  .giant-number {
-    font-size: clamp(12rem, 30vw, 30rem) !important;
+    gap: 24px;
   }
 }

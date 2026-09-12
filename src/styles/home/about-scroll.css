@@ -229,3 +229,86 @@
     max-width: 100%;
   }
 }
+
+/* ── MOBILE: disable sticky scrolljack, stack cards normally ── */
+@media (max-width: 768px) {
+  .pinned-scroll-section {
+    height: auto; /* Deja de ser el scroll container de 400vh */
+  }
+
+  .pinned-sticky-container {
+    position: relative; /* Desactiva sticky */
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 60px 16px;
+    overflow: visible;
+  }
+
+  .pinned-left-content {
+    flex: none;
+    height: auto;
+    padding-right: 0;
+    margin-bottom: 32px;
+    text-align: left;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .pinned-header {
+    margin: 0;
+    text-align: left;
+  }
+  .pinned-header h2 {
+    font-size: clamp(34px, 10vw, 44px) !important; /* Ahora sí, mucho más grande */
+    line-height: 1.1;
+  }
+  .pinned-header .title-wrapper {
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+  }
+  .pinned-header .premium-typing-text {
+    justify-content: flex-start !important;
+    font-size: 13px !important;
+    letter-spacing: 1px !important;
+  }
+
+  .pinned-paragraph {
+    font-size: 13px !important; /* Tipografía miniatura para lecturabilidad */
+    margin-top: 12px;
+    max-width: 100%;
+    line-height: 1.5;
+  }
+
+  .pinned-right-content {
+    position: relative;
+    flex: none;
+    width: 100%;
+    height: auto;
+    padding-top: 0; /* quitar el 50vh */
+    display: block;
+  }
+
+  .pinned-cards-track {
+    gap: 16px; 
+    padding-bottom: 0;
+    will-change: auto;
+  }
+
+  .pinned-card {
+    max-width: 100%;
+    transform: none !important;
+    opacity: 1 !important;
+    padding: 24px !important; /* Padding más compacto en móvil */
+  }
+
+  .card-content h3 {
+    font-size: 17px !important; /* Titulos compactos */
+    margin-bottom: 8px !important;
+  }
+
+  .card-content p {
+    font-size: 14px !important; /* Párrafos compactos */
+    line-height: 1.5 !important;
+  }
+}

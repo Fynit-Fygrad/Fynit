@@ -80,12 +80,86 @@ export default function DisciplinesCarousel() {
 
       <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', position: 'relative', zIndex: 2 }}>
         
-        <div className="disciplines-grid">
+        <div className="disciplines-grid white-rounded-box">
           
-          {/* Columna Izquierda: Cards de iconos en lugar de foto stock */}
+          {/* Columna Derecha (en PC) / Izquierda (en Móvil): Texto */}
+          <div className="disciplines-text-col">
+            
+            {/* ==================================
+                CONTENIDO MÓVIL (Mockup de píldora)
+                ================================== */}
+            <div className="mobile-only-content">
+              <div className="disc-header-flex">
+                {/* Ícono o badge eliminado a petición del usuario para dejar solo el título */}
+                <h2 className="disc-title-mobile">
+                  Adaptabilidad<br />
+                  para cualquier<br />
+                  <span className="text-yellow">área</span>
+                </h2>
+              </div>
+              
+              <p className="disciplines-description-mobile">
+                Desde ingeniería hasta ciencias sociales, Fynit se adapta a tu campo de estudio.
+              </p>
+              
+              <button className="disc-round-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+
+            {/* ==================================
+                CONTENIDO DESKTOP (Diseño original)
+                ================================== */}
+            <div className="desktop-only-content">
+              <div style={{ marginBottom: '16px' }}>
+                <TextType 
+                  text={[
+                    "02 — DISCIPLINAS", 
+                    "Múltiples áreas de estudio", 
+                    "Adaptabilidad garantizada"
+                  ]} 
+                  typingSpeed={70} 
+                  pauseDuration={1500} 
+                  showCursor 
+                  cursorCharacter="_" 
+                  deletingSpeed={40} 
+                  className="premium-typing-text"
+                />
+              </div>
+              <h2 className="disc-title">
+                ADAPTABILIDAD<br />
+                PARA CUALQUIER<br />
+                <em>ÁREA</em>
+              </h2>
+              <p className="disciplines-description">
+                No importa el campo de tu investigación, nuestro equipo domina el lenguaje, la terminología y las normativas de formato de las revistas científicas más exigentes de todas las áreas del conocimiento.
+              </p>
+              <ul className="disciplines-features">
+                <li>
+                  <span className="disc-feat-dot"></span>
+                  Rigor científico garantizado
+                </li>
+                <li>
+                  <span className="disc-feat-dot"></span>
+                  Formatos específicos (APA, IEEE, CONSORT, etc.)
+                </li>
+                <li>
+                  <span className="disc-feat-dot"></span>
+                  Estructurado para revistas Q1-Q2
+                </li>
+              </ul>
+              <a href="/analizar" className="btn-disciplines-cta" data-cursor>
+                <span>Solicitar análisis editorial</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+
+          </div>
+
+          {/* Columna Derecha: Animación 3D (Habilitada en móvil también) */}
           <div className="disciplines-carousel-col">
-            {/* Desktop 3D Scene */}
-            <div className="scene-3d desktop-only">
+            {/* 3D Scene */}
+            <div className="scene-3d">
               <div className="carousel-3d">
                 {disciplines.map((d, index) => {
                   const rotateY = index * (360 / disciplines.length);
@@ -126,79 +200,6 @@ export default function DisciplinesCarousel() {
                 })}
               </div>
             </div>
-
-            {/* Mobile Marquee Slider */}
-            <div className="mobile-snap-slider mobile-only">
-              <div className="mobile-marquee-track">
-                {[...disciplines, ...disciplines].map((d, idx) => (
-                  <div key={`${d.id}-${idx}`} className={`snap-card theme-${d.theme}`}>
-                    <div className="snap-card-inner">
-                      <div className="snap-icon-wrap cover-wrap" style={{ padding: 0, height: '200px', overflow: 'hidden', position: 'relative' }}>
-                        <img src={d.image} alt={d.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                        <div className="card-cover-overlay"></div>
-                        <div className="card-bottom-content mobile-bottom-content">
-                          <div className="card-icon-wrapper" style={{ 
-                              backgroundColor: d.theme === 'light' ? d.color : '#fff',
-                              color: d.theme === 'light' ? '#fff' : '#071742'
-                            }}>
-                            {d.icon}
-                          </div>
-                          <h4 className="card-cover-title">{d.title}</h4>
-                        </div>
-                      </div>
-                      <div className="snap-content">
-                        <p>{d.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Columna Derecha: Texto */}
-          <div className="disciplines-text-col">
-            <div style={{ marginBottom: '16px' }}>
-              <TextType 
-                text={[
-                  "02 — DISCIPLINAS", 
-                  "Múltiples áreas de estudio", 
-                  "Adaptabilidad garantizada"
-                ]} 
-                typingSpeed={70} 
-                pauseDuration={1500} 
-                showCursor 
-                cursorCharacter="_" 
-                deletingSpeed={40} 
-                className="premium-typing-text"
-              />
-            </div>
-            <h2 className="disc-title">
-              ADAPTABILIDAD<br />
-              PARA CUALQUIER<br />
-              <em>ÁREA</em>
-            </h2>
-            <p className="disciplines-description">
-              No importa el campo de tu investigación, nuestro equipo domina el lenguaje, la terminología y las normativas de formato de las revistas científicas más exigentes de todas las áreas del conocimiento.
-            </p>
-            <ul className="disciplines-features">
-              <li>
-                <span className="disc-feat-dot"></span>
-                Rigor científico garantizado
-              </li>
-              <li>
-                <span className="disc-feat-dot"></span>
-                Formatos específicos (APA, IEEE, CONSORT, etc.)
-              </li>
-              <li>
-                <span className="disc-feat-dot"></span>
-                Estructurado para revistas Q1-Q2
-              </li>
-            </ul>
-            <a href="/analizar" className="btn-disciplines-cta" data-cursor>
-              <span>Solicitar análisis editorial</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
           </div>
 
         </div>

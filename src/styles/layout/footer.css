@@ -4,6 +4,14 @@
   color: var(--white);
 }
 
+/* Elementos solo para móvil: ocultos por defecto en desktop */
+.footer-tagline-mobile,
+.footer-cta-mobile,
+.footer-social.footer-social-col {
+  display: none;
+}
+
+
 .footer-cta {
   padding-block: 100px 70px;
   border-bottom: 1px solid rgba(255, 255, 255, .1);
@@ -773,42 +781,122 @@
     grid-template-columns: 1fr 1fr;
   }
 
+  /* ── FOOTER MÓVIL COMPACTO ── */
+
+  /* Ocultar el CTA grande del footer en móvil */
   .footer-cta {
-    padding-block: 76px 56px;
+    display: none !important;
   }
 
-  .float-chip {
-    display: none;
+  /* Footer main: 2 columnas (brand izquierda | links+social derecha) */
+  footer.site-footer .footer-main {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    padding-block: 28px 20px !important;
+    gap: 20px !important;
+    align-items: start !important;
   }
 
+  /* Ocultar las 2 columnas extra de links en móvil */
+  footer.site-footer .footer-col:nth-child(3),
+  footer.site-footer .footer-col:nth-child(4) {
+    display: none !important;
+  }
+
+  /* Primera col de links visible: Producto, Precios, Blog, Contacto */
+  footer.site-footer .footer-col:nth-child(2) {
+    display: block !important;
+  }
+
+  .footer-col h4 {
+    font-size: 10px !important;
+    margin-bottom: 10px !important;
+    display: none !important; /* sin header en la columna */
+  }
+
+  .footer-col ul {
+    gap: 8px !important;
+  }
+
+  .footer-col a {
+    font-size: 13px !important;
+    color: rgba(255,255,255,0.8) !important;
+  }
+
+  /* Tagline compacto (mobile-only) */
+  .footer-tagline-mobile {
+    display: block !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: var(--white) !important;
+    line-height: 1.3 !important;
+    margin: 10px 0 14px !important;
+  }
+
+  /* Ocultar la descripción larga en móvil */
+  .footer-brand-desc {
+    display: none !important;
+  }
+
+  /* Botón CTA en el brand area */
+  .footer-cta-mobile {
+    display: inline-flex !important;
+    margin-bottom: 16px !important;
+    font-size: 13px !important;
+    padding: 10px 18px !important;
+    gap: 8px !important;
+  }
+
+  /* Social icons debajo de los links en la columna derecha */
+  .footer-social {
+    margin-top: 14px !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  /* Ocultar social del brand area, moverla a la col de links */
+  .footer-brand .footer-social {
+    display: none !important;
+  }
+
+  /* Mostrar social-col (LinkedIn, X, YouTube) en la columna derecha */
+  .footer-social-col {
+    display: flex !important;
+    gap: 8px !important;
+    margin-top: 14px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .footer-social a {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  /* Footer bottom horizontal compacto */
   .footer-bottom {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding-block: 14px !important;
+    font-size: 11px !important;
   }
 
-  /* Mascota mobile (footer) */
   .footer-mascot {
-    display: none;
-    /* hide mascot on mobile to save space */
-  }
-
-  .footer-cta-inner {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footer-cta-text {
-    text-align: center;
+    display: none !important;
   }
 
   .fynit-mascot-active {
-    display: none;
+    display: none !important;
+  }
+
+  .float-chip {
+    display: none !important;
   }
 }
 
 @media (max-width: 480px) {
-  .footer-main {
-    grid-template-columns: 1fr;
+  footer.site-footer .footer-main {
+    grid-template-columns: 1fr 1fr !important; /* Mantener 2 columnas en celular */
   }
 
   .numbers-grid {

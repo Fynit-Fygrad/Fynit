@@ -288,9 +288,28 @@ export default function OrbitalIndexaciones() {
           .idx-text-col {
             align-items: center;
             margin-bottom: 20px;
+            padding: 0 16px;
           }
           .idx-canvas-col {
-            height: 60vh !important;
+            height: min(50vh, 440px) !important;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .idx-grid-layout {
+            padding: 0 16px;
+          }
+          .idx-text-col {
+            text-align: left;
+            align-items: flex-start;
+          }
+          .idx-3d-pill {
+            width: 110px;
+            height: 42px;
+            padding: 8px 12px;
+          }
+          .idx-canvas-col {
+            height: min(45vh, 360px) !important;
           }
         }
       `}</style>
@@ -342,7 +361,7 @@ export default function OrbitalIndexaciones() {
         </div>
 
         {/* ── Derecha: Esfera Interactiva 3D ── */}
-        <div className="idx-canvas-col" style={{ position: 'relative', width: '100%', height: '750px', overflow: 'visible' }}>
+        <div className="idx-canvas-col" style={{ position: 'relative', width: '100%', height: '750px', minHeight: '300px', overflow: 'hidden' }}>
           {mounted && (
             <Canvas
               camera={{ position: [0, 0, 8.5], fov: 45 }}

@@ -63,65 +63,96 @@ export default function Home() {
         Hero Section
         NOTA: Hemos eliminado WebGLBackground global para mejorar radicalmente 
         el rendimiento y eliminar el lag en el modo oscuro.
-      */} 
-        <div
+      */}         <div
           className="epic-hero-bg"
           style={{ backgroundImage: `url('${heroBg}')` }}
           aria-hidden="true"
         />
 
-        {/* Main content grid: Left | Center | Right */}
-        <div className="epic-main-grid">
+        <div className="epic-hero-content container">
 
           {/* ── LEFT: copy ── */}
           <div className="epic-left">
-            <div className="epic-eyebrow">
-              <span className="epic-num">01</span>
-              <span>PLATAFORMA DE INTELIGENCIA ARTIFICIAL</span>
+            
+            {/* --- CONTENIDO DESKTOP --- */}
+            <div className="desktop-only-hero-text">
+              <div className="epic-eyebrow">
+                <span className="epic-num">01</span>
+                <span>PLATAFORMA DE INTELIGENCIA ARTIFICIAL</span>
+              </div>
+
+              <h1 className="epic-h1">
+                DIAGNÓSTICO.<br />
+                PUBLICACIÓN.<br />
+                <em>IMPACTO.</em>
+              </h1>
+
+              <p className="epic-lead">
+                Fynit es la plataforma de IA que potencia cada etapa de tu investigación, desde la idea hasta la publicación en revistas de alto impacto.
+              </p>
+
+              <div className="epic-ctas">
+                <a 
+                  href="/auth/register"
+                  className="epic-btn-yellow"
+                  data-cursor
+                >
+                  <span>Registrarse</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                </a>
+                <Link href="#demo" className="epic-btn-ghost" data-cursor>
+                  Ver cómo funciona →
+                </Link>
+              </div>
             </div>
 
-            <h1 className="epic-h1">
-              DIAGNÓSTICO.<br />
-              PUBLICACIÓN.<br />
-              <em>IMPACTO.</em>
-            </h1>
+            {/* --- CONTENIDO MOBILE (NUEVO MOCKUP) --- */}
+            <div className="mobile-only-hero-text">
+              <div className="epic-eyebrow" style={{ display: 'flex', alignItems: 'center', background: 'transparent', padding: 0, border: 'none', color: '#1B60DF', fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', fontSize: '11px', lineHeight: '1.4' }}>
+                <span style={{ marginRight: '6px' }}>—</span>
+                <span>
+                  <TextType text="TU INVESTIGACIÓN |" speed={50} delay={100} />
+                </span>
+              </div>
 
-            <p className="epic-lead">
-              Fynit es la plataforma de IA que potencia cada etapa
-              de tu investigación, desde la idea hasta la publicación
-              en revistas de alto impacto.
-            </p>
+              <h1 className="epic-h1">
+                DIAGNÓSTICO.<br />
+                PUBLICACIÓN.<br />
+                <em>IMPACTO.</em>
+              </h1>
 
-            <div className="epic-ctas">
-              <a
-                href="#"
-                onClick={(e) => { e.preventDefault(); showComingSoon(); }}
-                className="epic-btn-yellow"
-                data-cursor
-              >
-                <span>Registrarse</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-              </a>
-              <Link href="#demo" className="epic-btn-ghost" data-cursor>
-                Ver cómo funciona →
-              </Link>
+              <p className="epic-lead">
+                Fynit es la plataforma de IA que potencia cada etapa de tu investigación, desde la idea hasta la publicación en revistas de alto impacto.
+              </p>
+
+              <div className="epic-ctas">
+                <a 
+                  href="/auth/register"
+                  className="epic-btn-yellow"
+                  data-cursor
+                >
+                  <span>Probar ahora</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                </a>
+              </div>
             </div>
+
           </div>
 
-          {/* ── CENTER: mascot ── */}
+          {/* ── CENTER: 3D Mascot ── */}
           <div className="epic-center">
-            <img
-              src={mascotImg}
-              alt="Fynit AI Mascot"
+            {/* Soft backdrop glow behind mascot */}
+            <div className="epic-bot-glow"></div>
+            <img 
+              src={mascotImg} 
+              alt="Fynit AI Mascot" 
               className="epic-mascot"
-              fetchPriority="high"
-              width={800}
-              height={800}
             />
           </div>
 
           {/* ── RIGHT: features ── */}
-          <aside className="epic-features">
+          {/* Oculto en móvil porque no es parte del Hero principal (Img 3) */}
+          <aside className="epic-features desktop-only">
 
             <div className="epic-feature">
               <div className="epic-feat-connector"></div>
@@ -192,15 +223,15 @@ export default function Home() {
       {/*  ============ TESTIMONIOS ============  */}
       <section className="section testimonials bg-hero-gradient" id="testimonios">
         <div className="container">
-          <div className="section-head center" data-aos="fade-up" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div className="title-wrapper" style={{ alignItems: 'center', marginBottom: '16px' }}>
+          <div className="section-head" data-aos="fade-up" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+            <div className="title-wrapper" style={{ alignItems: 'flex-start', marginBottom: '16px' }}>
               <TextType
                 text={["Lo que dicen los usuarios", "Casos de éxito", "Nuestra comunidad"]}
                 typingSpeed={70} pauseDuration={1500} showCursor cursorCharacter="_" deletingSpeed={40}
                 className="premium-typing-text"
               />
-              <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                  <BlurText text="INVESTIGADORES QUE YA LO PROBARON" highlightWords={['PROBARON']} className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', lineHeight: '0.93' }} />
+              <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                  <BlurText text="INVESTIGADORES QUE YA LO PROBARON" highlightWords={['PROBARON']} className="massive-title black-title testi-main-title" delay={30} animateBy="words" direction="top" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', lineHeight: '0.93', justifyContent: 'flex-start' }} />
               </div>
             </div>
             <p>Estos son los primeros investigadores que confiaron en Fynit. Su feedback construyó la herramienta.</p>
@@ -208,50 +239,49 @@ export default function Home() {
           <div className="testi-grid">
             <div className="testi-card">
               <div className="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-              <blockquote>"Tenía un artículo dando vueltas sin saber a dónde enviarlo. Fynit me dijo en minutos que
-                tenía
-                potencial Q3 y cuatro cosas concretas que mejorar. No me dio una lista genérica: me dió foco."
-              </blockquote>
+              <blockquote>"Me ahorró semanas de trabajo. Las sugerencias fueron precisas y muy útiles."</blockquote>
               <div className="testi-author">
                 <div className="testi-avatar"><img
-                  src="https://ui-avatars.com/api/?name=Maria+Quispe&background=009ca6&color=fff&size=128"
-                  alt="Investigadora" loading="lazy" /></div>
+                  src="https://ui-avatars.com/api/?name=Ana+Torres&background=3B82F6&color=fff&size=128"
+                  alt="Ana Torres" loading="lazy" /></div>
                 <div className="testi-info">
-                  <strong>Dra. María Sol Quispe</strong>
-                  <span>Investigadora en Educación, UNMSM</span>
+                  <strong>Ana Torres</strong>
+                  <span>Investigadora – PUCP</span>
                 </div>
               </div>
             </div>
             <div className="testi-card featured">
               <div className="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-              <blockquote>"Subi mi tesis de maestría y en cuestión de segundos tenía un reporte que nunca había visto
-                igual: similitud, metodología, cuartil alcanzable. Mi asesor quedó impresionado con el nivel del
-                análisis."</blockquote>
+              <blockquote>"Es como tener un asesor siempre disponible. La calidad del análisis es impresionante."</blockquote>
               <div className="testi-author">
                 <div className="testi-avatar"><img
-                  src="https://ui-avatars.com/api/?name=Rodrigo+Salas&background=101728&color=fff&size=128"
-                  alt="Investigador" loading="lazy" /></div>
+                  src="https://ui-avatars.com/api/?name=Carlos+Mendez&background=101728&color=fff&size=128"
+                  alt="Carlos Méndez" loading="lazy" /></div>
                 <div className="testi-info">
-                  <strong>Mg. Rodrigo Salas</strong>
-                  <span>Doctorado en Ing. Civil, PUCP</span>
+                  <strong>Carlos Méndez</strong>
+                  <span>Doctorando – UNMSM</span>
                 </div>
               </div>
             </div>
             <div className="testi-card">
               <div className="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-              <blockquote>"Lo que más me impresionó fue la honestidad del diagnóstico. No infla los números. Te dice
-                exactamente dónde estás y cuánto te falta para el siguiente nivel editorial. Eso no tiene precio."
-              </blockquote>
+              <blockquote>"Me ayudó a elegir la revista ideal. Ya estoy en proceso de envío de mi paper."</blockquote>
               <div className="testi-author">
                 <div className="testi-avatar"><img
-                  src="https://ui-avatars.com/api/?name=Carmen+Vidal&background=ff8c00&color=fff&size=128"
-                  alt="Investigadora" loading="lazy" /></div>
+                  src="https://ui-avatars.com/api/?name=Lucia+Rojas&background=8B5CF6&color=fff&size=128"
+                  alt="Lucia Rojas" loading="lazy" /></div>
                 <div className="testi-info">
-                  <strong>Prof. Carmen Vidal, PhD</strong>
-                  <span>Directora de Investigación, UPC</span>
+                  <strong>Lucia Rojas</strong>
+                  <span>Investigadora – UNI</span>
                 </div>
               </div>
             </div>
+          </div>
+          {/* Dots decorativos como en la imagen de referencia */}
+          <div className="testi-dots" aria-hidden="true">
+            <span className="testi-dot"></span>
+            <span className="testi-dot active"></span>
+            <span className="testi-dot"></span>
           </div>
         </div>
       </section>
@@ -259,15 +289,15 @@ export default function Home() {
       {/*  ============ PRECIOS ============  */}
       <section className="section pricing bg-hero-gradient" id="precios">
         <div className="container">
-          <div className="section-head center" data-aos="fade-up" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
-            <div className="title-wrapper" style={{ alignItems: 'center', marginBottom: '16px' }}>
+          <div className="section-head" data-aos="fade-up" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: '40px' }}>
+            <div className="title-wrapper" style={{ alignItems: 'flex-start', marginBottom: '16px' }}>
               <TextType
                 text={["Planes & Precios", "Tu inversión", "Escala tu impacto"]}
                 typingSpeed={70} pauseDuration={1500} showCursor cursorCharacter="_" deletingSpeed={40}
                 className="premium-typing-text"
               />
-              <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                  <BlurText text="ELIGE EL PLAN QUE SE AJUSTA A TU ETAPA" highlightWords={['PLAN']} className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', lineHeight: '0.93' }} />
+              <div style={{ width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                  <BlurText text="ELIGE EL PLAN QUE SE AJUSTA A TU ETAPA" highlightWords={['PLAN']} className="massive-title black-title" delay={30} animateBy="words" direction="top" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', lineHeight: '0.93', justifyContent: 'flex-start' }} />
               </div>
             </div>
             <p>Sin sorpresas. Empieza y escala cuando estés listo.</p>
@@ -383,33 +413,30 @@ export default function Home() {
 
           <div className="blog-grid">
             <Link href="blog.html#q1-vs-q2" className="article-card">
-              <div className="article-thumb t1"><span>Publicación académica</span></div>
+              <div className="article-thumb" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                <span>Publicación académica</span>
+              </div>
               <div className="article-body">
-                <h3>Q1 vs Q2: cómo decidir sin perder el semestre</h3>
-                <p>Una guía directa para elegir tu revista objetivo según tu perfil real, no según el prestigio.</p>
-                <div className="article-meta"><span>12 jul 2026</span><span className="rd">6 min <svg>
-                  <use href="/sprite.svg#ic-arrow" />
-                </svg></span></div>
+                <h3>Cómo mejorar la calidad de tu manuscrito</h3>
+                <div className="article-meta"><span>5 min de lectura</span><span className="rd">&rarr;</span></div>
               </div>
             </Link>
-            <Link href="blog.html#errores-citacion" className="article-card">
-              <div className="article-thumb t2"><span>Buenas prácticas</span></div>
+            <Link href="blog.html#revistas-alto-impacto" className="article-card">
+              <div className="article-thumb" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                <span>¿Investigación?</span>
+              </div>
               <div className="article-body">
-                <h3>5 errores de citación que más bajan tu originalidad</h3>
-                <p>Los descuidos más comunes al parafrasear — y cómo detectarlos antes que el sistema antiplagio.</p>
-                <div className="article-meta"><span>3 jul 2026</span><span className="rd">4 min <svg>
-                  <use href="/sprite.svg#ic-arrow" />
-                </svg></span></div>
+                <h3>Revistas de alto impacto: ¿cómo elegir la ideal?</h3>
+                <div className="article-meta"><span>6 min de lectura</span><span className="rd">&rarr;</span></div>
               </div>
             </Link>
-            <Link href="blog.html#checklist-revision" className="article-card">
-              <div className="article-thumb t3"><span>Checklist</span></div>
+            <Link href="blog.html#ia-publicacion" className="article-card">
+              <div className="article-thumb" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&q=80)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                <span>IA</span>
+              </div>
               <div className="article-body">
-                <h3>Qué revisar antes de enviar a revisión por pares</h3>
-                <p>Ocho puntos que casi nadie verifica antes de enviar — y que sí revisa el comité editorial.</p>
-                <div className="article-meta"><span>28 jun 2026</span><span className="rd">5 min <svg>
-                  <use href="/sprite.svg#ic-arrow" />
-                </svg></span></div>
+                <h3>El futuro de la publicación científica con IA</h3>
+                <div className="article-meta"><span>7 min de lectura</span><span className="rd">&rarr;</span></div>
               </div>
             </Link>
           </div>

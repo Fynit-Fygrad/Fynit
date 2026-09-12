@@ -1,44 +1,57 @@
 'use client';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import BlurText from './BlurText';
 import TextType from './TextType';
 
 export default function AboutScrollSection() {
   const containerRef = useRef<HTMLElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
-  // Calculate movement for the right-side cards
-  // We want the cards to scroll up while the left side stays pinned.
-  // There are 4 cards. We move from 0% to roughly -75% so the last card reaches the top/center.
-  const cardsY = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
+  // En mobile desactivamos el parallax — cardsY se queda en 0%
+  const cardsY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    isMobile ? ["0%", "0%"] : ["0%", "-75%"]
+  );
 
   return (
     <section ref={containerRef} className="pinned-scroll-section">
       <div className="pinned-sticky-container">
-        
+
         {/* Left Side: Pinned Content */}
         <div className="pinned-left-content">
           <div className="pinned-header">
             <div className="title-wrapper" style={{ alignItems: 'flex-start', marginBottom: '15px' }}>
-              <TextType 
-                text="TU INVESTIGACIÓN" 
-                className="premium-typing-text" 
-                delay={50} 
+              <TextType
+                text={["TU INVESTIGACIÓN", "TU PUBLICACIÓN", "TU FUTURO ACADÉMICO", "TU ÉXITO"]}
+                className="premium-typing-text"
+                typingSpeed={60}
+                deletingSpeed={40}
+                pauseDuration={2000}
+                loop={true}
               />
             </div>
-            
-            <BlurText 
-              text="DE INVESTIGADORES PARA INVESTIGADORES" 
-              highlightIndices={[3]} 
-              className="massive-title black-title" 
-              delay={30} 
-              animateBy="words" 
-              direction="top" 
+
+            <BlurText
+              text="DE INVESTIGADORES PARA INVESTIGADORES"
+              highlightIndices={[3]}
+              className="massive-title black-title"
+              delay={30}
+              animateBy="words"
+              direction="top"
               style={{ justifyContent: 'flex-start' }}
             />
             <p className="pinned-paragraph">
@@ -53,7 +66,7 @@ export default function AboutScrollSection() {
         {/* Right Side: Scrolling Cards */}
         <div className="pinned-right-content">
           <motion.div style={{ y: cardsY }} className="pinned-cards-track">
-            
+
             {/* CARD 01 */}
             <div className="pinned-card">
               <div className="card-glass"></div>

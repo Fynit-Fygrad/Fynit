@@ -4,6 +4,63 @@
   background: transparent;
 }
 
+/* ── Dots de paginación decorativos ── */
+.testi-dots {
+  display: none; /* Solo en móvil */
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.testi-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  transition: background 0.3s;
+}
+
+.testi-dot.active {
+  background: var(--blue, #1B60DF);
+  width: 22px;
+  border-radius: 4px;
+}
+
+@media (max-width: 900px) {
+  .testi-dots {
+    display: flex;
+  }
+
+  /* Título de sección más grande en móvil */
+  .testi-main-title,
+  .testi-main-title * {
+    font-size: clamp(34px, 10vw, 44px) !important;
+    line-height: 1.05 !important;
+  }
+
+  /* Alinear header de testimonios a la izquierda en móvil */
+  .testimonials .section-head {
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+
+  .testimonials .section-head .title-wrapper {
+    align-items: flex-start !important;
+  }
+
+  .testimonials .section-head .premium-typing-text {
+    justify-content: flex-start !important;
+  }
+
+  .testimonials .section-head > div {
+    align-items: flex-start !important;
+  }
+
+  .testi-main-title > * {
+    justify-content: flex-start !important;
+  }
+}
+
 .testi-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -250,3 +307,176 @@
   height: 14px;
 }
 
+/* ============================================================
+   RESPONSIVE — Testimonials + Blog
+   ============================================================ */
+
+@media (max-width: 900px) {
+  /* ── Testimonios: 3 tarjetas compactas lado a lado (como imagen referencia) ── */
+  .testi-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+    margin-top: 24px !important;
+    overflow: visible !important;
+    padding-bottom: 0 !important;
+  }
+
+  .testi-card {
+    padding: 12px 10px !important;
+    gap: 8px !important;
+    border-radius: 12px !important;
+  }
+
+  .testi-stars {
+    font-size: 11px !important;
+    letter-spacing: 1px !important;
+  }
+
+  .testi-card blockquote {
+    font-size: 10px !important;
+    line-height: 1.45 !important;
+  }
+
+  .testi-card blockquote::before {
+    font-size: 1.4rem !important;
+  }
+
+  .testi-avatar {
+    width: 28px !important;
+    height: 28px !important;
+    border-width: 2px !important;
+  }
+
+  .testi-author {
+    gap: 7px !important;
+  }
+
+  .testi-info strong {
+    font-size: 10px !important;
+  }
+
+  .testi-info span {
+    font-size: 9px !important;
+  }
+
+  /* Dots decorativos debajo del grid (como en ref) */
+  .testi-grid::after {
+    content: '';
+    display: none;
+  }
+
+  .blog-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+    overflow: visible !important;
+    padding-bottom: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .article-card {
+    flex: unset !important;
+    scroll-snap-align: unset !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+  }
+
+  /* Thumbnail con foto real — no mostrar gradiente de fondo */
+  .article-thumb {
+    height: 90px !important; /* Compacto como en la referencia */
+    background-color: #e2e8f0 !important; /* fallback si la foto no carga */
+  }
+
+  /* Quitar los gradientes t1/t2/t3 en móvil (ya tienen foto real) */
+  .article-thumb.t1,
+  .article-thumb.t2,
+  .article-thumb.t3 {
+    background-image: none !important;
+    background: #e2e8f0 !important;
+  }
+
+  .article-thumb span {
+    font-size: 9px !important;
+    padding: 4px 8px !important;
+  }
+
+  .article-body {
+    padding: 10px 8px !important;
+  }
+
+  .article-body h3 {
+    font-size: 10px !important;
+    line-height: 1.3 !important;
+    margin-bottom: 6px !important;
+  }
+
+  .article-meta {
+    font-size: 9px !important;
+  }
+
+  .blog-head {
+    flex-direction: row !important;
+    align-items: flex-end !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    margin-bottom: 16px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .testi-grid {
+    gap: 6px !important;
+    margin-top: 20px !important;
+  }
+
+  .testi-card {
+    padding: 10px 8px !important;
+    border-radius: 10px !important;
+  }
+
+  .testi-card blockquote {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .testi-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .testi-info strong {
+    font-size: 12px;
+  }
+
+  .testi-info span {
+    font-size: 10px;
+  }
+
+  .blog-grid {
+    gap: 14px;
+    margin-left: -16px;
+    margin-right: -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  .article-card {
+    flex: 0 0 88%;
+  }
+
+  .blog-head {
+    margin-bottom: 24px;
+  }
+
+  .article-thumb {
+    height: 140px;
+  }
+
+  .article-body {
+    padding: 18px 16px;
+  }
+}

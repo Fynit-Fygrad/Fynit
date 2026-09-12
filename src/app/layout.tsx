@@ -16,6 +16,7 @@ import "@/styles/global.css";
 // Layout Styles
 import "@/styles/layout/sidebar.css";
 import "@/styles/layout/header.css";
+import "@/styles/layout/footer.css";
 
 // Home Components
 import "@/styles/home/hero.css";

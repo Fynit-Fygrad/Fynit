@@ -232,3 +232,57 @@ p {
 .premium-typing-text { font-family: var(--font-sans, sans-serif); font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-fynit-blue, #1B60DF); position: relative; display: inline-flex; align-items: center; margin-top: 12px; }
 .premium-typing-text::before { content: ""; position: absolute; top: -12px; left: 0; width: 30px; height: 2px; background-color: var(--color-fynit-blue, #1B60DF); }
 
+/* ============================================================
+   GLOBAL RESPONSIVE — Mobile-first corrections
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 18px;
+  }
+
+  .section {
+    padding: 72px 0;
+  }
+
+  .section-head {
+    margin-bottom: 36px;
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+
+  .section-head h2 {
+    font-size: clamp(22px, 6vw, 26px) !important;
+    line-height: 1.2;
+  }
+
+  .section-head p {
+    font-size: 13px !important;
+    line-height: 1.5;
+  }
+
+  .massive-title {
+    font-size: clamp(26px, 8vw, 32px) !important;
+    line-height: 1.1 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .section {
+    padding: 56px 0;
+  }
+
+  .massive-title {
+    font-size: clamp(24px, 8vw, 28px) !important;
+  }
+
+  .btn {
+    font-size: 13px;
+    padding: 12px 20px;
+    height: 40px;
+  }
+}

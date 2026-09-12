@@ -1,6 +1,7 @@
 /* ============================================================
    EPIC HERO — Awwwards Level Redesign
    Editorial layout · Bebas Neue display · Grain texture
+   Force HMR Update
    ============================================================ */
 
 
@@ -167,6 +168,10 @@
   z-index: 10;
   display: flex;
   flex-direction: column;
+}
+
+.mobile-only-hero-text {
+  display: none;
 }
 
 /* ── EYEBROW ── */
@@ -441,19 +446,18 @@
   transform: translateY(-50%);
   width: 240px;
   z-index: 10;
-  display: flex;
-  flex-direction: column;
-  gap: 44px;
+  display: block; /* changed from flex to block to avoid any flex gap caching issues */
 }
+/* Force Next.js Turbopack HMR v2 */
 
 .epic-features::before {
   content: '';
   position: absolute;
   left: -24px;
-  top: 18%;
-  bottom: 18%;
+  top: 23px;
+  bottom: 60px;
   width: 1px;
-  background: linear-gradient(to bottom, transparent, rgba(27, 96, 223, 0.4) 30%, rgba(27, 96, 223, 0.4) 70%, transparent);
+  background: linear-gradient(to bottom, transparent, rgba(27, 96, 223, 0.4) 15%, rgba(27, 96, 223, 0.4) 85%, transparent);
 }
 
 [data-theme='dark'] .epic-features::before {
@@ -466,8 +470,11 @@
   column-gap: 14px;
   align-items: start;
   position: relative;
+  margin-bottom: 55px;
 }
-
+.epic-feature:last-child {
+  margin-bottom: 0;
+}
 .epic-feat-connector {
   position: absolute;
   left: -24px;
@@ -810,9 +817,27 @@
 
 /* ── MOBILE ── */
 @media (max-width: 900px) {
+  .mobile-only-hero-text { display: block; }
+  .desktop-only-hero-text { display: none; }
+
+  /* Restaurar la visibilidad de la imagen de fondo en móvil y aplicar el fondo transparente original */
+  .epic-hero-bg { 
+    display: block !important; 
+    background-position: 70% center; /* Centramos el resplandor principal hacia donde está el robot */
+  }
+
   .epic-hero-section {
     height: auto;
     min-height: 100svh;
+    background: transparent;
+  }
+
+  /* Bloqueo agresivo para que NADA del texto pase de la mitad de la pantalla */
+  .mobile-only-hero-text {
+    max-width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .epic-left {
@@ -821,42 +846,60 @@
     top: auto;
     transform: none;
     width: 100%;
-    padding: 120px 24px 20px;
+    padding: 105px 20px 40px; /* Acercado ligeramente al navbar */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
+    z-index: 10;
   }
 
   .epic-left .epic-eyebrow {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .epic-left .epic-ctas {
-    justify-content: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
   .epic-left .epic-logos-row {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .epic-h1 {
-    font-size: clamp(72px, 18vw, 110px);
+    font-size: clamp(40px, 11vw, 72px); /* Título masivo como en el diseño de referencia */
+    line-height: 1.05;
+    max-width: 100%;
   }
 
   .epic-center {
-    position: relative;
+    position: absolute;
+    right: -15px; /* Pequeño margen para compensar el borde transparente del bot */
+    top: 25%;
     left: auto;
     bottom: auto;
     transform: none;
     margin: 0;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    pointer-events: none;
+    z-index: 2;
+    width: 55%; /* Le damos un poco más de espacio al bot hacia la derecha */
   }
 
   .epic-mascot {
-    height: 36svh;
-    max-height: 260px;
+    width: 100%; /* Escala dentro de su contenedor de 60% */
+    height: auto;
+    max-height: 480px;
+    object-fit: contain;
+    transform: translateY(15px);
+  }
+
+  /* Reset for dark mode since absolute positioning naturally fits it right */
+  [data-theme='dark'] .epic-mascot {
+    translate: 10% 0; 
   }
 
   .epic-features {
@@ -865,10 +908,18 @@
     top: auto;
     transform: none;
     width: 100%;
-    padding: 0 24px 60px;
-    gap: 28px;
-    align-items: center;
-    text-align: center;
+    padding: 40px 24px 60px;
+    gap: 36px;
+    align-items: flex-start;
+    text-align: left;
+    z-index: 5;
+  }
+
+  .epic-feature {
+    display: flex;
+    flex-direction: row; /* Icon left, text right like reference */
+    align-items: flex-start;
+    gap: 16px;
   }
 
   .epic-features::before {
@@ -889,15 +940,9 @@
   }
 
   .epic-rail,
-  .epic-scroll-cue {
-    display: none;
-  }
-
+  .epic-scroll-cue,
   .epic-pager {
-    position: relative;
-    bottom: auto;
-    right: auto;
-    padding: 0 26px 40px;
+    display: none !important; /* Hide all floating clutter */
   }
 
   .nav-links {
@@ -924,12 +969,39 @@
 
 @media (max-width: 480px) {
   .epic-h1 {
-    font-size: clamp(2.5rem, 14vw, 5rem);
-    letter-spacing: 0.5px;
+    font-size: clamp(36px, 13vw, 54px); /* Título gigante en celulares pequeños */
+    letter-spacing: -0.5px;
+    line-height: 1.05;
+    max-width: 100%;
   }
 
   .epic-ctas {
-    gap: 14px;
-    flex-wrap: wrap;
+    flex-direction: column; 
+    align-items: flex-start;
+    gap: 12px;
+    width: auto;
+    max-width: 100%; /* Ya está restringido por el padre mobile-only-hero-text */
+  }
+
+  .epic-btn-yellow,
+  .epic-btn-ghost {
+    width: auto;
+    justify-content: flex-start;
+  }
+
+  .epic-lead {
+    font-size: 13px; /* Tipografía miniatura para lecturabilidad máxima */
+    max-width: 100%; 
+    padding-right: 0; 
+    text-align: left; 
+    line-height: 1.5;
+  }
+
+  .epic-left {
+    padding: 95px 16px 12px;
+  }
+  
+  .mobile-only-hero-text {
+    max-width: 50%; /* En móviles muy pequeños le damos un pelín más de espacio, pero sigue sin tocar al bot */
   }
 }

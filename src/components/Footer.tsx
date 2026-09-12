@@ -34,16 +34,26 @@ export default function Footer() {
             <Link href="/" className="logo">
               <img src="assets/logos svg/logo-fynit-white.svg" alt="Fynit" className="logo-img" />
             </Link>
-            <p>IA académica que entiende tu investigación, diagnostica su potencial editorial y te conecta con expertos para que llegue más lejos.</p>
+            {/* Texto compacto SOLO en móvil */}
+            <p className="footer-tagline-mobile">Tu investigación,<br />en buenas manos.</p>
+            <a href="#" onClick={showComingSoon} className="btn btn-yellow footer-cta-mobile">
+              Comenzar ahora
+              <svg><use href="/sprite.svg#ic-arrow" /></svg>
+            </a>
+            {/* Descripción larga SOLO en desktop */}
+            <p className="footer-brand-desc">IA académica que entiende tu investigación, diagnostica su potencial editorial y te conecta con expertos para que llegue más lejos.</p>
             <div className="footer-social">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <svg><use href="/sprite.svg#ic-linkedin" /></svg>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <svg><use href="/sprite.svg#ic-facebook" /></svg>
               </a>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <svg><use href="/sprite.svg#ic-ig" /></svg>
               </a>
-              <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X">
-                <svg><use href="/sprite.svg#ic-x" /></svg>
+              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                <svg><use href="/sprite.svg#ic-tiktok" /></svg>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg><use href="/sprite.svg#ic-linkedin" /></svg>
               </a>
             </div>
           </div>
@@ -53,8 +63,24 @@ export default function Footer() {
             <ul>
               <li><Link href="/#como-funciona">Cómo funciona</Link></li>
               <li><Link href="/precios">Precios</Link></li>
-              <li><Link href="/#seguridad">Seguridad y datos</Link></li>
+              <li><Link href="/blog">Blog</Link></li>
+              <li><Link href="/#nosotros">Contacto</Link></li>
             </ul>
+            {/* Social icons en móvil: aparecen debajo de los links */}
+            <div className="footer-social footer-social-col">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <svg><use href="/sprite.svg#ic-facebook" /></svg>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg><use href="/sprite.svg#ic-ig" /></svg>
+              </a>
+              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                <svg><use href="/sprite.svg#ic-tiktok" /></svg>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg><use href="/sprite.svg#ic-linkedin" /></svg>
+              </a>
+            </div>
           </div>
 
           <div className="footer-col">
