@@ -828,7 +828,8 @@
 
   .epic-hero-section {
     height: auto;
-    min-height: 100svh;
+    min-height: auto;
+    padding-bottom: 0; /* Remove all extra padding */
     background: transparent;
   }
 
