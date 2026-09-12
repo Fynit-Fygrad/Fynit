@@ -20,6 +20,15 @@ export default function LusionCard({ children, isActive = false, onClick, classN
   // Control de hover para el brillo
   const isHovered = useMotionValue(0);
 
+  // Detect mobile to disable physics
+  const [isMobile, setIsMobile] = React.useState(false);
+  React.useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   // Resortes para que el movimiento se sienta líquido y pesado (Lusion style)
   const springConfig = { stiffness: 150, damping: 15, mass: 0.5 };
   const mouseXSpring = useSpring(x, springConfig);
@@ -65,6 +74,14 @@ export default function LusionCard({ children, isActive = false, onClick, classN
 
   // Crear un template dinámico para el gradiente
   const background = useMotionTemplate`radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.15) 0%, transparent 60%)`;
+
+  if (isMobile) {
+    return (
+      <div className={className} onClick={onClick} style={{ ...style, position: 'relative', overflow: 'hidden', zIndex: isActive ? 10 : 1 }}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <motion.div

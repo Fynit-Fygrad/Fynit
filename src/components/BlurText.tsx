@@ -97,7 +97,7 @@ const BlurText = ({
         
         return (
           <motion.span
-            className={`inline-block will-change-[transform,filter,opacity] ${isHighlighted ? 'highlight-yellow' : ''}`}
+            className={`inline-block ${isMobile ? '' : 'will-change-[transform,filter,opacity]'} ${isHighlighted ? 'highlight-yellow' : ''}`}
             key={index}
             initial={fromSnapshot}
             animate={inView ? animateKeyframes : fromSnapshot}
