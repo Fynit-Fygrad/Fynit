@@ -75,8 +75,8 @@ export default function HowSection() {
     });
 
     // ── 2. Cards stagger — each slides up & fades in ───────────
-    // Set initial invisible state
-    gsap.set('.how-step-card', { opacity: 0, y: 44, filter: 'blur(6px)' });
+    // Set initial invisible state (removed blur for performance)
+    gsap.set('.how-step-card', { opacity: 0, y: 44 });
 
     ScrollTrigger.batch('.how-step-card', {
       start: 'top 82%',
@@ -84,7 +84,6 @@ export default function HowSection() {
         gsap.to(batch, {
           opacity: 1,
           y: 0,
-          filter: 'blur(0px)',
           duration: 0.55,
           stagger: 0.08,
           ease: 'power3.out',
@@ -96,7 +95,6 @@ export default function HowSection() {
         gsap.to(batch, {
           opacity: 0,
           y: 44,
-          filter: 'blur(6px)',
           duration: 0.3,
           stagger: 0.04,
           ease: 'power2.in',

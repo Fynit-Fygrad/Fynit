@@ -302,6 +302,19 @@
     padding: 24px !important; /* Padding más compacto en móvil */
   }
 
+  /* KILL THE EXTREME MOBILE LAG */
+  .card-glass {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: #E8F2FF; /* solid fallback */
+  }
+  [data-theme='dark'] .card-glass {
+    background: #0B1120;
+  }
+  .card-abstract-icon {
+    display: none !important;
+  }
+
   .card-content h3 {
     font-size: 17px !important; /* Titulos compactos */
     margin-bottom: 8px !important;
