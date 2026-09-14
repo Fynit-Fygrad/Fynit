@@ -97,7 +97,8 @@ export default function Home() {
 
               <div className="epic-ctas">
                 <a 
-                  href="/registro"
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); showComingSoon(); }}
                   className="epic-btn-yellow"
                   data-cursor
                 >
@@ -131,7 +132,8 @@ export default function Home() {
 
               <div className="epic-ctas">
                 <a 
-                  href="/registro"
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); showComingSoon(); }}
                   className="epic-btn-yellow"
                   data-cursor
                 >
