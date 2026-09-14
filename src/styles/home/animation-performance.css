@@ -10,7 +10,40 @@
 
 /* Cache the moving mascot, including its original shadow, as a single layer. */
 @media (max-width: 1024px) {
+  .how-mobile-static .how-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .how-mobile-static .how-step-card,
+  .how-mobile-static .how-step-card:hover {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    backdrop-filter: none !important;
+    cursor: default;
+  }
+
   .home-page .epic-hero-section[data-animation-paused='false'] .epic-mascot {
     will-change: transform;
+  }
+}
+
+@media (max-width: 768px) {
+  .disciplines-3d-section .scene-3d {
+    perspective: none;
+  }
+
+  .disciplines-3d-section .carousel-item-wrapper,
+  .disciplines-3d-section .carousel-item-inner,
+  .disciplines-3d-section .card-face {
+    transform-style: flat;
+    will-change: auto;
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+  }
+
+  .disciplines-3d-section .card-front {
+    transform: none;
   }
 }

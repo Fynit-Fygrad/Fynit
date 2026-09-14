@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useTheme } from 'next-themes';
 import '@/styles/components/disciplines-carousel.css';
 import TextType from '@/components/TextType';
 
@@ -64,14 +63,17 @@ const disciplines = [
 ];
 
 export default function DisciplinesCarousel() {
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
-    setMounted(true);
+    const media = window.matchMedia('(max-width: 768px)');
+    const update = () => setIsMobile(media.matches);
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
   }, []);
 
-  const isDark = mounted && resolvedTheme === 'dark';
+
 
   return (
     <section className="disciplines-3d-section" id="disciplinas">
@@ -188,12 +190,12 @@ export default function DisciplinesCarousel() {
                         </div>
 
                         {/* Reverso de la tarjeta (Descripción detallada) */}
-                        <div className="card-face card-back">
+                        {!isMobile && <div className="card-face card-back">
                           <div className="card-back-content">
                             <h4>{d.title}</h4>
                             <p>{d.description}</p>
                           </div>
-                        </div>
+                        </div>}
                       </div>
                     </div>
                   );

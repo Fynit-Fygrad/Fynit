@@ -71,7 +71,7 @@ export default function HowSection() {
   };
 
   useGSAP(() => {
-    if (isMobile === null) return;
+    if (isMobile !== false) return;
     // ── 1. Mascot bounce on entry ──────────────────────────────
     gsap.from(mascotRef.current, {
       y: -20,
@@ -131,6 +131,44 @@ export default function HowSection() {
       });
     }
   }, { scope: sectionRef, dependencies: [isMobile], revertOnUpdate: true });
+
+  // Mobile renders plain content: no Motion, typing timers, physics or demo trees.
+  if (isMobile !== false) {
+    return (
+      <section className="section how how-mobile-static bg-hero-gradient" id="como-funciona" ref={sectionRef} style={{ position: 'relative', paddingTop: '60px' }}>
+        <div className="container" style={{ marginBottom: '40px' }}>
+          <div className="section-head" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+            <div className="title-wrapper" style={{ alignItems: 'flex-start', marginBottom: '16px' }}>
+              <span className="premium-typing-text">Cómo funciona</span>
+              <h2 className="massive-title black-title" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', lineHeight: '0.93', margin: 0 }}>
+                DE TU MANUSCRITO AL PLAN DE <span className="highlight-yellow">PUBLICACIÓN</span>
+              </h2>
+            </div>
+            <p>Descubre el proceso paso a paso.</p>
+          </div>
+        </div>
+        <div className="how-container">
+          <div className="container">
+            <div className="how-grid">
+              <div className="how-steps-container">
+                <div className="how-steps" id="howSteps">
+                  {STEPS.map(step => (
+                    <div key={step.num} className="step-card how-step-card">
+                      <span className="step-num">{step.num}</span>
+                      <div className="step-body">
+                        <h3>{step.title}</h3>
+                        <p>{step.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section
