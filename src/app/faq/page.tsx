@@ -142,7 +142,7 @@ export default function Page() {
   };
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="content-page">
       {/*  ============ HERO DE FAQ ============  */}
       <section className="faq-hero">
         <div className="container faq-hero-inner">
@@ -181,7 +181,7 @@ export default function Page() {
           {/*  Lista de acordeones  */}
           <div className="faq-list">
             {filteredFaqs.map((faq) => (
-              <div className={`faq-item ${openQuestion === faq.id ? 'open' : ''}`} key={faq.id}>
+              <div className={`faq-item ${openQuestion === faq.id ? 'is-open' : ''}`} key={faq.id}>
                 <button className="faq-trigger" aria-expanded={openQuestion === faq.id} onClick={() => toggleQuestion(faq.id)}>
                   <span>{faq.question}</span>
                   <span className="faq-icon-box">
@@ -191,7 +191,7 @@ export default function Page() {
                     </svg>
                   </span>
                 </button>
-                <div className="faq-content" style={{ maxHeight: openQuestion === faq.id ? '500px' : '0', overflow: 'hidden', transition: 'max-height 0.3s ease' }}>
+                <div className="faq-content" hidden={openQuestion !== faq.id} style={{ maxHeight: 'none' }}>
                   <div className="faq-answer">
                     {faq.answer}
                   </div>

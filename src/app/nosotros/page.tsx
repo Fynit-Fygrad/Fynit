@@ -7,7 +7,7 @@ export default function Page() {
   const containerRef = useRef(null);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="content-page">
 
 
     {/*  ============ HERO NOSOTROS ============  */}
@@ -15,7 +15,7 @@ export default function Page() {
       <div className="container about-hero-grid">
         <div className="about-hero-copy">
           <span className="eyebrow-accent">SOBRE NOSOTROS</span>
-          <h1 style={{ fontSize: '3rem', marginBottom: '20px', color: 'var(--navy)' }}>El propósito detrás de cada paper</h1>
+          <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '20px', color: 'var(--navy)' }}>El propósito detrás de cada paper</h1>
           <p className="lead" style={{ fontSize: '1.15rem', color: 'var(--ink-70)', lineHeight: '1.7', fontWeight: '300' }}>
             Fynit nace para guiar a los investigadores en su ruta editorial, eliminando la incertidumbre en el proceso de revisión y publicación de artículos científicos.
           </p>
@@ -53,7 +53,7 @@ export default function Page() {
       <div className="container">
         <div className="section-head center">
           <span className="eyebrow-accent">NUESTRA FILOSOFÍA</span>
-          <h2 style={{ fontSize: '2.2rem', marginTop: '12px' }}>Los tres pilares de Fynit</h2>
+          <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', marginTop: '12px' }}>Los tres pilares de Fynit</h2>
           <p style={{ color: 'var(--ink-70)', marginTop: '10px' }}>Bajo qué principios construimos nuestra tecnología de diagnóstico.</p>
         </div>
         

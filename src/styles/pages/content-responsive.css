@@ -1,0 +1,264 @@
+/* Scoped to secondary pages so the landing keeps its own art direction. */
+.content-page {
+  min-width: 0;
+}
+
+.content-page :is(.blog-grid, .pricing-grid, .team-grid, .about-hero-grid, .mv-grid, .pilares-grid) > * {
+  min-width: 0;
+}
+
+.content-page :is(h1, h2, h3, p, .btn) {
+  overflow-wrap: anywhere;
+}
+
+.content-page .faq-content[hidden] {
+  display: none;
+}
+
+.content-page .comparison-table-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.content-page .newsletter-input {
+  color: #071742;
+  background: #fff;
+  border-color: #cbd5e1;
+}
+
+.content-page .newsletter-input::placeholder {
+  color: #64748b;
+}
+
+.content-page .newsletter-input:focus {
+  border-color: #1b60df;
+  outline: 2px solid #1b60df;
+  outline-offset: 2px;
+}
+
+@media (max-width: 380px) {
+  .floating-navbar {
+    padding-inline: 12px;
+    gap: 8px;
+  }
+
+  .floating-navbar .logo {
+    flex-shrink: 0;
+  }
+
+  .floating-navbar .logo img {
+    height: 26px !important;
+  }
+
+  .floating-navbar .nav-actions {
+    gap: 4px;
+  }
+
+  .floating-navbar .btn-pill-blue {
+    padding-inline: 12px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .content-page .blog-grid,
+  .content-page .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .content-page .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+    margin-inline: auto;
+    gap: 32px;
+  }
+
+  .content-page .price-card.popular {
+    transform: none;
+  }
+
+  .content-page .faq-tabs-container {
+    justify-content: flex-start;
+  }
+
+  .content-page .faq-tab-btn {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-page .container {
+    width: 100%;
+    padding-inline: 20px;
+  }
+
+  .content-page :is(.blog-hero, .faq-hero, .team-hero, .prices-hero, .about-hero, .contact-hero-section) {
+    padding-block: 112px 40px;
+  }
+
+  .content-page :is(.blog-hero, .faq-hero, .team-hero, .prices-hero) h1 {
+    font-size: clamp(2rem, 6vw, 2.8rem);
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+
+  .content-page :is(.blog-hero, .faq-hero, .team-hero, .prices-hero) p {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .content-page :is(.featured-section, .mission-vision, .pilares, .team, .prices-section, .comparison-section, .pricing-faq-section) {
+    padding-block: 40px;
+  }
+
+  .content-page .blog-grid-section {
+    padding-block: 32px 48px;
+  }
+
+  .content-page .featured-card,
+  .content-page .about-hero-grid,
+  .content-page .mv-grid,
+  .content-page .pilares-grid,
+  .content-page .pricing-faq-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .content-page .featured-card {
+    gap: 0;
+  }
+
+  .content-page .featured-card-visual {
+    min-height: 0;
+    height: 240px;
+  }
+
+  .content-page .featured-card-visual img {
+    max-height: 210px;
+    max-width: 85%;
+    object-fit: contain;
+  }
+
+  .content-page :is(.featured-card-body, .article-card-body, .mv-card, .pilar-card, .faq-card) {
+    padding: 24px;
+  }
+
+  .content-page .featured-card-body h2 {
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+
+  .content-page .post-meta {
+    gap: 10px 16px;
+    margin-bottom: 20px;
+  }
+
+  .content-page .article-card-footer {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .content-page .blog-filter-tabs {
+    gap: 8px;
+  }
+
+  .content-page :is(.blog-filter-btn, .faq-tab-btn) {
+    min-height: 44px;
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .content-page :is(.blog-newsletter, .team-teaser) {
+    padding-block: 48px;
+  }
+
+  .content-page :is(.blog-newsletter, .team-teaser, .faq-contact-teaser, .comparison-head, .pricing-faq-head) h2 {
+    font-size: clamp(1.6rem, 5vw, 2rem);
+    line-height: 1.2;
+  }
+
+  .content-page .newsletter-form {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .content-page :is(.newsletter-input, .newsletter-form .btn) {
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+  }
+
+  .content-page :is(input, select, textarea) {
+    font-size: 16px;
+  }
+
+  .content-page .faq-tabs-container {
+    margin-bottom: 24px;
+    padding-block: 8px;
+  }
+
+  .content-page .faq-trigger {
+    gap: 12px;
+    padding: 20px;
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .content-page .faq-answer {
+    padding: 0 20px 24px;
+    font-size: 14px;
+  }
+
+  .content-page .faq-contact-teaser {
+    margin-top: 32px;
+    padding: 28px 20px;
+  }
+
+  .content-page .about-hero-visual img {
+    max-height: 280px;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  .content-page .pricing-toggle-container {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .content-page .price-card {
+    padding: 32px 24px;
+  }
+
+  .content-page .comparison-table {
+    min-width: 640px;
+  }
+
+  /* The form currently sets these layout values inline. */
+  .content-page .contact-form-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 24px !important;
+    padding: 24px !important;
+  }
+
+  .content-page .contact-form-grid > * {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 540px) {
+  .content-page .blog-grid,
+  .content-page .team-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .content-page .container {
+    padding-inline: 16px;
+  }
+
+  .content-page .btn {
+    white-space: normal;
+    text-align: center;
+    min-height: 44px;
+  }
+}

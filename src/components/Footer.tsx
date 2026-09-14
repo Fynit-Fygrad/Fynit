@@ -64,7 +64,7 @@ export default function Footer() {
               <li><Link href="/#como-funciona">Cómo funciona</Link></li>
               <li><Link href="/precios">Precios</Link></li>
               <li><Link href="/blog">Blog</Link></li>
-              <li><Link href="/#nosotros">Contacto</Link></li>
+              <li><Link href="/analizar">Contacto</Link></li>
             </ul>
             {/* Social icons en móvil: aparecen debajo de los links */}
             <div className="footer-social footer-social-col">
@@ -87,7 +87,7 @@ export default function Footer() {
             <h4>Recursos</h4>
             <ul>
               <li><Link href="/blog">Blog</Link></li>
-              <li><Link href="/#guias">Guías</Link></li>
+              <li><Link href="/blog">Guías</Link></li>
               <li><Link href="/faq">Preguntas frecuentes</Link></li>
             </ul>
           </div>
@@ -95,7 +95,7 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Compañía</h4>
             <ul>
-              <li><Link href="/#nosotros">Nosotros</Link></li>
+              <li><Link href="/nosotros">Nosotros</Link></li>
               <li><Link href="/analizar">Analizar</Link></li>
             </ul>
           </div>
@@ -104,7 +104,7 @@ export default function Footer() {
         <div className="container footer-bottom">
           <span>&copy; 2026 Fynit. Todos los derechos reservados.</span>
           <div className="legal">
-            <Link href="/#privacidad">Privacidad</Link>
+            <Link href="/assets/Politica_de_Privacidad_Fynit.pdf">Privacidad</Link>
             <Link href="/#terminos">Términos</Link>
           </div>
         </div>

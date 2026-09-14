@@ -1,0 +1,16 @@
+/* Freeze offscreen effects in place; resume without changing their appearance. */
+.home-page section[data-animation-paused='true'],
+.home-page section[data-animation-paused='true'] *,
+.home-page section[data-animation-paused='true']::before,
+.home-page section[data-animation-paused='true']::after,
+.home-page section[data-animation-paused='true'] *::before,
+.home-page section[data-animation-paused='true'] *::after {
+  animation-play-state: paused !important;
+}
+
+/* Cache the moving mascot, including its original shadow, as a single layer. */
+@media (max-width: 1024px) {
+  .home-page .epic-hero-section[data-animation-paused='false'] .epic-mascot {
+    will-change: transform;
+  }
+}

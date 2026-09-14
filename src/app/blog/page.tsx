@@ -7,7 +7,7 @@ export default function Page() {
   const containerRef = useRef(null);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="content-page">
 
 
     {/*  ============ BLOG HERO ============  */}

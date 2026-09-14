@@ -7,6 +7,7 @@ import { Html, Sphere, Points, PointMaterial, OrbitControls, Float } from '@reac
 import * as THREE from 'three';
 import TextType from './TextType';
 import BlurText from './BlurText';
+import { useAnimationVisibility } from '@/hooks/useAnimationVisibility';
 
 interface IndexationItem {
   id: string;
@@ -179,6 +180,8 @@ function GlobeScene({ isDark }: { isDark: boolean }) {
 }
 
 export default function OrbitalIndexaciones() {
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const { active, hasEntered } = useAnimationVisibility(canvasRef, '200px');
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -361,9 +364,10 @@ export default function OrbitalIndexaciones() {
         </div>
 
         {/* ── Derecha: Esfera Interactiva 3D ── */}
-        <div className="idx-canvas-col" style={{ position: 'relative', width: '100%', height: '750px', minHeight: '300px', overflow: 'hidden' }}>
-          {mounted && (
+        <div ref={canvasRef} className="idx-canvas-col" style={{ position: 'relative', width: '100%', height: '750px', minHeight: '300px', overflow: 'hidden' }}>
+          {mounted && hasEntered && (
             <Canvas
+              frameloop={active ? 'always' : 'never'}
               camera={{ position: [0, 0, 8.5], fov: 45 }}
               dpr={[1, 2]}
               gl={{ antialias: true, alpha: true }}

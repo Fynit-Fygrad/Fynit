@@ -1,0 +1,916 @@
+diff --git a/src/app/analizar/page.tsx b/src/app/analizar/page.tsx
+index 3a1bce7..7a0db19 100644
+--- a/src/app/analizar/page.tsx
++++ b/src/app/analizar/page.tsx
+@@ -121,7 +121,7 @@ export default function Page() {
+ 
+ 
+   return (
+-    <div ref={containerRef}>
++    <div ref={containerRef} className="content-page">
+ 
+ 
+     {/*  ============ CONTACTO NUEVO LAYOUT ============  */}
+diff --git a/src/app/blog/page.tsx b/src/app/blog/page.tsx
+index 3b4e3ff..a55a9b8 100644
+--- a/src/app/blog/page.tsx
++++ b/src/app/blog/page.tsx
+@@ -7,7 +7,7 @@ export default function Page() {
+   const containerRef = useRef(null);
+ 
+   return (
+-    <div ref={containerRef}>
++    <div ref={containerRef} className="content-page">
+ 
+ 
+     {/*  ============ BLOG HERO ============  */}
+diff --git a/src/app/equipo/page.tsx b/src/app/equipo/page.tsx
+index e14fe16..4e451d7 100644
+--- a/src/app/equipo/page.tsx
++++ b/src/app/equipo/page.tsx
+@@ -7,7 +7,7 @@ export default function Page() {
+   const containerRef = useRef(null);
+ 
+   return (
+-    <div ref={containerRef}>
++    <div ref={containerRef} className="content-page">
+ 
+ 
+     {/*  ============ HERO EQUIPO ============  */}
+diff --git a/src/app/faq/page.tsx b/src/app/faq/page.tsx
+index 45ba087..1303b3e 100644
+--- a/src/app/faq/page.tsx
++++ b/src/app/faq/page.tsx
+@@ -142,7 +142,7 @@ export default function Page() {
+   };
+ 
+   return (
+-    <div ref={containerRef}>
++    <div ref={containerRef} className="content-page">
+       {/*  ============ HERO DE FAQ ============  */}
+       <section className="faq-hero">
+         <div className="container faq-hero-inner">
+@@ -181,7 +181,7 @@ export default function Page() {
+           {/*  Lista de acordeones  */}
+           <div className="faq-list">
+             {filteredFaqs.map((faq) => (
+-              <div className={`faq-item ${openQuestion === faq.id ? 'open' : ''}`} key={faq.id}>
++              <div className={`faq-item ${openQuestion === faq.id ? 'is-open' : ''}`} key={faq.id}>
+                 <button className="faq-trigger" aria-expanded={openQuestion === faq.id} onClick={() => toggleQuestion(faq.id)}>
+                   <span>{faq.question}</span>
+                   <span className="faq-icon-box">
+@@ -191,7 +191,7 @@ export default function Page() {
+                     </svg>
+                   </span>
+                 </button>
+-                <div className="faq-content" style={{ maxHeight: openQuestion === faq.id ? '500px' : '0', overflow: 'hidden', transition: 'max-height 0.3s ease' }}>
++                <div className="faq-content" hidden={openQuestion !== faq.id} style={{ maxHeight: 'none' }}>
+                   <div className="faq-answer">
+                     {faq.answer}
+                   </div>
+diff --git a/src/app/layout.tsx b/src/app/layout.tsx
+index 53441af..4e04277 100644
+--- a/src/app/layout.tsx
++++ b/src/app/layout.tsx
+@@ -42,6 +42,7 @@ import "@/styles/pages/blog.css";
+ import "@/styles/pages/equipo.css";
+ import "@/styles/pages/contacto.css";
+ import "@/styles/pages/epic-hero.css";
++import "@/styles/pages/content-responsive.css";
+ 
+ const sora = Sora({
+   variable: "--font-sora",
+diff --git a/src/app/nosotros/page.tsx b/src/app/nosotros/page.tsx
+index 6acb20e..6dbf0dd 100644
+--- a/src/app/nosotros/page.tsx
++++ b/src/app/nosotros/page.tsx
+@@ -7,7 +7,7 @@ export default function Page() {
+   const containerRef = useRef(null);
+ 
+   return (
+-    <div ref={containerRef}>
++    <div ref={containerRef} className="content-page">
+ 
+ 
+     {/*  ============ HERO NOSOTROS ============  */}
+@@ -15,7 +15,7 @@ export default function Page() {
+       <div className="container about-hero-grid">
+         <div className="about-hero-copy">
+           <span className="eyebrow-accent">SOBRE NOSOTROS</span>
+-          <h1 style={{ fontSize: '3rem', marginBottom: '20px', color: 'var(--navy)' }}>El propósito detrás de cada paper</h1>
++          <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '20px', color: 'var(--navy)' }}>El propósito detrás de cada paper</h1>
+           <p className="lead" style={{ fontSize: '1.15rem', color: 'var(--ink-70)', lineHeight: '1.7', fontWeight: '300' }}>
+             Fynit nace para guiar a los investigadores en su ruta editorial, eliminando la incertidumbre en el proceso de revisión y publicación de artículos científicos.
+           </p>
+@@ -53,7 +53,7 @@ export default function Page() {
+       <div className="container">
+         <div className="section-head center">
+           <span className="eyebrow-accent">NUESTRA FILOSOFÍA</span>
+-          <h2 style={{ fontSize: '2.2rem', marginTop: '12px' }}>Los tres pilares de Fynit</h2>
++          <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', marginTop: '12px' }}>Los tres pilares de Fynit</h2>
+           <p style={{ color: 'var(--ink-70)', marginTop: '10px' }}>Bajo qué principios construimos nuestra tecnología de diagnóstico.</p>
+         </div>
+         
+diff --git a/src/app/page.tsx b/src/app/page.tsx
+index ce18685..313cd5c 100644
+--- a/src/app/page.tsx
++++ b/src/app/page.tsx
+@@ -12,8 +12,12 @@ import HowSection from '@/components/HowSection';
+ import TextType from '@/components/TextType';
+ import BlurText from '@/components/BlurText';
+ import LusionCard from '@/components/LusionCard';
++import { usePauseOffscreenAnimations } from '@/hooks/useAnimationVisibility';
++import '@/styles/home/animation-performance.css';
+ 
+ export default function Home() {
++  const homeRef = useRef<HTMLDivElement>(null);
++  usePauseOffscreenAnimations(homeRef);
+   const [currentStep, setCurrentStep] = useState(1);
+   const [stepKey, setStepKey] = useState(0);
+   const [countersVisible, setCountersVisible] = useState(false);
+@@ -53,7 +57,7 @@ export default function Home() {
+ 
+   return (
+     <>
+-      <div style={{ position: 'relative', zIndex: 1 }}>
++      <div ref={homeRef} className="home-page" style={{ position: 'relative', zIndex: 1 }}>
+       <link rel="preload" as="image" href={heroBg} fetchPriority="high" />
+       <link rel="preload" as="image" href={mascotImg} fetchPriority="high" />
+ 
+@@ -93,14 +97,14 @@ export default function Home() {
+ 
+               <div className="epic-ctas">
+                 <a 
+-                  href="/auth/register"
++                  href="/registro"
+                   className="epic-btn-yellow"
+                   data-cursor
+                 >
+                   <span>Registrarse</span>
+                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                 </a>
+-                <Link href="#demo" className="epic-btn-ghost" data-cursor>
++                <Link href="#como-funciona" className="epic-btn-ghost" data-cursor>
+                   Ver cómo funciona →
+                 </Link>
+               </div>
+@@ -127,7 +131,7 @@ export default function Home() {
+ 
+               <div className="epic-ctas">
+                 <a 
+-                  href="/auth/register"
++                  href="/registro"
+                   className="epic-btn-yellow"
+                   data-cursor
+                 >
+@@ -326,7 +330,7 @@ export default function Home() {
+                   <use href="/sprite.svg#ic-close" />
+                 </svg> Reporte completo descargable</li>
+               </ul>
+-              <Link href="analizar.html" className="btn btn-ghost btn-block">Empezar</Link>
++              <Link href="/analizar" className="btn btn-ghost btn-block">Empezar</Link>
+             </div>
+             {/*  Plan Pro  */}
+             <div className="price-card popular">
+@@ -352,7 +356,7 @@ export default function Home() {
+                   <use href="/sprite.svg#ic-check" />
+                 </svg> Seguimiento de versiones</li>
+               </ul>
+-              <Link href="analizar.html" className="btn btn-primary btn-block">Empezar 14 días gratis <svg>
++              <Link href="/analizar" className="btn btn-primary btn-block">Empezar 14 días gratis <svg>
+                 <use href="/sprite.svg#ic-arrow" />
+               </svg></Link>
+             </div>
+@@ -379,14 +383,14 @@ export default function Home() {
+                   <use href="/sprite.svg#ic-check" />
+                 </svg> SLA garantizado</li>
+               </ul>
+-              <Link href="analizar.html" className="btn btn-ghost btn-block">Contactar ventas</Link>
++              <Link href="/analizar" className="btn btn-ghost btn-block">Contactar ventas</Link>
+             </div>
+           </div>
+           <div style={{ textAlign: 'center', marginTop: '32px', marginBottom: '24px' }}>
+-            <Link href="precios.html" className="btn btn-ghost">Ver más detalle</Link>
++            <Link href="/precios" className="btn btn-ghost">Ver más detalle</Link>
+           </div>
+           <p className="pricing-note">Todos los planes incluyen seguridad de datos y privacidad de tu investigación. <Link
+-            href="seguridad.html">Ver política de datos &rarr;</Link></p>
++            href="/assets/Politica_de_Privacidad_Fynit.pdf">Ver política de datos &rarr;</Link></p>
+         </div>
+       </section>
+ 
+@@ -406,13 +410,13 @@ export default function Home() {
+                 </div>
+               </div>
+             </div>
+-            <Link href="blog.html" className="see-all">Ver todos <svg>
++            <Link href="/blog" className="see-all">Ver todos <svg>
+               <use href="/sprite.svg#ic-arrow" />
+             </svg></Link>
+           </div>
+ 
+           <div className="blog-grid">
+-            <Link href="blog.html#q1-vs-q2" className="article-card">
++            <Link href="/blog" className="article-card">
+               <div className="article-thumb" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                 <span>Publicación académica</span>
+               </div>
+@@ -421,7 +425,7 @@ export default function Home() {
+                 <div className="article-meta"><span>5 min de lectura</span><span className="rd">&rarr;</span></div>
+               </div>
+             </Link>
+-            <Link href="blog.html#revistas-alto-impacto" className="article-card">
++            <Link href="/blog" className="article-card">
+               <div className="article-thumb" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                 <span>¿Investigación?</span>
+               </div>
+@@ -430,7 +434,7 @@ export default function Home() {
+                 <div className="article-meta"><span>6 min de lectura</span><span className="rd">&rarr;</span></div>
+               </div>
+             </Link>
+-            <Link href="blog.html#ia-publicacion" className="article-card">
++            <Link href="/blog" className="article-card">
+               <div className="article-thumb" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&q=80)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                 <span>IA</span>
+               </div>
+diff --git a/src/app/precios/page.tsx b/src/app/precios/page.tsx
+index 5aa1a20..c3b0a37 100644
+--- a/src/app/precios/page.tsx
++++ b/src/app/precios/page.tsx
+@@ -8,7 +8,7 @@ export default function Page() {
+   const [isAnnual, setIsAnnual] = useState(false);
+ 
+   return (
+-    <div ref={containerRef}>
++    <div ref={containerRef} className="content-page">
+ 
+ 
+     {/*  ============ HERO DE PRECIOS ============  */}
+@@ -42,7 +42,7 @@ export default function Page() {
+             <div className="price-card-header">
+               <h3 className="price-card-title">Explorador</h3>
+               <div className="price-card-price">
+-                <span className="currency">\$</span>
++                <span className="currency">$</span>
+                 <span className="value">0</span>
+                 <span className="period">/ mes</span>
+               </div>
+@@ -84,7 +84,7 @@ export default function Page() {
+             <div className="price-card-header">
+               <h3 className="price-card-title">Investigador Pro</h3>
+               <div className="price-card-price">
+-                <span className="currency">\$</span>
++                <span className="currency">$</span>
+                 <div className="price-val-wrapper">
+                   <span className="value">{isAnnual ? '15' : '19'}</span>
+                 </div>
+@@ -175,7 +175,7 @@ export default function Page() {
+           <p>Encuentra el nivel de detalle y soporte que necesitas para tu ruta de publicación.</p>
+         </div>
+ 
+-        <div className="comparison-table-wrapper">
++        <div className="comparison-table-wrapper" role="region" aria-label="Comparación de planes, desliza horizontalmente para ver todas las columnas" tabIndex={0}>
+           <table className="comparison-table">
+             <thead>
+               <tr>
+@@ -346,7 +346,7 @@ export default function Page() {
+ 
+           <div className="faq-card">
+             <h3>¿Cómo funciona el descuento de facturación anual?</h3>
+-            <p>Al seleccionar la facturación anual, pagas todo el año por adelantado en un solo pago de \$180 USD (lo que equivale a \$15 USD al mes). Esto representa un ahorro directo del 20% en comparación con la tarifa de pago mensual de \$19 USD.</p>
++            <p>Al seleccionar la facturación anual, pagas todo el año por adelantado en un solo pago de $180 USD (lo que equivale a $15 USD al mes). Esto representa un ahorro directo del 20% en comparación con la tarifa de pago mensual de $19 USD.</p>
+           </div>
+ 
+           <div className="faq-card">
+diff --git a/src/components/Footer.tsx b/src/components/Footer.tsx
+index 138b6eb..f80027e 100644
+--- a/src/components/Footer.tsx
++++ b/src/components/Footer.tsx
+@@ -64,7 +64,7 @@ export default function Footer() {
+               <li><Link href="/#como-funciona">Cómo funciona</Link></li>
+               <li><Link href="/precios">Precios</Link></li>
+               <li><Link href="/blog">Blog</Link></li>
+-              <li><Link href="/#nosotros">Contacto</Link></li>
++              <li><Link href="/analizar">Contacto</Link></li>
+             </ul>
+             {/* Social icons en móvil: aparecen debajo de los links */}
+             <div className="footer-social footer-social-col">
+@@ -87,7 +87,7 @@ export default function Footer() {
+             <h4>Recursos</h4>
+             <ul>
+               <li><Link href="/blog">Blog</Link></li>
+-              <li><Link href="/#guias">Guías</Link></li>
++              <li><Link href="/blog">Guías</Link></li>
+               <li><Link href="/faq">Preguntas frecuentes</Link></li>
+             </ul>
+           </div>
+@@ -95,7 +95,7 @@ export default function Footer() {
+           <div className="footer-col">
+             <h4>Compañía</h4>
+             <ul>
+-              <li><Link href="/#nosotros">Nosotros</Link></li>
++              <li><Link href="/nosotros">Nosotros</Link></li>
+               <li><Link href="/analizar">Analizar</Link></li>
+             </ul>
+           </div>
+@@ -104,7 +104,7 @@ export default function Footer() {
+         <div className="container footer-bottom">
+           <span>&copy; 2026 Fynit. Todos los derechos reservados.</span>
+           <div className="legal">
+-            <Link href="/#privacidad">Privacidad</Link>
++            <Link href="/assets/Politica_de_Privacidad_Fynit.pdf">Privacidad</Link>
+             <Link href="/#terminos">Términos</Link>
+           </div>
+         </div>
+diff --git a/src/components/HowSection.tsx b/src/components/HowSection.tsx
+index 76ca0d9..681198c 100644
+--- a/src/components/HowSection.tsx
++++ b/src/components/HowSection.tsx
+@@ -49,7 +49,7 @@ export default function HowSection() {
+   const [currentStep, setCurrentStep] = useState(1);
+   const [stepKey, setStepKey] = useState(0);
+   const [hasInteracted, setHasInteracted] = useState(false);
+-  const [isMobile, setIsMobile] = useState(false);
++  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+   const sectionRef = useRef<HTMLElement>(null);
+   const stepsRef = useRef<HTMLDivElement>(null);
+   const frameRef = useRef<HTMLDivElement>(null);
+@@ -57,10 +57,11 @@ export default function HowSection() {
+ 
+   // Check mobile to unmount heavy animations
+   useEffect(() => {
+-    const checkMobile = () => setIsMobile(window.innerWidth <= 1024);
++    const media = window.matchMedia('(max-width: 1024px)');
++    const checkMobile = () => setIsMobile(media.matches);
+     checkMobile();
+-    window.addEventListener('resize', checkMobile);
+-    return () => window.removeEventListener('resize', checkMobile);
++    media.addEventListener('change', checkMobile);
++    return () => media.removeEventListener('change', checkMobile);
+   }, []);
+ 
+   const handleStepClick = (step: number) => {
+@@ -70,6 +71,7 @@ export default function HowSection() {
+   };
+ 
+   useGSAP(() => {
++    if (isMobile === null) return;
+     // ── 1. Mascot bounce on entry ──────────────────────────────
+     gsap.from(mascotRef.current, {
+       y: -20,
+@@ -128,7 +130,7 @@ export default function HowSection() {
+         },
+       });
+     }
+-  }, { scope: sectionRef });
++  }, { scope: sectionRef, dependencies: [isMobile], revertOnUpdate: true });
+ 
+   return (
+     <section
+@@ -234,7 +236,7 @@ export default function HowSection() {
+             </div>
+ 
+             {/* Right: macOS frame (HIDDEN ON MOBILE TO PREVENT CPU LAG FROM BACKGROUND ANIMATIONS) */}
+-            {!isMobile && (
++            {isMobile === false && (
+               <div className="how-visual">
+                 <div className="visual-frame" ref={frameRef}>
+                   <div className="visual-chrome">
+diff --git a/src/components/OrbitalIndexaciones.tsx b/src/components/OrbitalIndexaciones.tsx
+index 51098b6..0ba96fd 100644
+--- a/src/components/OrbitalIndexaciones.tsx
++++ b/src/components/OrbitalIndexaciones.tsx
+@@ -7,6 +7,7 @@ import { Html, Sphere, Points, PointMaterial, OrbitControls, Float } from '@reac
+ import * as THREE from 'three';
+ import TextType from './TextType';
+ import BlurText from './BlurText';
++import { useAnimationVisibility } from '@/hooks/useAnimationVisibility';
+ 
+ interface IndexationItem {
+   id: string;
+@@ -179,6 +180,8 @@ function GlobeScene({ isDark }: { isDark: boolean }) {
+ }
+ 
+ export default function OrbitalIndexaciones() {
++  const canvasRef = useRef<HTMLDivElement>(null);
++  const { active, hasEntered } = useAnimationVisibility(canvasRef, '200px');
+   const { resolvedTheme } = useTheme();
+   const [mounted, setMounted] = useState(false);
+ 
+@@ -361,9 +364,10 @@ export default function OrbitalIndexaciones() {
+         </div>
+ 
+         {/* ── Derecha: Esfera Interactiva 3D ── */}
+-        <div className="idx-canvas-col" style={{ position: 'relative', width: '100%', height: '750px', minHeight: '300px', overflow: 'hidden' }}>
+-          {mounted && (
++        <div ref={canvasRef} className="idx-canvas-col" style={{ position: 'relative', width: '100%', height: '750px', minHeight: '300px', overflow: 'hidden' }}>
++          {mounted && hasEntered && (
+             <Canvas
++              frameloop={active ? 'always' : 'never'}
+               camera={{ position: [0, 0, 8.5], fov: 45 }}
+               dpr={[1, 2]}
+               gl={{ antialias: true, alpha: true }}
+diff --git a/src/components/TextType.tsx b/src/components/TextType.tsx
+index f9a1ba7..7033d98 100644
+--- a/src/components/TextType.tsx
++++ b/src/components/TextType.tsx
+@@ -1,7 +1,11 @@
+ 'use client';
+ 
+-import { useEffect, useRef, useState, createElement, useMemo, useCallback } from 'react';
++import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
+ import { gsap } from 'gsap';
++import { useGSAP } from '@gsap/react';
++import { useAnimationVisibility } from '@/hooks/useAnimationVisibility';
++
++gsap.registerPlugin(useGSAP);
+ import '@/styles/components/TextType.css';
+ 
+ interface TextTypeProps {
+@@ -51,9 +55,9 @@ const TextType = ({
+   const [currentCharIndex, setCurrentCharIndex] = useState(0);
+   const [isDeleting, setIsDeleting] = useState(false);
+   const [currentTextIndex, setCurrentTextIndex] = useState(0);
+-  const [isVisible, setIsVisible] = useState(!startOnVisible);
+   const cursorRef = useRef<HTMLSpanElement>(null);
+   const containerRef = useRef<HTMLElement>(null);
++  const { active: isVisible } = useAnimationVisibility(containerRef, startOnVisible ? '0px' : '100px');
+ 
+   const textArray = useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
+ 
+@@ -68,36 +72,16 @@ const TextType = ({
+     return textColors[currentTextIndex % textColors.length];
+   };
+ 
+-  useEffect(() => {
+-    if (!startOnVisible || !containerRef.current) return;
+-
+-    const observer = new IntersectionObserver(
+-      entries => {
+-        entries.forEach(entry => {
+-          if (entry.isIntersecting) {
+-            setIsVisible(true);
+-          }
+-        });
+-      },
+-      { threshold: 0.1 }
+-    );
+-
+-    observer.observe(containerRef.current);
+-    return () => observer.disconnect();
+-  }, [startOnVisible]);
+-
+-  useEffect(() => {
+-    if (showCursor && cursorRef.current) {
+-      gsap.set(cursorRef.current, { opacity: 1 });
+-      gsap.to(cursorRef.current, {
+-        opacity: 0,
+-        duration: cursorBlinkDuration,
+-        repeat: -1,
+-        yoyo: true,
+-        ease: 'power2.inOut'
+-      });
+-    }
+-  }, [showCursor, cursorBlinkDuration]);
++  useGSAP(() => {
++    if (!showCursor || !cursorRef.current || !isVisible) return;
++    gsap.fromTo(cursorRef.current, { opacity: 1 }, {
++      opacity: 0,
++      duration: cursorBlinkDuration,
++      repeat: -1,
++      yoyo: true,
++      ease: 'power2.inOut'
++    });
++  }, { scope: containerRef, dependencies: [showCursor, cursorBlinkDuration, isVisible], revertOnUpdate: true });
+ 
+   useEffect(() => {
+     if (!isVisible) return;
+@@ -171,24 +155,20 @@ const TextType = ({
+ 
+   const shouldHideCursor = hideCursorWhileTyping && (currentCharIndex < textArray[currentTextIndex].length || isDeleting);
+ 
+-  return createElement(
+-    Component,
+-    {
+-      ref: containerRef,
+-      className: `text-type ${className}`,
+-      ...props
+-    },
++  return (
++    <Component ref={containerRef} className={`text-type ${className}`} {...props}>
+     <span className="text-type__content" style={{ color: getCurrentTextColor() || 'inherit' }}>
+       {displayedText}
+-    </span>,
+-    showCursor && (
++    </span>
++    {showCursor && (
+       <span
+         ref={cursorRef}
+         className={`text-type__cursor ${cursorClassName} ${shouldHideCursor ? 'text-type__cursor--hidden' : ''}`}
+       >
+         {cursorCharacter}
+       </span>
+-    )
++    )}
++    </Component>
+   );
+ };
+ 
+diff --git a/src/styles/home/pricing.css b/src/styles/home/pricing.css
+index a2da5e7..def881e 100644
+--- a/src/styles/home/pricing.css
++++ b/src/styles/home/pricing.css
+@@ -150,32 +150,32 @@
+ 
+ @media (max-width: 900px) {
+   /* Header izquierda en móvil */
+-  .pricing .section-head {
++  .home-page .pricing .section-head {
+     align-items: flex-start !important;
+     text-align: left !important;
+   }
+ 
+-  .pricing .section-head .title-wrapper {
++  .home-page .pricing .section-head .title-wrapper {
+     align-items: flex-start !important;
+   }
+ 
+-  .pricing .section-head .premium-typing-text {
++  .home-page .pricing .section-head .premium-typing-text {
+     justify-content: flex-start !important;
+   }
+ 
+-  .pricing .section-head .massive-title > * {
++  .home-page .pricing .section-head .massive-title > * {
+     justify-content: flex-start !important;
+   }
+ 
+   /* Título grande en móvil */
+-  .pricing .section-head .massive-title,
+-  .pricing .section-head .massive-title * {
++  .home-page .pricing .section-head .massive-title,
++  .home-page .pricing .section-head .massive-title * {
+     font-size: clamp(30px, 9vw, 40px) !important;
+     line-height: 1.05 !important;
+   }
+ 
+   /* ── 3 tarjetas compactas en fila (como imagen referencia) ── */
+-  .pricing-grid {
++  .home-page .pricing-grid {
+     display: grid !important;
+     grid-template-columns: repeat(3, 1fr) !important;
+     align-items: stretch !important; /* Iguala la altura de las 3 tarjetas */
+@@ -189,11 +189,11 @@
+     padding-right: 0 !important;
+   }
+ 
+-  .price-card.popular {
++  .home-page .price-card.popular {
+     transform: none !important;
+   }
+ 
+-  .price-card {
++  .home-page .price-card {
+     padding: 12px 8px !important;
+     gap: 6px !important;
+     border-radius: 12px !important;
+@@ -205,35 +205,35 @@
+   }
+ 
+   /* Quitar flex:1 de features para que no alargue la tarjeta */
+-  .price-features {
++  .home-page .price-features {
+     flex: 0 !important;
+     gap: 5px !important;
+   }
+ 
+   /* Ocultar features extra para mantener la tarjeta compacta */
+-  .price-features li:nth-child(n+4) {
++  .home-page .price-features li:nth-child(n+4) {
+     display: none !important;
+   }
+ 
+-  .price-badge {
++  .home-page .price-badge {
+     font-size: 9px !important;
+     padding: 3px 8px !important;
+   }
+ 
+-  .price-title {
++  .home-page .price-title {
+     font-size: 0.95rem !important;
+     line-height: 1.2 !important;
+   }
+ 
+-  .price-num {
++  .home-page .price-num {
+     font-size: 1.7rem !important;
+   }
+ 
+-  .price-per {
++  .home-page .price-per {
+     font-size: 10px !important;
+   }
+ 
+-  .price-desc {
++  .home-page .price-desc {
+     font-size: 9px !important;
+     line-height: 1.35 !important;
+     display: -webkit-box !important;
+@@ -242,23 +242,23 @@
+     overflow: hidden !important;
+   }
+ 
+-  .price-features li {
++  .home-page .price-features li {
+     font-size: 9px !important;
+     gap: 5px !important;
+   }
+ 
+-  .price-features li svg {
++  .home-page .price-features li svg {
+     width: 11px !important;
+     height: 11px !important;
+   }
+ 
+-  .price-pop-label {
++  .home-page .price-pop-label {
+     font-size: 9px !important;
+     padding: 3px 10px !important;
+   }
+ 
+   /* Botón compacto */
+-  .price-card .btn {
++  .home-page .price-card .btn {
+     font-size: 10px !important;
+     padding: 8px 10px !important;
+     border-radius: 8px !important;
+@@ -267,19 +267,19 @@
+ }
+ 
+ @media (max-width: 480px) {
+-  .pricing-grid {
++  .home-page .pricing-grid {
+     gap: 6px !important;
+   }
+ 
+-  .price-card {
++  .home-page .price-card {
+     padding: 10px 7px !important;
+   }
+ 
+-  .price-title {
++  .home-page .price-title {
+     font-size: 0.85rem !important;
+   }
+ 
+-  .price-num {
++  .home-page .price-num {
+     font-size: 1.5rem !important;
+   }
+ }
+diff --git a/src/styles/home/testimonials.css b/src/styles/home/testimonials.css
+index e6f2920..1b02b41 100644
+--- a/src/styles/home/testimonials.css
++++ b/src/styles/home/testimonials.css
+@@ -27,36 +27,36 @@
+ }
+ 
+ @media (max-width: 900px) {
+-  .testi-dots {
++  .home-page .testi-dots {
+     display: flex;
+   }
+ 
+   /* Título de sección más grande en móvil */
+-  .testi-main-title,
+-  .testi-main-title * {
++  .home-page .testi-main-title,
++  .home-page .testi-main-title * {
+     font-size: clamp(34px, 10vw, 44px) !important;
+     line-height: 1.05 !important;
+   }
+ 
+   /* Alinear header de testimonios a la izquierda en móvil */
+-  .testimonials .section-head {
++  .home-page .testimonials .section-head {
+     align-items: flex-start !important;
+     text-align: left !important;
+   }
+ 
+-  .testimonials .section-head .title-wrapper {
++  .home-page .testimonials .section-head .title-wrapper {
+     align-items: flex-start !important;
+   }
+ 
+-  .testimonials .section-head .premium-typing-text {
++  .home-page .testimonials .section-head .premium-typing-text {
+     justify-content: flex-start !important;
+   }
+ 
+-  .testimonials .section-head > div {
++  .home-page .testimonials .section-head > div {
+     align-items: flex-start !important;
+   }
+ 
+-  .testi-main-title > * {
++  .home-page .testi-main-title > * {
+     justify-content: flex-start !important;
+   }
+ }
+@@ -313,7 +313,7 @@
+ 
+ @media (max-width: 900px) {
+   /* ── Testimonios: 3 tarjetas compactas lado a lado (como imagen referencia) ── */
+-  .testi-grid {
++  .home-page .testi-grid {
+     display: grid !important;
+     grid-template-columns: repeat(3, 1fr) !important;
+     gap: 8px !important;
+@@ -322,51 +322,51 @@
+     padding-bottom: 0 !important;
+   }
+ 
+-  .testi-card {
++  .home-page .testi-card {
+     padding: 12px 10px !important;
+     gap: 8px !important;
+     border-radius: 12px !important;
+   }
+ 
+-  .testi-stars {
++  .home-page .testi-stars {
+     font-size: 11px !important;
+     letter-spacing: 1px !important;
+   }
+ 
+-  .testi-card blockquote {
++  .home-page .testi-card blockquote {
+     font-size: 10px !important;
+     line-height: 1.45 !important;
+   }
+ 
+-  .testi-card blockquote::before {
++  .home-page .testi-card blockquote::before {
+     font-size: 1.4rem !important;
+   }
+ 
+-  .testi-avatar {
++  .home-page .testi-avatar {
+     width: 28px !important;
+     height: 28px !important;
+     border-width: 2px !important;
+   }
+ 
+-  .testi-author {
++  .home-page .testi-author {
+     gap: 7px !important;
+   }
+ 
+-  .testi-info strong {
++  .home-page .testi-info strong {
+     font-size: 10px !important;
+   }
+ 
+-  .testi-info span {
++  .home-page .testi-info span {
+     font-size: 9px !important;
+   }
+ 
+   /* Dots decorativos debajo del grid (como en ref) */
+-  .testi-grid::after {
++  .home-page .testi-grid::after {
+     content: '';
+     display: none;
+   }
+ 
+-  .blog-grid {
++  .home-page .blog-grid {
+     display: grid !important;
+     grid-template-columns: repeat(3, 1fr) !important;
+     gap: 8px !important;
+@@ -378,7 +378,7 @@
+     padding-right: 0 !important;
+   }
+ 
+-  .article-card {
++  .home-page .article-card {
+     flex: unset !important;
+     scroll-snap-align: unset !important;
+     border-radius: 12px !important;
+@@ -386,39 +386,39 @@
+   }
+ 
+   /* Thumbnail con foto real — no mostrar gradiente de fondo */
+-  .article-thumb {
++  .home-page .article-thumb {
+     height: 90px !important; /* Compacto como en la referencia */
+     background-color: #e2e8f0 !important; /* fallback si la foto no carga */
+   }
+ 
+   /* Quitar los gradientes t1/t2/t3 en móvil (ya tienen foto real) */
+-  .article-thumb.t1,
+-  .article-thumb.t2,
+-  .article-thumb.t3 {
++  .home-page .article-thumb.t1,
++  .home-page .article-thumb.t2,
++  .home-page .article-thumb.t3 {
+     background-image: none !important;
+     background: #e2e8f0 !important;
+   }
+ 
+-  .article-thumb span {
++  .home-page .article-thumb span {
+     font-size: 9px !important;
+     padding: 4px 8px !important;
+   }
+ 
+-  .article-body {
++  .home-page .article-body {
+     padding: 10px 8px !important;
+   }
+ 
+-  .article-body h3 {
++  .home-page .article-body h3 {
+     font-size: 10px !important;
+     line-height: 1.3 !important;
+     margin-bottom: 6px !important;
+   }
+ 
+-  .article-meta {
++  .home-page .article-meta {
+     font-size: 9px !important;
+   }
+ 
+-  .blog-head {
++  .home-page .blog-head {
+     flex-direction: row !important;
+     align-items: flex-end !important;
+     justify-content: space-between !important;
+@@ -428,35 +428,35 @@
+ }
+ 
+ @media (max-width: 640px) {
+-  .testi-grid {
++  .home-page .testi-grid {
+     gap: 6px !important;
+     margin-top: 20px !important;
+   }
+ 
+-  .testi-card {
++  .home-page .testi-card {
+     padding: 10px 8px !important;
+     border-radius: 10px !important;
+   }
+ 
+-  .testi-card blockquote {
++  .home-page .testi-card blockquote {
+     font-size: 13px;
+     line-height: 1.5;
+   }
+ 
+-  .testi-avatar {
++  .home-page .testi-avatar {
+     width: 32px;
+     height: 32px;
+   }
+ 
+-  .testi-info strong {
++  .home-page .testi-info strong {
+     font-size: 12px;
+   }
+ 
+-  .testi-info span {
++  .home-page .testi-info span {
+     font-size: 10px;
+   }
+ 
+-  .blog-grid {
++  .home-page .blog-grid {
+     gap: 14px;
+     margin-left: -16px;
+     margin-right: -16px;
+@@ -464,19 +464,19 @@
+     padding-right: 16px;
+   }
+   
+-  .article-card {
++  .home-page .article-card {
+     flex: 0 0 88%;
+   }
+ 
+-  .blog-head {
++  .home-page .blog-head {
+     margin-bottom: 24px;
+   }
+ 
+-  .article-thumb {
++  .home-page .article-thumb {
+     height: 140px;
+   }
+ 
+-  .article-body {
++  .home-page .article-body {
+     padding: 18px 16px;
+   }
+ }

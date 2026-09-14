@@ -150,32 +150,32 @@
 
 @media (max-width: 900px) {
   /* Header izquierda en móvil */
-  .pricing .section-head {
+  .home-page .pricing .section-head {
     align-items: flex-start !important;
     text-align: left !important;
   }
 
-  .pricing .section-head .title-wrapper {
+  .home-page .pricing .section-head .title-wrapper {
     align-items: flex-start !important;
   }
 
-  .pricing .section-head .premium-typing-text {
+  .home-page .pricing .section-head .premium-typing-text {
     justify-content: flex-start !important;
   }
 
-  .pricing .section-head .massive-title > * {
+  .home-page .pricing .section-head .massive-title > * {
     justify-content: flex-start !important;
   }
 
   /* Título grande en móvil */
-  .pricing .section-head .massive-title,
-  .pricing .section-head .massive-title * {
+  .home-page .pricing .section-head .massive-title,
+  .home-page .pricing .section-head .massive-title * {
     font-size: clamp(30px, 9vw, 40px) !important;
     line-height: 1.05 !important;
   }
 
   /* ── 3 tarjetas compactas en fila (como imagen referencia) ── */
-  .pricing-grid {
+  .home-page .pricing-grid {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
     align-items: stretch !important; /* Iguala la altura de las 3 tarjetas */
@@ -189,11 +189,11 @@
     padding-right: 0 !important;
   }
 
-  .price-card.popular {
+  .home-page .price-card.popular {
     transform: none !important;
   }
 
-  .price-card {
+  .home-page .price-card {
     padding: 12px 8px !important;
     gap: 6px !important;
     border-radius: 12px !important;
@@ -205,35 +205,35 @@
   }
 
   /* Quitar flex:1 de features para que no alargue la tarjeta */
-  .price-features {
+  .home-page .price-features {
     flex: 0 !important;
     gap: 5px !important;
   }
 
   /* Ocultar features extra para mantener la tarjeta compacta */
-  .price-features li:nth-child(n+4) {
+  .home-page .price-features li:nth-child(n+4) {
     display: none !important;
   }
 
-  .price-badge {
+  .home-page .price-badge {
     font-size: 9px !important;
     padding: 3px 8px !important;
   }
 
-  .price-title {
+  .home-page .price-title {
     font-size: 0.95rem !important;
     line-height: 1.2 !important;
   }
 
-  .price-num {
+  .home-page .price-num {
     font-size: 1.7rem !important;
   }
 
-  .price-per {
+  .home-page .price-per {
     font-size: 10px !important;
   }
 
-  .price-desc {
+  .home-page .price-desc {
     font-size: 9px !important;
     line-height: 1.35 !important;
     display: -webkit-box !important;
@@ -242,23 +242,23 @@
     overflow: hidden !important;
   }
 
-  .price-features li {
+  .home-page .price-features li {
     font-size: 9px !important;
     gap: 5px !important;
   }
 
-  .price-features li svg {
+  .home-page .price-features li svg {
     width: 11px !important;
     height: 11px !important;
   }
 
-  .price-pop-label {
+  .home-page .price-pop-label {
     font-size: 9px !important;
     padding: 3px 10px !important;
   }
 
   /* Botón compacto */
-  .price-card .btn {
+  .home-page .price-card .btn {
     font-size: 10px !important;
     padding: 8px 10px !important;
     border-radius: 8px !important;
@@ -267,19 +267,19 @@
 }
 
 @media (max-width: 480px) {
-  .pricing-grid {
+  .home-page .pricing-grid {
     gap: 6px !important;
   }
 
-  .price-card {
+  .home-page .price-card {
     padding: 10px 7px !important;
   }
 
-  .price-title {
+  .home-page .price-title {
     font-size: 0.85rem !important;
   }
 
-  .price-num {
+  .home-page .price-num {
     font-size: 1.5rem !important;
   }
 }

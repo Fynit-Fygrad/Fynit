@@ -27,36 +27,36 @@
 }
 
 @media (max-width: 900px) {
-  .testi-dots {
+  .home-page .testi-dots {
     display: flex;
   }
 
   /* Título de sección más grande en móvil */
-  .testi-main-title,
-  .testi-main-title * {
+  .home-page .testi-main-title,
+  .home-page .testi-main-title * {
     font-size: clamp(34px, 10vw, 44px) !important;
     line-height: 1.05 !important;
   }
 
   /* Alinear header de testimonios a la izquierda en móvil */
-  .testimonials .section-head {
+  .home-page .testimonials .section-head {
     align-items: flex-start !important;
     text-align: left !important;
   }
 
-  .testimonials .section-head .title-wrapper {
+  .home-page .testimonials .section-head .title-wrapper {
     align-items: flex-start !important;
   }
 
-  .testimonials .section-head .premium-typing-text {
+  .home-page .testimonials .section-head .premium-typing-text {
     justify-content: flex-start !important;
   }
 
-  .testimonials .section-head > div {
+  .home-page .testimonials .section-head > div {
     align-items: flex-start !important;
   }
 
-  .testi-main-title > * {
+  .home-page .testi-main-title > * {
     justify-content: flex-start !important;
   }
 }
@@ -313,7 +313,7 @@
 
 @media (max-width: 900px) {
   /* ── Testimonios: 3 tarjetas compactas lado a lado (como imagen referencia) ── */
-  .testi-grid {
+  .home-page .testi-grid {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 8px !important;
@@ -322,51 +322,51 @@
     padding-bottom: 0 !important;
   }
 
-  .testi-card {
+  .home-page .testi-card {
     padding: 12px 10px !important;
     gap: 8px !important;
     border-radius: 12px !important;
   }
 
-  .testi-stars {
+  .home-page .testi-stars {
     font-size: 11px !important;
     letter-spacing: 1px !important;
   }
 
-  .testi-card blockquote {
+  .home-page .testi-card blockquote {
     font-size: 10px !important;
     line-height: 1.45 !important;
   }
 
-  .testi-card blockquote::before {
+  .home-page .testi-card blockquote::before {
     font-size: 1.4rem !important;
   }
 
-  .testi-avatar {
+  .home-page .testi-avatar {
     width: 28px !important;
     height: 28px !important;
     border-width: 2px !important;
   }
 
-  .testi-author {
+  .home-page .testi-author {
     gap: 7px !important;
   }
 
-  .testi-info strong {
+  .home-page .testi-info strong {
     font-size: 10px !important;
   }
 
-  .testi-info span {
+  .home-page .testi-info span {
     font-size: 9px !important;
   }
 
   /* Dots decorativos debajo del grid (como en ref) */
-  .testi-grid::after {
+  .home-page .testi-grid::after {
     content: '';
     display: none;
   }
 
-  .blog-grid {
+  .home-page .blog-grid {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 8px !important;
@@ -378,7 +378,7 @@
     padding-right: 0 !important;
   }
 
-  .article-card {
+  .home-page .article-card {
     flex: unset !important;
     scroll-snap-align: unset !important;
     border-radius: 12px !important;
@@ -386,39 +386,39 @@
   }
 
   /* Thumbnail con foto real — no mostrar gradiente de fondo */
-  .article-thumb {
+  .home-page .article-thumb {
     height: 90px !important; /* Compacto como en la referencia */
     background-color: #e2e8f0 !important; /* fallback si la foto no carga */
   }
 
   /* Quitar los gradientes t1/t2/t3 en móvil (ya tienen foto real) */
-  .article-thumb.t1,
-  .article-thumb.t2,
-  .article-thumb.t3 {
+  .home-page .article-thumb.t1,
+  .home-page .article-thumb.t2,
+  .home-page .article-thumb.t3 {
     background-image: none !important;
     background: #e2e8f0 !important;
   }
 
-  .article-thumb span {
+  .home-page .article-thumb span {
     font-size: 9px !important;
     padding: 4px 8px !important;
   }
 
-  .article-body {
+  .home-page .article-body {
     padding: 10px 8px !important;
   }
 
-  .article-body h3 {
+  .home-page .article-body h3 {
     font-size: 10px !important;
     line-height: 1.3 !important;
     margin-bottom: 6px !important;
   }
 
-  .article-meta {
+  .home-page .article-meta {
     font-size: 9px !important;
   }
 
-  .blog-head {
+  .home-page .blog-head {
     flex-direction: row !important;
     align-items: flex-end !important;
     justify-content: space-between !important;
@@ -428,35 +428,35 @@
 }
 
 @media (max-width: 640px) {
-  .testi-grid {
+  .home-page .testi-grid {
     gap: 6px !important;
     margin-top: 20px !important;
   }
 
-  .testi-card {
+  .home-page .testi-card {
     padding: 10px 8px !important;
     border-radius: 10px !important;
   }
 
-  .testi-card blockquote {
+  .home-page .testi-card blockquote {
     font-size: 13px;
     line-height: 1.5;
   }
 
-  .testi-avatar {
+  .home-page .testi-avatar {
     width: 32px;
     height: 32px;
   }
 
-  .testi-info strong {
+  .home-page .testi-info strong {
     font-size: 12px;
   }
 
-  .testi-info span {
+  .home-page .testi-info span {
     font-size: 10px;
   }
 
-  .blog-grid {
+  .home-page .blog-grid {
     gap: 14px;
     margin-left: -16px;
     margin-right: -16px;
@@ -464,19 +464,19 @@
     padding-right: 16px;
   }
   
-  .article-card {
+  .home-page .article-card {
     flex: 0 0 88%;
   }
 
-  .blog-head {
+  .home-page .blog-head {
     margin-bottom: 24px;
   }
 
-  .article-thumb {
+  .home-page .article-thumb {
     height: 140px;
   }
 
-  .article-body {
+  .home-page .article-body {
     padding: 18px 16px;
   }
 }

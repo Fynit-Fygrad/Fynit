@@ -1,7 +1,11 @@
 'use client';
 
-import { useEffect, useRef, useState, createElement, useMemo, useCallback } from 'react';
+import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { useAnimationVisibility } from '@/hooks/useAnimationVisibility';
+
+gsap.registerPlugin(useGSAP);
 import '@/styles/components/TextType.css';
 
 interface TextTypeProps {
@@ -51,9 +55,9 @@ const TextType = ({
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(!startOnVisible);
   const cursorRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLElement>(null);
+  const { active: isVisible } = useAnimationVisibility(containerRef, startOnVisible ? '0px' : '100px');
 
   const textArray = useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
 
@@ -68,36 +72,16 @@ const TextType = ({
     return textColors[currentTextIndex % textColors.length];
   };
 
-  useEffect(() => {
-    if (!startOnVisible || !containerRef.current) return;
-
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(containerRef.current);
-    return () => observer.disconnect();
-  }, [startOnVisible]);
-
-  useEffect(() => {
-    if (showCursor && cursorRef.current) {
-      gsap.set(cursorRef.current, { opacity: 1 });
-      gsap.to(cursorRef.current, {
-        opacity: 0,
-        duration: cursorBlinkDuration,
-        repeat: -1,
-        yoyo: true,
-        ease: 'power2.inOut'
-      });
-    }
-  }, [showCursor, cursorBlinkDuration]);
+  useGSAP(() => {
+    if (!showCursor || !cursorRef.current || !isVisible) return;
+    gsap.fromTo(cursorRef.current, { opacity: 1 }, {
+      opacity: 0,
+      duration: cursorBlinkDuration,
+      repeat: -1,
+      yoyo: true,
+      ease: 'power2.inOut'
+    });
+  }, { scope: containerRef, dependencies: [showCursor, cursorBlinkDuration, isVisible], revertOnUpdate: true });
 
   useEffect(() => {
     if (!isVisible) return;
@@ -171,24 +155,20 @@ const TextType = ({
 
   const shouldHideCursor = hideCursorWhileTyping && (currentCharIndex < textArray[currentTextIndex].length || isDeleting);
 
-  return createElement(
-    Component,
-    {
-      ref: containerRef,
-      className: `text-type ${className}`,
-      ...props
-    },
+  return (
+    <Component ref={containerRef} className={`text-type ${className}`} {...props}>
     <span className="text-type__content" style={{ color: getCurrentTextColor() || 'inherit' }}>
       {displayedText}
-    </span>,
-    showCursor && (
+    </span>
+    {showCursor && (
       <span
         ref={cursorRef}
         className={`text-type__cursor ${cursorClassName} ${shouldHideCursor ? 'text-type__cursor--hidden' : ''}`}
       >
         {cursorCharacter}
       </span>
-    )
+    )}
+    </Component>
   );
 };
 

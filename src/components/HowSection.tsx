@@ -49,7 +49,7 @@ export default function HowSection() {
   const [currentStep, setCurrentStep] = useState(1);
   const [stepKey, setStepKey] = useState(0);
   const [hasInteracted, setHasInteracted] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const stepsRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
@@ -57,10 +57,11 @@ export default function HowSection() {
 
   // Check mobile to unmount heavy animations
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 1024);
+    const media = window.matchMedia('(max-width: 1024px)');
+    const checkMobile = () => setIsMobile(media.matches);
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    media.addEventListener('change', checkMobile);
+    return () => media.removeEventListener('change', checkMobile);
   }, []);
 
   const handleStepClick = (step: number) => {
@@ -70,6 +71,7 @@ export default function HowSection() {
   };
 
   useGSAP(() => {
+    if (isMobile === null) return;
     // ── 1. Mascot bounce on entry ──────────────────────────────
     gsap.from(mascotRef.current, {
       y: -20,
@@ -128,7 +130,7 @@ export default function HowSection() {
         },
       });
     }
-  }, { scope: sectionRef });
+  }, { scope: sectionRef, dependencies: [isMobile], revertOnUpdate: true });
 
   return (
     <section
@@ -234,7 +236,7 @@ export default function HowSection() {
             </div>
 
             {/* Right: macOS frame (HIDDEN ON MOBILE TO PREVENT CPU LAG FROM BACKGROUND ANIMATIONS) */}
-            {!isMobile && (
+            {isMobile === false && (
               <div className="how-visual">
                 <div className="visual-frame" ref={frameRef}>
                   <div className="visual-chrome">

@@ -12,8 +12,12 @@ import HowSection from '@/components/HowSection';
 import TextType from '@/components/TextType';
 import BlurText from '@/components/BlurText';
 import LusionCard from '@/components/LusionCard';
+import { usePauseOffscreenAnimations } from '@/hooks/useAnimationVisibility';
+import '@/styles/home/animation-performance.css';
 
 export default function Home() {
+  const homeRef = useRef<HTMLDivElement>(null);
+  usePauseOffscreenAnimations(homeRef);
   const [currentStep, setCurrentStep] = useState(1);
   const [stepKey, setStepKey] = useState(0);
   const [countersVisible, setCountersVisible] = useState(false);
@@ -53,7 +57,7 @@ export default function Home() {
 
   return (
     <>
-      <div style={{ position: 'relative', zIndex: 1 }}>
+      <div ref={homeRef} className="home-page" style={{ position: 'relative', zIndex: 1 }}>
       <link rel="preload" as="image" href={heroBg} fetchPriority="high" />
       <link rel="preload" as="image" href={mascotImg} fetchPriority="high" />
 
@@ -93,14 +97,14 @@ export default function Home() {
 
               <div className="epic-ctas">
                 <a 
-                  href="/auth/register"
+                  href="/registro"
                   className="epic-btn-yellow"
                   data-cursor
                 >
                   <span>Registrarse</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                 </a>
-                <Link href="#demo" className="epic-btn-ghost" data-cursor>
+                <Link href="#como-funciona" className="epic-btn-ghost" data-cursor>
                   Ver cómo funciona →
                 </Link>
               </div>
@@ -127,7 +131,7 @@ export default function Home() {
 
               <div className="epic-ctas">
                 <a 
-                  href="/auth/register"
+                  href="/registro"
                   className="epic-btn-yellow"
                   data-cursor
                 >
@@ -326,7 +330,7 @@ export default function Home() {
                   <use href="/sprite.svg#ic-close" />
                 </svg> Reporte completo descargable</li>
               </ul>
-              <Link href="analizar.html" className="btn btn-ghost btn-block">Empezar</Link>
+              <Link href="/analizar" className="btn btn-ghost btn-block">Empezar</Link>
             </div>
             {/*  Plan Pro  */}
             <div className="price-card popular">
@@ -352,7 +356,7 @@ export default function Home() {
                   <use href="/sprite.svg#ic-check" />
                 </svg> Seguimiento de versiones</li>
               </ul>
-              <Link href="analizar.html" className="btn btn-primary btn-block">Empezar 14 días gratis <svg>
+              <Link href="/analizar" className="btn btn-primary btn-block">Empezar 14 días gratis <svg>
                 <use href="/sprite.svg#ic-arrow" />
               </svg></Link>
             </div>
@@ -379,14 +383,14 @@ export default function Home() {
                   <use href="/sprite.svg#ic-check" />
                 </svg> SLA garantizado</li>
               </ul>
-              <Link href="analizar.html" className="btn btn-ghost btn-block">Contactar ventas</Link>
+              <Link href="/analizar" className="btn btn-ghost btn-block">Contactar ventas</Link>
             </div>
           </div>
           <div style={{ textAlign: 'center', marginTop: '32px', marginBottom: '24px' }}>
-            <Link href="precios.html" className="btn btn-ghost">Ver más detalle</Link>
+            <Link href="/precios" className="btn btn-ghost">Ver más detalle</Link>
           </div>
           <p className="pricing-note">Todos los planes incluyen seguridad de datos y privacidad de tu investigación. <Link
-            href="seguridad.html">Ver política de datos &rarr;</Link></p>
+            href="/assets/Politica_de_Privacidad_Fynit.pdf">Ver política de datos &rarr;</Link></p>
         </div>
       </section>
 
@@ -406,13 +410,13 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <Link href="blog.html" className="see-all">Ver todos <svg>
+            <Link href="/blog" className="see-all">Ver todos <svg>
               <use href="/sprite.svg#ic-arrow" />
             </svg></Link>
           </div>
 
           <div className="blog-grid">
-            <Link href="blog.html#q1-vs-q2" className="article-card">
+            <Link href="/blog" className="article-card">
               <div className="article-thumb" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
                 <span>Publicación académica</span>
               </div>
@@ -421,7 +425,7 @@ export default function Home() {
                 <div className="article-meta"><span>5 min de lectura</span><span className="rd">&rarr;</span></div>
               </div>
             </Link>
-            <Link href="blog.html#revistas-alto-impacto" className="article-card">
+            <Link href="/blog" className="article-card">
               <div className="article-thumb" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
                 <span>¿Investigación?</span>
               </div>
@@ -430,7 +434,7 @@ export default function Home() {
                 <div className="article-meta"><span>6 min de lectura</span><span className="rd">&rarr;</span></div>
               </div>
             </Link>
-            <Link href="blog.html#ia-publicacion" className="article-card">
+            <Link href="/blog" className="article-card">
               <div className="article-thumb" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&q=80)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
                 <span>IA</span>
               </div>

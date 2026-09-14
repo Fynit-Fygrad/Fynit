@@ -8,7 +8,7 @@ export default function Page() {
   const [isAnnual, setIsAnnual] = useState(false);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="content-page">
 
 
     {/*  ============ HERO DE PRECIOS ============  */}
@@ -42,7 +42,7 @@ export default function Page() {
             <div className="price-card-header">
               <h3 className="price-card-title">Explorador</h3>
               <div className="price-card-price">
-                <span className="currency">\$</span>
+                <span className="currency">$</span>
                 <span className="value">0</span>
                 <span className="period">/ mes</span>
               </div>
@@ -84,7 +84,7 @@ export default function Page() {
             <div className="price-card-header">
               <h3 className="price-card-title">Investigador Pro</h3>
               <div className="price-card-price">
-                <span className="currency">\$</span>
+                <span className="currency">$</span>
                 <div className="price-val-wrapper">
                   <span className="value">{isAnnual ? '15' : '19'}</span>
                 </div>
@@ -175,7 +175,7 @@ export default function Page() {
           <p>Encuentra el nivel de detalle y soporte que necesitas para tu ruta de publicación.</p>
         </div>
 
-        <div className="comparison-table-wrapper">
+        <div className="comparison-table-wrapper" role="region" aria-label="Comparación de planes, desliza horizontalmente para ver todas las columnas" tabIndex={0}>
           <table className="comparison-table">
             <thead>
               <tr>
@@ -346,7 +346,7 @@ export default function Page() {
 
           <div className="faq-card">
             <h3>¿Cómo funciona el descuento de facturación anual?</h3>
-            <p>Al seleccionar la facturación anual, pagas todo el año por adelantado en un solo pago de \$180 USD (lo que equivale a \$15 USD al mes). Esto representa un ahorro directo del 20% en comparación con la tarifa de pago mensual de \$19 USD.</p>
+            <p>Al seleccionar la facturación anual, pagas todo el año por adelantado en un solo pago de $180 USD (lo que equivale a $15 USD al mes). Esto representa un ahorro directo del 20% en comparación con la tarifa de pago mensual de $19 USD.</p>
           </div>
 
           <div className="faq-card">

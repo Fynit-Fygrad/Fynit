@@ -121,7 +121,7 @@ export default function Page() {
 
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="content-page">
 
 
     {/*  ============ CONTACTO NUEVO LAYOUT ============  */}

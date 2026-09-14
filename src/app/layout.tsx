@@ -42,6 +42,7 @@ import "@/styles/pages/blog.css";
 import "@/styles/pages/equipo.css";
 import "@/styles/pages/contacto.css";
 import "@/styles/pages/epic-hero.css";
+import "@/styles/pages/content-responsive.css";
 
 const sora = Sora({
   variable: "--font-sora",
