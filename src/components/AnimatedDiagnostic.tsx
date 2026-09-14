@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { motion, useAnimation, Variants, useMotionValue, useTransform, animate } from 'framer-motion';
 import '@/styles/components/AnimatedDiagnostic.css';
 import { useMockupCursor } from '@/hooks/useMockupCursor';
+import { useAnimationVisibility } from '@/hooks/useAnimationVisibility';
 
 export default function AnimatedDiagnostic() {
   const controls = useAnimation();
@@ -24,6 +25,14 @@ export default function AnimatedDiagnostic() {
   const sumText = useTransform(sumVal, v => `${Math.round(v)}/100`);
 
   const mountedRef = useRef(false);
+  
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { active } = useAnimationVisibility(containerRef);
+  const activeRef = useRef(active);
+  
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
 
   useEffect(() => {
     mountedRef.current = true;
@@ -31,6 +40,11 @@ export default function AnimatedDiagnostic() {
 
     const runSequence = async () => {
       while (mountedRef.current) {
+        if (!activeRef.current) {
+          await sleep(500);
+          continue;
+        }
+        
         // 1. Reset
         controls.set("reset");
         simVal.set(0); readVal.set(0); metVal.set(0); sumVal.set(0);
@@ -147,6 +161,7 @@ export default function AnimatedDiagnostic() {
     <div className="adiag-wrapper" style={{ position: 'relative' }}>
       {CursorNode}
       <motion.div 
+        ref={containerRef}
         className="adiag-container"
         animate={controls}
         variants={containerVariants}

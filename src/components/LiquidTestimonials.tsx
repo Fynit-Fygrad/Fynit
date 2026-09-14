@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useAnimationVisibility } from '@/hooks/useAnimationVisibility';
 
 const testimonials = [
   {
@@ -93,6 +94,8 @@ function Particles({ isDark }: { isDark: boolean }) {
 }
 
 export default function LiquidTestimonials() {
+  const containerRef = useRef<HTMLElement>(null);
+  const { active, hasEntered } = useAnimationVisibility(containerRef, '200px');
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -111,6 +114,7 @@ export default function LiquidTestimonials() {
 
   return (
     <section 
+      ref={containerRef}
       style={{
         position: 'relative',
         width: '100%',
@@ -225,18 +229,21 @@ export default function LiquidTestimonials() {
       `}</style>
 
       {/* WebGL Background Seguro */}
-      <Canvas
-        camera={{ position: [0, 0, 8], fov: 45 }}
-        dpr={[1, 2]}
-        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}
-      >
-        <ambientLight intensity={isDark ? 0.5 : 1} />
-        <directionalLight position={[10, 10, 10]} intensity={isDark ? 2 : 3} color={isDark ? "#60A5FA" : "#ffffff"} />
-        <directionalLight position={[-10, -10, -10]} intensity={isDark ? 1 : 2} color={isDark ? "#3B82F6" : "#e2e8f0"} />
-        
-        <GlassOcean isDark={isDark} />
-        <Particles isDark={isDark} />
-      </Canvas>
+      {mounted && hasEntered && (
+        <Canvas
+          frameloop={active ? 'always' : 'never'}
+          camera={{ position: [0, 0, 8], fov: 45 }}
+          dpr={[1, 2]}
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}
+        >
+          <ambientLight intensity={isDark ? 0.5 : 1} />
+          <directionalLight position={[10, 10, 10]} intensity={isDark ? 2 : 3} color={isDark ? "#60A5FA" : "#ffffff"} />
+          <directionalLight position={[-10, -10, -10]} intensity={isDark ? 1 : 2} color={isDark ? "#3B82F6" : "#e2e8f0"} />
+          
+          <GlassOcean isDark={isDark} />
+          <Particles isDark={isDark} />
+        </Canvas>
+      )}
     </section>
   );
 }

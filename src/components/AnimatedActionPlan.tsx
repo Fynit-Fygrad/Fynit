@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import '@/styles/components/AnimatedActionPlan.css';
 import { useMockupCursor } from '@/hooks/useMockupCursor';
+import { useAnimationVisibility } from '@/hooks/useAnimationVisibility';
 
 export default function AnimatedActionPlan() {
   const containerControls = useAnimation();
@@ -30,6 +31,10 @@ export default function AnimatedActionPlan() {
 
   const { reset: cursorReset, moveTo, moveToEl, clickEl, hide: cursorHide, CursorNode } = useMockupCursor();
 
+  const { active } = useAnimationVisibility(wrapperRef);
+  const activeRef = useRef(active);
+  useEffect(() => { activeRef.current = active; }, [active]);
+
   useEffect(() => {
     mountedRef.current = true;
 
@@ -37,6 +42,10 @@ export default function AnimatedActionPlan() {
 
     const runSequence = async () => {
       while (mountedRef.current) {
+        if (!activeRef.current) {
+          await sleep(500);
+          continue;
+        }
         containerControls.set("reset");
         screenAControls.set({ opacity: 1, x: 0, display: 'flex' });
         screenBControls.set({ opacity: 0, x: 50, display: 'none' });

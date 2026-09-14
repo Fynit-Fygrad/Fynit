@@ -296,6 +296,15 @@ export default function OrbitalIndexaciones() {
           .idx-canvas-col {
             height: min(50vh, 440px) !important;
           }
+          /* Performance fix: disable heavy blur on mobile */
+          .idx-3d-pill {
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            background: rgba(255, 255, 255, 0.95);
+          }
+          [data-theme='dark'] .idx-3d-pill {
+            background: rgba(15, 23, 42, 0.9);
+          }
         }
 
         @media (max-width: 640px) {

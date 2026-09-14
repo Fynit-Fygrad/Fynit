@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation, Variants, useMotionValue, useTransform, animate } from 'framer-motion';
 import '@/styles/components/AnimatedDropzone.css';
 import { useMockupCursor } from '@/hooks/useMockupCursor';
+import { useAnimationVisibility } from '@/hooks/useAnimationVisibility';
 
 export default function AnimatedDropzone() {
   const controls = useAnimation();
@@ -15,6 +16,10 @@ export default function AnimatedDropzone() {
   const { reset: cursorReset, moveTo, click: cursorClick, hide: cursorHide, CursorNode } = useMockupCursor();
 
   const mountedRef = useRef(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { active } = useAnimationVisibility(containerRef);
+  const activeRef = useRef(active);
+  useEffect(() => { activeRef.current = active; }, [active]);
 
   useEffect(() => {
     mountedRef.current = true;
@@ -22,6 +27,10 @@ export default function AnimatedDropzone() {
 
     const runSequence = async () => {
       while (mountedRef.current) {
+        if (!activeRef.current) {
+          await sleep(500);
+          continue;
+        }
         // 0. Reset
         controls.set("reset");
         fillControls.set({ width: "0%" });
@@ -175,7 +184,7 @@ export default function AnimatedDropzone() {
   };
 
   return (
-    <div className="ad-wrapper" style={{ position: 'relative' }}>
+    <div className="ad-wrapper" style={{ position: 'relative' }} ref={containerRef}>
       {CursorNode}
       <motion.div 
         className="ad-container"

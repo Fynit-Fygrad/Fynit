@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { motion, useAnimation, useMotionValue, useTransform, animate } from 'framer-motion';
 import '@/styles/components/AnimatedRealtimeCorrection.css';
 import { useMockupCursor } from '@/hooks/useMockupCursor';
+import { useAnimationVisibility } from '@/hooks/useAnimationVisibility';
 
 export default function AnimatedRealtimeCorrection() {
   const containerControls = useAnimation();
@@ -50,6 +51,10 @@ export default function AnimatedRealtimeCorrection() {
   const { reset: cursorReset, moveTo, click: cursorClick, hide: cursorHide, CursorNode } = useMockupCursor();
 
   const mountedRef = useRef(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { active } = useAnimationVisibility(containerRef);
+  const activeRef = useRef(active);
+  useEffect(() => { activeRef.current = active; }, [active]);
 
   useEffect(() => {
     mountedRef.current = true;
@@ -57,6 +62,10 @@ export default function AnimatedRealtimeCorrection() {
 
     const runSequence = async () => {
       while (mountedRef.current) {
+        if (!activeRef.current) {
+          await sleep(500);
+          continue;
+        }
         // 1. Reset
         containerControls.set("reset");
         simVal.set(18);
@@ -143,7 +152,7 @@ export default function AnimatedRealtimeCorrection() {
   }, []);
 
   return (
-    <div className="areal-wrapper" style={{ position: 'relative' }}>
+    <div className="areal-wrapper" style={{ position: 'relative' }} ref={containerRef}>
       {CursorNode}
       <motion.div 
         className="areal-container"
