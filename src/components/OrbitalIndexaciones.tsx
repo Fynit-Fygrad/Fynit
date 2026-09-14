@@ -184,9 +184,15 @@ export default function OrbitalIndexaciones() {
   const { active, hasEntered } = useAnimationVisibility(canvasRef, '200px');
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   React.useEffect(() => {
     setMounted(true);
+    const media = window.matchMedia('(max-width: 768px)');
+    const update = () => setIsMobile(media.matches);
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
   }, []);
 
   const isDark = mounted && resolvedTheme === 'dark';
@@ -386,6 +392,7 @@ export default function OrbitalIndexaciones() {
               <OrbitControls
                 enableZoom={false}
                 enablePan={false}
+                enableRotate={!isMobile}
                 autoRotate={false}
                 maxPolarAngle={Math.PI / 1.5}
                 minPolarAngle={Math.PI / 3}

@@ -139,10 +139,28 @@ export default function HowSection() {
         <div className="container" style={{ marginBottom: '40px' }}>
           <div className="section-head" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <div className="title-wrapper" style={{ alignItems: 'flex-start', marginBottom: '16px' }}>
-              <span className="premium-typing-text">Cómo funciona</span>
-              <h2 className="massive-title black-title" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', lineHeight: '0.93', margin: 0 }}>
-                DE TU MANUSCRITO AL PLAN DE <span className="highlight-yellow">PUBLICACIÓN</span>
-              </h2>
+              <TextType
+                as="span"
+                text={['Cómo funciona', 'El proceso', 'Paso a paso']}
+                typingSpeed={70}
+                pauseDuration={1500}
+                showCursor
+                cursorCharacter="_"
+                deletingSpeed={40}
+                className="premium-typing-text"
+              />
+              <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                <BlurText
+                  text="DE TU MANUSCRITO AL PLAN DE PUBLICACIÓN"
+                  highlightWords={['PUBLICACIÓN']}
+                  className="massive-title black-title"
+                  delay={30}
+                  animateBy="words"
+                  direction="top"
+                  as="h2"
+                  style={{ justifyContent: 'flex-start', fontSize: 'clamp(2.5rem, 5.5vw, 5.5rem)', lineHeight: '0.93' }}
+                />
+              </div>
             </div>
             <p>Descubre el proceso paso a paso.</p>
           </div>

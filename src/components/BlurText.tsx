@@ -26,11 +26,12 @@ const BlurText = ({
   stepDuration = 0.12,
   style,
   highlightWords = [],
-  highlightIndices = []
+  highlightIndices = [],
+  as: Component = 'h2'
 }: any) => {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
-  const ref = useRef<HTMLHeadingElement>(null);
+  const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!ref.current) return;
@@ -51,7 +52,9 @@ const BlurText = ({
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    setIsMobile(window.innerWidth <= 768);
+    if (typeof window !== 'undefined') {
+      setIsMobile(window.innerWidth <= 768);
+    }
   }, []);
 
   const defaultFrom = useMemo(
@@ -82,7 +85,7 @@ const BlurText = ({
   const times = Array.from({ length: stepCount }, (_, i) => (stepCount === 1 ? 0 : i / (stepCount - 1)));
 
   return (
-    <h2 ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', margin: 0, padding: 0, ...(style || {}) }}>
+    <Component ref={ref} className={className} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', margin: 0, padding: 0, ...(style || {}) }}>
       {elements.map((segment: string, index: number) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
 
@@ -109,7 +112,7 @@ const BlurText = ({
           </motion.span>
         );
       })}
-    </h2>
+    </Component>
   );
 };
 

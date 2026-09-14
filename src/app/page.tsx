@@ -82,7 +82,15 @@ export default function Home() {
             <div className="desktop-only-hero-text">
               <div className="epic-eyebrow">
                 <span className="epic-num">01</span>
-                <span>PLATAFORMA DE INTELIGENCIA ARTIFICIAL</span>
+                <TextType 
+                  as="span"
+                  text={["PLATAFORMA DE INTELIGENCIA ARTIFICIAL", "TU INVESTIGACIÓN", "TU TESIS", "TU ARTÍCULO CIENTÍFICO"]} 
+                  typingSpeed={50} 
+                  pauseDuration={2000} 
+                  showCursor 
+                  cursorCharacter="_" 
+                  deletingSpeed={30} 
+                />
               </div>
 
               <h1 className="epic-h1">
@@ -115,9 +123,15 @@ export default function Home() {
             <div className="mobile-only-hero-text">
               <div className="epic-eyebrow" style={{ display: 'flex', alignItems: 'center', background: 'transparent', padding: 0, border: 'none', color: '#1B60DF', fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', fontSize: '11px', lineHeight: '1.4' }}>
                 <span style={{ marginRight: '6px' }}>—</span>
-                <span>
-                  <TextType text="TU INVESTIGACIÓN |" speed={50} delay={100} />
-                </span>
+                <TextType 
+                  as="span"
+                  text={["TU INVESTIGACIÓN", "TU TESIS", "TU ARTÍCULO CIENTÍFICO"]} 
+                  typingSpeed={50} 
+                  pauseDuration={2000} 
+                  showCursor 
+                  cursorCharacter="_" 
+                  deletingSpeed={30} 
+                />
               </div>
 
               <h1 className="epic-h1">

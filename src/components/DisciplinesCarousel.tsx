@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import '@/styles/components/disciplines-carousel.css';
 import TextType from '@/components/TextType';
+import BlurText from '@/components/BlurText';
 
 const disciplines = [
   {
@@ -94,9 +95,13 @@ export default function DisciplinesCarousel() {
               <div className="disc-header-flex">
                 {/* Ícono o badge eliminado a petición del usuario para dejar solo el título */}
                 <h2 className="disc-title-mobile">
-                  Adaptabilidad<br />
-                  para cualquier<br />
-                  <span className="text-yellow">área</span>
+                  <BlurText text="Adaptabilidad" delay={30} as="span" style={{display: 'inline-block'}} />
+                  <br />
+                  <BlurText text="para cualquier" delay={30} as="span" style={{display: 'inline-block'}} />
+                  <br />
+                  <span className="text-yellow">
+                    <BlurText text="área" highlightWords={['área']} delay={30} as="span" style={{display: 'inline-block'}} />
+                  </span>
                 </h2>
               </div>
               
@@ -129,9 +134,13 @@ export default function DisciplinesCarousel() {
                 />
               </div>
               <h2 className="disc-title">
-                ADAPTABILIDAD<br />
-                PARA CUALQUIER<br />
-                <em>ÁREA</em>
+                <BlurText text="ADAPTABILIDAD" delay={30} as="span" style={{display: 'inline-block'}} />
+                <br />
+                <BlurText text="PARA CUALQUIER" delay={30} as="span" style={{display: 'inline-block'}} />
+                <br />
+                <em>
+                  <BlurText text="ÁREA" highlightWords={['ÁREA']} delay={30} as="span" style={{display: 'inline-block'}} />
+                </em>
               </h2>
               <p className="disciplines-description">
                 No importa el campo de tu investigación, nuestro equipo domina el lenguaje, la terminología y las normativas de formato de las revistas científicas más exigentes de todas las áreas del conocimiento.
@@ -204,7 +213,12 @@ export default function DisciplinesCarousel() {
             </div>
 
             {/* Hint de scroll manual en móviles (ubicado debajo de las tarjetas) */}
-            <div className="mobile-only" style={{ position: 'absolute', bottom: '-20px', left: '0', width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <style>{`
+              @media (min-width: 769px) {
+                .mobile-swipe-hint-container { display: none !important; }
+              }
+            `}</style>
+            <div className="mobile-only mobile-swipe-hint-container" style={{ position: 'absolute', bottom: '-20px', left: '0', width: '100%', display: 'flex', justifyContent: 'center' }}>
               <div className="mobile-swipe-hint" style={{ color: 'rgba(7, 23, 66, 0.6)' }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
                 <span>Deslizar</span>
