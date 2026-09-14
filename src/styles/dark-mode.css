@@ -28,6 +28,7 @@
 [data-theme='dark'] .team-teaser {
   background: #071742 !important; /* Force original navy background */
   color: #FFFFFF !important;
+  border-color: rgba(27, 96, 223, 0.3) !important;
 }
 
 [data-theme='dark'] .site-footer {
@@ -73,7 +74,7 @@
 
 [data-theme='dark'] .custom-radio-label {
   background: transparent !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(27, 96, 223, 0.3) !important;
 }
 
 [data-theme='dark'] .custom-radio-label:hover {

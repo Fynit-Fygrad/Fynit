@@ -81,7 +81,7 @@ export default function Page() {
         {/*  Footer link  */}
         <p className="text-center text-sm text-gray-500 mt-8">
             ¿No tienes cuenta?
-            <Link href="javascript:void(0)" onClick={(event) => { (window as any).showComingSoon && (window as any).showComingSoon(event) }}
+            <Link href="#" onClick={(event) => { event.preventDefault(); (window as any).showComingSoon && (window as any).showComingSoon(event) }}
                 className="font-semibold text-brand-600 hover:text-brand-700 transition-colors">Regístrate aquí</Link>
         </p>
 

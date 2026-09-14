@@ -358,3 +358,58 @@
 }
 
 
+
+/* --- DARK MODE MODAL PRIVACIDAD --- */
+[data-theme='dark'] .privacy-modal-content {
+  background: #0f172a !important; /* Dark blue background */
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7) !important;
+}
+
+[data-theme='dark'] .privacy-modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme='dark'] .privacy-modal-title {
+  color: #f1f5f9 !important;
+}
+
+[data-theme='dark'] .btn-close-modal {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #94a3b8 !important;
+}
+
+[data-theme='dark'] .btn-close-modal:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #f8fafc !important;
+}
+
+[data-theme='dark'] .privacy-modal-body {
+  color: #94a3b8 !important;
+}
+
+[data-theme='dark'] .privacy-modal-body h2 {
+  color: #e2e8f0 !important;
+}
+
+[data-theme='dark'] .privacy-modal-body b,
+[data-theme='dark'] .privacy-modal-body strong {
+  color: #f8fafc !important;
+}
+
+[data-theme='dark'] .privacy-modal-footer {
+  background: #0f172a !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme='dark'] .privacy-modal-footer hr {
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme='dark'] .btn-download-pdf {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme='dark'] .btn-download-pdf:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}

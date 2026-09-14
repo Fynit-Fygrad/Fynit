@@ -222,9 +222,9 @@ export default function Page() {
                         </svg>
                       </div>
                       <input type="text" name="apellidos" required placeholder="Tus apellidos"
-                        style={{ width: '100%', boxSizing: 'border-box', border: '1px solid #f3f4f6', background: softBg, borderRadius: '10px', padding: '12px 12px 12px 42px', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', color: textColor, outline: 'none', transition: 'all 0.2s' }}
+                        style={{ width: '100%', boxSizing: 'border-box', border: `1px solid ${isDark ? 'rgba(27,96,223,0.3)' : '#f3f4f6'}`, background: softBg, borderRadius: '10px', padding: '12px 12px 12px 42px', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', color: textColor, outline: 'none', transition: 'all 0.2s' }}
                         onFocus={(event) => { event.currentTarget.style.borderColor='#1B60DF';event.currentTarget.style.background=isDark ? '#101B2E' : '#fff';event.currentTarget.style.boxShadow='0 0 0 4px rgba(27,96,223,0.1)'; }}
-                        onBlur={(event) => { event.currentTarget.style.borderColor='#f3f4f6';event.currentTarget.style.background=softBg;event.currentTarget.style.boxShadow='none'; }} />
+                        onBlur={(event) => { event.currentTarget.style.borderColor=isDark ? 'rgba(27,96,223,0.3)' : '#f3f4f6';event.currentTarget.style.background=softBg;event.currentTarget.style.boxShadow='none'; }} />
                     </div>
                   </div>
 
@@ -242,9 +242,9 @@ export default function Page() {
                         </svg>
                       </div>
                       <input type="text" name="nombres" placeholder="Tus nombres" required
-                        style={{ width: '100%', boxSizing: 'border-box', border: '1px solid #f3f4f6', background: softBg, borderRadius: '10px', padding: '12px 12px 12px 42px', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', color: textColor, outline: 'none', transition: 'all 0.2s' }}
+                        style={{ width: '100%', boxSizing: 'border-box', border: `1px solid ${isDark ? 'rgba(27,96,223,0.3)' : '#f3f4f6'}`, background: softBg, borderRadius: '10px', padding: '12px 12px 12px 42px', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', color: textColor, outline: 'none', transition: 'all 0.2s' }}
                         onFocus={(event) => { event.currentTarget.style.borderColor='#1B60DF';event.currentTarget.style.background=isDark ? '#101B2E' : '#fff';event.currentTarget.style.boxShadow='0 0 0 4px rgba(27,96,223,0.1)'; }}
-                        onBlur={(event) => { event.currentTarget.style.borderColor='#f3f4f6';event.currentTarget.style.background=softBg;event.currentTarget.style.boxShadow='none'; }} />
+                        onBlur={(event) => { event.currentTarget.style.borderColor=isDark ? 'rgba(27,96,223,0.3)' : '#f3f4f6';event.currentTarget.style.background=softBg;event.currentTarget.style.boxShadow='none'; }} />
                     </div>
                   </div>
 
@@ -263,9 +263,9 @@ export default function Page() {
                         </svg>
                       </div>
                       <input type="email" name="email" placeholder="tu@correo.com" required
-                        style={{ width: '100%', boxSizing: 'border-box', border: '1px solid #f3f4f6', background: softBg, borderRadius: '10px', padding: '12px 12px 12px 42px', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', color: textColor, outline: 'none', transition: 'all 0.2s' }}
+                        style={{ width: '100%', boxSizing: 'border-box', border: `1px solid ${isDark ? 'rgba(27,96,223,0.3)' : '#f3f4f6'}`, background: softBg, borderRadius: '10px', padding: '12px 12px 12px 42px', fontFamily: '\'Inter\',sans-serif', fontSize: '13px', color: textColor, outline: 'none', transition: 'all 0.2s' }}
                         onFocus={(event) => { event.currentTarget.style.borderColor='#1B60DF';event.currentTarget.style.background=isDark ? '#101B2E' : '#fff';event.currentTarget.style.boxShadow='0 0 0 4px rgba(27,96,223,0.1)'; }}
-                        onBlur={(event) => { event.currentTarget.style.borderColor='#f3f4f6';event.currentTarget.style.background=softBg;event.currentTarget.style.boxShadow='none'; }} />
+                        onBlur={(event) => { event.currentTarget.style.borderColor=isDark ? 'rgba(27,96,223,0.3)' : '#f3f4f6';event.currentTarget.style.background=softBg;event.currentTarget.style.boxShadow='none'; }} />
                     </div>
                   </div>
 
@@ -397,7 +397,7 @@ export default function Page() {
                     <div>
                       <h4 style={{ fontFamily: '\'Sora\',sans-serif', fontSize: '12px', fontWeight: '700', color: textColor, margin: '0 0 4px' }}>Tu Investigación es confidencial</h4>
                       <p style={{ margin: '0 0 4px', fontSize: '11px', color: textMuted, lineHeight: '1.4' }}>Usamos tu documento únicamente para realizar el análisis solicitado.<br />No publicamos ni adquirimos derechos sobre tu investigación.</p>
-                      <p style={{ margin: '0', fontSize: '11px', color: textMuted, lineHeight: '1.4' }}>Consulta nuestra <Link href="javascript:void(0)" onClick={(event) => { setIsModalOpen(true) }} style={{ color: '#1B60DF', fontWeight: '600', textDecoration: 'none' }}>política de privacidad</Link>.</p>
+                      <p style={{ margin: '0', fontSize: '11px', color: textMuted, lineHeight: '1.4' }}>Consulta nuestra <Link href="#" onClick={(event) => { event.preventDefault(); setIsModalOpen(true) }} style={{ color: '#1B60DF', fontWeight: '600', textDecoration: 'none' }}>política de privacidad</Link>.</p>
                     </div>
                   </div>
 
@@ -556,7 +556,7 @@ export default function Page() {
                     style={{ width: '16px', height: '16px', marginTop: '2px', accentColor: '#1B60DF', cursor: 'pointer' }} />
                   <span
                     style={{ fontFamily: '\'Inter\', sans-serif', fontSize: '12px', color: textMuted, lineHeight: '1.4', userSelect: 'none' }}>
-                    He leído y acepto la <Link href="javascript:void(0)" onClick={(event) => { setIsModalOpen(true) }}
+                    He leído y acepto la <Link href="#" onClick={(event) => { event.preventDefault(); setIsModalOpen(true) }}
                       style={{ color: '#1B60DF', fontWeight: '600', textDecoration: 'none' }}
                       onMouseOver={(event) => { event.currentTarget.style.textDecoration='underline' }}
                       onMouseOut={(event) => { event.currentTarget.style.textDecoration='none' }}>Política de Privacidad</Link> y autorizo el tratamiento de mis datos para realizar el análisis solicitado.
