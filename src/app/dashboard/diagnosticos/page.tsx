@@ -6,6 +6,9 @@ import DashboardHeader from '@/components/dashboard/DashboardHeader';
 import MetricCard, { MetricColor } from '@/components/dashboard/MetricCard';
 import EvolutionChart from '@/components/dashboard/EvolutionChart';
 import ResultSummary from '@/components/dashboard/ResultSummary';
+import { useWorkspace } from '@/components/dashboard/WorkspaceProvider';
+import { Journey, ReportButton, DocumentBar } from '@/components/dashboard/WorkspaceUI';
+import Link from 'next/link';
 
 const defaultMockData = {
   document: {
@@ -60,7 +63,15 @@ const defaultMockData = {
 
 export default function ResultadosDiagnostico() {
   const router = useRouter();
-  const [mockData, setMockData] = useState(defaultMockData);
+  const { active } = useWorkspace();
+  const [storedData, setMockData] = useState(defaultMockData);
+  const latest = active.evaluations.at(-1)!;
+  const mockData = { ...storedData, metrics: {
+    similitud: { ...storedData.metrics.similitud, value: latest.similarity, label: `${latest.similarity}%` },
+    readiness: { ...storedData.metrics.readiness, value: latest.readiness, label: `${latest.readiness}/100` },
+    editorial: { ...storedData.metrics.editorial, label: latest.quartile, status: latest.quartile === 'Q2' ? 'Meta alcanzada' : 'Q2 posible', description: latest.quartile === 'Q2' ? 'Tu evaluación simulada ya alcanza el nivel Q2.' : storedData.metrics.editorial.description },
+    metodologia: { ...storedData.metrics.metodologia, value: latest.methodology, label: `${latest.methodology}/100`, status: latest.methodology >= 80 ? 'Fortalecida' : 'Mejorable' },
+  }, summary: { ...storedData.summary, globalScore: latest.readiness }, evolution: active.evaluations.map(e => ({ label: `Versión ${e.version}`, value: e.readiness })) };
   const [hasDocument, setHasDocument] = useState<boolean | null>(null); // null = loading
 
   useEffect(() => {
@@ -83,7 +94,7 @@ export default function ResultadosDiagnostico() {
     } else {
       setHasDocument(false);
     }
-  }, []);
+  }, [active.id]);
 
   if (hasDocument === null) {
     return <div className="h-full flex items-center justify-center text-slate-500">Cargando resultados...</div>;
@@ -121,9 +132,6 @@ export default function ResultadosDiagnostico() {
   }
 
   const handleNewDiagnosis = () => {
-    sessionStorage.removeItem('fynit_sim_doc_name');
-    sessionStorage.removeItem('fynit_sim_doc_size');
-    sessionStorage.removeItem('fynit_sim_doc_date');
     router.push('/dashboard/inicio');
   };
 
@@ -150,9 +158,11 @@ export default function ResultadosDiagnostico() {
       
       <div className="flex-1 overflow-y-auto p-8 custom-scrollbar flex justify-center">
         <div className="max-w-[1000px] w-full flex flex-col gap-6 pb-10">
+          <DocumentBar />
+          <Journey />
           
           {/* Top Document Info Card */}
-          <div className="bg-white dark:bg-slate-900 rounded-[24px] p-5 border border-slate-200 dark:border-slate-800 flex items-center justify-between shadow-sm">
+          <div className="bg-white dark:bg-slate-900 rounded-[24px] p-5 border border-slate-200 dark:border-slate-800 flex flex-wrap gap-5 items-center justify-between shadow-sm">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center dark:bg-blue-900/30 dark:text-blue-400 shrink-0">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -186,19 +196,12 @@ export default function ResultadosDiagnostico() {
                 </div>
               </div>
 
-              <button className="flex items-center gap-2 px-5 py-2.5 rounded-xl border-2 border-[#2563eb] text-[#2563eb] font-bold text-[13px] hover:bg-blue-50 transition-colors dark:border-blue-500 dark:text-blue-400 dark:hover:bg-blue-900/20">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                  <polyline points="7 10 12 15 17 10"></polyline>
-                  <line x1="12" y1="15" x2="12" y2="3"></line>
-                </svg>
-                Descargar reporte
-              </button>
+              <ReportButton />
             </div>
           </div>
 
           {/* Metric Cards Grid */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <MetricCard 
               title="Similitud"
               mainValue={mockData.metrics.similitud.label}
@@ -246,11 +249,11 @@ export default function ResultadosDiagnostico() {
           </div>
 
           {/* Bottom Area: Evolution & Summary */}
-          <div className="grid grid-cols-3 gap-6">
-            <div className="col-span-2">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
               <EvolutionChart data={mockData.evolution} />
             </div>
-            <div className="col-span-1">
+            <div>
               <ResultSummary 
                 text={mockData.summary.text}
                 globalScore={mockData.summary.globalScore}
@@ -258,6 +261,7 @@ export default function ResultadosDiagnostico() {
               />
             </div>
           </div>
+          <div className="ws-callout ws-row"><div><h3>Acciones recomendadas</h3><p style={{ marginBottom: 0 }}>Consulta las mejoras pendientes del manuscrito.</p></div><Link className="ws-button" href="/dashboard/plan">Ver plan de acción →</Link></div>
 
         </div>
       </div>

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
+import { PublicationOptions } from '@/components/dashboard/PublicationOptions';
 
 // Mock Data
 const defaultMockData = {
@@ -187,10 +188,10 @@ export default function RevistasSugeridas() {
           <div className="flex items-center justify-between mt-4">
             <div>
               <h2 className="text-[22px] font-black text-slate-900 dark:text-white leading-tight">Revistas recomendadas para tu manuscrito</h2>
-              <p className="text-[13.5px] text-slate-500 dark:text-slate-400 mt-0.5">Selección basada en Scopus & WoS y el fit real de tu investigación.</p>
+              <p className="text-[13.5px] text-slate-500 dark:text-slate-400 mt-0.5">Ejemplo de recomendaciones editoriales. Compatibilidad y datos simulados.</p>
             </div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 text-[12px] font-bold border border-blue-100 dark:border-blue-800">
-              Metodología: Scopus AI Fit
+              Compatibilidad ilustrativa
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70">
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="12" y1="16" x2="12" y2="12"></line>
@@ -199,6 +200,7 @@ export default function RevistasSugeridas() {
             </div>
           </div>
 
+          <PublicationOptions />
           {/* Table Container */}
           <div className="bg-white dark:bg-slate-900 rounded-[24px] border border-slate-200 dark:border-slate-800 shadow-sm mt-2 shrink-0 overflow-hidden">
             <div className="overflow-x-auto custom-scrollbar pb-2">
@@ -209,7 +211,7 @@ export default function RevistasSugeridas() {
                 <span className="text-[11px] font-bold text-slate-400 tracking-wider text-center">CUARTIL</span>
                 <span className="text-[11px] font-bold text-slate-400 tracking-wider text-center">BASE DE DATOS</span>
                 <div className="flex items-center justify-center gap-1 text-[11px] font-bold text-slate-400 tracking-wider">
-                  FIT REAL 
+                  FIT SIMULADO
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="10"></circle>
                     <line x1="12" y1="16" x2="12" y2="12"></line>
@@ -264,7 +266,7 @@ export default function RevistasSugeridas() {
                         <span className={`text-[15px] font-black ${journal.fit >= 75 ? 'text-green-600 dark:text-green-500' : 'text-orange-500 dark:text-orange-400'}`}>
                           {journal.fit}%
                         </span>
-                        <span className="text-[12px] text-slate-400 dark:text-slate-500 font-medium">Fit real</span>
+                        <span className="text-[12px] text-slate-400 dark:text-slate-500 font-medium">Fit simulado</span>
                       </div>
                       <div className="w-full max-w-[120px] h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden flex">
                         <div className={`h-full rounded-full ${getFitBarColor(journal.fit)}`} style={{ width: `${journal.fit}%` }}></div>
@@ -301,7 +303,7 @@ export default function RevistasSugeridas() {
               </div>
               <div className="flex flex-col">
                 <h3 className="text-[17px] font-bold text-[#1e40af] dark:text-blue-400 leading-snug mb-0.5">Mejor opción para ti</h3>
-                <p className="text-[13.5px] text-slate-500 dark:text-slate-400 max-w-lg leading-relaxed">Según el análisis de tu manuscrito, esta revista tiene el mayor fit real y alineación temática.</p>
+                <p className="text-[13.5px] text-slate-500 dark:text-slate-400 max-w-lg leading-relaxed">Según el análisis de tu manuscrito, esta revista tiene el mayor fit simulado y alineación temática.</p>
               </div>
             </div>
 
@@ -315,7 +317,7 @@ export default function RevistasSugeridas() {
                   <span className="text-[14px] font-bold text-slate-900 dark:text-white truncate max-w-[150px]">
                     {bestMatch.name.replace('Journal of', 'J.')}
                   </span>
-                  <span className="text-[12px] font-bold text-green-600 dark:text-green-500">{bestMatch.fit}% fit real</span>
+                  <span className="text-[12px] font-bold text-green-600 dark:text-green-500">{bestMatch.fit}% fit simulado</span>
                 </div>
               </div>
               <button 
@@ -338,7 +340,7 @@ export default function RevistasSugeridas() {
               <line x1="12" y1="8" x2="12.01" y2="8"></line>
             </svg>
             <span className="text-[12.5px] font-medium leading-relaxed">
-              Los porcentajes representan el fit real de tu manuscrito con la revista, basado en análisis semántico, citaciones y alcance.
+              Los porcentajes son ilustrativos. No proceden de un análisis editorial real.
             </span>
           </div>
 

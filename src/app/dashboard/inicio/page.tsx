@@ -4,9 +4,14 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
 import '@/styles/dashboard/upload.css';
+import Link from 'next/link';
+import { useWorkspace } from '@/components/dashboard/WorkspaceProvider';
 
 export default function NuevoDiagnostico() {
   const router = useRouter();
+  const { add } = useWorkspace();
+  const [fileError, setFileError] = useState('');
+  const [showAnalysisInfo, setShowAnalysisInfo] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [acceptedPrivacy, setAcceptedPrivacy] = useState(false);
@@ -24,6 +29,11 @@ export default function NuevoDiagnostico() {
   };
 
   const addFile = (file: File) => {
+    if (!/\.(pdf|docx)$/i.test(file.name) || file.size > 50 * 1024 * 1024 || !file.size) {
+      setFileError('Selecciona un PDF o DOCX de hasta 50 MB que no esté vacío.');
+      return;
+    }
+    setFileError('');
     const isPdf = file.name.toLowerCase().endsWith('.pdf');
     const sizeInMB = (file.size / (1024 * 1024)).toFixed(1);
     const newFile = {
@@ -63,6 +73,7 @@ export default function NuevoDiagnostico() {
     setIsProcessing(true);
     
     const file = files[0];
+    sessionStorage.removeItem('fynit_sim_doc_text');
 
     // Save to session storage for the diagnosis simulation
     sessionStorage.setItem('fynit_sim_doc_name', file.name);
@@ -92,6 +103,7 @@ export default function NuevoDiagnostico() {
     }
 
     // Redirect to diagnosis page
+    add(files);
     router.push('/dashboard/diagnosticos');
   };
 
@@ -104,6 +116,9 @@ export default function NuevoDiagnostico() {
       
       <div className="flex-1 overflow-y-auto p-8 custom-scrollbar flex justify-center">
         <div className="max-w-[950px] w-full mt-2">
+          <div className="ws-callout ws-row" style={{ marginBottom: 24 }}><div><h3>Documentos de demostración</h3><p style={{ marginBottom: 0 }}>Consulta un manuscrito de ejemplo para revisar el proceso de evaluación.</p></div><Link href="/dashboard/documentos" className="ws-button ws-secondary">Explorar demo →</Link></div>
+          {fileError && <p role="alert" className="text-red-600 text-sm mb-4">{fileError}</p>}
+          {showAnalysisInfo && <div className="ws-callout" style={{ marginBottom: 20 }}><h3>Cuatro dimensiones de tu investigación</h3><p>Similitud textual, preparación para publicar (readiness), nivel editorial y calidad metodológica. En esta demo los puntajes son ilustrativos.</p></div>}
           
           <div className="flex justify-between items-start mb-6">
             <div className="flex flex-col gap-1.5">
@@ -114,7 +129,7 @@ export default function NuevoDiagnostico() {
               </p>
             </div>
             
-            <button className="flex items-center gap-1.5 text-[#1b60df] bg-blue-50 hover:bg-blue-100 px-3.5 py-1.5 rounded-full text-[12.5px] font-semibold transition-colors border border-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-900/30">
+            <button onClick={() => setShowAnalysisInfo(!showAnalysisInfo)} aria-expanded={showAnalysisInfo} className="flex items-center gap-1.5 text-[#1b60df] bg-blue-50 hover:bg-blue-100 px-3.5 py-1.5 rounded-full text-[12.5px] font-semibold transition-colors border border-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-900/30">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="12" y1="16" x2="12" y2="12"></line>
@@ -124,10 +139,10 @@ export default function NuevoDiagnostico() {
             </button>
           </div>
 
-          <div className="flex gap-4 h-[380px]">
+          <div className="flex flex-col lg:flex-row gap-4 lg:h-[380px]">
             {/* Left: Drag and Drop Area */}
             <div 
-              className={`flex-1 relative rounded-3xl border-2 border-dashed transition-all duration-300 flex flex-col items-center justify-center bg-white dark:bg-slate-900/50 ${
+              className={`flex-1 min-h-[350px] relative rounded-3xl border-2 border-dashed transition-all duration-300 flex flex-col items-center justify-center bg-white dark:bg-slate-900/50 ${
                 isDragging 
                   ? 'border-blue-500 bg-blue-50/50 dark:border-blue-500/50 dark:bg-blue-900/10' 
                   : 'border-slate-300 hover:border-slate-400 dark:border-slate-700 dark:hover:border-slate-600'
@@ -156,7 +171,7 @@ export default function NuevoDiagnostico() {
                 <input 
                   id="file-upload" 
                   type="file" 
-                  accept=".pdf,.doc,.docx" 
+                  accept=".pdf,.docx"
                   multiple
                   className="hidden"
                   onChange={handleFileInput}
@@ -165,7 +180,7 @@ export default function NuevoDiagnostico() {
             </div>
 
             {/* Right: Selected Files List & Action Area */}
-            <div className="w-[320px] bg-white border border-slate-200 rounded-3xl p-5 flex flex-col dark:bg-slate-900/50 dark:border-slate-700">
+            <div className="w-full lg:w-[320px] min-h-[280px] bg-white border border-slate-200 rounded-3xl p-5 flex flex-col dark:bg-slate-900/50 dark:border-slate-700">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-[13.5px] font-bold text-slate-900 dark:text-white">Archivos subidos</h3>
                 <div className="bg-slate-100 text-slate-600 text-[10.5px] font-bold w-5 h-5 rounded flex items-center justify-center dark:bg-slate-800 dark:text-slate-400">

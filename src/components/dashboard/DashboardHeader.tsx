@@ -1,19 +1,21 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
+import Link from 'next/link';
 
 interface DashboardHeaderProps {
   title: string;
   breadcrumb: string;
   action?: React.ReactNode;
+  compact?: boolean;
 }
 
-export default function DashboardHeader({ title, breadcrumb, action }: DashboardHeaderProps) {
+export default function DashboardHeader({ title, breadcrumb, action, compact = false }: DashboardHeaderProps) {
+  const [notifications, setNotifications] = useState(false);
   return (
-    <header className="h-[75px] border-b border-slate-100 bg-white flex items-center justify-between px-8 shrink-0 dark:bg-[#0B1120] dark:border-slate-800">
-      <div className="flex flex-col gap-1.5">
-        <h1 className="text-[20px] font-bold text-slate-900 m-0 leading-tight tracking-tight dark:text-white">{title}</h1>
-        {breadcrumb && <span className="text-[12px] text-slate-500 font-medium dark:text-slate-400">{breadcrumb}</span>}
+    <header className="min-h-[75px] relative gap-3 border-b border-slate-100 bg-white flex flex-wrap items-center justify-between px-4 md:px-8 py-3 shrink-0 dark:bg-[#0B1120] dark:border-slate-800">
+      <div className="min-w-0 flex flex-col gap-1.5">
+        {compact ? <div className="ws-breadcrumb"><span>Espacio de trabajo</span><span aria-hidden="true">/</span><strong>{title}</strong></div> : <><h1 className="text-[20px] font-bold text-slate-900 m-0 leading-tight tracking-tight dark:text-white">{title}</h1>{breadcrumb && <span className="text-[12px] text-slate-500 font-medium dark:text-slate-400">{breadcrumb}</span>}</>}
       </div>
 
       <div className="flex items-center gap-4">
@@ -30,7 +32,7 @@ export default function DashboardHeader({ title, breadcrumb, action }: Dashboard
           Créditos <span className="font-extrabold ml-0.5">3</span>
         </div>
         
-        <button className="relative w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 transition-colors dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800">
+        <button aria-label="Notificaciones" aria-expanded={notifications} onClick={() => setNotifications(!notifications)} className="relative w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-50 transition-colors dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800">
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
             <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
@@ -39,9 +41,10 @@ export default function DashboardHeader({ title, breadcrumb, action }: Dashboard
         </button>
 
         <div className="w-8 h-8 rounded-full overflow-hidden bg-slate-200 border border-slate-200 dark:border-slate-700">
-          <img src="/assets/imgs png/mascot_peeking.webp" alt="Profile" className="w-full h-full object-cover" />
+          <span className="ws-user-avatar" aria-label="Andre De La Torre">AT</span>
         </div>
       </div>
+      {notifications && <div className="absolute right-4 top-full z-30 bg-white border border-slate-200 rounded-xl p-5 shadow-lg max-w-[300px] dark:bg-slate-900"><p className="text-sm font-semibold">Tu espacio está listo</p><p className="text-xs text-slate-500 my-3">Explora las acciones y novedades de tu investigación.</p><Link href="/dashboard/historial" onClick={() => setNotifications(false)} className="text-xs text-blue-600">Ver actividad →</Link></div>}
     </header>
   );
 }

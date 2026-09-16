@@ -1,11 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 export default function DashboardSidebar() {
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
 
   const navItems = [
     { name: 'Inicio', path: '/dashboard/inicio', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
@@ -18,8 +19,11 @@ export default function DashboardSidebar() {
     { name: 'Historial', path: '/dashboard/historial', icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
   ];
 
+  navItems.push({ name: 'Preparar envío', path: '/dashboard/envio', icon: 'M22 2L9 15 M22 2l-7 20-6-7-7-6z' });
   return (
-    <aside className="w-[220px] bg-[#fdfdfd] border-r border-slate-100 flex flex-col h-full z-50 shrink-0 relative dark:bg-[#0B1120] dark:border-slate-800">
+    <><button className="fixed bottom-4 right-4 z-[60] md:hidden bg-[#1b60df] text-white rounded-full px-4 py-3 shadow-lg text-xs" aria-expanded={open} aria-controls="dashboard-navigation" onClick={() => setOpen(!open)}>{open ? 'Cerrar menú' : '☰ Menú'}</button>
+    {open && <button aria-label="Cerrar navegación" className="fixed inset-0 z-40 bg-slate-900/30 md:hidden" onClick={() => setOpen(false)} />}
+    <aside id="dashboard-navigation" className={`${open ? 'flex' : 'hidden md:flex'} w-[220px] bg-[#fdfdfd] border-r border-slate-100 flex-col h-full z-50 shrink-0 fixed md:relative dark:bg-[#0B1120] dark:border-slate-800`}>
       {/* Top Logo Container */}
       <div className="pt-6 pb-3 w-full flex items-center pl-6 shrink-0">
         <Link href="/">
@@ -36,6 +40,8 @@ export default function DashboardSidebar() {
             <Link 
               key={item.name} 
               href={item.path}
+              onClick={() => setOpen(false)}
+              aria-current={isActive ? 'page' : undefined}
               className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 ${
                 isActive 
                   ? 'bg-[#f4f7ff] text-[#1b60df] font-medium dark:bg-blue-900/20 dark:text-blue-400' 
@@ -63,9 +69,9 @@ export default function DashboardSidebar() {
           <p className="text-[11px] text-[#64748b] leading-[1.6] mb-3 dark:text-slate-400 font-medium">
             Accede a más diagnósticos, reportes avanzados y análisis ilimitados.
           </p>
-          <button className="w-full bg-[#0c1427] hover:bg-slate-800 text-white font-semibold py-1.5 rounded-[6px] text-[11px] transition-colors tracking-wide">
+          <Link href="/precios" style={{ color: "white" }} className="block text-center w-full bg-[#0c1427] hover:bg-slate-800 text-white font-semibold py-1.5 rounded-[6px] text-[11px] transition-colors tracking-wide">
             Actualizar plan
-          </button>
+          </Link>
         </div>
 
         <div className="flex items-center gap-2.5 px-1 cursor-pointer group">
@@ -83,6 +89,6 @@ export default function DashboardSidebar() {
           </svg>
         </div>
       </div>
-    </aside>
+    </aside></>
   );
 }

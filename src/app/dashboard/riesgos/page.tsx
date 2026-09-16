@@ -2,10 +2,14 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
+import Link from 'next/link';
+import { useWorkspace } from '@/components/dashboard/WorkspaceProvider';
 import { useRouter } from 'next/navigation';
 
 export default function RiesgosDetectados() {
   const router = useRouter();
+  const { active } = useWorkspace();
+  const latestSimilarity = active.evaluations.at(-1)!.similarity;
   const editorRef = useRef<HTMLDivElement>(null);
   
   const totalWordsOriginal = 1368;
@@ -13,7 +17,7 @@ export default function RiesgosDetectados() {
   const [maxExcerptWords, setMaxExcerptWords] = useState(32);
   
   const [plagiarismWords, setPlagiarismWords] = useState(initialPlagiarismWords);
-  const [plagiarismScore, setPlagiarismScore] = useState(18); // 18% initially
+  const [plagiarismScore, setPlagiarismScore] = useState(latestSimilarity);
   const [lastUpdated, setLastUpdated] = useState("Actualizado hace 30 segundos");
   const [hasDocument, setHasDocument] = useState<boolean | null>(null);
   const [docText, setDocText] = useState<string | null>(null);
@@ -54,7 +58,7 @@ export default function RiesgosDetectados() {
       let htmlContent = '';
 
       allParagraphs.forEach((p: string, i: number) => {
-        let modifiedText = p.trim();
+        let modifiedText = p.trim().replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
         const words = modifiedText.split(' ');
 
         // Spread highlights: highlight 1 phrase roughly every ~5 paragraphs
@@ -91,7 +95,7 @@ export default function RiesgosDetectados() {
 
       // Update stats with real data
       setPlagiarismWords(Math.round(realTotalWords * 0.18));
-      setPlagiarismScore(18);
+      setPlagiarismScore(latestSimilarity);
       setMaxExcerptWords(totalHighlightedWords || 50);
 
       editorRef.current.innerHTML = htmlContent || '<p>No se pudo procesar el texto del documento.</p>';
@@ -191,6 +195,7 @@ export default function RiesgosDetectados() {
       <DashboardHeader 
         title="Riesgos detectados en el documento" 
         breadcrumb="Inicio > Diagnósticos > Riesgos"
+        action={<Link className="ws-button" href="/dashboard/plan">Ver plan de acción →</Link>}
       />
       
       <div className="flex-1 overflow-y-auto p-4 md:p-8 custom-scrollbar">
@@ -311,7 +316,7 @@ export default function RiesgosDetectados() {
                       <span className="text-[12px] font-bold text-slate-700 dark:text-slate-300">scielo.org, redalyc.org</span>
                     </div>
                   </div>
-                  <button className="text-[12px] font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 dark:text-blue-500">
+                  <button onClick={() => router.push("/dashboard/plan")} className="text-[12px] font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 dark:text-blue-500">
                     Ver detalle <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                   </button>
                 </div>
@@ -343,7 +348,7 @@ export default function RiesgosDetectados() {
                       <span className="text-[12px] font-bold text-slate-700 dark:text-slate-300">Metodología, Discusión</span>
                     </div>
                   </div>
-                  <button className="text-[12px] font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 dark:text-blue-500">
+                  <button onClick={() => router.push("/dashboard/plan")} className="text-[12px] font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 dark:text-blue-500">
                     Ver detalle <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                   </button>
                 </div>
@@ -375,7 +380,7 @@ export default function RiesgosDetectados() {
                       <span className="text-[12px] font-bold text-slate-700 dark:text-slate-300">15 referencias</span>
                     </div>
                   </div>
-                  <button className="text-[12px] font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 dark:text-blue-500">
+                  <button onClick={() => router.push("/dashboard/plan")} className="text-[12px] font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 dark:text-blue-500">
                     Ver detalle <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                   </button>
                 </div>
