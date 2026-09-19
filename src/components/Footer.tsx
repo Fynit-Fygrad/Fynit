@@ -19,12 +19,12 @@ export default function Footer() {
             <div className="footer-cta-text">
               <span className="eyebrow" style={{ color: 'var(--yellow)' }}>Empieza hoy</span>
               <h2>¿Listo para ver hacia dónde puede llegar tu investigación?</h2>
-              <a href="#" onClick={showComingSoon} className="btn btn-yellow">
+              <Link href="/registro" className="btn btn-yellow">
                 Crear cuenta
                 <svg>
                   <use href="/sprite.svg#ic-arrow" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -36,10 +36,10 @@ export default function Footer() {
             </Link>
             {/* Texto compacto SOLO en móvil */}
             <p className="footer-tagline-mobile">Tu investigación,<br />en buenas manos.</p>
-            <a href="#" onClick={showComingSoon} className="btn btn-yellow footer-cta-mobile">
+            <Link href="/registro" className="btn btn-yellow footer-cta-mobile">
               Comenzar ahora
               <svg><use href="/sprite.svg#ic-arrow" /></svg>
-            </a>
+            </Link>
             {/* Descripción larga SOLO en desktop */}
             <p className="footer-brand-desc">IA académica que entiende tu investigación, diagnostica su potencial editorial y te conecta con expertos para que llegue más lejos.</p>
             <div className="footer-social">

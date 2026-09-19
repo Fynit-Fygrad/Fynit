@@ -306,7 +306,7 @@ export default function HowSection() {
                     <div style={{ position: 'absolute', top: '12px', left: 0, right: 0, zIndex: 10, fontSize: '12px', color: '#64748B', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>
                       Animación ilustrativa de cómo funciona —
-                      <span onClick={() => showComingSoon()} style={{ color: '#2563EB', fontWeight: 600, cursor: 'pointer' }}>Regístrate para probarlo tú mismo</span>
+                      <Link href="/registro" style={{ color: '#2563EB', fontWeight: 600, cursor: 'pointer' }}>Regístrate para probarlo tú mismo</Link>
                     </div>
 
                     {/* Step visuals stacked on same grid cell */}

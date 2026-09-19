@@ -104,15 +104,14 @@ export default function Home() {
               </p>
 
               <div className="epic-ctas">
-                <a 
-                  href="#"
-                  onClick={(e) => { e.preventDefault(); showComingSoon(); }}
+                <Link 
+                  href="/registro"
                   className="epic-btn-yellow"
                   data-cursor
                 >
                   <span>Registrarse</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-                </a>
+                </Link>
                 <Link href="#como-funciona" className="epic-btn-ghost" data-cursor>
                   Ver cómo funciona →
                 </Link>
@@ -145,15 +144,14 @@ export default function Home() {
               </p>
 
               <div className="epic-ctas">
-                <a 
-                  href="#"
-                  onClick={(e) => { e.preventDefault(); showComingSoon(); }}
+                <Link 
+                  href="/registro"
                   className="epic-btn-yellow"
                   data-cursor
                 >
                   <span>Probar ahora</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-                </a>
+                </Link>
               </div>
             </div>
 
