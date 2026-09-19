@@ -19,7 +19,6 @@ export default function DashboardSidebar() {
     { name: 'Historial', path: '/dashboard/historial', icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
   ];
 
-  navItems.push({ name: 'Preparar envío', path: '/dashboard/envio', icon: 'M22 2L9 15 M22 2l-7 20-6-7-7-6z' });
   return (
     <><button className="fixed bottom-4 right-4 z-[60] md:hidden bg-[#1b60df] text-white rounded-full px-4 py-3 shadow-lg text-xs" aria-expanded={open} aria-controls="dashboard-navigation" onClick={() => setOpen(!open)}>{open ? 'Cerrar menú' : '☰ Menú'}</button>
     {open && <button aria-label="Cerrar navegación" className="fixed inset-0 z-40 bg-slate-900/30 md:hidden" onClick={() => setOpen(false)} />}
