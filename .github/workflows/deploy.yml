@@ -31,8 +31,8 @@ jobs:
             echo "DATABASE_URL=$DATABASE_URL" >> .env
             echo "SESSION_SECRET=$SESSION_SECRET" >> .env
             npm install
-            ./node_modules/.bin/prisma generate
-            ./node_modules/.bin/prisma migrate deploy
+            # Aplicar migracion SQL directamente (idempotente)
+            sudo -u postgres psql -d fynit_db -f /var/www/Fynit/prisma/migrations/20260919_init/migration.sql
             npm run build
             pm2 restart fynit-next
         env:
