@@ -116,7 +116,7 @@ export default function NuevoDiagnostico() {
       
       <div className="flex-1 overflow-y-auto p-8 custom-scrollbar flex justify-center">
         <div className="max-w-[950px] w-full mt-2">
-          <div className="ws-callout ws-row" style={{ marginBottom: 24 }}><div><h3>Documentos de demostración</h3><p style={{ marginBottom: 0 }}>Consulta un manuscrito de ejemplo para revisar el proceso de evaluación.</p></div><Link href="/dashboard/documentos" className="ws-button ws-secondary">Explorar demo →</Link></div>
+          
           {fileError && <p role="alert" className="text-red-600 text-sm mb-4">{fileError}</p>}
           {showAnalysisInfo && <div className="ws-callout" style={{ marginBottom: 20 }}><h3>Cuatro dimensiones de tu investigación</h3><p>Similitud textual, preparación para publicar (readiness), nivel editorial y calidad metodológica. En esta demo los puntajes son ilustrativos.</p></div>}
           

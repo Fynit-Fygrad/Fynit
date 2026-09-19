@@ -15,13 +15,7 @@ export default function Documents() {
     .sort((a, b) => sort === 'name' ? a.name.localeCompare(b.name, 'es') : new Date(b.evaluations.at(-1)!.date).getTime() - new Date(a.evaluations.at(-1)!.date).getTime());
   function open(id: string) { select(id); router.push('/dashboard/diagnosticos'); }
   return <Page title="Mis documentos" description="Administra tus manuscritos y consulta sus evaluaciones." action={<Link className="ws-button" href="/dashboard/inicio"><Icon name="plus" />Subir documento</Link>}>
-    <div className="ws-library-summary">
-      <span><strong>{projects.length}</strong> documentos</span>
-      <span><strong>{projects.filter(p => projectStatus(p) === 'En mejora').length}</strong> en mejora</span>
-      <span><strong>{projects.reduce((n,p) => n + p.evaluations.length, 0)}</strong> evaluaciones</span>
-    </div>
     <section className="ws-library" aria-label="Biblioteca de documentos">
-      <div className="ws-library-tabs ws-tabs">{['Todos', 'En mejora', 'Reevaluado', 'Listo para enviar'].map(f => <button key={f} aria-pressed={filter === f} onClick={() => setFilter(f)}>{f}<span>{projects.filter(p => f === 'Todos' || projectStatus(p) === f).length}</span></button>)}</div>
       <div className="ws-toolbar ws-library-tools">
         <div className="ws-search"><Icon name="search" /><input aria-label="Buscar documentos" placeholder="Buscar documento" value={search} onChange={e => setSearch(e.target.value)} /></div>
         <select aria-label="Ordenar documentos" className="ws-select" value={sort} onChange={e => setSort(e.target.value)}><option value="recent">Evaluación más reciente</option><option value="name">Nombre: A–Z</option></select>

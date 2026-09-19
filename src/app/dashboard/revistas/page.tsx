@@ -184,23 +184,6 @@ export default function RevistasSugeridas() {
             </div>
           </div>
 
-          {/* Section Header */}
-          <div className="flex items-center justify-between mt-4">
-            <div>
-              <h2 className="text-[22px] font-black text-slate-900 dark:text-white leading-tight">Revistas recomendadas para tu manuscrito</h2>
-              <p className="text-[13.5px] text-slate-500 dark:text-slate-400 mt-0.5">Ejemplo de recomendaciones editoriales. Compatibilidad y datos simulados.</p>
-            </div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 text-[12px] font-bold border border-blue-100 dark:border-blue-800">
-              Compatibilidad ilustrativa
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 opacity-70">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="16" x2="12" y2="12"></line>
-                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-              </svg>
-            </div>
-          </div>
-
-          <PublicationOptions />
           {/* Table Container */}
           <div className="bg-white dark:bg-slate-900 rounded-[24px] border border-slate-200 dark:border-slate-800 shadow-sm mt-2 shrink-0 overflow-hidden">
             <div className="overflow-x-auto custom-scrollbar pb-2">

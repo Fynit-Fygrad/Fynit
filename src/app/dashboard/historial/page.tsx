@@ -28,7 +28,7 @@ export default function History() {
           <ol className="ws-timeline">{events.map(e => <li key={e.id}><div><strong>{e.text}</strong><small>{e.kind}</small></div><time dateTime={e.date}>{formatDate(e.date)}</time></li>)}</ol>{!events.length && <p className="ws-muted">No hay actividad para este filtro.</p>}
         </section>
       </div>
-      <aside className="ws-stack ws-side-panel"><section className="ws-card"><h3>Evaluaciones guardadas</h3><div className="ws-versions">{[...active.evaluations].reverse().map(e => <div className="ws-version" key={e.version}><span className="ws-version-number">{String(e.version).padStart(2,'0')}</span><div><strong>Evaluación {e.version}</strong><p>{formatDate(e.date)}</p></div><span className="ws-version-score">{e.readiness}<small>/100</small></span></div>)}</div></section><div className="ws-callout"><h3>Preparación editorial</h3><p>Consulta los requisitos pendientes antes del envío.</p><Link className="ws-text-button" href="/dashboard/envio">Preparar envío<Icon name="arrow" /></Link></div></aside>
+      <aside className="ws-stack ws-side-panel"><section className="ws-card"><h3>Evaluaciones guardadas</h3><div className="ws-versions">{[...active.evaluations].reverse().map(e => <div className="ws-version" key={e.version}><span className="ws-version-number">{String(e.version).padStart(2,'0')}</span><div><strong>Evaluación {e.version}</strong><p>{formatDate(e.date)}</p></div><span className="ws-version-score">{e.readiness}<small>/100</small></span></div>)}</div></section></aside>
     </div>
   </Page>;
 }

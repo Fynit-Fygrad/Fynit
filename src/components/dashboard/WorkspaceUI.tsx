@@ -14,13 +14,10 @@ export function Badge({ children, tone = 'blue' }: { children: ReactNode; tone?:
 export function Page({ title, description, children, action }: { title: string; description: string; children: ReactNode; action?: ReactNode }) {
   return <div className="ws-page"><DashboardHeader title={title} breadcrumb={title} compact /><main className="ws-scroll"><div className="ws-container"><div className="ws-heading"><div><h1>{title}</h1><p>{description}</p></div>{action}</div>{children}</div></main></div>;
 }
-export function DocumentBar() {
-  const { active, projects, select } = useWorkspace();
-  return <div className="ws-document"><span className="ws-icon"><Icon /></span><div><label htmlFor="active-document">Documento de trabajo</label><select id="active-document" value={active.id} onChange={e => select(e.target.value)}>{projects.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}</select></div><Badge>Versión {active.evaluations.length}</Badge></div>;
-}
+export function DocumentBar() { return null; }
 export function Stat({ label, value, detail, icon = 'chart' }: { label: string; value: ReactNode; detail: string; icon?: string }) { return <div className="ws-card ws-stat"><span className="ws-icon"><Icon name={icon} /></span><span>{label}</span><strong>{value}</strong><small>{detail}</small></div>; }
 export function Empty({ text }: { text: string }) { return <div className="ws-empty"><Icon name="search" /><h3>No encontramos resultados</h3><p>{text}</p></div>; }
-export function Journey() { const pathname = usePathname(); return <nav className="ws-journey" aria-label="Etapas de publicación">{[['diagnosticos', 'Diagnóstico'], ['plan', 'Plan de acción'], ['expertos', 'Revisión experta'], ['historial', 'Historial'], ['envio', 'Envío']].map(([path, label], i) => <Link key={path} href={`/dashboard/${path}`} aria-current={pathname === `/dashboard/${path}` ? 'step' : undefined}><span>{String(i + 1).padStart(2, '0')}</span>{label}</Link>)}</nav>; }
+export function Journey() { return null; }
 export function DemoNotice() { const { storageWarning } = useWorkspace(); return <div className="ws-demo" role="status"><span className="ws-demo-dot" /><span>Versión de demostración · Datos y servicios simulados{storageWarning && ' · Guardado no disponible en este navegador.'}</span></div>; }
 export function ReportButton() {
   const { active } = useWorkspace();
