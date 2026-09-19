@@ -16,6 +16,7 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script_stop: true
+          envs: DATABASE_URL,SESSION_SECRET
           script: |
             git config --global --add safe.directory /var/www/Fynit
             cd /var/www/Fynit
@@ -23,6 +24,17 @@ jobs:
             git reset --hard origin/main
             chown -R www-data:www-data /var/www/Fynit
             chmod -R 755 /var/www/Fynit
+            # Actualizar variables de entorno en el VPS
+            touch .env
+            sed -i '/^DATABASE_URL=/d' .env
+            sed -i '/^SESSION_SECRET=/d' .env
+            echo "DATABASE_URL=$DATABASE_URL" >> .env
+            echo "SESSION_SECRET=$SESSION_SECRET" >> .env
             npm install
+            npx prisma generate
+            npx prisma migrate deploy
             npm run build
             pm2 restart fynit-next
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
