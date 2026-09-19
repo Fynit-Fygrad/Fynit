@@ -23,8 +23,8 @@ function LoginForm() {
       <div className="auth-visual-side">
         <div className="auth-visual-glow"></div>
         <img 
-          src="/assets/imgs png/epic-mascot-dark.webp" 
-          alt="Fynit AI" 
+          src="/assets/imgs png/mascot-auth.png" 
+          alt="Fynit Mascot" 
           className="auth-mascot"
         />
         <div className="auth-visual-text">

@@ -254,45 +254,54 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%);
+    background-color: var(--tint);
+    border-right: 1px solid var(--line);
     overflow: hidden;
-    padding: 120px 60px 60px 60px;
+    padding: 120px 40px 60px 40px;
   }
   
   [data-theme="dark"] .auth-visual-side {
-    background: linear-gradient(135deg, #050B14 0%, #071742 100%);
+    background-color: #050B14;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  /* Decorative glow */
+  /* Decorative glow - very subtle now */
   .auth-visual-glow {
     position: absolute;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(27, 96, 223, 0.4) 0%, rgba(7, 23, 66, 0) 70%);
+    background: radial-gradient(circle, rgba(27, 96, 223, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    filter: blur(40px);
     z-index: 1;
-    animation: pulseGlow 4s ease-in-out infinite alternate;
+  }
+
+  [data-theme="dark"] .auth-visual-glow {
+    background: radial-gradient(circle, rgba(27, 96, 223, 0.15) 0%, rgba(5, 11, 20, 0) 70%);
   }
 
   .auth-mascot {
     position: relative;
     z-index: 2;
-    max-width: 80%;
+    max-width: 75%;
     max-height: 45vh;
     object-fit: contain;
     animation: floatMascot 6s ease-in-out infinite;
+    drop-shadow: 0 20px 40px rgba(7, 23, 66, 0.15);
   }
 
   .auth-visual-text {
     position: relative;
     z-index: 2;
     text-align: center;
-    color: var(--white);
+    color: var(--navy);
     margin-top: 40px;
     max-width: 400px;
+  }
+
+  [data-theme="dark"] .auth-visual-text {
+    color: var(--white);
   }
 
   .auth-visual-text h3 {
@@ -303,9 +312,13 @@
   }
 
   .auth-visual-text p {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--ink-70);
     font-size: 1rem;
     line-height: 1.5;
+  }
+
+  [data-theme="dark"] .auth-visual-text p {
+    color: rgba(255, 255, 255, 0.6);
   }
 }
 
