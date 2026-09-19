@@ -56,9 +56,8 @@ export async function signup(
     return { message: 'Ocurrió un error al crear tu cuenta. Intenta de nuevo.' }
   }
 
-  // 5. Crear sesión y redirigir
-  await createSession(user.id)
-  redirect('/dashboard')
+  // 5. Redirigir al login con mensaje de éxito (no iniciar sesión automáticamente)
+  redirect('/login?registered=true')
 }
 
 // ─────────────────────────────────────────────
