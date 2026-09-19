@@ -33,6 +33,8 @@ jobs:
             npm install
             # Aplicar migracion SQL directamente (idempotente)
             sudo -u postgres psql -d fynit_db -f /var/www/Fynit/prisma/migrations/20260919_init/migration.sql
+            # Generar cliente Prisma ORM (usando binario local v5)
+            node ./node_modules/prisma/build/index.js generate
             npm run build
             pm2 restart fynit-next
         env:
