@@ -16,6 +16,9 @@ export default function Page() {
 
   return (
     <div className="auth-layout">
+      <div className="auth-bg-circle auth-bg-circle-1"></div>
+      <div className="auth-bg-circle auth-bg-circle-2"></div>
+      
       {/* ── Panel Izquierdo (Formulario) ── */}
       <div className="auth-form-side">
         <div className="auth-form-container">
@@ -142,20 +145,6 @@ export default function Page() {
             ¿Ya tienes cuenta? <Link href="/login">Inicia sesión aquí</Link>
           </p>
 
-        </div>
-      </div>
-
-      {/* ── Panel Derecho (Visual - Solo Desktop) ── */}
-      <div className="auth-visual-side">
-        <div className="auth-visual-glow"></div>
-        <img 
-          src="/assets/imgs png/epic-mascot-dark.webp" 
-          alt="Fynit AI" 
-          className="auth-mascot"
-        />
-        <div className="auth-visual-text">
-          <h3>Investigación Potenciada</h3>
-          <p>Tu asistente inteligente para lograr publicaciones de alto impacto de manera rápida y segura.</p>
         </div>
       </div>
     </div>
