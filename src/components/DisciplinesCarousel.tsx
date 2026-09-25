@@ -10,7 +10,7 @@ const disciplines = [
   {
     id: 1,
     title: 'Biología Avanzada',
-    image: 'assets/imgs png/cover_biology.jpg',
+    image: 'assets/imgs png/cover_biology.webp',
     description: 'Revisamos metodologías experimentales y estructuramos tu artículo para journals científicos de alto impacto.',
     color: '#00C9A7',
     theme: 'dark',
@@ -19,7 +19,7 @@ const disciplines = [
   {
     id: 2,
     title: 'Ciencias de la Computación',
-    image: 'assets/imgs png/cover_cs.jpg',
+    image: 'assets/imgs png/cover_cs.webp',
     description: 'Validamos el formato IEEE o ACM y verificamos el rigor técnico del estado del arte.',
     color: '#1B60DF',
     theme: 'dark',
@@ -28,7 +28,7 @@ const disciplines = [
   {
     id: 3,
     title: 'Medicina Clínica',
-    image: 'assets/imgs png/cover_medicine.jpg',
+    image: 'assets/imgs png/cover_medicine.webp',
     description: 'Aseguramos que tu reporte o ensayo cumpla con guías como CONSORT y estándares médicos internacionales.',
     color: '#FF5757',
     theme: 'dark',
@@ -37,7 +37,7 @@ const disciplines = [
   {
     id: 4,
     title: 'Derecho Corporativo',
-    image: 'assets/imgs png/cover_law.jpg',
+    image: 'assets/imgs png/cover_law.webp',
     description: 'Adaptamos tu redacción al lenguaje jurídico formal y estructuramos argumentos para revistas de derecho.',
     color: '#FEC600',
     theme: 'dark',
@@ -46,7 +46,7 @@ const disciplines = [
   {
     id: 5,
     title: 'Economía y Finanzas',
-    image: 'assets/imgs png/cover_economics.jpg',
+    image: 'assets/imgs png/cover_economics.webp',
     description: 'Evaluamos la presentación de tus datos financieros y modelos para publicaciones Q1 en economía.',
     color: '#00E5FF',
     theme: 'dark',
@@ -55,7 +55,7 @@ const disciplines = [
   {
     id: 6,
     title: 'Ingeniería y Tecnología',
-    image: 'assets/imgs png/cover_engineering.jpg',
+    image: 'assets/imgs png/cover_engineering.webp',
     description: 'Organizamos tus resultados de laboratorio en tablas y gráficos rigurosos listos para publicar.',
     color: '#8B5CF6',
     theme: 'dark',

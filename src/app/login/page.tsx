@@ -23,7 +23,7 @@ function LoginForm() {
       <div className="auth-visual-side">
         <div className="auth-visual-glow"></div>
         <img 
-          src="/assets/imgs png/mascot-auth.png" 
+          src="/assets/imgs png/mascot-auth.webp" 
           alt="Fynit Mascot" 
           className="auth-mascot"
         />
