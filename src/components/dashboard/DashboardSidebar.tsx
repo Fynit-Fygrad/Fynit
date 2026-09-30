@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export default function DashboardSidebar() {
+export default function DashboardSidebar({ userName = 'Investigador', isAdmin = false }: { userName?: string; isAdmin?: boolean }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -19,6 +19,7 @@ export default function DashboardSidebar() {
     { name: 'Historial', path: '/dashboard/historial', icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
   ];
 
+  if (isAdmin) navItems.push({ name: 'Administración', path: '/admin', icon: 'M12 3l8 4v5c0 5-8 9-8 9s-8-4-8-9V7z M9 12l2 2 4-4' });
   return (
     <><button className="fixed bottom-4 right-4 z-[60] md:hidden bg-[#1b60df] text-white rounded-full px-4 py-3 shadow-lg text-xs" aria-expanded={open} aria-controls="dashboard-navigation" onClick={() => setOpen(!open)}>{open ? 'Cerrar menú' : '☰ Menú'}</button>
     {open && <button aria-label="Cerrar navegación" className="fixed inset-0 z-40 bg-slate-900/30 md:hidden" onClick={() => setOpen(false)} />}
@@ -74,13 +75,15 @@ export default function DashboardSidebar() {
         </div>
 
         <div className="flex items-center gap-2.5 px-1 cursor-pointer group">
-          <div className="w-[34px] h-[34px] rounded-full bg-slate-100 flex items-center justify-center shrink-0 border border-slate-200 dark:bg-slate-700 dark:border-slate-600">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="text-slate-500 dark:text-slate-400">
-              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-            </svg>
+          <div className="w-[34px] h-[34px] rounded-full bg-slate-100 flex items-center justify-center shrink-0 border border-slate-200 dark:bg-slate-800 dark:border-slate-700">
+            <span className="font-bold text-slate-700 text-[12.5px] tracking-tight dark:text-slate-300">
+              {userName.split(' ').length >= 2 
+                ? `${userName.split(' ')[0][0]}${userName.split(' ')[1][0]}`.toUpperCase() 
+                : userName.slice(0, 2).toUpperCase()}
+            </span>
           </div>
           <div className="flex-1 overflow-hidden">
-            <h5 className="text-[12px] font-medium text-[#0f172a] truncate dark:text-white tracking-tight">Andre De La Torre</h5>
+            <h5 className="text-[12px] font-medium text-[#0f172a] truncate dark:text-white tracking-tight">{userName}</h5>
             <p className="text-[10.5px] text-[#64748b] font-normal dark:text-slate-400">Investigador</p>
           </div>
           <svg className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

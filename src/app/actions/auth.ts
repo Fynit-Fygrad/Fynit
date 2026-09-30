@@ -97,9 +97,37 @@ export async function login(
     }
   }
 
+  if (user.role === 'ADMIN') {
+    return { message: 'Esta cuenta utiliza el acceso administrativo.' }
+  }
+
   // 4. Crear sesión y redirigir
-  await createSession(user.id)
+  if (!user.isActive) return { message: 'Tu cuenta está desactivada. Contacta con el administrador de Fynit.' }
+  await db.user.update({ where: { id: user.id }, data: { lastLoginAt: new Date() } })
+  await createSession(user.id, user.sessionVersion)
   redirect('/dashboard')
+}
+
+export async function adminLogin(
+  state: LoginFormState,
+  formData: FormData
+): Promise<LoginFormState> {
+  const validatedFields = LoginFormSchema.safeParse({
+    email: formData.get('email'),
+    password: formData.get('password'),
+  })
+  if (!validatedFields.success) return { errors: validatedFields.error.flatten().fieldErrors }
+
+  const { email, password } = validatedFields.data
+  const user = await db.user.findUnique({ where: { email } })
+  if (!user || user.role !== 'ADMIN' || !(await bcrypt.compare(password, user.password))) {
+    return { message: 'Credenciales administrativas incorrectas.' }
+  }
+  if (!user.isActive) return { message: 'Esta cuenta administrativa está desactivada.' }
+
+  await db.user.update({ where: { id: user.id }, data: { lastLoginAt: new Date() } })
+  await createSession(user.id, user.sessionVersion)
+  redirect('/admin')
 }
 
 // ─────────────────────────────────────────────
@@ -108,4 +136,9 @@ export async function login(
 export async function logout() {
   await deleteSession()
   redirect('/login')
+}
+
+export async function adminLogout() {
+  await deleteSession()
+  redirect('/administracion/login')
 }

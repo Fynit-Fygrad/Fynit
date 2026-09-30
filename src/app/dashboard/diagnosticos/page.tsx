@@ -132,6 +132,10 @@ export default function ResultadosDiagnostico() {
   }
 
   const handleNewDiagnosis = () => {
+    sessionStorage.removeItem('fynit_sim_doc_name');
+    sessionStorage.removeItem('fynit_sim_doc_size');
+    sessionStorage.removeItem('fynit_sim_doc_date');
+    sessionStorage.removeItem('fynit_sim_doc_text');
     router.push('/dashboard/inicio');
   };
 

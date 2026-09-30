@@ -35,9 +35,9 @@ function syncLegacy(project: Project) {
 }
 export const formatDate = (date: string) => new Date(date).toLocaleDateString('es-PE', { day: 'numeric', month: 'short', year: 'numeric' });
 export function projectStatus(project: Project) { return project.prepared ? 'Listo para enviar' : project.evaluations.length > 1 ? 'Reevaluado' : 'En mejora'; }
-type ContextValue = { projects: Project[]; active: Project; select: (id: string) => void; add: (files: { name: string; size: string }[]) => void; update: (change: (p: Project) => Project, text?: string, kind?: string) => void; reevaluate: () => void; storageWarning: boolean };
+type ContextValue = { projects: Project[]; active: Project; select: (id: string) => void; add: (files: { name: string; size: string }[]) => void; update: (change: (p: Project) => Project, text?: string, kind?: string) => void; reevaluate: () => void; storageWarning: boolean; userName: string; userInitials: string };
 const Context = createContext<ContextValue | null>(null);
-export function WorkspaceProvider({ children }: { children: ReactNode }) {
+export function WorkspaceProvider({ children, userName = 'Investigador' }: { children: ReactNode, userName?: string }) {
   const [workspace, setWorkspace] = useState<Workspace | null>(null);
   const [storageWarning, setStorageWarning] = useState(false);
   useEffect(() => {
@@ -52,7 +52,10 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
         if (legacyName) { const project = makeProject(legacyName, sessionStorage.getItem('fynit_sim_doc_size') || '1.8 MB'); data.projects.unshift(project); data.activeId = project.id; }
       }
       if (!data.projects.some(p => p.id === data.activeId)) data.activeId = data.projects[0].id;
-      syncLegacy(data.projects.find(p => p.id === data.activeId)!);
+      
+      // We purposefully DO NOT call syncLegacy here on initial mount
+      // to avoid populating sessionStorage with fake "plantillas" data.
+      
       localStorage.setItem(KEY, JSON.stringify(data));
     } catch {
       // Browser storage is only available after hydration; initialize the fallback once.
@@ -72,7 +75,15 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     if (text) next.events = [{ id: crypto.randomUUID(), text, date: new Date().toISOString(), kind }, ...next.events];
     save({ ...workspace!, projects: workspace!.projects.map(p => p.id === active.id ? next : p) });
   }
-  return <Context.Provider value={{ projects: workspace.projects, active, storageWarning,
+  
+  const getInitials = (name: string) => {
+    const parts = name.trim().split(' ');
+    if (parts.length >= 2) return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
+    return name.slice(0, 2).toUpperCase();
+  };
+  const userInitials = getInitials(userName);
+
+  return <Context.Provider value={{ projects: workspace.projects, active, storageWarning, userName, userInitials,
     select: id => { if (workspace.projects.some(p => p.id === id)) save({ ...workspace, activeId: id }); },
     add: files => { const projects = files.map(f => makeProject(f.name, f.size)); if (projects.length) save({ projects: [...projects, ...workspace.projects], activeId: projects[0].id }); },
     update,

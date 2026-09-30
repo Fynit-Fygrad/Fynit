@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { getCurrentUser } from '@/lib/auth-access';
 
 // Inicializar Resend con la variable de entorno
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -25,6 +26,7 @@ const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 
 export async function POST(req: NextRequest) {
     try {
+        if (!await getCurrentUser()) return NextResponse.json({ error: 'Inicia sesión para continuar.' }, { status: 401 });
         // --- 1. Rate Limiter ---
         // Usamos la IP o un identificador (en edge/serverless el IP viene en headers)
         const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown';

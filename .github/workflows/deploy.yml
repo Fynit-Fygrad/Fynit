@@ -32,7 +32,8 @@ jobs:
             echo "SESSION_SECRET=$SESSION_SECRET" >> .env
             npm install
             # Aplicar migracion SQL directamente (idempotente)
-            sudo -u postgres psql -d fynit_db -f /var/www/Fynit/prisma/migrations/20260919_init/migration.sql
+            sudo -u postgres psql -v ON_ERROR_STOP=1 -d fynit_db -f /var/www/Fynit/prisma/migrations/20260919_init/migration.sql
+            sudo -u postgres psql -v ON_ERROR_STOP=1 -d fynit_db -f /var/www/Fynit/prisma/migrations/202609290001_admin_users/migration.sql
             # Generar cliente Prisma ORM (usando binario local v5)
             node ./node_modules/prisma/build/index.js generate
             npm run build

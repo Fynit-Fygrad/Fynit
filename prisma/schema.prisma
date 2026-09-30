@@ -17,6 +17,33 @@ model User {
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  role      UserRole @default(USER)
+  isActive  Boolean  @default(true)
+  disabledAt DateTime?
+  lastLoginAt DateTime?
+  sessionVersion Int @default(0)
+  performedActions AdminAuditLog[] @relation("AdminActor")
+  receivedActions AdminAuditLog[] @relation("AdminTarget")
 
   @@map("users")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+model AdminAuditLog {
+  id String @id @default(cuid())
+  actorId String
+  targetId String
+  action String
+  reason String
+  createdAt DateTime @default(now())
+  actor User @relation("AdminActor", fields: [actorId], references: [id], onDelete: Restrict)
+  target User @relation("AdminTarget", fields: [targetId], references: [id], onDelete: Restrict)
+
+  @@index([createdAt])
+  @@index([targetId, createdAt])
+  @@map("admin_audit_logs")
 }

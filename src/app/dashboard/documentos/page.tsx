@@ -14,7 +14,7 @@ export default function Documents() {
   const visible = projects.filter(p => p.name.toLowerCase().includes(search.toLowerCase()) && (filter === 'Todos' || projectStatus(p) === filter))
     .sort((a, b) => sort === 'name' ? a.name.localeCompare(b.name, 'es') : new Date(b.evaluations.at(-1)!.date).getTime() - new Date(a.evaluations.at(-1)!.date).getTime());
   function open(id: string) { select(id); router.push('/dashboard/diagnosticos'); }
-  return <Page title="Mis documentos" description="Administra tus manuscritos y consulta sus evaluaciones." action={<Link className="ws-button" href="/dashboard/inicio"><Icon name="plus" />Subir documento</Link>}>
+  return <Page title="Mis documentos" description="Administra tus manuscritos y consulta sus evaluaciones." action={<Link className="ws-button" href="/dashboard/inicio"><Icon name="plus" />Subir documento</Link>} requireDoc={false}>
     <section className="ws-library" aria-label="Biblioteca de documentos">
       <div className="ws-toolbar ws-library-tools">
         <div className="ws-search"><Icon name="search" /><input aria-label="Buscar documentos" placeholder="Buscar documento" value={search} onChange={e => setSearch(e.target.value)} /></div>

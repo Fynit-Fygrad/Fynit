@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useWorkspace } from '@/components/dashboard/WorkspaceProvider';
 
 interface DashboardHeaderProps {
   title: string;
@@ -12,6 +13,8 @@ interface DashboardHeaderProps {
 
 export default function DashboardHeader({ title, breadcrumb, action, compact = false }: DashboardHeaderProps) {
   const [notifications, setNotifications] = useState(false);
+  const workspace = useWorkspace();
+  
   return (
     <header className="min-h-[75px] relative gap-3 border-b border-slate-100 bg-white flex flex-wrap items-center justify-between px-4 md:px-8 py-3 shrink-0 dark:bg-[#0B1120] dark:border-slate-800">
       <div className="min-w-0 flex flex-col gap-1.5">
@@ -40,8 +43,8 @@ export default function DashboardHeader({ title, breadcrumb, action, compact = f
           <div className="absolute top-[7px] right-[8px] w-1.5 h-1.5 bg-blue-500 rounded-full border-[1.5px] border-white dark:border-[#0B1120]"></div>
         </button>
 
-        <div className="w-8 h-8 rounded-full overflow-hidden bg-slate-200 border border-slate-200 dark:border-slate-700">
-          <span className="ws-user-avatar" aria-label="Andre De La Torre">AT</span>
+        <div className="w-8 h-8 rounded-full overflow-hidden bg-slate-200 border border-slate-200 dark:border-slate-700 flex items-center justify-center">
+          <span className="ws-user-avatar font-bold text-slate-700 text-[11.5px] tracking-tight dark:text-slate-300" aria-label={workspace?.userName || "Investigador"}>{workspace?.userInitials || "IN"}</span>
         </div>
       </div>
       {notifications && <div className="absolute right-4 top-full z-30 bg-white border border-slate-200 rounded-xl p-5 shadow-lg max-w-[300px] dark:bg-slate-900"><p className="text-sm font-semibold">Tu espacio está listo</p><p className="text-xs text-slate-500 my-3">Explora las acciones y novedades de tu investigación.</p><Link href="/dashboard/historial" onClick={() => setNotifications(false)} className="text-xs text-blue-600">Ver actividad →</Link></div>}

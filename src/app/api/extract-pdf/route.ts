@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { extractText } from 'unpdf';
+import { getCurrentUser } from '@/lib/auth-access';
 
 export async function POST(req: NextRequest) {
   try {
+    if (!await getCurrentUser()) return NextResponse.json({ error: 'Inicia sesión para continuar.' }, { status: 401 });
     const formData = await req.formData();
     const file = formData.get('file') as File;
     

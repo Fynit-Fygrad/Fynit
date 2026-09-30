@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState, type ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
+import { useState, useEffect, type ReactNode } from 'react';
 import DashboardHeader from './DashboardHeader';
 import { useWorkspace } from './WorkspaceProvider';
 import { createReportPdf } from '@/lib/dashboard-report';
@@ -11,7 +11,50 @@ export function Icon({ name = 'file', className = '' }: { name?: string; classNa
   return <svg className={className} width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={paths[name] || paths.file} /></svg>;
 }
 export function Badge({ children, tone = 'blue' }: { children: ReactNode; tone?: string }) { return <span className={`ws-badge ws-${tone}`}>{children}</span>; }
-export function Page({ title, description, children, action }: { title: string; description: string; children: ReactNode; action?: ReactNode }) {
+
+export function Page({ title, description, children, action, requireDoc = true }: { title: string; description: string; children: ReactNode; action?: ReactNode; requireDoc?: boolean }) {
+  const router = useRouter();
+  const { active } = useWorkspace();
+  const [hasDocument, setHasDocument] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    if (requireDoc) {
+      const simDocName = sessionStorage.getItem('fynit_sim_doc_name');
+      setHasDocument(!!simDocName);
+    } else {
+      setHasDocument(true);
+    }
+  }, [active?.id, requireDoc]);
+
+  if (requireDoc && hasDocument === null) {
+    return <div className="h-full flex items-center justify-center text-slate-500">Cargando...</div>;
+  }
+
+  if (requireDoc && hasDocument === false) {
+    return (
+      <div className="flex flex-col h-full bg-slate-50 dark:bg-[#0B1120]">
+        <DashboardHeader title={title} breadcrumb={`Inicio > ${title}`} compact />
+        <div className="flex-1 overflow-y-auto flex flex-col items-center justify-center p-8">
+          <div className="bg-white p-10 rounded-[32px] border border-slate-200 text-center max-w-md shadow-sm dark:bg-slate-900/50 dark:border-slate-800">
+            <div className="w-20 h-20 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="12" y1="18" x2="12" y2="12"></line>
+                <line x1="9" y1="15" x2="15" y2="15"></line>
+              </svg>
+            </div>
+            <h2 className="text-xl font-bold text-slate-900 mb-3 dark:text-white">Aún no hay resultados</h2>
+            <p className="text-slate-500 mb-8 dark:text-slate-400">Debes subir un archivo y realizar un diagnóstico en la pantalla de Inicio para ver esta sección.</p>
+            <button onClick={() => router.push('/dashboard/inicio')} className="bg-[#1b60df] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#124bc5] transition-colors">
+              Ir a Inicio y subir archivo
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return <div className="ws-page"><DashboardHeader title={title} breadcrumb={title} compact /><main className="ws-scroll"><div className="ws-container"><div className="ws-heading"><div><h1>{title}</h1><p>{description}</p></div>{action}</div>{children}</div></main></div>;
 }
 export function DocumentBar() { return null; }

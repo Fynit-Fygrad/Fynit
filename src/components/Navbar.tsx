@@ -8,7 +8,12 @@ import { useTheme } from 'next-themes';
 
 export default function Navbar() {
   const pathname = usePathname();
-  if (pathname.startsWith('/dashboard')) return null;
+  if (pathname.startsWith('/dashboard') || pathname.startsWith('/admin') || pathname.startsWith('/administracion')) return null;
+  return <SiteNavbar />;
+}
+
+function SiteNavbar() {
+  const pathname = usePathname();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
